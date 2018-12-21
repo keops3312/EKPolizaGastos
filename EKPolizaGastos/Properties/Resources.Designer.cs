@@ -63,9 +63,49 @@ namespace EKPolizaGastos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap directorio {
+            get {
+                object obj = ResourceManager.GetObject("directorio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap directorioM {
+            get {
+                object obj = ResourceManager.GetObject("directorioM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap My_Documents_Folder {
             get {
                 object obj = ResourceManager.GetObject("My_Documents_Folder", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap New_Database {
+            get {
+                object obj = ResourceManager.GetObject("New-Database", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap New_DatabaseP_fw {
+            get {
+                object obj = ResourceManager.GetObject("New-DatabaseP.fw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

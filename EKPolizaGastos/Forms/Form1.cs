@@ -50,8 +50,24 @@ namespace EKPolizaGastos
                 int cantidad = dirs.Length;
                 lblCount.Text = "Numero de XML docuemntos encontrados: " + cantidad;
 
+                showObjects();
+
             }
 
+        }
+
+        private void showObjects()
+        {
+            lblCount.Visible = true;
+            lblLeyenda.Visible = true;
+            txtpath.Visible = true;
+        }
+
+        private void hideObjects()
+        {
+            lblCount.Visible = false;
+            lblLeyenda.Visible = false;
+            txtpath.Visible = false;
         }
 
         private void ReadAndStart()
@@ -87,11 +103,12 @@ namespace EKPolizaGastos
 
             txtpath.Enabled = false;
 
+
             folderBrowserDialog = new FolderBrowserDialog();
             readSATFactura = new ReadSATFactura();
 
             cnx = readSATFactura.CheckDataConection();
-
+            hideObjects();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -102,12 +119,17 @@ namespace EKPolizaGastos
         private void btnCargarRuta_MouseHover(object sender, EventArgs e)
         {
            
-
-
-            ToastNotification.Show(this, "Click para cargar Ruta donde estan los XML", 
-                eToastGlowColor.Blue, eToastPosition.BottomRight);
+            ToastNotification.Show(this, "Click para cargar Ruta donde estan los XML",
+                global::EKPolizaGastos.Properties.Resources.directorioM,2000,
+                eToastGlowColor.Blue, eToastPosition.TopCenter);
         }
 
+        private void btnLeer_MouseHover(object sender, EventArgs e)
+        {
+            ToastNotification.Show(this, "Click para comenzar a ingresar archivos XML",
+               global::EKPolizaGastos.Properties.Resources.New_DatabaseP_fw, 2000,
+               eToastGlowColor.Blue, eToastPosition.BottomCenter);
+        }
 
 
 

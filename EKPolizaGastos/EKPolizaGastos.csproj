@@ -53,11 +53,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\facturas.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>facturas.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,17 +84,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Data\facturas.xsc">
-      <DependentUpon>facturas.xsd</DependentUpon>
-    </None>
-    <None Include="Data\facturas.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>facturas.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Data\facturas.xss">
-      <DependentUpon>facturas.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -128,7 +112,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\alpha_channel_example.png" />
+    <Content Include="Images\directorio.png" />
     <Content Include="Images\My_Documents_Folder.png" />
+    <Content Include="Images\New-Database.png" />
+    <None Include="Resources\New-DatabaseP.fw.png" />
+    <None Include="Resources\directorioM.png" />
+    <None Include="Resources\directorio.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
