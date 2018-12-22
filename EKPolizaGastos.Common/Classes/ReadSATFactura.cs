@@ -2,19 +2,17 @@
 
 namespace EKPolizaGastos.Common.Classes
 {
-    using EDsemp.Classes;
-    using System;
-    using System.Collections.Generic;
+    #region Libraries (Librerias)  
     using System.Data;
     using System.Data.SqlClient;
     using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Xml;
+    using EDsemp.Classes;
+    #endregion
     public class ReadSATFactura
     {
 
+        #region Attributes
         private string Serie;
         private string Folio;
         private string Fecha;
@@ -61,6 +59,10 @@ namespace EKPolizaGastos.Common.Classes
 
 
         private string sqlcnx, a, b, c, f;
+        #endregion
+
+
+        #region Methods
 
         public string CheckDataConection()
         {
@@ -68,7 +70,7 @@ namespace EKPolizaGastos.Common.Classes
 
             //aligual que las demas aplicaciones cargaremos nuestra llave al servidor de oficinas para la conexion directa
             string cadena = "C:/SEMP2013/EKPolizaGastos/EKPolizaGastos/cdb.txt";
-           
+
             using (StreamReader sr1 = new StreamReader(cadena, true))
             {
 
@@ -84,21 +86,21 @@ namespace EKPolizaGastos.Common.Classes
                 f = Encriptar_Desencriptar.DecryptKeyMD5(lineF);
                 //ahora realizo la conexion par amostrar las sucursales
 
-              
-                    sqlcnx = "Data Source=" + a + " ;" +
-                        "Initial Catalog=" + b + ";" +
-                        "Persist Security Info=True;" +
-                        "User ID=" + c + ";Password=" + f + "";
-                    SqlConnection conexion = new SqlConnection();
-                    conexion.ConnectionString = sqlcnx;
-                    conexion.Open();
 
-                    if (true)
-                    {
-                        return sqlcnx;
-                    }
+                sqlcnx = "Data Source=" + a + " ;" +
+                    "Initial Catalog=" + b + ";" +
+                    "Persist Security Info=True;" +
+                    "User ID=" + c + ";Password=" + f + "";
+                SqlConnection conexion = new SqlConnection();
+                conexion.ConnectionString = sqlcnx;
+                conexion.Open();
 
-                
+                if (true)
+                {
+                    return sqlcnx;
+                }
+
+
 
 
             }
@@ -109,7 +111,7 @@ namespace EKPolizaGastos.Common.Classes
         }
 
 
-        public void Scan(string path,string cnx)
+        public void Scan(string path, string cnx)
         {
             XmlDocument xDoc = new XmlDocument();
 
@@ -183,7 +185,7 @@ namespace EKPolizaGastos.Common.Classes
                     {
                         Importe = nodoReceptor.GetAttribute("Importe");
                         Impuesto = nodoReceptor.GetAttribute("Impuesto");
-                        TasaOCuota =nodoReceptor.GetAttribute("TasaOCuota");
+                        TasaOCuota = nodoReceptor.GetAttribute("TasaOCuota");
                         TipoFactor = nodoReceptor.GetAttribute("TipoFactor");
 
 
@@ -214,48 +216,48 @@ namespace EKPolizaGastos.Common.Classes
                 //command.Parameters.Add(paramCodRetorno);
                 command.Parameters.AddWithValue("opcion", 1);
                 command.Parameters.AddWithValue("Serie", Serie);
-                command.Parameters.AddWithValue("Folio",Folio);
-                command.Parameters.AddWithValue("Fecha",Fecha);
-                command.Parameters.AddWithValue("Version",Version);
-                command.Parameters.AddWithValue("Sello",Sello);
-                command.Parameters.AddWithValue("FormaPago",FormaPago);
-                command.Parameters.AddWithValue("NoCertificado",NoCertificado);
-                command.Parameters.AddWithValue("MetodoPago",MetodoPago);
-                command.Parameters.AddWithValue("LugarExpedicion",LugarExpedicion);
-                command.Parameters.AddWithValue("schemaLocation",schemaLocation);
-                command.Parameters.AddWithValue("CondicionesDePago",CondicionesDePago);
-                command.Parameters.AddWithValue("SubTotal",SubTotal);
-                command.Parameters.AddWithValue("Moneda",Moneda);
-                command.Parameters.AddWithValue("Total",Total);
-                command.Parameters.AddWithValue("TipoDeComprobante",TipoDeComprobante);
-                command.Parameters.AddWithValue("Descuento",Descuento);
+                command.Parameters.AddWithValue("Folio", Folio);
+                command.Parameters.AddWithValue("Fecha", Fecha);
+                command.Parameters.AddWithValue("Version", Version);
+                command.Parameters.AddWithValue("Sello", Sello);
+                command.Parameters.AddWithValue("FormaPago", FormaPago);
+                command.Parameters.AddWithValue("NoCertificado", NoCertificado);
+                command.Parameters.AddWithValue("MetodoPago", MetodoPago);
+                command.Parameters.AddWithValue("LugarExpedicion", LugarExpedicion);
+                command.Parameters.AddWithValue("schemaLocation", schemaLocation);
+                command.Parameters.AddWithValue("CondicionesDePago", CondicionesDePago);
+                command.Parameters.AddWithValue("SubTotal", SubTotal);
+                command.Parameters.AddWithValue("Moneda", Moneda);
+                command.Parameters.AddWithValue("Total", Total);
+                command.Parameters.AddWithValue("TipoDeComprobante", TipoDeComprobante);
+                command.Parameters.AddWithValue("Descuento", Descuento);
 
 
-                command.Parameters.AddWithValue("Nombre",Nombre);
-                command.Parameters.AddWithValue("RegimenFiscal",RegimenFiscal);
-                command.Parameters.AddWithValue("Rfc",Rfc);
+                command.Parameters.AddWithValue("Nombre", Nombre);
+                command.Parameters.AddWithValue("RegimenFiscal", RegimenFiscal);
+                command.Parameters.AddWithValue("Rfc", Rfc);
 
 
-                command.Parameters.AddWithValue("NombreR",NombreR);
-                command.Parameters.AddWithValue("RfcR",RfcR);
-                command.Parameters.AddWithValue("UsoCFDI",UsoCFDI);
-
-
-
-
-                command.Parameters.AddWithValue("Importe",Importe);
-                command.Parameters.AddWithValue("Impuesto",Impuesto);
-                command.Parameters.AddWithValue("TasaOCuota",TasaOCuota);
-                command.Parameters.AddWithValue("TipoFactor",TipoFactor);
+                command.Parameters.AddWithValue("NombreR", NombreR);
+                command.Parameters.AddWithValue("RfcR", RfcR);
+                command.Parameters.AddWithValue("UsoCFDI", UsoCFDI);
 
 
 
-                command.Parameters.AddWithValue("SelloCFD",SelloCFD);
-                command.Parameters.AddWithValue("NoCertificadoSAT",NoCertificadoSAT);
-                command.Parameters.AddWithValue("RfcProvCertif",RfcProvCertif);
-                command.Parameters.AddWithValue("UUID",UUID);
-                command.Parameters.AddWithValue("FechaTimbrado",FechaTimbrado);
-                command.Parameters.AddWithValue("SelloSAT",SelloSAT);
+
+                command.Parameters.AddWithValue("Importe", Importe);
+                command.Parameters.AddWithValue("Impuesto", Impuesto);
+                command.Parameters.AddWithValue("TasaOCuota", TasaOCuota);
+                command.Parameters.AddWithValue("TipoFactor", TipoFactor);
+
+
+
+                command.Parameters.AddWithValue("SelloCFD", SelloCFD);
+                command.Parameters.AddWithValue("NoCertificadoSAT", NoCertificadoSAT);
+                command.Parameters.AddWithValue("RfcProvCertif", RfcProvCertif);
+                command.Parameters.AddWithValue("UUID", UUID);
+                command.Parameters.AddWithValue("FechaTimbrado", FechaTimbrado);
+                command.Parameters.AddWithValue("SelloSAT", SelloSAT);
                 command.Parameters.AddWithValue("@msg", "1");
 
                 command.ExecuteNonQuery();
@@ -265,6 +267,19 @@ namespace EKPolizaGastos.Common.Classes
 
         }
 
+
+        private void GeneratePrePoliza()
+        {
+
+
+
+
+
+        }
+
+
+
+        #endregion
 
 
     }
