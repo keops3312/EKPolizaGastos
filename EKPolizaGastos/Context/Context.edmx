@@ -66,9 +66,11 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Empresa" Type="nvarchar" MaxLength="150" />
-          <Property Name="Marca" Type="nvarchar" MaxLength="150" />
-          <Property Name="RFC" Type="nvarchar" MaxLength="150" />
+          <Property Name="Empresa" Type="nvarchar" MaxLength="255" />
+          <Property Name="Marca" Type="nvarchar" MaxLength="255" />
+          <Property Name="RFC" Type="nvarchar" MaxLength="255" />
+          <Property Name="Path" Type="nvarchar" MaxLength="255" />
+          <Property Name="Letra" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -255,9 +257,11 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Empresa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Marca" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="RFC" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Empresa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Marca" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RFC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Letra" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="CuentasGastos" Relationship="Self.FK_CuentasGastos_Empresas" FromRole="Empresas" ToRole="CuentasGastos" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -294,7 +298,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SEMP_SATEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="SEMP_SATConetxt" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comprobante" EntityType="Self.Comprobante" />
           <EntitySet Name="ComprobanteEstatus" EntityType="Self.ComprobanteEstatus" />
           <EntitySet Name="CuentasGastos" EntityType="Self.CuentasGastos" />
@@ -399,7 +403,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SEMP_SATModelStoreContainer" CdmEntityContainer="SEMP_SATEntities">
+        <EntityContainerMapping StorageEntityContainer="SEMP_SATModelStoreContainer" CdmEntityContainer="SEMP_SATConetxt">
           <EntitySetMapping Name="Comprobante">
             <EntityTypeMapping TypeName="SEMP_SATModel.Comprobante">
               <MappingFragment StoreEntitySet="Comprobante">
@@ -466,6 +470,8 @@
                 <ScalarProperty Name="Empresa" ColumnName="Empresa" />
                 <ScalarProperty Name="Marca" ColumnName="Marca" />
                 <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Letra" ColumnName="Letra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

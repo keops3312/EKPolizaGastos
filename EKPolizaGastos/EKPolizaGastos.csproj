@@ -53,6 +53,10 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -67,28 +71,43 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\Comprobante.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\ComprobanteEstatus.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Context.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Context.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
     <Compile Include="Context\CuentasGastos.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Empresas.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\sp_helpdiagrams_Result.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\SP_InsertFactura_Result.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\sysdiagrams.cs">
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
@@ -116,21 +135,6 @@
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Context\SEMP_SAT.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SEMP_SAT.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\SEMP_SAT.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SEMP_SAT.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\SEMP_SAT.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SEMP_SAT.edmx</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,6 +158,13 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport1.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Context\Context.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Context.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Context\Context.edmx.diagram">
+      <DependentUpon>Context.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -164,13 +175,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EntityDeploy Include="Context\SEMP_SAT.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SEMP_SAT.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Context\SEMP_SAT.edmx.diagram">
-      <DependentUpon>SEMP_SAT.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -185,31 +189,31 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EKPolizaGastos.Common\EKPolizaGastos.Common.csproj">
-      <Project>{4e7c58c8-8cc7-4c61-9bae-7f5beba30268}</Project>
-      <Name>EKPolizaGastos.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="Context\Context.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Context.edmx</DependentUpon>
+      <LastGenOutput>Context.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Context\Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Context.edmx</DependentUpon>
+      <LastGenOutput>Context.cs</LastGenOutput>
+    </Content>
     <Content Include="Images\alpha_channel_example.png" />
     <Content Include="Images\attachment-icon.png" />
     <Content Include="Images\directorio.png" />
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
-    <Content Include="Context\SEMP_SAT.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>SEMP_SAT.Context.cs</LastGenOutput>
-      <DependentUpon>SEMP_SAT.edmx</DependentUpon>
-    </Content>
-    <Content Include="Context\SEMP_SAT.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>SEMP_SAT.edmx</DependentUpon>
-      <LastGenOutput>SEMP_SAT.cs</LastGenOutput>
-    </Content>
     <None Include="Resources\attachment-icon.png" />
     <None Include="Resources\New-DatabaseP.fw.png" />
     <None Include="Resources\directorioM.png" />
     <None Include="Resources\directorio.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EKPolizaGastos.Common\EKPolizaGastos.Common.csproj">
+      <Project>{4e7c58c8-8cc7-4c61-9bae-7f5beba30268}</Project>
+      <Name>EKPolizaGastos.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

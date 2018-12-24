@@ -2,6 +2,7 @@
 
 namespace EKPolizaGastos.Common.Classes
 {
+    using System;
     #region Libraries (Librerias)  
     using System.Data;
     using System.Data.SqlClient;
@@ -111,14 +112,27 @@ namespace EKPolizaGastos.Common.Classes
         }
 
 
-        public void Scan(string path, string cnx)
+        public int Scan(string path, string cnx,string nameTable)//ruta carpeta descomprimida + conexion + el nombre de la tabla que es el nombre de la carpeta
         {
+            int total;
+
             XmlDocument xDoc = new XmlDocument();
 
             string[] archivos = Directory.GetFiles(path, "*.XML");
+            //TRUNCATE TABLE
+            using (SqlConnection conn = new SqlConnection(cnx))
+            {
+                conn.Open();
+
+                SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("opcion", 1);
+                command.Parameters.AddWithValue("@msg", "2");
+                command.ExecuteNonQuery();
 
 
-
+            }
+            //INSERT NEW REGISTRES
             foreach (var file in archivos)
             {
                 xDoc.Load(file);
@@ -198,12 +212,37 @@ namespace EKPolizaGastos.Common.Classes
                 }
             }
 
+            //CLON DE TABLE COMPROBANTES AND RETURN ROWS COPIED
+            using (SqlConnection conn = new SqlConnection(cnx))
+            {
+                conn.Open();
+                SqlCommand command = new SqlCommand("SELECT * Into" + nameTable + " From Comprobante", conn);
+                command.ExecuteNonQuery();
+                conn.Close();
 
 
+
+                conn.Open();
+                SqlCommand commandClear = new SqlCommand("SP_InsertFactura", conn);
+                commandClear.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("opcion", 3);
+                command.Parameters.AddWithValue("@msg", "2");
+                commandClear.Parameters.Add("@Capto", SqlDbType.Int).Direction = ParameterDirection.Output;       
+                commandClear.ExecuteNonQuery();
+
+                total = Convert.ToInt32(commandClear.Parameters["@Capto"].Value);
+                conn.Close();
+
+
+
+            }
+
+            return total;
         }
 
-        private void InsertData(string cnx)
+        public void InsertData(string cnx)
         {
+
             using (SqlConnection conn = new SqlConnection(cnx))
             {
                 conn.Open();
@@ -214,7 +253,7 @@ namespace EKPolizaGastos.Common.Classes
                 //SqlParameter paramCodRetorno = new SqlParameter("CodRetorno", SqlDbType.Int);
                 //paramCodRetorno.Direction = ParameterDirection.Output;
                 //command.Parameters.Add(paramCodRetorno);
-                command.Parameters.AddWithValue("opcion", 1);
+                command.Parameters.AddWithValue("opcion", 2);
                 command.Parameters.AddWithValue("Serie", Serie);
                 command.Parameters.AddWithValue("Folio", Folio);
                 command.Parameters.AddWithValue("Fecha", Fecha);
@@ -258,7 +297,7 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("UUID", UUID);
                 command.Parameters.AddWithValue("FechaTimbrado", FechaTimbrado);
                 command.Parameters.AddWithValue("SelloSAT", SelloSAT);
-                command.Parameters.AddWithValue("@msg", "1");
+                command.Parameters.AddWithValue("@msg", "2");
 
                 command.ExecuteNonQuery();
 
@@ -268,7 +307,7 @@ namespace EKPolizaGastos.Common.Classes
         }
 
 
-        private void GeneratePrePoliza()
+        public void GeneratePrePoliza()
         {
 
 
@@ -277,7 +316,17 @@ namespace EKPolizaGastos.Common.Classes
 
         }
 
+        public void CreateTable(string cnx, string nameTable)
+        {
+            using (SqlConnection conn = new SqlConnection(cnx))
+            {
+                conn.Open();
 
+                SqlCommand command = new SqlCommand("SELECT * Into" + nameTable + " From Comprobante Where 1 = 2", conn);
+
+            }
+
+        }
 
         #endregion
 

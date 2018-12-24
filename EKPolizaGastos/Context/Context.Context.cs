@@ -15,10 +15,10 @@ namespace EKPolizaGastos.Context
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SEMP_SATEntities : DbContext
+    public partial class SEMP_SATConetxt : DbContext
     {
-        public SEMP_SATEntities()
-            : base("name=SEMP_SATEntities")
+        public SEMP_SATConetxt()
+            : base("name=SEMP_SATConetxt")
         {
         }
     

@@ -14,18 +14,18 @@ namespace EKPolizaGastos.Forms
     public partial class PlantillaPrepolizaForm : DevComponents.DotNetBar.Office2007Form
     {
         #region Context
-        private SEMP_SATEntities db;
+        //private SEMP_SAT db;
         #endregion
 
         public PlantillaPrepolizaForm()
         {
             InitializeComponent();
 
-            db = new SEMP_SATEntities();
+            //db = new SEMP_SAT();
 
-            cmbEmpresas.DataSource = db.Empresas.ToList();
-            cmbEmpresas.DisplayMember = "Empresa";
-            cmbEmpresas.ValueMember = "RFC";
+            //cmbEmpresas.DataSource = db.Empresas.ToList();
+            //cmbEmpresas.DisplayMember = "Empresa";
+            //cmbEmpresas.ValueMember = "RFC";
 
             dateInput.Value = DateTime.Now;
 
@@ -45,8 +45,8 @@ namespace EKPolizaGastos.Forms
         {
             
 
-            dataGridViewX1.DataSource = db.Comprobante.Where(p => p.RFC_receptor == cmbEmpresas.ValueMember &&
-                                                              p.Fecha == Convert.ToDateTime(dateInput.Value).ToString("yyyy-MM-dd")).ToList();
+            //dataGridViewX1.DataSource = db.Comprobante.Where(p => p.RFC_receptor == cmbEmpresas.ValueMember &&
+            //                                                  p.Fecha == Convert.ToDateTime(dateInput.Value).ToString("yyyy-MM-dd")).ToList();
             
         }
     }
