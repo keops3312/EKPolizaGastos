@@ -2,12 +2,14 @@
 
 namespace EKPolizaGastos.Common.Classes
 {
-    using System;
+
     #region Libraries (Librerias)  
+    using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.IO;
     using System.Xml;
+    using ClosedXML.Excel;
     using EDsemp.Classes;
     #endregion
     public class ReadSATFactura
@@ -119,20 +121,20 @@ namespace EKPolizaGastos.Common.Classes
             XmlDocument xDoc = new XmlDocument();
 
             string[] archivos = Directory.GetFiles(path, "*.XML");
+
+            SqlConnection conn = new SqlConnection(cnx);
+          
             //TRUNCATE TABLE
-            using (SqlConnection conn = new SqlConnection(cnx))
-            {
-                conn.Open();
+            conn.Open();
+            SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("opcion", 1);
+            command.Parameters.AddWithValue("@msg", "2");
+            command.Parameters.AddWithValue("@Capto", 2);
+            command.ExecuteNonQuery();
+            conn.Close();
 
-                SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("opcion", 1);
-                command.Parameters.AddWithValue("@msg", "2");
-                command.ExecuteNonQuery();
-
-
-            }
-            //INSERT NEW REGISTRES
+            ////INSERT NEW REGISTRES
             foreach (var file in archivos)
             {
                 xDoc.Load(file);
@@ -212,31 +214,34 @@ namespace EKPolizaGastos.Common.Classes
                 }
             }
 
-            //CLON DE TABLE COMPROBANTES AND RETURN ROWS COPIED
-            using (SqlConnection conn = new SqlConnection(cnx))
-            {
-                conn.Open();
-                SqlCommand command = new SqlCommand("SELECT * Into" + nameTable + " From Comprobante", conn);
-                command.ExecuteNonQuery();
-                conn.Close();
 
+            conn.Open();
+            SqlCommand commandCreate = new SqlCommand("USE SEMP_SAT " +
+                              "SELECT * INTO BASE FROM COMPROBANTE", conn);
+            commandCreate.ExecuteNonQuery();
+            conn.Close();
 
+            conn.Open();
+            SqlCommand commandRename = new SqlCommand("USE SEMP_SAT " +
+                              "EXEC SP_RENAME 'BASE' , '" + nameTable + "'", conn);
+            commandRename.ExecuteNonQuery();
+            conn.Close();
 
-                conn.Open();
-                SqlCommand commandClear = new SqlCommand("SP_InsertFactura", conn);
-                commandClear.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("opcion", 3);
-                command.Parameters.AddWithValue("@msg", "2");
-                commandClear.Parameters.Add("@Capto", SqlDbType.Int).Direction = ParameterDirection.Output;       
-                commandClear.ExecuteNonQuery();
+            ////CLON DE TABLE COMPROBANTES AND RETURN ROWS COPIED
 
-                total = Convert.ToInt32(commandClear.Parameters["@Capto"].Value);
-                conn.Close();
+            conn.Open();
+            SqlCommand commandClear = new SqlCommand("SP_InsertFactura", conn);
+            commandClear.CommandType = CommandType.StoredProcedure;
+            commandClear.Parameters.AddWithValue("opcion", 3);
+            commandClear.Parameters.AddWithValue("msg", "2");
+            SqlParameter param = new SqlParameter("Capto", SqlDbType.Int);
+            param.Direction = ParameterDirection.Output;
+            commandClear.Parameters.Add(param);
 
-
-
-            }
-
+            commandClear.ExecuteNonQuery();
+            total = int.Parse(param.Value.ToString());
+            //conn.Close();
+          
             return total;
         }
 
@@ -298,6 +303,7 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("FechaTimbrado", FechaTimbrado);
                 command.Parameters.AddWithValue("SelloSAT", SelloSAT);
                 command.Parameters.AddWithValue("@msg", "2");
+                command.Parameters.AddWithValue("@Capto", 2);
 
                 command.ExecuteNonQuery();
 
@@ -316,15 +322,31 @@ namespace EKPolizaGastos.Common.Classes
 
         }
 
-        public void CreateTable(string cnx, string nameTable)
-        {
-            using (SqlConnection conn = new SqlConnection(cnx))
-            {
-                conn.Open();
+       public void ToExcel(string nameTable, string path,string cnx, string root)
+       {
 
-                SqlCommand command = new SqlCommand("SELECT * Into" + nameTable + " From Comprobante Where 1 = 2", conn);
+            SqlConnection conn = new SqlConnection(cnx);
+            //CREATE TABLE TO EXCEL FILE
+            DataTable excel = new DataTable(nameTable);
+         
+            //CHARGE DATA 
+            SqlCommand cmd = new SqlCommand("SELECT * FROM  [" + nameTable + "]  ORDER BY IdFactura ASC", conn);
+            using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+            {
+                a.Fill(excel);
 
             }
+
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel);
+                wb.SaveAs(path + "/" + nameTable + ".xlsx");
+
+            }
+
+
+            System.IO.Directory.Move(root + "/" + nameTable + ".zip", path + "/" + nameTable + ".zip");
 
         }
 

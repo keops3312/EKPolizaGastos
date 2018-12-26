@@ -65,6 +65,7 @@ namespace EKPolizaGastos
 
             txtpath.Enabled = false;
             circularProgress1.Visible = false;
+            btnLeer.Enabled = false;
 
             cnx = readSATFactura.CheckDataConection();
 
@@ -115,20 +116,9 @@ namespace EKPolizaGastos
         private void ReadAndStart()
         {
 
-           
-
             ReadSATFactura readSATFactura = new ReadSATFactura();
 
-
-            readSATFactura.CreateTable(cnx,nameFile);
-          
             TotalRegistrosEnNuevaTabla = readSATFactura.Scan(path,cnx,nameFile);
-
-         
-
-
-
-
 
         }
 
@@ -182,10 +172,10 @@ namespace EKPolizaGastos
                 }
 
                 lblCount.Text = "Numero de documentos Zip encontrados: " + cantidad;
-
+                btnCargarRuta.Enabled = true;
                 return;
             }
-
+            btnCargarRuta.Enabled = false;
             lblCount.Text = "No Existen archivos para Descomprimir";
             return;
           
@@ -225,11 +215,14 @@ namespace EKPolizaGastos
             cantidad = xmlFiles.Length;
             lblMessage.Text = "Numero de documentos XML encontrados: " + cantidad;
 
+            //listView1.SmallImageList = imageList1;
+            //listView1.View = View.List;
             foreach (var item in xmlFiles)
             {
                 listXML.Items.Add(item.Substring(26));
 
             }
+           
 
 
 
@@ -241,9 +234,24 @@ namespace EKPolizaGastos
         #region Events
         private void btnCargarRuta_Click(object sender, EventArgs e)
         {
-            circularProgress1.Visible = true;
-            circularProgress1.IsRunning =true;
-            backgroundWorker2.RunWorkerAsync();
+
+
+            if (lblItemSeleted.Text.Length > 1)
+            {
+                circularProgress1.Visible = true;
+                circularProgress1.IsRunning = true;
+                backgroundWorker2.RunWorkerAsync();
+
+            }
+            else
+            {
+
+                MessageBoxEx.Show("No has seleccionado un archivo para descomprimir",
+                    "EK Poliza Gastos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            
 
         }
 
@@ -275,26 +283,43 @@ namespace EKPolizaGastos
 
         private void listZip_ItemDoubleClick(object sender, MouseEventArgs e)
         {
-
-            if (listZip.Items.Count >= 1)
+            try
             {
-                lblItemSeleted.Text = listZip.SelectedItem.ToString();
+                if (listZip.Items.Count >= 1)
+                {
+                    lblItemSeleted.Text = listZip.SelectedItem.ToString();
+                }
             }
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+            }
+          
 
 
         }
 
         private void listZip_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (listZip.Items.Count >= 1)
+            try
             {
-                if (e.KeyChar == (char)Keys.Enter)
+                if (listZip.Items.Count >= 1)
                 {
+                    if (e.KeyChar == (char)Keys.Enter)
+                    {
 
-                    lblItemSeleted.Text = listZip.SelectedItem.ToString();
+                        lblItemSeleted.Text = listZip.SelectedItem.ToString();
 
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+            }
+            
         }
 
 
@@ -350,8 +375,16 @@ namespace EKPolizaGastos
            
             circularProgress1.Visible = false;
             circularProgress1.IsRunning = false;
+
             MessageBoxEx.EnableGlass = false;
-            MessageBoxEx.Show("xxx", TotalRegistrosEnNuevaTabla.ToString());
+            MessageBoxEx.Show("Numero de XML's Capturados: " + TotalRegistrosEnNuevaTabla.ToString() + "",
+                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            readSATFactura.ToExcel(nameFile, path,cnx,txtpath.Text);
+            LoadCompaniesProperties();
+
+
+          
         }
 
 
@@ -373,12 +406,16 @@ namespace EKPolizaGastos
             circularProgress1.IsRunning = false;
             MessageBoxEx.EnableGlass = false;
             MessageBoxEx.Show("Carpeta Descomprimida con Exito", "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            if(listXML.Items.Count > 0)
+            {
+                btnLeer.Enabled = true;
+            }
         }
 
+
+
+
         #endregion
-
-
-
-
     }
 }
