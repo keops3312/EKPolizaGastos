@@ -60,7 +60,17 @@ namespace EKPolizaGastos.Common.Classes
         private string FechaTimbrado;
         private string SelloSAT;
 
+        //concepts to tax
+        private string ClaveProdServ;
+        private string NoIdentificacion;
+        private string Cantidad ;
+        private string ClaveUnidad ;
+        private string Unidad ;
+        private string Descripcion;
+        private string ValorUnitario ;
+        private string ImporteX ;
 
+        //
         private string sqlcnx, a, b, c, f;
         #endregion
 
@@ -145,6 +155,7 @@ namespace EKPolizaGastos.Common.Classes
                 XmlNodeList xReceptor = xDoc.GetElementsByTagName("cfdi:Receptor");
                 XmlNodeList xCFDIComplemento = xDoc.GetElementsByTagName("tfd:TimbreFiscalDigital");
                 XmlNodeList xTax = xDoc.GetElementsByTagName("cfdi:Traslado");
+                XmlNodeList xConceptos = xDoc.GetElementsByTagName("cfdi:Concepto");
 
 
 
@@ -207,9 +218,22 @@ namespace EKPolizaGastos.Common.Classes
 
 
                     }
-
-                    //Insert Data
                     InsertData(cnx);
+
+                    foreach (XmlElement nodoReceptor in xConceptos)
+                    {
+                        ClaveProdServ = nodoReceptor.GetAttribute("ClaveProdServ");
+                        NoIdentificacion = nodoReceptor.GetAttribute("NoIdentificacion");
+                        Cantidad = nodoReceptor.GetAttribute("Cantidad");
+                        ClaveUnidad = nodoReceptor.GetAttribute("ClaveUnidad");
+                        Unidad = nodoReceptor.GetAttribute("Unidad");
+                        Descripcion = nodoReceptor.GetAttribute("Descripcion");
+                        ValorUnitario = nodoReceptor.GetAttribute("ValorUnitario");
+                        ImporteX = nodoReceptor.GetAttribute("ImporteX");
+                        InserConcepts(cnx);
+                    }
+                    //Insert Data
+                    
 
                 }
             }
@@ -302,6 +326,41 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("UUID", UUID);
                 command.Parameters.AddWithValue("FechaTimbrado", FechaTimbrado);
                 command.Parameters.AddWithValue("SelloSAT", SelloSAT);
+
+             
+
+                command.Parameters.AddWithValue("@msg", "2");
+                command.Parameters.AddWithValue("@Capto", 2);
+
+                command.ExecuteNonQuery();
+
+                //return Convert.ToInt32(command.Parameters["CodRetorno"].Value);
+            }
+
+           
+
+        }
+
+        public void InserConcepts(string cnx)
+        {
+            using (SqlConnection conn = new SqlConnection(cnx))
+            {
+                conn.Open();
+
+                SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("opcion", 4);
+                command.Parameters.AddWithValue("ClaveProdServ", ClaveProdServ);
+                command.Parameters.AddWithValue("NoIdentificacion", NoIdentificacion);
+                command.Parameters.AddWithValue("Cantidad", Cantidad);
+                command.Parameters.AddWithValue("ClaveUnidad", ClaveUnidad);
+                command.Parameters.AddWithValue("Unidad", Unidad);
+                command.Parameters.AddWithValue("Descripcion", Descripcion);
+                command.Parameters.AddWithValue("ValorUnitario", ValorUnitario);
+                command.Parameters.AddWithValue("ImporteX", ImporteX);
+
+                command.Parameters.AddWithValue("UUID", UUID);
                 command.Parameters.AddWithValue("@msg", "2");
                 command.Parameters.AddWithValue("@Capto", 2);
 
