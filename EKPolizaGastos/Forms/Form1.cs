@@ -18,6 +18,7 @@ namespace EKPolizaGastos
     using EKPolizaGastos.Context;
     using EKPolizaGastos.Forms;
     using System.IO.Compression;
+    using System.Data;
     #endregion
 
 
@@ -44,6 +45,7 @@ namespace EKPolizaGastos
         private string[] xmlFiles;
         private string nameFile;
         private int TotalRegistrosEnNuevaTabla;
+        
         #endregion
 
         #region Methods
@@ -147,7 +149,7 @@ namespace EKPolizaGastos
                 var empresa = db.Empresas.Where(p => p.Letra == letra).First();
 
                 txtpath.Text = empresa.Path;
-
+                lblEmpresa.Text = "Empresa Seleccionada: " + empresa.Empresa;
                 //Buscamos archivos zip comprimidos y agregamos a la lista
 
                  dirs = Directory.GetFiles(empresa.Path, "*.zip");
@@ -158,6 +160,21 @@ namespace EKPolizaGastos
 
               
             }
+
+            DataTable list = new DataTable();
+            list=readSATFactura.ToListDTB(letra.Trim(), cnx);
+
+           // listTables.Items.Clear();
+            listBox1.Items.Clear();
+            foreach (DataRow item in list.Rows)
+            {
+               // listTables.Items.Add(item[0].ToString());
+
+                listBox1.Items.Add(item[0].ToString());
+            }
+
+            //cargamos la lista de los meses que ya se cargaron dentor de la base de datos por letra de empresa
+
             return;
            
         }
@@ -382,6 +399,9 @@ namespace EKPolizaGastos
 
             readSATFactura.ToExcel(nameFile, path,cnx,txtpath.Text);
             LoadCompaniesProperties();
+            listXML.Items.Clear();
+            lblMessage.Text = "-";
+            
 
 
           

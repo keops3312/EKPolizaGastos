@@ -3,8 +3,7 @@
 namespace EKPolizaGastos.Common.Classes
 {
 
-    #region Libraries (Librerias)  
-    using System;
+    #region Libraries (Librerias)   
     using System.Data;
     using System.Data.SqlClient;
     using System.IO;
@@ -69,6 +68,7 @@ namespace EKPolizaGastos.Common.Classes
         private string Descripcion;
         private string ValorUnitario ;
         private string ImporteX ;
+        private string DescuentoX;
 
         //
         private string sqlcnx, a, b, c, f;
@@ -229,7 +229,8 @@ namespace EKPolizaGastos.Common.Classes
                         Unidad = nodoReceptor.GetAttribute("Unidad");
                         Descripcion = nodoReceptor.GetAttribute("Descripcion");
                         ValorUnitario = nodoReceptor.GetAttribute("ValorUnitario");
-                        ImporteX = nodoReceptor.GetAttribute("ImporteX");
+                        ImporteX = nodoReceptor.GetAttribute("Importe");
+                        DescuentoX= nodoReceptor.GetAttribute("Descuento");
                         InserConcepts(cnx);
                     }
                     //Insert Data
@@ -250,6 +251,21 @@ namespace EKPolizaGastos.Common.Classes
                               "EXEC SP_RENAME 'BASE' , '" + nameTable + "'", conn);
             commandRename.ExecuteNonQuery();
             conn.Close();
+
+
+
+            conn.Open();
+            SqlCommand commandCreateC = new SqlCommand("USE SEMP_SAT " +
+                              "SELECT * INTO BASE2 FROM COMPROBANTECONCEPTOS", conn);
+            commandCreateC.ExecuteNonQuery();
+            conn.Close();
+
+            conn.Open();
+            SqlCommand commandRenameC = new SqlCommand("USE SEMP_SAT " +
+                              "EXEC SP_RENAME 'BASE2' , '" + nameTable + "Conceptos'", conn);
+            commandRenameC.ExecuteNonQuery();
+            conn.Close();
+
 
             ////CLON DE TABLE COMPROBANTES AND RETURN ROWS COPIED
 
@@ -345,6 +361,19 @@ namespace EKPolizaGastos.Common.Classes
         {
             using (SqlConnection conn = new SqlConnection(cnx))
             {
+
+
+
+                //search de las register
+                DataTable lastRegister = new DataTable();
+                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM Comprobante  ORDER BY IdFactura desc", conn);
+                using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+                {
+                    a.Fill(lastRegister);
+
+                }
+
+
                 conn.Open();
 
                 SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
@@ -359,12 +388,18 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("Descripcion", Descripcion);
                 command.Parameters.AddWithValue("ValorUnitario", ValorUnitario);
                 command.Parameters.AddWithValue("ImporteX", ImporteX);
+                command.Parameters.AddWithValue("DescuentoX", DescuentoX);
+                command.Parameters.AddWithValue("IdFactura", lastRegister.Rows[0][0].ToString());
 
                 command.Parameters.AddWithValue("UUID", UUID);
                 command.Parameters.AddWithValue("@msg", "2");
                 command.Parameters.AddWithValue("@Capto", 2);
 
                 command.ExecuteNonQuery();
+
+
+              
+
 
                 //return Convert.ToInt32(command.Parameters["CodRetorno"].Value);
             }
@@ -405,8 +440,52 @@ namespace EKPolizaGastos.Common.Classes
             }
 
 
+
+            //CREATE TABLE TO EXCEL FILE Concepts
+            DataTable excel2 = new DataTable(nameTable);
+
+            //CHARGE DATA Concepts
+            SqlCommand cmd2 = new SqlCommand("SELECT * FROM  [" + nameTable + "Conceptos" + "]  ORDER BY IdFactura ASC", conn);
+            using (SqlDataAdapter a = new SqlDataAdapter(cmd2))
+            {
+                a.Fill(excel2);
+
+            }
+
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel2);
+                wb.SaveAs(path + "/" + nameTable + "Conceptos.xlsx");
+
+            }
+
+
             System.IO.Directory.Move(root + "/" + nameTable + ".zip", path + "/" + nameTable + ".zip");
 
+        }
+
+
+
+        public DataTable ToListDTB(string Letra,string cnx)
+        {
+           
+            SqlConnection conn = new SqlConnection(cnx);
+            //CREATE TABLE TO EXCEL FILE
+            DataTable list = new DataTable();
+
+            //CHARGE DATA 
+            SqlCommand cmd = new SqlCommand("select name from sysobjects where type='U'" +
+                                " and name like '%" + Letra  + "%' and name not like '%conceptos%'", conn);
+            using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+            {
+                a.Fill(list);
+
+            }
+
+         
+
+            return list;
         }
 
         #endregion

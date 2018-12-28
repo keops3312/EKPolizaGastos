@@ -54,8 +54,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLeer = new DevComponents.DotNetBar.ButtonX();
             this.btnCargarRuta = new DevComponents.DotNetBar.ButtonX();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.listTables = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.lblEmpresa = new DevComponents.DotNetBar.LabelX();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -207,8 +209,10 @@
             this.listZip.BackgroundStyle.BorderTopWidth = 2;
             this.listZip.BackgroundStyle.Class = "TreeBorderKey";
             this.listZip.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.listZip.CheckStateMember = null;
             this.listZip.ContainerControlProcessDialogKey = true;
             this.listZip.DragDropSupport = true;
+            this.listZip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             this.listZip.Location = new System.Drawing.Point(12, 210);
             this.listZip.Name = "listZip";
             this.listZip.Size = new System.Drawing.Size(308, 139);
@@ -347,26 +351,57 @@
             this.btnCargarRuta.Click += new System.EventHandler(this.btnCargarRuta_Click);
             this.btnCargarRuta.MouseHover += new System.EventHandler(this.btnCargarRuta_MouseHover);
             // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(708, 122);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(219, 239);
-            this.listView1.TabIndex = 21;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList1.Images.SetKeyName(0, "iconList.fw.png");
             // 
+            // listTables
+            // 
+            // 
+            // 
+            // 
+            this.listTables.Border.Class = "ListViewBorder";
+            this.listTables.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.listTables.DisabledBackColor = System.Drawing.Color.Empty;
+            this.listTables.Location = new System.Drawing.Point(990, 413);
+            this.listTables.Name = "listTables";
+            this.listTables.Size = new System.Drawing.Size(44, 44);
+            this.listTables.SmallImageList = this.imageList1;
+            this.listTables.TabIndex = 21;
+            this.listTables.UseCompatibleStateImageBehavior = false;
+            this.listTables.View = System.Windows.Forms.View.Details;
+            // 
+            // lblEmpresa
+            // 
+            // 
+            // 
+            // 
+            this.lblEmpresa.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblEmpresa.Location = new System.Drawing.Point(729, 82);
+            this.lblEmpresa.Name = "lblEmpresa";
+            this.lblEmpresa.Size = new System.Drawing.Size(277, 44);
+            this.lblEmpresa.TabIndex = 22;
+            this.lblEmpresa.Text = "-";
+            this.lblEmpresa.WordWrap = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(729, 123);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(277, 238);
+            this.listBox1.TabIndex = 23;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 475);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lblEmpresa);
+            this.Controls.Add(this.listTables);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.labelX5);
@@ -428,8 +463,10 @@
         private DevComponents.DotNetBar.LabelX labelX5;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ImageList imageList1;
+        private DevComponents.DotNetBar.Controls.ListViewEx listTables;
+        private DevComponents.DotNetBar.LabelX lblEmpresa;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 
