@@ -48,16 +48,19 @@
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
             this.listXML = new System.Windows.Forms.ListBox();
             this.labelX5 = new DevComponents.DotNetBar.LabelX();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.listTables = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.lblEmpresa = new DevComponents.DotNetBar.LabelX();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnPoliza = new DevComponents.DotNetBar.ButtonX();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLeer = new DevComponents.DotNetBar.ButtonX();
             this.btnCargarRuta = new DevComponents.DotNetBar.ButtonX();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.listTables = new DevComponents.DotNetBar.Controls.ListViewEx();
-            this.lblEmpresa = new DevComponents.DotNetBar.LabelX();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listXML2 = new DevComponents.DotNetBar.Controls.ListViewEx();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -167,7 +170,7 @@
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX2.ForeColor = System.Drawing.Color.Black;
-            this.labelX2.Location = new System.Drawing.Point(389, 37);
+            this.labelX2.Location = new System.Drawing.Point(379, 37);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(277, 23);
             this.labelX2.TabIndex = 11;
@@ -181,7 +184,7 @@
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX3.ForeColor = System.Drawing.Color.Black;
-            this.labelX3.Location = new System.Drawing.Point(785, 37);
+            this.labelX3.Location = new System.Drawing.Point(719, 37);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(121, 23);
             this.labelX3.TabIndex = 12;
@@ -260,9 +263,9 @@
             // listXML
             // 
             this.listXML.FormattingEnabled = true;
-            this.listXML.Location = new System.Drawing.Point(389, 123);
+            this.listXML.Location = new System.Drawing.Point(707, 561);
             this.listXML.Name = "listXML";
-            this.listXML.Size = new System.Drawing.Size(277, 238);
+            this.listXML.Size = new System.Drawing.Size(43, 17);
             this.listXML.TabIndex = 17;
             // 
             // labelX5
@@ -277,12 +280,69 @@
             this.labelX5.TabIndex = 18;
             this.labelX5.Text = "Archivo Seleccionado";
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "iconList.fw.png");
+            this.imageList1.Images.SetKeyName(1, "database24.fw.png");
+            // 
+            // listTables
+            // 
+            // 
+            // 
+            // 
+            this.listTables.Border.Class = "ListViewBorder";
+            this.listTables.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.listTables.DisabledBackColor = System.Drawing.Color.Empty;
+            this.listTables.Location = new System.Drawing.Point(719, 122);
+            this.listTables.Name = "listTables";
+            this.listTables.Size = new System.Drawing.Size(287, 237);
+            this.listTables.SmallImageList = this.imageList1;
+            this.listTables.TabIndex = 21;
+            this.listTables.UseCompatibleStateImageBehavior = false;
+            this.listTables.View = System.Windows.Forms.View.Details;
+            this.listTables.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listTables_KeyPress);
+            this.listTables.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listTables_MouseDoubleClick);
+            // 
+            // lblEmpresa
+            // 
+            // 
+            // 
+            // 
+            this.lblEmpresa.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.lblEmpresa.Location = new System.Drawing.Point(785, 66);
+            this.lblEmpresa.Name = "lblEmpresa";
+            this.lblEmpresa.Size = new System.Drawing.Size(221, 51);
+            this.lblEmpresa.TabIndex = 22;
+            this.lblEmpresa.Text = "-";
+            this.lblEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.lblEmpresa.WordWrap = true;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(756, 557);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(31, 30);
+            this.listBox1.TabIndex = 23;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::EKPolizaGastos.Properties.Resources.png_empresa;
+            this.pictureBox4.Location = new System.Drawing.Point(719, 66);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(60, 51);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 24;
+            this.pictureBox4.TabStop = false;
+            // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::EKPolizaGastos.Properties.Resources.xmlLogo;
-            this.pictureBox3.Location = new System.Drawing.Point(389, 75);
+            this.pictureBox3.Location = new System.Drawing.Point(379, 66);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(50, 41);
+            this.pictureBox3.Size = new System.Drawing.Size(60, 50);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 20;
             this.pictureBox3.TabStop = false;
@@ -303,7 +363,7 @@
             this.btnPoliza.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnPoliza.Image = global::EKPolizaGastos.Properties.Resources.attachment_icon;
             this.btnPoliza.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.btnPoliza.Location = new System.Drawing.Point(785, 413);
+            this.btnPoliza.Location = new System.Drawing.Point(762, 413);
             this.btnPoliza.Name = "btnPoliza";
             this.btnPoliza.Size = new System.Drawing.Size(187, 50);
             this.btnPoliza.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -314,7 +374,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::EKPolizaGastos.Properties.Resources.New_DatabaseP_fw;
-            this.pictureBox1.Location = new System.Drawing.Point(989, 477);
+            this.pictureBox1.Location = new System.Drawing.Point(838, 537);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(48, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -351,54 +411,27 @@
             this.btnCargarRuta.Click += new System.EventHandler(this.btnCargarRuta_Click);
             this.btnCargarRuta.MouseHover += new System.EventHandler(this.btnCargarRuta_MouseHover);
             // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "iconList.fw.png");
-            // 
-            // listTables
+            // listXML2
             // 
             // 
             // 
             // 
-            this.listTables.Border.Class = "ListViewBorder";
-            this.listTables.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.listTables.DisabledBackColor = System.Drawing.Color.Empty;
-            this.listTables.Location = new System.Drawing.Point(990, 413);
-            this.listTables.Name = "listTables";
-            this.listTables.Size = new System.Drawing.Size(44, 44);
-            this.listTables.SmallImageList = this.imageList1;
-            this.listTables.TabIndex = 21;
-            this.listTables.UseCompatibleStateImageBehavior = false;
-            this.listTables.View = System.Windows.Forms.View.Details;
-            // 
-            // lblEmpresa
-            // 
-            // 
-            // 
-            // 
-            this.lblEmpresa.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblEmpresa.Location = new System.Drawing.Point(729, 82);
-            this.lblEmpresa.Name = "lblEmpresa";
-            this.lblEmpresa.Size = new System.Drawing.Size(277, 44);
-            this.lblEmpresa.TabIndex = 22;
-            this.lblEmpresa.Text = "-";
-            this.lblEmpresa.WordWrap = true;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(729, 123);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(277, 238);
-            this.listBox1.TabIndex = 23;
+            this.listXML2.Border.Class = "ListViewBorder";
+            this.listXML2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.listXML2.DisabledBackColor = System.Drawing.Color.Empty;
+            this.listXML2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listXML2.Location = new System.Drawing.Point(379, 122);
+            this.listXML2.Name = "listXML2";
+            this.listXML2.Size = new System.Drawing.Size(287, 238);
+            this.listXML2.TabIndex = 25;
+            this.listXML2.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 475);
+            this.ClientSize = new System.Drawing.Size(1059, 504);
+            this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.lblEmpresa);
             this.Controls.Add(this.listTables);
@@ -422,6 +455,7 @@
             this.Controls.Add(this.lblCount);
             this.Controls.Add(this.btnCargarRuta);
             this.Controls.Add(this.txtpath);
+            this.Controls.Add(this.listXML2);
             this.DoubleBuffered = true;
             this.EnableGlass = false;
             this.ForeColor = System.Drawing.Color.Black;
@@ -431,6 +465,7 @@
             this.Text = "Form1";
             this.TitleText = "EK Poliza de Gastos";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -467,6 +502,8 @@
         private DevComponents.DotNetBar.Controls.ListViewEx listTables;
         private DevComponents.DotNetBar.LabelX lblEmpresa;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.PictureBox pictureBox4;
+        private DevComponents.DotNetBar.Controls.ListViewEx listXML2;
     }
 }
 

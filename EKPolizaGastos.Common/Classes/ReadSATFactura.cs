@@ -488,6 +488,25 @@ namespace EKPolizaGastos.Common.Classes
             return list;
         }
 
+
+
+        public DataTable listExercise(string cnx,string ejercicio)
+        {
+            SqlConnection conn = new SqlConnection(cnx);
+            DataTable result = new DataTable();
+            //CHARGE DATA 
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [" + ejercicio + "] " +
+                               "order by IdFactura asc", conn);
+            using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+            {
+                a.Fill(result);
+
+            }
+
+
+            return result;
+        }
+
         #endregion
 
 

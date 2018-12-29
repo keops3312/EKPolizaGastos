@@ -226,6 +226,8 @@
     <Content Include="Images\directorio.png" />
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
+    <None Include="Resources\png-empresa.png" />
+    <None Include="Resources\empresa.png" />
     <None Include="Resources\xmlLogo.png" />
     <None Include="Resources\ZIP-File-Logo.png" />
     <None Include="Resources\attachment-icon.png" />

@@ -93,6 +93,16 @@ namespace EKPolizaGastos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap empresa {
+            get {
+                object obj = ResourceManager.GetObject("empresa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap My_Documents_Folder {
             get {
                 object obj = ResourceManager.GetObject("My_Documents_Folder", resourceCulture);
@@ -116,6 +126,16 @@ namespace EKPolizaGastos.Properties {
         internal static System.Drawing.Bitmap New_DatabaseP_fw {
             get {
                 object obj = ResourceManager.GetObject("New-DatabaseP.fw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap png_empresa {
+            get {
+                object obj = ResourceManager.GetObject("png-empresa", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

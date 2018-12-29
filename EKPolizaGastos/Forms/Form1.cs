@@ -45,7 +45,7 @@ namespace EKPolizaGastos
         private string[] xmlFiles;
         private string nameFile;
         private int TotalRegistrosEnNuevaTabla;
-        
+        public string ejercicio;
         #endregion
 
         #region Methods
@@ -149,7 +149,7 @@ namespace EKPolizaGastos
                 var empresa = db.Empresas.Where(p => p.Letra == letra).First();
 
                 txtpath.Text = empresa.Path;
-                lblEmpresa.Text = "Empresa Seleccionada: " + empresa.Empresa;
+                lblEmpresa.Text = "Empresa Seleccionada: \n" + empresa.Empresa;
                 //Buscamos archivos zip comprimidos y agregamos a la lista
 
                  dirs = Directory.GetFiles(empresa.Path, "*.zip");
@@ -164,13 +164,21 @@ namespace EKPolizaGastos
             DataTable list = new DataTable();
             list=readSATFactura.ToListDTB(letra.Trim(), cnx);
 
-           // listTables.Items.Clear();
+            listTables.Items.Clear();
             listBox1.Items.Clear();
             foreach (DataRow item in list.Rows)
             {
                // listTables.Items.Add(item[0].ToString());
 
                 listBox1.Items.Add(item[0].ToString());
+            }
+
+
+            foreach (DataRow item in list.Rows)
+            {
+                // listTables.Items.Add(item[0].ToString());
+
+                listTables.Items.Add(item[0].ToString(),1);
             }
 
             //cargamos la lista de los meses que ya se cargaron dentor de la base de datos por letra de empresa
@@ -239,9 +247,13 @@ namespace EKPolizaGastos
                 listXML.Items.Add(item.Substring(26));
 
             }
-           
 
 
+            foreach (var item in xmlFiles)
+            {
+                listXML2.Items.Add(item.Substring(26),0);
+
+            }
 
 
 
@@ -272,7 +284,45 @@ namespace EKPolizaGastos
 
         }
 
-      
+        private void listTables_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (listTables.Items.Count >= 1)
+                {
+                    ejercicio = listTables.SelectedItems[0].Text;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+            }
+
+        }
+
+        private void listTables_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (listTables.Items.Count >= 1)
+                {
+                    if (e.KeyChar == (char)Keys.Enter)
+                    {
+                        ejercicio = listTables.SelectedItems[0].Text;
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.Write(ex.Message);
+            }
+        }
 
         private void btnLeer_Click(object sender, EventArgs e)
         {
@@ -343,7 +393,18 @@ namespace EKPolizaGastos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            listXML2.View = View.Details;
+
+            listXML2.Columns.Add("CFDI", 150);
+            listXML2.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            listXML2.SmallImageList = imageList1;
+
+
+            listTables.View = View.Details;
+
+            listTables.Columns.Add("Ejercicios", 150);
+            listTables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            listTables.SmallImageList = imageList1;
         }
 
         private void btnCargarRuta_MouseHover(object sender, EventArgs e)
@@ -363,9 +424,24 @@ namespace EKPolizaGastos
 
         private void btnPoliza_Click(object sender, EventArgs e)
         {
-            PlantillaPrepolizaForm plantillaPrepoliza = new PlantillaPrepolizaForm();
-            plantillaPrepoliza.ShowDialog();
+            if (!string.IsNullOrEmpty(ejercicio))
+            {
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Ejercicio Elejido: " + ejercicio + "",
+                    "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                PlantillaPrepolizaForm plantillaPrepoliza = new PlantillaPrepolizaForm();
+                plantillaPrepoliza.ejercicio = ejercicio;
+                plantillaPrepoliza.cnx = cnx;
+                plantillaPrepoliza.ShowDialog();
+                return;
+            }
+
+            MessageBoxEx.EnableGlass = false;
+            MessageBoxEx.Show("No has Seleccionado Ejercicio!",
+                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            return;
         }
 
         private void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
@@ -400,6 +476,7 @@ namespace EKPolizaGastos
             readSATFactura.ToExcel(nameFile, path,cnx,txtpath.Text);
             LoadCompaniesProperties();
             listXML.Items.Clear();
+            listXML2.Items.Clear();
             lblMessage.Text = "-";
             
 
@@ -437,5 +514,7 @@ namespace EKPolizaGastos
 
 
         #endregion
+
+        
     }
 }
