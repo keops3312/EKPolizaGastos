@@ -12,24 +12,20 @@ namespace EKPolizaGastos.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class Empresas
+    public partial class Localidades
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Empresas()
+        public Localidades()
         {
-            this.Localidades = new HashSet<Localidades>();
             this.Proveedores = new HashSet<Proveedores>();
         }
     
-        public int IdEmpresa { get; set; }
-        public string Empresa { get; set; }
-        public string Marca { get; set; }
-        public string RFC { get; set; }
-        public string Path { get; set; }
-        public string Letra { get; set; }
+        public int IdLocalidad { get; set; }
+        public string Localidad { get; set; }
+        public string Sigla_Sucursal { get; set; }
+        public Nullable<int> IdEmpresa { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Localidades> Localidades { get; set; }
+        public virtual Empresas Empresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Proveedores> Proveedores { get; set; }
     }

@@ -1,1 +1,354 @@
-<?xml version="1.0" standalone="yes"?>  <DATAPACKET Version="2.0"><METADATA><FIELDS><FIELD attrname="VersionCOI" fieldtype="i2"/><FIELD attrname="TipoPoliz" fieldtype="string" WIDTH="5"/><FIELD attrname="DiaPoliz" fieldtype="string" WIDTH="2"/><FIELD attrname="ConcepPoliz" fieldtype="string" WIDTH="120"/><FIELD attrname="UUID" fieldtype="string" WIDTH="100"/><FIELD attrname="Partidas" fieldtype="nested"><FIELDS><FIELD attrname="Cuenta" fieldtype="string" WIDTH="21"/><FIELD attrname="Depto" fieldtype="i4"/><FIELD attrname="ConceptoPol" fieldtype="string" WIDTH="120"/><FIELD attrname="Monto" fieldtype="r8"/><FIELD attrname="TipoCambio" fieldtype="r8"/><FIELD attrname="DebeHaber" fieldtype="string" WIDTH="1"/><FIELD attrname="ccostos" fieldtype="i4"/><FIELD attrname="proyectos" fieldtype="i4"/><FIELD attrname="Porcentaje" fieldtype="r8"/><FIELD attrname="FRMPAGO" fieldtype="string" WIDTH="5"/><FIELD attrname="NUMCHEQUE" fieldtype="string" WIDTH="20"/><FIELD attrname="MONTOBN" fieldtype="r8"/><FIELD attrname="BANCO" fieldtype="i4"/><FIELD attrname="CTAORIG" fieldtype="string" WIDTH="50"/><FIELD attrname="BENEF" fieldtype="string" WIDTH="300"/><FIELD attrname="RFC" fieldtype="string" WIDTH="13"/><FIELD attrname="BANCODEST" fieldtype="i4"/><FIELD attrname="CTADEST" fieldtype="string" WIDTH="50"/><FIELD attrname="FECHACHEQUE" fieldtype="string" WIDTH="10"/><FIELD attrname="BANCOORIGEXT" fieldtype="string" WIDTH="225"/><FIELD attrname="BANCODESTEXT" fieldtype="string" WIDTH="225"/><FIELD attrname="IDUUID" fieldtype="i4"/><FIELD attrname="IDFISCAL" fieldtype="string" WIDTH="40"/><FIELD attrname="CDSPartidasUUID" fieldtype="nested"><FIELDS><FIELD attrname="NUMREG" fieldtype="i4"/><FIELD attrname="UUIDTIMBRE" fieldtype="string" WIDTH="36"/><FIELD attrname="MONTO" fieldtype="r8"/><FIELD attrname="SERIE" fieldtype="string" WIDTH="100"/><FIELD attrname="FOLIO" fieldtype="string" WIDTH="100"/><FIELD attrname="RFCEMISOR" fieldtype="string" WIDTH="16"/><FIELD attrname="RFCRECEPTOR" fieldtype="string" WIDTH="16"/><FIELD attrname="FECHAUUID" fieldtype="string" WIDTH="10"/><FIELD attrname="TIPOCOMPROBANTE" fieldtype="i2"/></FIELDS><PARAMS/></FIELD></FIELDS><PARAMS/></FIELD></FIELDS><PARAMS/></METADATA><ROWDATA><ROW VersionCOI="807" TipoPoliz="Eg" DiaPoliz="02" ConcepPoliz="Emilia Reyes - fac 125 - renta  junio"><Partidas><ROWPartidas Cuenta="600100500300000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" Monto="23986" TipoCambio="1" DebeHaber="D" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="389" IDFISCAL=""><CDSPartidasUUID><ROWCDSPartidasUUID NUMREG="389" UUIDTIMBRE="AD32E6A8-5892-4063-950C-520BF19B776F" MONTO="22866.67" SERIE="" FOLIO="125" RFCEMISOR="REME5202139N1" RFCRECEPTOR="CIN050210354" FECHAUUID="02/06/2018" TIPOCOMPROBANTE="1"/></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="100600100600000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   REME5202139N1" Monto="3837.76" TipoCambio="1" DebeHaber="D" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="200300600100000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   renta junio" Monto="2398.6" TipoCambio="1" DebeHaber="H" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="200300600300000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   renta junio" Monto="2558.49" TipoCambio="1" DebeHaber="H" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="200000300900000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   renta junio" Monto="22866.67" TipoCambio="1" DebeHaber="H" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="200000300900000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   renta junio" Monto="21416.65" TipoCambio="1" DebeHaber="D" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="100100100400000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" Monto="21416.65" TipoCambio="1" DebeHaber="H" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="200000300900000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" Monto="1450.84" TipoCambio="1" DebeHaber="D" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="100100100400000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" Monto="1450.84" TipoCambio="1" DebeHaber="H" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="200000300900000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" Monto="0.82" TipoCambio="1" DebeHaber="H" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas><ROWPartidas Cuenta="800100100200000000003" Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" Monto="0.82" TipoCambio="1" DebeHaber="D" ccostos="0" proyectos="0" FRMPAGO="" NUMCHEQUE="" MONTOBN="0" BANCO="0" CTAORIG="" BENEF="" RFC="" BANCODEST="0" CTADEST="" FECHACHEQUE="" BANCOORIGEXT="" BANCODESTEXT="" IDUUID="0" IDFISCAL=""><CDSPartidasUUID></CDSPartidasUUID></ROWPartidas></Partidas></ROW></ROWDATA></DATAPACKET>
+<?xml version="1.0" standalone="yes"?> 
+<DATAPACKET Version="2.0">
+<METADATA>
+<FIELDS>
+<FIELD attrname="VersionCOI" fieldtype="i2"/>
+<FIELD attrname="TipoPoliz" fieldtype="string" WIDTH="5"/>
+<FIELD attrname="DiaPoliz" fieldtype="string" WIDTH="2"/>
+<FIELD attrname="ConcepPoliz" fieldtype="string" WIDTH="120"/>
+<FIELD attrname="UUID" fieldtype="string" WIDTH="100"/>
+<FIELD attrname="Partidas" fieldtype="nested">
+<FIELDS>
+<FIELD attrname="Cuenta" fieldtype="string" WIDTH="21"/>
+<FIELD attrname="Depto" fieldtype="i4"/>
+<FIELD attrname="ConceptoPol" fieldtype="string" WIDTH="120"/>
+<FIELD attrname="Monto" fieldtype="r8"/>
+<FIELD attrname="TipoCambio" fieldtype="r8"/>
+<FIELD attrname="DebeHaber" fieldtype="string" WIDTH="1"/>
+<FIELD attrname="ccostos" fieldtype="i4"/>
+<FIELD attrname="proyectos" fieldtype="i4"/>
+<FIELD attrname="Porcentaje" fieldtype="r8"/>
+<FIELD attrname="FRMPAGO" fieldtype="string" WIDTH="5"/>
+<FIELD attrname="NUMCHEQUE" fieldtype="string" WIDTH="20"/>
+<FIELD attrname="MONTOBN" fieldtype="r8"/><FIELD attrname="BANCO" fieldtype="i4"/>
+<FIELD attrname="CTAORIG" fieldtype="string" WIDTH="50"/>
+<FIELD attrname="BENEF" fieldtype="string" WIDTH="300"/>
+<FIELD attrname="RFC" fieldtype="string" WIDTH="13"/>
+<FIELD attrname="BANCODEST" fieldtype="i4"/>
+<FIELD attrname="CTADEST" fieldtype="string" WIDTH="50"/>
+<FIELD attrname="FECHACHEQUE" fieldtype="string" WIDTH="10"/>
+<FIELD attrname="BANCOORIGEXT" fieldtype="string" WIDTH="225"/>
+<FIELD attrname="BANCODESTEXT" fieldtype="string" WIDTH="225"/>
+<FIELD attrname="IDUUID" fieldtype="i4"/>
+<FIELD attrname="IDFISCAL" fieldtype="string" WIDTH="40"/>
+<FIELD attrname="CDSPartidasUUID" fieldtype="nested">
+<FIELDS>
+<FIELD attrname="NUMREG" fieldtype="i4"/>
+<FIELD attrname="UUIDTIMBRE" fieldtype="string" WIDTH="36"/>
+<FIELD attrname="MONTO" fieldtype="r8"/>
+<FIELD attrname="SERIE" fieldtype="string" WIDTH="100"/>
+<FIELD attrname="FOLIO" fieldtype="string" WIDTH="100"/>
+<FIELD attrname="RFCEMISOR" fieldtype="string" WIDTH="16"/>
+<FIELD attrname="RFCRECEPTOR" fieldtype="string" WIDTH="16"/>
+<FIELD attrname="FECHAUUID" fieldtype="string" WIDTH="10"/>
+<FIELD attrname="TIPOCOMPROBANTE" fieldtype="i2"/>
+</FIELDS>
+<PARAMS/>
+</FIELD>
+</FIELDS>
+<PARAMS/>
+</FIELD>
+</FIELDS>
+<PARAMS/>
+</METADATA>
+<ROWDATA>
+<ROW 
+VersionCOI="807"
+TipoPoliz="Eg" 
+DiaPoliz="02" 
+ConcepPoliz="Emilia Reyes - fac 125 - renta  junio">
+<Partidas>
+<ROWPartidas 
+Cuenta="600100500300000000003" 
+Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" 
+Monto="23986" 
+TipoCambio="1" 
+DebeHaber="D" 
+ccostos="0" 
+proyectos="0" 
+FRMPAGO="" 
+NUMCHEQUE="" 
+MONTOBN="0"
+BANCO="0" 
+CTAORIG=""
+BENEF="" 
+RFC="" 
+BANCODEST="0" 
+CTADEST="" 
+FECHACHEQUE=""
+BANCOORIGEXT=""
+BANCODESTEXT=""
+IDUUID="389" 
+IDFISCAL="">
+<CDSPartidasUUID>
+<ROWCDSPartidasUUID 
+NUMREG="389" 
+UUIDTIMBRE="AD32E6A8-5892-4063-950C-520BF19B776F"
+MONTO="22866.67" 
+SERIE=""
+FOLIO="125" 
+RFCEMISOR="REME5202139N1" 
+RFCRECEPTOR="CIN050210354"
+FECHAUUID="02/06/2016"
+TIPOCOMPROBANTE="1"/>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="100600100600000000003" 
+Depto="5"
+ConceptoPol="Emilia Reyes - fac 125 -   REME5202139N1" 
+Monto="3837.76" 
+TipoCambio="1"
+DebeHaber="D"
+ccostos="0" 
+proyectos="0" 
+FRMPAGO=""
+NUMCHEQUE=""
+MONTOBN="0" 
+BANCO="0" 
+CTAORIG="" 
+BENEF=""
+RFC="" 
+BANCODEST="0"
+CTADEST=""
+FECHACHEQUE=""
+BANCOORIGEXT=""
+BANCODESTEXT="" 
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas
+Cuenta="200300600100000000003" 
+Depto="5" 
+ConceptoPol="Emilia Reyes - fac 125 -   renta junio"
+Monto="2398.6"
+TipoCambio="1"
+DebeHaber="H" 
+ccostos="0" 
+proyectos="0" 
+FRMPAGO="" 
+NUMCHEQUE="" 
+MONTOBN="0"
+BANCO="0" 
+CTAORIG=""
+BENEF=""
+RFC=""
+BANCODEST="0"
+CTADEST="" 
+FECHACHEQUE=""
+BANCOORIGEXT="" 
+BANCODESTEXT="" 
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="200300600300000000003"
+Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   renta junio" 
+Monto="2558.49"
+TipoCambio="1"
+DebeHaber="H" 
+ccostos="0"
+proyectos="0" 
+FRMPAGO="" 
+NUMCHEQUE="" 
+MONTOBN="0" 
+BANCO="0" 
+CTAORIG=""
+BENEF="" 
+RFC=""
+BANCODEST="0" 
+CTADEST=""
+FECHACHEQUE=""
+BANCOORIGEXT=""
+BANCODESTEXT="" 
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="200000300900000000003"
+Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   renta junio"
+Monto="22866.67"
+TipoCambio="1" 
+DebeHaber="H"
+ccostos="0" 
+proyectos="0" 
+FRMPAGO=""
+NUMCHEQUE="" 
+MONTOBN="0"
+BANCO="0"
+CTAORIG="" 
+BENEF=""
+RFC="" 
+BANCODEST="0"
+CTADEST="" 
+FECHACHEQUE="" 
+BANCOORIGEXT="" 
+BANCODESTEXT=""
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="200000300900000000003"
+Depto="5" ConceptoPol="Emilia Reyes - fac 125 -   renta junio"
+Monto="21416.65"
+TipoCambio="1"
+DebeHaber="D"
+ccostos="0" 
+proyectos="0" 
+FRMPAGO="" 
+NUMCHEQUE=""
+MONTOBN="0" 
+BANCO="0" 
+CTAORIG="" 
+BENEF="" 
+RFC="" 
+BANCODEST="0" 
+CTADEST="" 
+FECHACHEQUE=""
+BANCOORIGEXT=""
+BANCODESTEXT=""
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="100100100400000000003"
+Depto="5"
+ConceptoPol="Emilia Reyes - fac 125 - renta  junio" 
+Monto="21416.65" 
+TipoCambio="1" 
+DebeHaber="H" 
+ccostos="0" 
+proyectos="0" 
+FRMPAGO=""
+NUMCHEQUE="" 
+MONTOBN="0" 
+BANCO="0" 
+CTAORIG="" 
+BENEF="" 
+RFC=""
+BANCODEST="0" 
+CTADEST="" 
+FECHACHEQUE="" 
+BANCOORIGEXT=""
+BANCODESTEXT="" 
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="200000300900000000003" 
+Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" 
+Monto="1450.84"
+TipoCambio="1" 
+DebeHaber="D"
+ccostos="0" 
+proyectos="0" 
+FRMPAGO=""
+NUMCHEQUE="" 
+MONTOBN="0" 
+BANCO="0"
+CTAORIG="" 
+BENEF=""
+RFC="" 
+BANCODEST="0"
+CTADEST=""
+FECHACHEQUE="" 
+BANCOORIGEXT="" 
+BANCODESTEXT=""
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="100100100400000000003" 
+Depto="5" ConceptoPol="Emilia Reyes - fac 125 - renta  junio" 
+Monto="1450.84" 
+TipoCambio="1" 
+DebeHaber="H"
+ccostos="0" 
+proyectos="0" 
+FRMPAGO="" 
+NUMCHEQUE="" 
+MONTOBN="0" 
+BANCO="0" 
+CTAORIG="" 
+BENEF="" 
+RFC="" 
+BANCODEST="0" 
+CTADEST="" 
+FECHACHEQUE=""
+BANCOORIGEXT="" 
+BANCODESTEXT="" 
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="200000300900000000003"
+Depto="5"
+ConceptoPol="Emilia Reyes - fac 125 - renta  junio" 
+Monto="0.82"
+TipoCambio="1" 
+DebeHaber="H" 
+ccostos="0" 
+proyectos="0" 
+FRMPAGO="" 
+NUMCHEQUE="" 
+MONTOBN="0" 
+BANCO="0" 
+CTAORIG="" 
+BENEF="" 
+RFC="" 
+BANCODEST="0" 
+CTADEST="" 
+FECHACHEQUE=""
+BANCOORIGEXT=""
+BANCODESTEXT="" 
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+<ROWPartidas 
+Cuenta="800100100200000000003"
+Depto="5" 
+ConceptoPol="Emilia Reyes - fac 125 - renta  junio"
+Monto="0.82" 
+TipoCambio="1" 
+DebeHaber="D" 
+ccostos="0" 
+proyectos="0" 
+FRMPAGO="" 
+NUMCHEQUE=""
+MONTOBN="0" 
+BANCO="0"
+CTAORIG="" 
+BENEF="" 
+RFC="" 
+BANCODEST="0" 
+CTADEST="" 
+FECHACHEQUE="" 
+BANCOORIGEXT=""
+BANCODESTEXT="" 
+IDUUID="0" 
+IDFISCAL="">
+<CDSPartidasUUID>
+</CDSPartidasUUID>
+</ROWPartidas>
+</Partidas>
+</ROW>
+</ROWDATA>
+</DATAPACKET>

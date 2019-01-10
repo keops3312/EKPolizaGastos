@@ -15,10 +15,10 @@ namespace EKPolizaGastos.Context
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SEMP_SATConetxt : DbContext
+    public partial class SEMP_SATContext : DbContext
     {
-        public SEMP_SATConetxt()
-            : base("name=SEMP_SATConetxt")
+        public SEMP_SATContext()
+            : base("name=SEMP_SATContext")
         {
         }
     
@@ -31,7 +31,12 @@ namespace EKPolizaGastos.Context
         public virtual DbSet<ComprobanteEstatus> ComprobanteEstatus { get; set; }
         public virtual DbSet<CuentasGastos> CuentasGastos { get; set; }
         public virtual DbSet<Empresas> Empresas { get; set; }
+        public virtual DbSet<Localidades> Localidades { get; set; }
+        public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<CIS_NOV2018> CIS_NOV2018 { get; set; }
+        public virtual DbSet<CIS_NOV2018Conceptos> CIS_NOV2018Conceptos { get; set; }
+        public virtual DbSet<ComprobanteConceptos> ComprobanteConceptos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -114,7 +119,7 @@ namespace EKPolizaGastos.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<SP_InsertFactura_Result> SP_InsertFactura(Nullable<int> opcion, string serie, string folio, string fecha, string version, string sello, string formaPago, string noCertificado, string metodoPago, string lugarExpedicion, string schemaLocation, string condicionesDePago, string subTotal, string moneda, string total, string tipoDeComprobante, string descuento, string nombre, string regimenFiscal, string rfc, string nombreR, string rfcR, string usoCFDI, string importe, string impuesto, string tasaOCuota, string tipoFactor, string selloCFD, string noCertificadoSAT, string rfcProvCertif, string uUID, string fechaTimbrado, string selloSAT, ObjectParameter msg)
+        public virtual ObjectResult<SP_InsertFactura_Result> SP_InsertFactura(Nullable<int> opcion, string serie, string folio, string fecha, string version, string sello, string formaPago, string noCertificado, string metodoPago, string lugarExpedicion, string schemaLocation, string condicionesDePago, string subTotal, string moneda, string total, string tipoDeComprobante, string descuento, string nombre, string regimenFiscal, string rfc, string nombreR, string rfcR, string usoCFDI, string importe, string impuesto, string tasaOCuota, string tipoFactor, string selloCFD, string noCertificadoSAT, string rfcProvCertif, string uUID, string fechaTimbrado, string selloSAT, string idFactura, string claveProdServ, string noIdentificacion, string cantidad, string claveUnidad, string unidad, string descripcion, string valorUnitario, string importeX, string descuentoX, string nombreTabla, Nullable<System.DateTime> fechaC, ObjectParameter msg, ObjectParameter capto)
         {
             var opcionParameter = opcion.HasValue ?
                 new ObjectParameter("opcion", opcion) :
@@ -248,7 +253,55 @@ namespace EKPolizaGastos.Context
                 new ObjectParameter("SelloSAT", selloSAT) :
                 new ObjectParameter("SelloSAT", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertFactura_Result>("SP_InsertFactura", opcionParameter, serieParameter, folioParameter, fechaParameter, versionParameter, selloParameter, formaPagoParameter, noCertificadoParameter, metodoPagoParameter, lugarExpedicionParameter, schemaLocationParameter, condicionesDePagoParameter, subTotalParameter, monedaParameter, totalParameter, tipoDeComprobanteParameter, descuentoParameter, nombreParameter, regimenFiscalParameter, rfcParameter, nombreRParameter, rfcRParameter, usoCFDIParameter, importeParameter, impuestoParameter, tasaOCuotaParameter, tipoFactorParameter, selloCFDParameter, noCertificadoSATParameter, rfcProvCertifParameter, uUIDParameter, fechaTimbradoParameter, selloSATParameter, msg);
+            var idFacturaParameter = idFactura != null ?
+                new ObjectParameter("IdFactura", idFactura) :
+                new ObjectParameter("IdFactura", typeof(string));
+    
+            var claveProdServParameter = claveProdServ != null ?
+                new ObjectParameter("ClaveProdServ", claveProdServ) :
+                new ObjectParameter("ClaveProdServ", typeof(string));
+    
+            var noIdentificacionParameter = noIdentificacion != null ?
+                new ObjectParameter("NoIdentificacion", noIdentificacion) :
+                new ObjectParameter("NoIdentificacion", typeof(string));
+    
+            var cantidadParameter = cantidad != null ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(string));
+    
+            var claveUnidadParameter = claveUnidad != null ?
+                new ObjectParameter("ClaveUnidad", claveUnidad) :
+                new ObjectParameter("ClaveUnidad", typeof(string));
+    
+            var unidadParameter = unidad != null ?
+                new ObjectParameter("Unidad", unidad) :
+                new ObjectParameter("Unidad", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var valorUnitarioParameter = valorUnitario != null ?
+                new ObjectParameter("ValorUnitario", valorUnitario) :
+                new ObjectParameter("ValorUnitario", typeof(string));
+    
+            var importeXParameter = importeX != null ?
+                new ObjectParameter("ImporteX", importeX) :
+                new ObjectParameter("ImporteX", typeof(string));
+    
+            var descuentoXParameter = descuentoX != null ?
+                new ObjectParameter("DescuentoX", descuentoX) :
+                new ObjectParameter("DescuentoX", typeof(string));
+    
+            var nombreTablaParameter = nombreTabla != null ?
+                new ObjectParameter("nombreTabla", nombreTabla) :
+                new ObjectParameter("nombreTabla", typeof(string));
+    
+            var fechaCParameter = fechaC.HasValue ?
+                new ObjectParameter("FechaC", fechaC) :
+                new ObjectParameter("FechaC", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertFactura_Result>("SP_InsertFactura", opcionParameter, serieParameter, folioParameter, fechaParameter, versionParameter, selloParameter, formaPagoParameter, noCertificadoParameter, metodoPagoParameter, lugarExpedicionParameter, schemaLocationParameter, condicionesDePagoParameter, subTotalParameter, monedaParameter, totalParameter, tipoDeComprobanteParameter, descuentoParameter, nombreParameter, regimenFiscalParameter, rfcParameter, nombreRParameter, rfcRParameter, usoCFDIParameter, importeParameter, impuestoParameter, tasaOCuotaParameter, tipoFactorParameter, selloCFDParameter, noCertificadoSATParameter, rfcProvCertifParameter, uUIDParameter, fechaTimbradoParameter, selloSATParameter, idFacturaParameter, claveProdServParameter, noIdentificacionParameter, cantidadParameter, claveUnidadParameter, unidadParameter, descripcionParameter, valorUnitarioParameter, importeXParameter, descuentoXParameter, nombreTablaParameter, fechaCParameter, msg, capto);
         }
     
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)

@@ -12,7 +12,7 @@ namespace EKPolizaGastos.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class Comprobante
+    public partial class CIS_NOV2018
     {
         public int IdFactura { get; set; }
         public string Serie { get; set; }
@@ -50,7 +50,5 @@ namespace EKPolizaGastos.Context
         public Nullable<System.DateTime> Registro { get; set; }
         public int IdEstatus { get; set; }
         public Nullable<System.DateTime> FechaC { get; set; }
-    
-        public virtual ComprobanteEstatus ComprobanteEstatus { get; set; }
     }
 }

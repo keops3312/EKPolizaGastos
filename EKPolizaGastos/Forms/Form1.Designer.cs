@@ -212,7 +212,6 @@
             this.listZip.BackgroundStyle.BorderTopWidth = 2;
             this.listZip.BackgroundStyle.Class = "TreeBorderKey";
             this.listZip.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.listZip.CheckStateMember = null;
             this.listZip.ContainerControlProcessDialogKey = true;
             this.listZip.DragDropSupport = true;
             this.listZip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
@@ -318,6 +317,7 @@
             this.lblEmpresa.Text = "-";
             this.lblEmpresa.TextAlignment = System.Drawing.StringAlignment.Center;
             this.lblEmpresa.WordWrap = true;
+            this.lblEmpresa.Click += new System.EventHandler(this.lblEmpresa_Click);
             // 
             // listBox1
             // 

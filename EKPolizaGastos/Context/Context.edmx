@@ -5,6 +5,69 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
       <Schema Namespace="SEMP_SATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SEMP_SAT.dbo.CIS-NOV2018' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CIS-NOV2018">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+            <PropertyRef Name="IdEstatus" />
+          </Key>
+          <Property Name="IdFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Serie" Type="nvarchar(max)" />
+          <Property Name="Folio" Type="nvarchar" MaxLength="255" />
+          <Property Name="Fecha" Type="nvarchar" MaxLength="255" />
+          <Property Name="Versions" Type="nvarchar" MaxLength="255" />
+          <Property Name="Sello" Type="nvarchar(max)" />
+          <Property Name="FormaPago" Type="nvarchar" MaxLength="255" />
+          <Property Name="NoCertificado" Type="nvarchar" MaxLength="255" />
+          <Property Name="MetodoPago" Type="nvarchar" MaxLength="255" />
+          <Property Name="LugarExpedicion" Type="nvarchar" MaxLength="255" />
+          <Property Name="schemaLocation" Type="nvarchar" MaxLength="255" />
+          <Property Name="CondicionesDePago" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubTotal" Type="nvarchar" MaxLength="255" />
+          <Property Name="Descuento" Type="nvarchar" MaxLength="255" />
+          <Property Name="Moneda" Type="nvarchar" MaxLength="255" />
+          <Property Name="Total" Type="nvarchar" MaxLength="255" />
+          <Property Name="TipoDeComprobante" Type="nvarchar" MaxLength="255" />
+          <Property Name="Emisor" Type="nvarchar" MaxLength="255" />
+          <Property Name="RegimeFiscal_receptor" Type="nvarchar" MaxLength="255" />
+          <Property Name="RFC_emisor" Type="nvarchar" MaxLength="255" />
+          <Property Name="Receptor" Type="nvarchar" MaxLength="255" />
+          <Property Name="RFC_receptor" Type="nvarchar" MaxLength="255" />
+          <Property Name="UsoCFDI" Type="nvarchar" MaxLength="255" />
+          <Property Name="SelloCFD" Type="nvarchar(max)" />
+          <Property Name="NoCertificadoSAT" Type="nvarchar" MaxLength="255" />
+          <Property Name="RFcProvCertif" Type="nvarchar" MaxLength="255" />
+          <Property Name="UUID" Type="nvarchar" MaxLength="255" />
+          <Property Name="FechaTimbrado" Type="nvarchar" MaxLength="255" />
+          <Property Name="SelloSAT" Type="nvarchar(max)" />
+          <Property Name="Importe" Type="nvarchar" MaxLength="255" />
+          <Property Name="Impuesto" Type="nvarchar" MaxLength="255" />
+          <Property Name="TasaOCuota" Type="nvarchar" MaxLength="255" />
+          <Property Name="TipoFactor" Type="nvarchar" MaxLength="255" />
+          <Property Name="Registro" Type="date" />
+          <Property Name="IdEstatus" Type="int" Nullable="false" />
+          <Property Name="FechaC" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SEMP_SAT.dbo.CIS-NOV2018Conceptos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CIS-NOV2018Conceptos">
+          <Key>
+            <PropertyRef Name="IdConceptos" />
+          </Key>
+          <Property Name="IdConceptos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFactura" Type="int" />
+          <Property Name="ClaveProdServ" Type="nvarchar" MaxLength="255" />
+          <Property Name="NoIdentificacion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cantidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="ClaveUnidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="Unidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="ValorUnitario" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImporteX" Type="nvarchar" MaxLength="255" />
+          <Property Name="DescuentoX" Type="nvarchar" MaxLength="255" />
+          <Property Name="UUID" Type="nvarchar" MaxLength="255" />
+        </EntityType>
         <EntityType Name="Comprobante">
           <Key>
             <PropertyRef Name="IdFactura" />
@@ -44,6 +107,26 @@
           <Property Name="TipoFactor" Type="nvarchar" MaxLength="255" />
           <Property Name="Registro" Type="date" />
           <Property Name="IdEstatus" Type="int" Nullable="false" />
+          <Property Name="FechaC" Type="date" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ComprobanteConceptos">
+          <Key>
+            <PropertyRef Name="IdConceptos" />
+          </Key>
+          <Property Name="IdConceptos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFactura" Type="int" />
+          <Property Name="ClaveProdServ" Type="nvarchar" MaxLength="255" />
+          <Property Name="NoIdentificacion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Cantidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="ClaveUnidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="Unidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="ValorUnitario" Type="nvarchar" MaxLength="255" />
+          <Property Name="ImporteX" Type="nvarchar" MaxLength="255" />
+          <Property Name="DescuentoX" Type="nvarchar" MaxLength="255" />
+          <Property Name="UUID" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ComprobanteEstatus">
           <Key>
@@ -66,11 +149,42 @@
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Empresa" Type="nvarchar" MaxLength="255" />
+          <Property Name="Empresa" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Marca" Type="nvarchar" MaxLength="255" />
           <Property Name="RFC" Type="nvarchar" MaxLength="255" />
           <Property Name="Path" Type="nvarchar" MaxLength="255" />
           <Property Name="Letra" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Localidades">
+          <Key>
+            <PropertyRef Name="IdLocalidad" />
+          </Key>
+          <Property Name="IdLocalidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Localidad" Type="nvarchar" MaxLength="255" />
+          <Property Name="Sigla_Sucursal" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdEmpresa" Type="int" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Proveedor" Type="nvarchar" MaxLength="255" />
+          <Property Name="RFC" Type="nvarchar" MaxLength="255" />
+          <Property Name="NoProveedor" Type="nvarchar" MaxLength="255" />
+          <Property Name="IdEmpresa" Type="int" Nullable="false" />
+          <Property Name="IdLocalidad" Type="int" Nullable="false" />
+          <Property Name="Cuenta_cargo_1" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cuenta_cargo_2" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cuenta_cargo_3" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cuenta_Cargo_Iva" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cuenta_Abono_1" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cuenta_Abono_2" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cuenta_Abono_3" Type="nvarchar" MaxLength="15" />
+          <Property Name="Titulo_principal" Type="nvarchar" MaxLength="15" />
+          <Property Name="Titulo_secundario" Type="nvarchar" MaxLength="15" />
+          <Property Name="Titulo_tercero" Type="nvarchar" MaxLength="15" />
+          <Property Name="Departamento" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -94,15 +208,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CuentasGastos_Empresas">
+        <Association Name="FK_Localidades_Empresas">
           <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
-          <End Role="CuentasGastos" Type="Self.CuentasGastos" Multiplicity="*" />
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
               <PropertyRef Name="IdEmpresa" />
             </Principal>
-            <Dependent Role="CuentasGastos">
+            <Dependent Role="Localidades">
               <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Localidades">
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="IdLocalidad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -165,7 +303,20 @@
           <Parameter Name="UUID" Type="nvarchar" Mode="In" />
           <Parameter Name="FechaTimbrado" Type="nvarchar" Mode="In" />
           <Parameter Name="SelloSAT" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdFactura" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClaveProdServ" Type="nvarchar" Mode="In" />
+          <Parameter Name="NoIdentificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Cantidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="ClaveUnidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="Unidad" Type="nvarchar" Mode="In" />
+          <Parameter Name="Descripcion" Type="nvarchar" Mode="In" />
+          <Parameter Name="ValorUnitario" Type="nvarchar" Mode="In" />
+          <Parameter Name="ImporteX" Type="nvarchar" Mode="In" />
+          <Parameter Name="DescuentoX" Type="nvarchar" Mode="In" />
+          <Parameter Name="nombreTabla" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaC" Type="date" Mode="In" />
           <Parameter Name="msg" Type="varchar" Mode="InOut" />
+          <Parameter Name="Capto" Type="int" Mode="InOut" />
         </Function>
         <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -178,14 +329,96 @@
           <EntitySet Name="ComprobanteEstatus" EntityType="Self.ComprobanteEstatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CuentasGastos" EntityType="Self.CuentasGastos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empresas" EntityType="Self.Empresas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Localidades" EntityType="Self.Localidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CIS-NOV2018" EntityType="Self.CIS-NOV2018" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CIS-NOV2018].[IdFactura] AS [IdFactura], 
+    [CIS-NOV2018].[Serie] AS [Serie], 
+    [CIS-NOV2018].[Folio] AS [Folio], 
+    [CIS-NOV2018].[Fecha] AS [Fecha], 
+    [CIS-NOV2018].[Versions] AS [Versions], 
+    [CIS-NOV2018].[Sello] AS [Sello], 
+    [CIS-NOV2018].[FormaPago] AS [FormaPago], 
+    [CIS-NOV2018].[NoCertificado] AS [NoCertificado], 
+    [CIS-NOV2018].[MetodoPago] AS [MetodoPago], 
+    [CIS-NOV2018].[LugarExpedicion] AS [LugarExpedicion], 
+    [CIS-NOV2018].[schemaLocation] AS [schemaLocation], 
+    [CIS-NOV2018].[CondicionesDePago] AS [CondicionesDePago], 
+    [CIS-NOV2018].[SubTotal] AS [SubTotal], 
+    [CIS-NOV2018].[Descuento] AS [Descuento], 
+    [CIS-NOV2018].[Moneda] AS [Moneda], 
+    [CIS-NOV2018].[Total] AS [Total], 
+    [CIS-NOV2018].[TipoDeComprobante] AS [TipoDeComprobante], 
+    [CIS-NOV2018].[Emisor] AS [Emisor], 
+    [CIS-NOV2018].[RegimeFiscal_receptor] AS [RegimeFiscal_receptor], 
+    [CIS-NOV2018].[RFC_emisor] AS [RFC_emisor], 
+    [CIS-NOV2018].[Receptor] AS [Receptor], 
+    [CIS-NOV2018].[RFC_receptor] AS [RFC_receptor], 
+    [CIS-NOV2018].[UsoCFDI] AS [UsoCFDI], 
+    [CIS-NOV2018].[SelloCFD] AS [SelloCFD], 
+    [CIS-NOV2018].[NoCertificadoSAT] AS [NoCertificadoSAT], 
+    [CIS-NOV2018].[RFcProvCertif] AS [RFcProvCertif], 
+    [CIS-NOV2018].[UUID] AS [UUID], 
+    [CIS-NOV2018].[FechaTimbrado] AS [FechaTimbrado], 
+    [CIS-NOV2018].[SelloSAT] AS [SelloSAT], 
+    [CIS-NOV2018].[Importe] AS [Importe], 
+    [CIS-NOV2018].[Impuesto] AS [Impuesto], 
+    [CIS-NOV2018].[TasaOCuota] AS [TasaOCuota], 
+    [CIS-NOV2018].[TipoFactor] AS [TipoFactor], 
+    [CIS-NOV2018].[Registro] AS [Registro], 
+    [CIS-NOV2018].[IdEstatus] AS [IdEstatus], 
+    [CIS-NOV2018].[FechaC] AS [FechaC]
+    FROM [dbo].[CIS-NOV2018] AS [CIS-NOV2018]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CIS-NOV2018Conceptos" EntityType="Self.CIS-NOV2018Conceptos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CIS-NOV2018Conceptos].[IdConceptos] AS [IdConceptos], 
+    [CIS-NOV2018Conceptos].[IdFactura] AS [IdFactura], 
+    [CIS-NOV2018Conceptos].[ClaveProdServ] AS [ClaveProdServ], 
+    [CIS-NOV2018Conceptos].[NoIdentificacion] AS [NoIdentificacion], 
+    [CIS-NOV2018Conceptos].[Cantidad] AS [Cantidad], 
+    [CIS-NOV2018Conceptos].[ClaveUnidad] AS [ClaveUnidad], 
+    [CIS-NOV2018Conceptos].[Unidad] AS [Unidad], 
+    [CIS-NOV2018Conceptos].[Descripcion] AS [Descripcion], 
+    [CIS-NOV2018Conceptos].[ValorUnitario] AS [ValorUnitario], 
+    [CIS-NOV2018Conceptos].[ImporteX] AS [ImporteX], 
+    [CIS-NOV2018Conceptos].[DescuentoX] AS [DescuentoX], 
+    [CIS-NOV2018Conceptos].[UUID] AS [UUID]
+    FROM [dbo].[CIS-NOV2018Conceptos] AS [CIS-NOV2018Conceptos]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ComprobanteConceptos" EntityType="Self.ComprobanteConceptos" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ComprobanteConceptos].[IdConceptos] AS [IdConceptos], 
+    [ComprobanteConceptos].[IdFactura] AS [IdFactura], 
+    [ComprobanteConceptos].[ClaveProdServ] AS [ClaveProdServ], 
+    [ComprobanteConceptos].[NoIdentificacion] AS [NoIdentificacion], 
+    [ComprobanteConceptos].[Cantidad] AS [Cantidad], 
+    [ComprobanteConceptos].[ClaveUnidad] AS [ClaveUnidad], 
+    [ComprobanteConceptos].[Unidad] AS [Unidad], 
+    [ComprobanteConceptos].[Descripcion] AS [Descripcion], 
+    [ComprobanteConceptos].[ValorUnitario] AS [ValorUnitario], 
+    [ComprobanteConceptos].[ImporteX] AS [ImporteX], 
+    [ComprobanteConceptos].[DescuentoX] AS [DescuentoX], 
+    [ComprobanteConceptos].[UUID] AS [UUID]
+    FROM [dbo].[ComprobanteConceptos] AS [ComprobanteConceptos]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Comprobante_ComprobanteEstatus" Association="Self.FK_Comprobante_ComprobanteEstatus">
             <End Role="ComprobanteEstatus" EntitySet="ComprobanteEstatus" />
             <End Role="Comprobante" EntitySet="Comprobante" />
           </AssociationSet>
-          <AssociationSet Name="FK_CuentasGastos_Empresas" Association="Self.FK_CuentasGastos_Empresas">
+          <AssociationSet Name="FK_Localidades_Empresas" Association="Self.FK_Localidades_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="CuentasGastos" EntitySet="CuentasGastos" />
+            <End Role="Localidades" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Empresas" Association="Self.FK_Proveedores_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Localidades" Association="Self.FK_Proveedores_Localidades">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -232,6 +465,7 @@
           <Property Name="TipoFactor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Registro" Type="DateTime" Precision="0" />
           <Property Name="IdEstatus" Type="Int32" Nullable="false" />
+          <Property Name="FechaC" Type="DateTime" Precision="0" />
           <NavigationProperty Name="ComprobanteEstatus" Relationship="Self.FK_Comprobante_ComprobanteEstatus" FromRole="Comprobante" ToRole="ComprobanteEstatus" />
         </EntityType>
         <EntityType Name="ComprobanteEstatus">
@@ -250,19 +484,54 @@
           <Property Name="Cuenta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IdEmpresa" Type="Int32" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_CuentasGastos_Empresas" FromRole="CuentasGastos" ToRole="Empresas" />
         </EntityType>
         <EntityType Name="Empresas">
           <Key>
             <PropertyRef Name="IdEmpresa" />
           </Key>
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Empresa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Empresa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Marca" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="RFC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Letra" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="CuentasGastos" Relationship="Self.FK_CuentasGastos_Empresas" FromRole="Empresas" ToRole="CuentasGastos" />
+          <NavigationProperty Name="Localidades" Relationship="Self.FK_Localidades_Empresas" FromRole="Empresas" ToRole="Localidades" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Empresas" FromRole="Empresas" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Localidades">
+          <Key>
+            <PropertyRef Name="IdLocalidad" />
+          </Key>
+          <Property Name="IdLocalidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Localidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sigla_Sucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdEmpresa" Type="Int32" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Localidades_Empresas" FromRole="Localidades" ToRole="Empresas" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Localidades" FromRole="Localidades" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Proveedor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RFC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NoProveedor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
+          <Property Name="IdLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="Cuenta_cargo_1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_cargo_2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_cargo_3" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Cargo_Iva" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Abono_1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Abono_2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Abono_3" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Titulo_principal" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Titulo_secundario" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Titulo_tercero" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Departamento" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Empresas" Relationship="Self.FK_Proveedores_Empresas" FromRole="Proveedores" ToRole="Empresas" />
+          <NavigationProperty Name="Localidades" Relationship="Self.FK_Proveedores_Localidades" FromRole="Proveedores" ToRole="Localidades" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -273,6 +542,82 @@
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="CIS_NOV2018">
+          <Key>
+            <PropertyRef Name="IdFactura" />
+            <PropertyRef Name="IdEstatus" />
+          </Key>
+          <Property Name="IdFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Serie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Folio" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Fecha" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Versions" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Sello" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FormaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NoCertificado" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="MetodoPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LugarExpedicion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="schemaLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionesDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SubTotal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Descuento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Moneda" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TipoDeComprobante" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Emisor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RegimeFiscal_receptor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RFC_emisor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Receptor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RFC_receptor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UsoCFDI" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SelloCFD" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NoCertificadoSAT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RFcProvCertif" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UUID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FechaTimbrado" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SelloSAT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Importe" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Impuesto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TasaOCuota" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TipoFactor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Registro" Type="DateTime" Precision="0" />
+          <Property Name="IdEstatus" Type="Int32" Nullable="false" />
+          <Property Name="FechaC" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="CIS_NOV2018Conceptos">
+          <Key>
+            <PropertyRef Name="IdConceptos" />
+          </Key>
+          <Property Name="IdConceptos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFactura" Type="Int32" />
+          <Property Name="ClaveProdServ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NoIdentificacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cantidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ClaveUnidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Unidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ValorUnitario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImporteX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DescuentoX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UUID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ComprobanteConceptos">
+          <Key>
+            <PropertyRef Name="IdConceptos" />
+          </Key>
+          <Property Name="IdConceptos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFactura" Type="Int32" />
+          <Property Name="ClaveProdServ" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NoIdentificacion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Cantidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ClaveUnidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Unidad" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ValorUnitario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ImporteX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DescuentoX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UUID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Comprobante_ComprobanteEstatus">
           <End Role="ComprobanteEstatus" Type="Self.ComprobanteEstatus" Multiplicity="1" />
@@ -286,31 +631,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_CuentasGastos_Empresas">
+        <Association Name="FK_Localidades_Empresas">
           <End Role="Empresas" Type="Self.Empresas" Multiplicity="0..1" />
-          <End Role="CuentasGastos" Type="Self.CuentasGastos" Multiplicity="*" />
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Empresas">
               <PropertyRef Name="IdEmpresa" />
             </Principal>
-            <Dependent Role="CuentasGastos">
+            <Dependent Role="Localidades">
               <PropertyRef Name="IdEmpresa" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SEMP_SATConetxt" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Proveedores_Empresas">
+          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresas">
+              <PropertyRef Name="IdEmpresa" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="IdEmpresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Localidades">
+          <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Localidades">
+              <PropertyRef Name="IdLocalidad" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="IdLocalidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SEMP_SATContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comprobante" EntityType="Self.Comprobante" />
           <EntitySet Name="ComprobanteEstatus" EntityType="Self.ComprobanteEstatus" />
           <EntitySet Name="CuentasGastos" EntityType="Self.CuentasGastos" />
           <EntitySet Name="Empresas" EntityType="Self.Empresas" />
+          <EntitySet Name="Localidades" EntityType="Self.Localidades" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="CIS_NOV2018" EntityType="Self.CIS_NOV2018" />
+          <EntitySet Name="CIS_NOV2018Conceptos" EntityType="Self.CIS_NOV2018Conceptos" />
+          <EntitySet Name="ComprobanteConceptos" EntityType="Self.ComprobanteConceptos" />
           <AssociationSet Name="FK_Comprobante_ComprobanteEstatus" Association="Self.FK_Comprobante_ComprobanteEstatus">
             <End Role="ComprobanteEstatus" EntitySet="ComprobanteEstatus" />
             <End Role="Comprobante" EntitySet="Comprobante" />
           </AssociationSet>
-          <AssociationSet Name="FK_CuentasGastos_Empresas" Association="Self.FK_CuentasGastos_Empresas">
+          <AssociationSet Name="FK_Localidades_Empresas" Association="Self.FK_Localidades_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="CuentasGastos" EntitySet="CuentasGastos" />
+            <End Role="Localidades" EntitySet="Localidades" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Empresas" Association="Self.FK_Proveedores_Empresas">
+            <End Role="Empresas" EntitySet="Empresas" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Localidades" Association="Self.FK_Proveedores_Localidades">
+            <End Role="Localidades" EntitySet="Localidades" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -370,7 +752,20 @@
             <Parameter Name="UUID" Mode="In" Type="String" />
             <Parameter Name="FechaTimbrado" Mode="In" Type="String" />
             <Parameter Name="SelloSAT" Mode="In" Type="String" />
+            <Parameter Name="IdFactura" Mode="In" Type="String" />
+            <Parameter Name="ClaveProdServ" Mode="In" Type="String" />
+            <Parameter Name="NoIdentificacion" Mode="In" Type="String" />
+            <Parameter Name="Cantidad" Mode="In" Type="String" />
+            <Parameter Name="ClaveUnidad" Mode="In" Type="String" />
+            <Parameter Name="Unidad" Mode="In" Type="String" />
+            <Parameter Name="Descripcion" Mode="In" Type="String" />
+            <Parameter Name="ValorUnitario" Mode="In" Type="String" />
+            <Parameter Name="ImporteX" Mode="In" Type="String" />
+            <Parameter Name="DescuentoX" Mode="In" Type="String" />
+            <Parameter Name="nombreTabla" Mode="In" Type="String" />
+            <Parameter Name="FechaC" Mode="In" Type="DateTime" />
             <Parameter Name="msg" Mode="InOut" Type="String" />
+            <Parameter Name="Capto" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_renamediagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -403,7 +798,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="SEMP_SATModelStoreContainer" CdmEntityContainer="SEMP_SATConetxt">
+        <EntityContainerMapping StorageEntityContainer="SEMP_SATModelStoreContainer" CdmEntityContainer="SEMP_SATContext">
           <EntitySetMapping Name="Comprobante">
             <EntityTypeMapping TypeName="SEMP_SATModel.Comprobante">
               <MappingFragment StoreEntitySet="Comprobante">
@@ -442,6 +837,7 @@
                 <ScalarProperty Name="TipoFactor" ColumnName="TipoFactor" />
                 <ScalarProperty Name="Registro" ColumnName="Registro" />
                 <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+                <ScalarProperty Name="FechaC" ColumnName="FechaC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -475,6 +871,39 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Localidades">
+            <EntityTypeMapping TypeName="SEMP_SATModel.Localidades">
+              <MappingFragment StoreEntitySet="Localidades">
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="Sigla_Sucursal" ColumnName="Sigla_Sucursal" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="SEMP_SATModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="NoProveedor" ColumnName="NoProveedor" />
+                <ScalarProperty Name="IdEmpresa" ColumnName="IdEmpresa" />
+                <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
+                <ScalarProperty Name="Cuenta_cargo_1" ColumnName="Cuenta_cargo_1" />
+                <ScalarProperty Name="Cuenta_cargo_2" ColumnName="Cuenta_cargo_2" />
+                <ScalarProperty Name="Cuenta_cargo_3" ColumnName="Cuenta_cargo_3" />
+                <ScalarProperty Name="Cuenta_Cargo_Iva" ColumnName="Cuenta_Cargo_Iva" />
+                <ScalarProperty Name="Cuenta_Abono_1" ColumnName="Cuenta_Abono_1" />
+                <ScalarProperty Name="Cuenta_Abono_2" ColumnName="Cuenta_Abono_2" />
+                <ScalarProperty Name="Cuenta_Abono_3" ColumnName="Cuenta_Abono_3" />
+                <ScalarProperty Name="Titulo_principal" ColumnName="Titulo_principal" />
+                <ScalarProperty Name="Titulo_secundario" ColumnName="Titulo_secundario" />
+                <ScalarProperty Name="Titulo_tercero" ColumnName="Titulo_tercero" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="SEMP_SATModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -483,6 +912,84 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIS_NOV2018">
+            <EntityTypeMapping TypeName="SEMP_SATModel.CIS_NOV2018">
+              <MappingFragment StoreEntitySet="CIS-NOV2018">
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="Serie" ColumnName="Serie" />
+                <ScalarProperty Name="Folio" ColumnName="Folio" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Versions" ColumnName="Versions" />
+                <ScalarProperty Name="Sello" ColumnName="Sello" />
+                <ScalarProperty Name="FormaPago" ColumnName="FormaPago" />
+                <ScalarProperty Name="NoCertificado" ColumnName="NoCertificado" />
+                <ScalarProperty Name="MetodoPago" ColumnName="MetodoPago" />
+                <ScalarProperty Name="LugarExpedicion" ColumnName="LugarExpedicion" />
+                <ScalarProperty Name="schemaLocation" ColumnName="schemaLocation" />
+                <ScalarProperty Name="CondicionesDePago" ColumnName="CondicionesDePago" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="Descuento" ColumnName="Descuento" />
+                <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="TipoDeComprobante" ColumnName="TipoDeComprobante" />
+                <ScalarProperty Name="Emisor" ColumnName="Emisor" />
+                <ScalarProperty Name="RegimeFiscal_receptor" ColumnName="RegimeFiscal_receptor" />
+                <ScalarProperty Name="RFC_emisor" ColumnName="RFC_emisor" />
+                <ScalarProperty Name="Receptor" ColumnName="Receptor" />
+                <ScalarProperty Name="RFC_receptor" ColumnName="RFC_receptor" />
+                <ScalarProperty Name="UsoCFDI" ColumnName="UsoCFDI" />
+                <ScalarProperty Name="SelloCFD" ColumnName="SelloCFD" />
+                <ScalarProperty Name="NoCertificadoSAT" ColumnName="NoCertificadoSAT" />
+                <ScalarProperty Name="RFcProvCertif" ColumnName="RFcProvCertif" />
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+                <ScalarProperty Name="FechaTimbrado" ColumnName="FechaTimbrado" />
+                <ScalarProperty Name="SelloSAT" ColumnName="SelloSAT" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="TasaOCuota" ColumnName="TasaOCuota" />
+                <ScalarProperty Name="TipoFactor" ColumnName="TipoFactor" />
+                <ScalarProperty Name="Registro" ColumnName="Registro" />
+                <ScalarProperty Name="IdEstatus" ColumnName="IdEstatus" />
+                <ScalarProperty Name="FechaC" ColumnName="FechaC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CIS_NOV2018Conceptos">
+            <EntityTypeMapping TypeName="SEMP_SATModel.CIS_NOV2018Conceptos">
+              <MappingFragment StoreEntitySet="CIS-NOV2018Conceptos">
+                <ScalarProperty Name="IdConceptos" ColumnName="IdConceptos" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="ClaveProdServ" ColumnName="ClaveProdServ" />
+                <ScalarProperty Name="NoIdentificacion" ColumnName="NoIdentificacion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ClaveUnidad" ColumnName="ClaveUnidad" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+                <ScalarProperty Name="ImporteX" ColumnName="ImporteX" />
+                <ScalarProperty Name="DescuentoX" ColumnName="DescuentoX" />
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComprobanteConceptos">
+            <EntityTypeMapping TypeName="SEMP_SATModel.ComprobanteConceptos">
+              <MappingFragment StoreEntitySet="ComprobanteConceptos">
+                <ScalarProperty Name="IdConceptos" ColumnName="IdConceptos" />
+                <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
+                <ScalarProperty Name="ClaveProdServ" ColumnName="ClaveProdServ" />
+                <ScalarProperty Name="NoIdentificacion" ColumnName="NoIdentificacion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ClaveUnidad" ColumnName="ClaveUnidad" />
+                <ScalarProperty Name="Unidad" ColumnName="Unidad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="ValorUnitario" ColumnName="ValorUnitario" />
+                <ScalarProperty Name="ImporteX" ColumnName="ImporteX" />
+                <ScalarProperty Name="DescuentoX" ColumnName="DescuentoX" />
+                <ScalarProperty Name="UUID" ColumnName="UUID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

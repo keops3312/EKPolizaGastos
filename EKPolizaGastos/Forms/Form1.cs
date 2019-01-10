@@ -19,6 +19,7 @@ namespace EKPolizaGastos
     using EKPolizaGastos.Forms;
     using System.IO.Compression;
     using System.Data;
+    using System.Globalization;
     #endregion
 
 
@@ -27,7 +28,7 @@ namespace EKPolizaGastos
     {
 
         #region Context
-        private SEMP_SATConetxt db;
+        private SEMP_SATContext db;
         #endregion
 
         #region Attributtes
@@ -54,7 +55,7 @@ namespace EKPolizaGastos
         public Form1()
         {
             InitializeComponent();
-            db = new SEMP_SATConetxt();
+            db = new SEMP_SATContext();
             folderBrowserDialog = new FolderBrowserDialog();
             readSATFactura = new ReadSATFactura();
 
@@ -121,6 +122,8 @@ namespace EKPolizaGastos
             ReadSATFactura readSATFactura = new ReadSATFactura();
 
             TotalRegistrosEnNuevaTabla = readSATFactura.Scan(path,cnx,nameFile);
+
+           
 
         }
 
@@ -405,6 +408,9 @@ namespace EKPolizaGastos
             listTables.Columns.Add("Ejercicios", 150);
             listTables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             listTables.SmallImageList = imageList1;
+
+         
+           
         }
 
         private void btnCargarRuta_MouseHover(object sender, EventArgs e)
@@ -432,6 +438,7 @@ namespace EKPolizaGastos
 
                 PlantillaPrepolizaForm plantillaPrepoliza = new PlantillaPrepolizaForm();
                 plantillaPrepoliza.ejercicio = ejercicio;
+                plantillaPrepoliza.path=txtpath.Text;
                 plantillaPrepoliza.cnx = cnx;
                 plantillaPrepoliza.ShowDialog();
                 return;
@@ -475,13 +482,14 @@ namespace EKPolizaGastos
 
             readSATFactura.ToExcel(nameFile, path,cnx,txtpath.Text);
             LoadCompaniesProperties();
+
             listXML.Items.Clear();
             listXML2.Items.Clear();
             lblMessage.Text = "-";
-            
+
+          //  readSATFactura.InsertProvedores(cnx, nameFile, nameFile.Substring(0, 3)); //catch Provedors
 
 
-          
         }
 
 
@@ -513,8 +521,12 @@ namespace EKPolizaGastos
 
 
 
+
         #endregion
 
-        
+        private void lblEmpresa_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
