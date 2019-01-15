@@ -1366,35 +1366,42 @@ namespace EKPolizaGastos.Forms
                 }
                 else
                 {
+                    DialogResult actualizarProveedor = MessageBoxEx.Show("¿Este Proveedor ya existe ! \n" + 
+                                                                    "¿Desea Actualizar datos de Proveedor?",
+                                                     "EKPolizaGastos",
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+                    if (actualizarProveedor == DialogResult.Yes)
+                    {
 
+                        Proveedores proveedoresM = new Proveedores();
+                        proveedoresM = ExisteProovedor;
 
-                    Proveedores proveedoresM = new Proveedores();
-                    proveedoresM = ExisteProovedor;
+                        proveedoresM.Proveedor = Proveedor_Completo;
+                        proveedoresM.RFC = RFC_proveedor;
+                        proveedoresM.NoProveedor = numeroProvedorConvertido;
+                        proveedoresM.IdEmpresa = IdEmpresa;
+                        proveedoresM.IdLocalidad = IdLocalidad;
+                        proveedoresM.Cuenta_cargo_1 = Cuenta_cargo_1;
+                        proveedoresM.Cuenta_cargo_2 = Cuenta_cargo_2;
+                        proveedoresM.Cuenta_cargo_3 = Cuenta_cargo_3;
+                        proveedoresM.Cuenta_Cargo_Iva = Cuenta_cargo_Iva;
+                        proveedoresM.Cuenta_Abono_1 = Cuenta_Abono_1;
+                        proveedoresM.Cuenta_Abono_2 = Cuenta_Abono_2;
+                        proveedoresM.Cuenta_Abono_3 = Cuenta_Abono_3;
+                        proveedoresM.Titulo_principal = Titulo_principal;
+                        proveedoresM.Titulo_secundario = Titulo_secundario;
+                        proveedoresM.Titulo_tercero = Titulo_tercero;
 
-                    proveedoresM.Proveedor = Proveedor_Completo;
-                    proveedoresM.RFC = RFC_proveedor;
-                    proveedoresM.NoProveedor = numeroProvedorConvertido;
-                    proveedoresM.IdEmpresa = IdEmpresa;
-                    proveedoresM.IdLocalidad = IdLocalidad;
-                    proveedoresM.Cuenta_cargo_1 = Cuenta_cargo_1;
-                    proveedoresM.Cuenta_cargo_2 = Cuenta_cargo_2;
-                    proveedoresM.Cuenta_cargo_3 = Cuenta_cargo_3;
-                    proveedoresM.Cuenta_Cargo_Iva = Cuenta_cargo_Iva;
-                    proveedoresM.Cuenta_Abono_1 = Cuenta_Abono_1;
-                    proveedoresM.Cuenta_Abono_2 = Cuenta_Abono_2;
-                    proveedoresM.Cuenta_Abono_3 = Cuenta_Abono_3;
-                    proveedoresM.Titulo_principal = Titulo_principal;
-                    proveedoresM.Titulo_secundario = Titulo_secundario;
-                    proveedoresM.Titulo_tercero = Titulo_tercero;
-
-                    proveedoresM.Departamento = txtDepto.Text;
-                    proveedoresM.Isr_Retenido = Cuenta_isr_retenido;
-                    proveedoresM.Iva_Retenido = Cuenta_iva_retenido;
-                    //modifico las propiedades
-                    db.Proveedores.Attach(proveedoresM);
-                    db.Entry(proveedoresM).State =
-                        EntityState.Modified;
-                    db.SaveChanges();
+                        proveedoresM.Departamento = txtDepto.Text;
+                        proveedoresM.Isr_Retenido = Cuenta_isr_retenido;
+                        proveedoresM.Iva_Retenido = Cuenta_iva_retenido;
+                        //modifico las propiedades
+                        db.Proveedores.Attach(proveedoresM);
+                        db.Entry(proveedoresM).State =
+                            EntityState.Modified;
+                        db.SaveChanges();
+                    }
 
 
                 }
@@ -1404,7 +1411,17 @@ namespace EKPolizaGastos.Forms
 
                 #endregion
 
-
+                #region Update Ejercicio
+                
+                using (SqlConnection conn = new SqlConnection(cnx))
+                {
+                    conn.Open();
+                    SqlCommand cmdD = new SqlCommand("UPDATE [" + ejercicio + "]  SET IdEstatus='1'" +
+                    "  where IdFactura='" + IdF + "'", conn);
+                    cmdD.ExecuteNonQuery();
+                    conn.Close();
+                }
+                #endregion
 
             }
 

@@ -814,7 +814,7 @@ namespace EKPolizaGastos.Common.Classes
             DataTable result = new DataTable();
             //CHARGE DATA 
             SqlCommand cmd = new SqlCommand("SELECT * FROM [" + ejercicio + "] " +
-                               "order by IdFactura asc", conn);
+                               "where IdEstatus='2' order by IdFactura asc", conn);
             using (SqlDataAdapter a = new SqlDataAdapter(cmd))
             {
                 a.Fill(result);
