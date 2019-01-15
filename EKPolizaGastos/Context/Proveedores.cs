@@ -31,6 +31,8 @@ namespace EKPolizaGastos.Context
         public string Titulo_secundario { get; set; }
         public string Titulo_tercero { get; set; }
         public string Departamento { get; set; }
+        public string Iva_Retenido { get; set; }
+        public string Isr_Retenido { get; set; }
     
         public virtual Empresas Empresas { get; set; }
         public virtual Localidades Localidades { get; set; }

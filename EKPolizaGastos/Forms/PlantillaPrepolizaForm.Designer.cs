@@ -44,7 +44,6 @@
             this.labelX6 = new DevComponents.DotNetBar.LabelX();
             this.styleManagerAmbient1 = new DevComponents.DotNetBar.StyleManagerAmbient(this.components);
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.txtTipo = new DevComponents.DotNetBar.Controls.TextBoxX();
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
@@ -58,6 +57,7 @@
             this.Concepto = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Debe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Haber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmbLocalidades = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.labelX7 = new DevComponents.DotNetBar.LabelX();
             this.txtDepto = new DevComponents.DotNetBar.Controls.TextBoxX();
@@ -68,6 +68,8 @@
             this.line1 = new DevComponents.DotNetBar.Controls.Line();
             this.line2 = new DevComponents.DotNetBar.Controls.Line();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
+            this.line3 = new DevComponents.DotNetBar.Controls.Line();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poliza)).BeginInit();
             this.SuspendLayout();
@@ -118,10 +120,10 @@
             // 
             // 
             this.lblCantidad.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidad.Location = new System.Drawing.Point(774, 71);
+            this.lblCantidad.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidad.Location = new System.Drawing.Point(33, 42);
             this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(269, 23);
+            this.lblCantidad.Size = new System.Drawing.Size(736, 34);
             this.lblCantidad.TabIndex = 15;
             this.lblCantidad.Text = "Numero de Polizas por Generar";
             // 
@@ -132,7 +134,7 @@
             // 
             this.lblAno.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAno.Location = new System.Drawing.Point(823, 32);
+            this.lblAno.Location = new System.Drawing.Point(823, 14);
             this.lblAno.Name = "lblAno";
             this.lblAno.Size = new System.Drawing.Size(220, 23);
             this.lblAno.TabIndex = 16;
@@ -145,7 +147,7 @@
             // 
             this.lblMes.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMes.Location = new System.Drawing.Point(481, 32);
+            this.lblMes.Location = new System.Drawing.Point(481, 14);
             this.lblMes.Name = "lblMes";
             this.lblMes.Size = new System.Drawing.Size(220, 23);
             this.lblMes.TabIndex = 17;
@@ -158,7 +160,7 @@
             // 
             this.lblEmpresa.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblEmpresa.Location = new System.Drawing.Point(33, 32);
+            this.lblEmpresa.Location = new System.Drawing.Point(33, 14);
             this.lblEmpresa.Name = "lblEmpresa";
             this.lblEmpresa.Size = new System.Drawing.Size(417, 23);
             this.lblEmpresa.TabIndex = 18;
@@ -171,7 +173,7 @@
             // 
             this.labelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX6.Location = new System.Drawing.Point(34, 71);
+            this.labelX6.Location = new System.Drawing.Point(39, 92);
             this.labelX6.Name = "labelX6";
             this.labelX6.Size = new System.Drawing.Size(135, 23);
             this.labelX6.TabIndex = 19;
@@ -183,18 +185,6 @@
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007VistaGlass;
             this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(115)))), ((int)(((byte)(199))))));
             // 
-            // buttonX2
-            // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Location = new System.Drawing.Point(823, 729);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(69, 53);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 21;
-            this.buttonX2.Text = "Pre-Poliza";
-            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
-            // 
             // txtTipo
             // 
             // 
@@ -203,7 +193,7 @@
             this.txtTipo.Border.Class = "TextBoxBorder";
             this.txtTipo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipo.Location = new System.Drawing.Point(127, 115);
+            this.txtTipo.Location = new System.Drawing.Point(127, 118);
             this.txtTipo.Name = "txtTipo";
             this.txtTipo.PreventEnterBeep = true;
             this.txtTipo.Size = new System.Drawing.Size(100, 26);
@@ -217,7 +207,7 @@
             // 
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX1.Location = new System.Drawing.Point(39, 110);
+            this.labelX1.Location = new System.Drawing.Point(39, 121);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(45, 23);
             this.labelX1.TabIndex = 23;
@@ -230,7 +220,7 @@
             // 
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX3.Location = new System.Drawing.Point(247, 118);
+            this.labelX3.Location = new System.Drawing.Point(247, 121);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(98, 23);
             this.labelX3.TabIndex = 24;
@@ -244,7 +234,7 @@
             this.txtNumero.Border.Class = "TextBoxBorder";
             this.txtNumero.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNumero.Location = new System.Drawing.Point(350, 115);
+            this.txtNumero.Location = new System.Drawing.Point(350, 118);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.PreventEnterBeep = true;
             this.txtNumero.Size = new System.Drawing.Size(100, 26);
@@ -259,10 +249,10 @@
             this.txtFecha.Border.Class = "TextBoxBorder";
             this.txtFecha.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFecha.Location = new System.Drawing.Point(537, 115);
+            this.txtFecha.Location = new System.Drawing.Point(860, 118);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.PreventEnterBeep = true;
-            this.txtFecha.Size = new System.Drawing.Size(100, 26);
+            this.txtFecha.Size = new System.Drawing.Size(183, 26);
             this.txtFecha.TabIndex = 26;
             // 
             // labelX4
@@ -272,7 +262,7 @@
             // 
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX4.Location = new System.Drawing.Point(467, 118);
+            this.labelX4.Location = new System.Drawing.Point(774, 121);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(64, 23);
             this.labelX4.TabIndex = 27;
@@ -304,7 +294,7 @@
             this.txtConcepto.Multiline = true;
             this.txtConcepto.Name = "txtConcepto";
             this.txtConcepto.PreventEnterBeep = true;
-            this.txtConcepto.Size = new System.Drawing.Size(916, 62);
+            this.txtConcepto.Size = new System.Drawing.Size(916, 38);
             this.txtConcepto.TabIndex = 29;
             // 
             // poliza
@@ -324,7 +314,8 @@
             this.Cuenta,
             this.Concepto,
             this.Debe,
-            this.Haber});
+            this.Haber,
+            this.Tipo});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -335,7 +326,7 @@
             this.poliza.DefaultCellStyle = dataGridViewCellStyle5;
             this.poliza.EnableHeadersVisualStyles = false;
             this.poliza.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(198)))), ((int)(((byte)(217)))));
-            this.poliza.Location = new System.Drawing.Point(39, 222);
+            this.poliza.Location = new System.Drawing.Point(36, 198);
             this.poliza.Name = "poliza";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
@@ -345,7 +336,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.poliza.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.poliza.Size = new System.Drawing.Size(1004, 424);
+            this.poliza.Size = new System.Drawing.Size(1004, 317);
             this.poliza.TabIndex = 30;
             // 
             // Cuenta
@@ -369,17 +360,24 @@
             this.Haber.HeaderText = "Haber";
             this.Haber.Name = "Haber";
             // 
+            // Tipo
+            // 
+            this.Tipo.HeaderText = "Tipo";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.Visible = false;
+            // 
             // cmbLocalidades
             // 
             this.cmbLocalidades.DisplayMember = "Text";
+            this.cmbLocalidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbLocalidades.FormattingEnabled = true;
-            this.cmbLocalidades.ItemHeight = 13;
-            this.cmbLocalidades.Location = new System.Drawing.Point(1096, 244);
+            this.cmbLocalidades.ItemHeight = 20;
+            this.cmbLocalidades.Location = new System.Drawing.Point(36, 625);
             this.cmbLocalidades.Name = "cmbLocalidades";
-            this.cmbLocalidades.Size = new System.Drawing.Size(261, 21);
+            this.cmbLocalidades.Size = new System.Drawing.Size(334, 28);
             this.cmbLocalidades.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbLocalidades.TabIndex = 32;
-            //this.cmbLocalidades.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidades_SelectedIndexChanged);
+            this.cmbLocalidades.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidades_SelectedIndexChanged);
             // 
             // labelX7
             // 
@@ -387,11 +385,12 @@
             // 
             // 
             this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX7.Location = new System.Drawing.Point(1097, 222);
+            this.labelX7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelX7.Location = new System.Drawing.Point(37, 594);
             this.labelX7.Name = "labelX7";
             this.labelX7.Size = new System.Drawing.Size(260, 23);
             this.labelX7.TabIndex = 33;
-            this.labelX7.Text = "Para cambiar las cuentas Seleccione la localidad:";
+            this.labelX7.Text = "Seleccione Sucursal:";
             // 
             // txtDepto
             // 
@@ -400,10 +399,11 @@
             // 
             this.txtDepto.Border.Class = "TextBoxBorder";
             this.txtDepto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.txtDepto.Location = new System.Drawing.Point(900, 123);
+            this.txtDepto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDepto.Location = new System.Drawing.Point(597, 624);
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.PreventEnterBeep = true;
-            this.txtDepto.Size = new System.Drawing.Size(143, 20);
+            this.txtDepto.Size = new System.Drawing.Size(143, 29);
             this.txtDepto.TabIndex = 34;
             // 
             // labelX8
@@ -412,7 +412,7 @@
             // 
             // 
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(664, 105);
+            this.labelX8.Location = new System.Drawing.Point(392, 615);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(199, 38);
             this.labelX8.TabIndex = 35;
@@ -425,7 +425,7 @@
             // 
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX9.Location = new System.Drawing.Point(522, 684);
+            this.labelX9.Location = new System.Drawing.Point(519, 553);
             this.labelX9.Name = "labelX9";
             this.labelX9.Size = new System.Drawing.Size(72, 23);
             this.labelX9.TabIndex = 36;
@@ -440,7 +440,7 @@
             this.txtDebe.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDebe.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDebe.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.txtDebe.Location = new System.Drawing.Point(613, 678);
+            this.txtDebe.Location = new System.Drawing.Point(610, 547);
             this.txtDebe.Name = "txtDebe";
             this.txtDebe.PreventEnterBeep = true;
             this.txtDebe.Size = new System.Drawing.Size(183, 29);
@@ -455,7 +455,7 @@
             this.txtHaber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtHaber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtHaber.ForeColor = System.Drawing.Color.Green;
-            this.txtHaber.Location = new System.Drawing.Point(860, 678);
+            this.txtHaber.Location = new System.Drawing.Point(857, 547);
             this.txtHaber.Name = "txtHaber";
             this.txtHaber.PreventEnterBeep = true;
             this.txtHaber.Size = new System.Drawing.Size(183, 29);
@@ -463,7 +463,7 @@
             // 
             // line1
             // 
-            this.line1.Location = new System.Drawing.Point(36, 713);
+            this.line1.Location = new System.Drawing.Point(33, 582);
             this.line1.Name = "line1";
             this.line1.Size = new System.Drawing.Size(1007, 10);
             this.line1.TabIndex = 39;
@@ -471,7 +471,7 @@
             // 
             // line2
             // 
-            this.line2.Location = new System.Drawing.Point(39, 652);
+            this.line2.Location = new System.Drawing.Point(36, 521);
             this.line2.Name = "line2";
             this.line2.Size = new System.Drawing.Size(1007, 10);
             this.line2.TabIndex = 40;
@@ -481,18 +481,41 @@
             // 
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX1.Location = new System.Drawing.Point(956, 729);
+            this.buttonX1.Location = new System.Drawing.Point(1103, 753);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(69, 53);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX1.TabIndex = 41;
             this.buttonX1.Text = "buttonX1";
             // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
+            this.buttonX2.ImageFixedSize = new System.Drawing.Size(48, 48);
+            this.buttonX2.Location = new System.Drawing.Point(820, 598);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(220, 53);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 21;
+            this.buttonX2.Text = "Pre-Poliza";
+            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
+            // 
+            // line3
+            // 
+            this.line3.Location = new System.Drawing.Point(33, 82);
+            this.line3.Name = "line3";
+            this.line3.Size = new System.Drawing.Size(1007, 10);
+            this.line3.TabIndex = 42;
+            this.line3.Text = "line3";
+            // 
             // PlantillaPrepolizaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1189, 787);
+            this.ClientSize = new System.Drawing.Size(1085, 676);
+            this.Controls.Add(this.line3);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.line2);
             this.Controls.Add(this.line1);
@@ -522,7 +545,10 @@
             this.DoubleBuffered = true;
             this.EnableGlass = false;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(1101, 715);
+            this.MinimumSize = new System.Drawing.Size(1101, 715);
             this.Name = "PlantillaPrepolizaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Construccion de Pre-Poliza";
             this.Load += new System.EventHandler(this.PlantillaPrepolizaForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
@@ -554,15 +580,17 @@
         private DevComponents.DotNetBar.LabelX labelX7;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDepto;
         private DevComponents.DotNetBar.LabelX labelX8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Concepto;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Debe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Haber;
         private DevComponents.DotNetBar.LabelX labelX9;
         private DevComponents.DotNetBar.Controls.TextBoxX txtDebe;
         private DevComponents.DotNetBar.Controls.TextBoxX txtHaber;
         private DevComponents.DotNetBar.Controls.Line line1;
         private DevComponents.DotNetBar.Controls.Line line2;
         private DevComponents.DotNetBar.ButtonX buttonX1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Concepto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Debe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Haber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private DevComponents.DotNetBar.Controls.Line line3;
     }
 }

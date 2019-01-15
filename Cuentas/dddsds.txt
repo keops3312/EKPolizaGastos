@@ -1,0 +1,265 @@
+
+            //
+            #region Lectura de Poliza
+            dataGridViewX1.Rows[indexGridPosition].Selected = true;
+            dataGridViewX1.CurrentCell = dataGridViewX1.Rows[indexGridPosition].Cells[0];
+
+
+            Proveedor = dataGridViewX1.Rows[indexGridPosition].Cells[17].Value.ToString();
+            RFC_proveedor = dataGridViewX1.Rows[indexGridPosition].Cells[19].Value.ToString();
+            IdF = dataGridViewX1.Rows[indexGridPosition].Cells[0].Value.ToString();
+            UUID = dataGridViewX1.Rows[indexGridPosition].Cells[26].Value.ToString();
+            Folio = dataGridViewX1.Rows[indexGridPosition].Cells[2].Value.ToString();
+            txtNumero.Text = dataGridViewX1.Rows[indexGridPosition].Cells[0].Value.ToString();
+
+            if (Folio.Length > 5)
+            {
+                Folio = Folio.Substring(0, 5);
+            }
+
+
+            //Buscamos si ya existe titulo para proovedor y de no existir se hace un generico
+            Cuenta_cargo_1 = "0000-000-000";
+            Cuenta_cargo_2 = "0000-000-000";
+            Cuenta_cargo_3 = "0000-000-000";
+            Cuenta_cargo_Iva = "0000-000-000";
+            Cuenta_Abono_1 = "0000-000-000";
+            Cuenta_Abono_2 = "0000-000-000";
+            Cuenta_Abono_3 = "0000-000-000";
+            Titulo_principal = "Proveedor X";
+            Titulo_secundario = "RFCXXX";
+            Titulo_tercero = "blabla";
+            Departamento = "0";
+
+            var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor &&
+                                p.IdEmpresa == IdEmpresaEjercicio).FirstOrDefault();
+
+
+            if (proveedor == null)
+            {
+                //tomamos la primera creacion de proveedores
+
+                Titulo_principal = Proveedor + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+
+                Titulo_secundario = Proveedor;
+
+                if (Proveedor.Length > 40)
+                {
+                    Titulo_principal = Proveedor.Substring(0, 40) + " " + RFC_proveedor + "/n" + "articulo primero"; //proveedor a 40 caracteres + RFc
+                }
+
+                if (Proveedor.Length > 24)
+                {
+                    Titulo_secundario = Proveedor.Substring(0, 25); //proveedor a 25 caracteres + RFc
+                }
+
+                if (Proveedor.Length > 24)
+                {
+                    Titulo_tercero = "IVA-" + Proveedor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                }
+
+            }
+            else
+            {
+
+                Titulo_principal = proveedor.Titulo_principal + " " + proveedor.RFC;
+
+                Cuenta_cargo_1 = proveedor.Cuenta_cargo_1;
+                Cuenta_cargo_2 = proveedor.Cuenta_cargo_2;
+                Cuenta_cargo_3 = proveedor.Cuenta_cargo_3;
+                Cuenta_cargo_Iva = proveedor.Cuenta_Cargo_Iva;
+                Cuenta_Abono_1 = proveedor.Cuenta_Abono_1;
+                Cuenta_Abono_2 = proveedor.Cuenta_Abono_2;
+                Cuenta_Abono_3 = proveedor.Cuenta_Abono_3;
+                Titulo_principal = proveedor.Titulo_principal;//el concepto del encabezado
+                Titulo_secundario = proveedor.Titulo_secundario;//el concepto del total
+                Titulo_tercero = proveedor.Titulo_tercero; //el concepto del iva
+
+                if (Titulo_secundario == "---")
+                {
+
+                    Titulo_secundario = Proveedor;
+
+                    Titulo_tercero = "IVA-" + Proveedor + "-" + Folio;
+
+                    if (Proveedor.Length > 24)
+                    {
+                        Titulo_secundario = Proveedor.Substring(0, 25); //proveedor
+                    }
+
+                    if (Proveedor.Length > 20)
+                    {
+                        Titulo_tercero = "IVA-" + Proveedor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                    }
+
+
+                }
+
+
+
+
+
+
+                Departamento = proveedor.Departamento;
+
+            }
+
+            //Titulo en cabecera
+            txtConcepto.Text = Titulo_principal;
+            //Fecha de la factura
+            txtFecha.Text = DateTime.Parse(dataGridViewX1.Rows[indexGridPosition].Cells[35].Value.ToString()).ToString("dd/MM/yyyy");
+            //Departamento
+            txtDepto.Text = Departamento;
+
+
+            DataTable totalEiva = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(cnx))
+            {
+                SqlCommand cmdD = new SqlCommand("SELECT Total, Importe as Iva FROM [" + ejercicio + "] " +
+                "  where IdFactura='" + IdF + "'", conn);
+
+
+                using (SqlDataAdapter a = new SqlDataAdapter(cmdD))
+                {
+                    a.Fill(totalEiva);
+
+                    total = totalEiva.Rows[0][0].ToString();
+                    iva = totalEiva.Rows[0][1].ToString();
+
+                }
+
+            }
+
+
+
+            DataTable conceptos = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(cnx))
+            {
+                SqlCommand cmdD = new SqlCommand("SELECT Descripcion, ImporteX as Subtotal  FROM [" + ejercicio + "Conceptos] " +
+                "  where IdFactura='" + IdF + "'", conn);
+
+
+                using (SqlDataAdapter a = new SqlDataAdapter(cmdD))
+                {
+                    a.Fill(conceptos);
+
+                }
+
+            }
+            
+            
+            //Agregando los conceptos al grid
+            string descripcion;
+            string subtotal;
+
+            XmlDocument VarDocumentoXML = new XmlDocument();
+
+            string file = @"" + path + "/" + ejercicio + "/" + UUID + ".xml";
+            VarDocumentoXML.Load(file);
+            XmlNodeList xTax = VarDocumentoXML.GetElementsByTagName("cfdi:Traslado");
+
+            //El total de la poliza
+            poliza.Rows.Insert(0, Cuenta_cargo_1, Titulo_secundario, "0.00", total);
+            //El iva de la poliza
+
+            if (xTax.Count == 0)//Infonavit
+            {
+                iva = "0.00";
+
+            }
+            poliza.Rows.Insert(1, Cuenta_cargo_Iva, Titulo_tercero, iva, "0.00");
+            //Los Conceptos de la poliza
+
+
+
+            foreach (DataRow item in conceptos.Rows)
+            {
+
+                descripcion = item[0].ToString();
+                subtotal = item[1].ToString();
+
+                if (descripcion.Length > 25)
+                {
+                    descripcion = descripcion.Substring(0, 25);
+                }
+
+                if (xTax.Count == 0)//Infonavit
+                {
+                    if (descripcion.Length > 25)
+                    {
+                        descripcion = descripcion.Substring(0, 25);
+                    }
+
+                    poliza.Rows.Insert(2, Cuenta_cargo_3, descripcion, subtotal, "0.00");
+
+                }
+                else
+                {
+
+
+                    XmlNamespaceManager VarManager = new XmlNamespaceManager(VarDocumentoXML.NameTable);
+                    VarManager.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
+                    VarManager.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
+                    VarManager.AddNamespace("implocal", "http://www.sat.gob.mx/implocal");
+                    VarManager.AddNamespace("xs", "http://www.w3.org/2001/XMLSchema");
+
+                    TotalImpuestosTrasladados = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Impuestos/@TotalImpuestosTrasladados", VarManager).InnerText;
+
+
+                    XmlNodeList VarConceptos = VarDocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Conceptos/cfdi:Concepto", VarManager);
+
+
+
+                    foreach (XmlElement node in VarConceptos)
+                    {
+
+
+                        Importe = node.GetAttribute("Importe");
+                        descripcionxml = node.GetAttribute("Descripcion");
+
+
+                        XmlDocument xml = new XmlDocument();
+                        string TrasladosXML = node.FirstChild.FirstChild.InnerXml;
+                        xml.LoadXml(TrasladosXML);
+
+                        baseX = xml.DocumentElement.Attributes["Base"].Value;
+                        importeX = xml.DocumentElement.Attributes["Importe"].Value;
+                        impuestoX = xml.DocumentElement.Attributes["Impuesto"].Value;
+                        tasaOCuotaX = xml.DocumentElement.Attributes["TasaOCuota"].Value;
+                        tipoFactorX = xml.DocumentElement.Attributes["TipoFactor"].Value;
+
+
+                        subtotal = baseX;
+
+                        if (descripcion.Length > 25)
+                        {
+                            descripcion = descripcion.Substring(0, 25);
+                        }
+
+                        poliza.Rows.Insert(2, Cuenta_cargo_3, descripcion, subtotal, "0.00");
+                    }
+
+
+                }
+
+            }
+            float Debe = 0;
+            float haber = 0;
+            foreach (DataGridViewRow row in poliza.Rows)
+            {
+                float valor = float.Parse(row.Cells[2].Value.ToString());
+                Debe += valor;
+            }
+            foreach (DataGridViewRow row in poliza.Rows)
+            {
+                float valor = float.Parse(row.Cells[3].Value.ToString());
+                haber += valor;
+            }
+            txtDebe.Text = Debe.ToString("C2");
+            txtHaber.Text = haber.ToString("C2");
+
+            #endregion
+           
+            

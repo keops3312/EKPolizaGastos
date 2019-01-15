@@ -24,6 +24,7 @@ namespace EKPolizaGastos.Context
         public string Localidad { get; set; }
         public string Sigla_Sucursal { get; set; }
         public Nullable<int> IdEmpresa { get; set; }
+        public string Departamento { get; set; }
     
         public virtual Empresas Empresas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

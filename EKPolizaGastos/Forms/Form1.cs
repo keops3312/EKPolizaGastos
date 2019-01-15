@@ -393,7 +393,7 @@ namespace EKPolizaGastos
         }
 
 
-
+        //Inicio del Formulario
         private void Form1_Load(object sender, EventArgs e)
         {
             listXML2.View = View.Details;
@@ -409,8 +409,11 @@ namespace EKPolizaGastos
             listTables.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
             listTables.SmallImageList = imageList1;
 
-         
-           
+
+            cmbEmpresa.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbEmpresa.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbEmpresa.DropDownStyle = ComboBoxStyle.DropDownList;
+
         }
 
         private void btnCargarRuta_MouseHover(object sender, EventArgs e)
@@ -524,9 +527,6 @@ namespace EKPolizaGastos
 
         #endregion
 
-        private void lblEmpresa_Click(object sender, EventArgs e)
-        {
-
-        }
+     
     }
 }

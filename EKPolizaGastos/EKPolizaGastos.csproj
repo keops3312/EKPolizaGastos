@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>polizaGastos.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll</HintPath>
@@ -232,7 +235,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -259,6 +264,8 @@
     <Content Include="Images\directorio.png" />
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
+    <Content Include="polizaGastos.ico" />
+    <None Include="Resources\Poliza_de _Servicio.png" />
     <None Include="Resources\png-empresa.png" />
     <None Include="Resources\empresa.png" />
     <None Include="Resources\xmlLogo.png" />

@@ -143,6 +143,16 @@ namespace EKPolizaGastos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Poliza_de__Servicio {
+            get {
+                object obj = ResourceManager.GetObject("Poliza_de _Servicio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap xmlLogo {
             get {
                 object obj = ResourceManager.GetObject("xmlLogo", resourceCulture);

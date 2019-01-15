@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SEMP_SATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SEMP_SATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SEMP_SAT.dbo.CIS-NOV2018' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CIS-NOV2018">
@@ -67,6 +67,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.CIS-NOV2018Conceptos' does not have a
           <Property Name="ImporteX" Type="nvarchar" MaxLength="255" />
           <Property Name="DescuentoX" Type="nvarchar" MaxLength="255" />
           <Property Name="UUID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Base" Type="nvarchar" MaxLength="255" />
+          <Property Name="Impuesto" Type="nvarchar" MaxLength="255" />
+          <Property Name="TipoFactor" Type="nvarchar" MaxLength="255" />
+          <Property Name="TasaOCuota" Type="nvarchar" MaxLength="255" />
+          <Property Name="Importe" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Comprobante">
           <Key>
@@ -127,6 +132,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Property Name="ImporteX" Type="nvarchar" MaxLength="255" />
           <Property Name="DescuentoX" Type="nvarchar" MaxLength="255" />
           <Property Name="UUID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Base" Type="nvarchar" MaxLength="255" />
+          <Property Name="Impuesto" Type="nvarchar" MaxLength="255" />
+          <Property Name="TipoFactor" Type="nvarchar" MaxLength="255" />
+          <Property Name="TasaOCuota" Type="nvarchar" MaxLength="255" />
+          <Property Name="Importe" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="ComprobanteEstatus">
           <Key>
@@ -163,6 +173,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Property Name="Localidad" Type="nvarchar" MaxLength="255" />
           <Property Name="Sigla_Sucursal" Type="nvarchar" MaxLength="50" />
           <Property Name="IdEmpresa" Type="int" />
+          <Property Name="Departamento" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -174,17 +185,19 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Property Name="NoProveedor" Type="nvarchar" MaxLength="255" />
           <Property Name="IdEmpresa" Type="int" Nullable="false" />
           <Property Name="IdLocalidad" Type="int" Nullable="false" />
-          <Property Name="Cuenta_cargo_1" Type="nvarchar" MaxLength="15" />
-          <Property Name="Cuenta_cargo_2" Type="nvarchar" MaxLength="15" />
-          <Property Name="Cuenta_cargo_3" Type="nvarchar" MaxLength="15" />
-          <Property Name="Cuenta_Cargo_Iva" Type="nvarchar" MaxLength="15" />
-          <Property Name="Cuenta_Abono_1" Type="nvarchar" MaxLength="15" />
-          <Property Name="Cuenta_Abono_2" Type="nvarchar" MaxLength="15" />
-          <Property Name="Cuenta_Abono_3" Type="nvarchar" MaxLength="15" />
-          <Property Name="Titulo_principal" Type="nvarchar" MaxLength="15" />
-          <Property Name="Titulo_secundario" Type="nvarchar" MaxLength="15" />
-          <Property Name="Titulo_tercero" Type="nvarchar" MaxLength="15" />
-          <Property Name="Departamento" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cuenta_cargo_1" Type="nvarchar" MaxLength="30" />
+          <Property Name="Cuenta_cargo_2" Type="nvarchar" MaxLength="30" />
+          <Property Name="Cuenta_cargo_3" Type="nvarchar" MaxLength="30" />
+          <Property Name="Cuenta_Cargo_Iva" Type="nvarchar" MaxLength="30" />
+          <Property Name="Cuenta_Abono_1" Type="nvarchar" MaxLength="30" />
+          <Property Name="Cuenta_Abono_2" Type="nvarchar" MaxLength="30" />
+          <Property Name="Cuenta_Abono_3" Type="nvarchar" MaxLength="30" />
+          <Property Name="Titulo_principal" Type="nvarchar" MaxLength="255" />
+          <Property Name="Titulo_secundario" Type="nvarchar" MaxLength="255" />
+          <Property Name="Titulo_tercero" Type="nvarchar" MaxLength="255" />
+          <Property Name="Departamento" Type="nvarchar" MaxLength="255" />
+          <Property Name="Iva_Retenido" Type="nvarchar" MaxLength="255" />
+          <Property Name="Isr_Retenido" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -315,6 +328,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Parameter Name="DescuentoX" Type="nvarchar" Mode="In" />
           <Parameter Name="nombreTabla" Type="nvarchar" Mode="In" />
           <Parameter Name="FechaC" Type="date" Mode="In" />
+          <Parameter Name="BaseTR" Type="nvarchar" Mode="In" />
+          <Parameter Name="ImpuestoTR" Type="nvarchar" Mode="In" />
+          <Parameter Name="TipoFactorTR" Type="nvarchar" Mode="In" />
+          <Parameter Name="TasaOCuotaTR" Type="nvarchar" Mode="In" />
+          <Parameter Name="ImporteTR" Type="nvarchar" Mode="In" />
           <Parameter Name="msg" Type="varchar" Mode="InOut" />
           <Parameter Name="Capto" Type="int" Mode="InOut" />
         </Function>
@@ -385,7 +403,12 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
     [CIS-NOV2018Conceptos].[ValorUnitario] AS [ValorUnitario], 
     [CIS-NOV2018Conceptos].[ImporteX] AS [ImporteX], 
     [CIS-NOV2018Conceptos].[DescuentoX] AS [DescuentoX], 
-    [CIS-NOV2018Conceptos].[UUID] AS [UUID]
+    [CIS-NOV2018Conceptos].[UUID] AS [UUID], 
+    [CIS-NOV2018Conceptos].[Base] AS [Base], 
+    [CIS-NOV2018Conceptos].[Impuesto] AS [Impuesto], 
+    [CIS-NOV2018Conceptos].[TipoFactor] AS [TipoFactor], 
+    [CIS-NOV2018Conceptos].[TasaOCuota] AS [TasaOCuota], 
+    [CIS-NOV2018Conceptos].[Importe] AS [Importe]
     FROM [dbo].[CIS-NOV2018Conceptos] AS [CIS-NOV2018Conceptos]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ComprobanteConceptos" EntityType="Self.ComprobanteConceptos" store:Type="Tables" store:Schema="dbo">
@@ -401,7 +424,12 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
     [ComprobanteConceptos].[ValorUnitario] AS [ValorUnitario], 
     [ComprobanteConceptos].[ImporteX] AS [ImporteX], 
     [ComprobanteConceptos].[DescuentoX] AS [DescuentoX], 
-    [ComprobanteConceptos].[UUID] AS [UUID]
+    [ComprobanteConceptos].[UUID] AS [UUID], 
+    [ComprobanteConceptos].[Base] AS [Base], 
+    [ComprobanteConceptos].[Impuesto] AS [Impuesto], 
+    [ComprobanteConceptos].[TipoFactor] AS [TipoFactor], 
+    [ComprobanteConceptos].[TasaOCuota] AS [TasaOCuota], 
+    [ComprobanteConceptos].[Importe] AS [Importe]
     FROM [dbo].[ComprobanteConceptos] AS [ComprobanteConceptos]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Comprobante_ComprobanteEstatus" Association="Self.FK_Comprobante_ComprobanteEstatus">
@@ -421,8 +449,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
             <End Role="Proveedores" EntitySet="Proveedores" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEMP_SATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -508,6 +535,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Property Name="IdEmpresa" Type="Int32" />
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Localidades_Empresas" FromRole="Localidades" ToRole="Empresas" />
           <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Localidades" FromRole="Localidades" ToRole="Proveedores" />
+          <Property Name="Departamento" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -519,19 +547,21 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Property Name="NoProveedor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IdEmpresa" Type="Int32" Nullable="false" />
           <Property Name="IdLocalidad" Type="Int32" Nullable="false" />
-          <Property Name="Cuenta_cargo_1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Cuenta_cargo_2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Cuenta_cargo_3" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Cuenta_Cargo_Iva" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Cuenta_Abono_1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Cuenta_Abono_2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Cuenta_Abono_3" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Titulo_principal" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Titulo_secundario" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Titulo_tercero" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Departamento" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_cargo_1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_cargo_2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_cargo_3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Cargo_Iva" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Abono_1" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Abono_2" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Cuenta_Abono_3" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Titulo_principal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Titulo_secundario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Titulo_tercero" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Departamento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Proveedores_Empresas" FromRole="Proveedores" ToRole="Empresas" />
           <NavigationProperty Name="Localidades" Relationship="Self.FK_Proveedores_Localidades" FromRole="Proveedores" ToRole="Localidades" />
+          <Property Name="Iva_Retenido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Isr_Retenido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -601,6 +631,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Property Name="ImporteX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DescuentoX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="UUID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Base" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Impuesto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TipoFactor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TasaOCuota" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Importe" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ComprobanteConceptos">
           <Key>
@@ -618,6 +653,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <Property Name="ImporteX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="DescuentoX" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="UUID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Base" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Impuesto" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TipoFactor" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TasaOCuota" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Importe" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Comprobante_ComprobanteEstatus">
           <End Role="ComprobanteEstatus" Type="Self.ComprobanteEstatus" Multiplicity="1" />
@@ -764,6 +804,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
             <Parameter Name="DescuentoX" Mode="In" Type="String" />
             <Parameter Name="nombreTabla" Mode="In" Type="String" />
             <Parameter Name="FechaC" Mode="In" Type="DateTime" />
+            <Parameter Name="BaseTR" Mode="In" Type="String" />
+            <Parameter Name="ImpuestoTR" Mode="In" Type="String" />
+            <Parameter Name="TipoFactorTR" Mode="In" Type="String" />
+            <Parameter Name="TasaOCuotaTR" Mode="In" Type="String" />
+            <Parameter Name="ImporteTR" Mode="In" Type="String" />
             <Parameter Name="msg" Mode="InOut" Type="String" />
             <Parameter Name="Capto" Mode="InOut" Type="Int32" />
           </FunctionImport>
@@ -874,6 +919,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <EntitySetMapping Name="Localidades">
             <EntityTypeMapping TypeName="SEMP_SATModel.Localidades">
               <MappingFragment StoreEntitySet="Localidades">
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
                 <ScalarProperty Name="IdLocalidad" ColumnName="IdLocalidad" />
                 <ScalarProperty Name="Localidad" ColumnName="Localidad" />
                 <ScalarProperty Name="Sigla_Sucursal" ColumnName="Sigla_Sucursal" />
@@ -884,6 +930,8 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="SEMP_SATModel.Proveedores">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="Isr_Retenido" ColumnName="Isr_Retenido" />
+                <ScalarProperty Name="Iva_Retenido" ColumnName="Iva_Retenido" />
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
                 <ScalarProperty Name="RFC" ColumnName="RFC" />
@@ -960,6 +1008,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <EntitySetMapping Name="CIS_NOV2018Conceptos">
             <EntityTypeMapping TypeName="SEMP_SATModel.CIS_NOV2018Conceptos">
               <MappingFragment StoreEntitySet="CIS-NOV2018Conceptos">
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="TasaOCuota" ColumnName="TasaOCuota" />
+                <ScalarProperty Name="TipoFactor" ColumnName="TipoFactor" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
                 <ScalarProperty Name="IdConceptos" ColumnName="IdConceptos" />
                 <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
                 <ScalarProperty Name="ClaveProdServ" ColumnName="ClaveProdServ" />
@@ -978,6 +1031,11 @@ warning 6002: The table/view 'SEMP_SAT.dbo.ComprobanteConceptos' does not have a
           <EntitySetMapping Name="ComprobanteConceptos">
             <EntityTypeMapping TypeName="SEMP_SATModel.ComprobanteConceptos">
               <MappingFragment StoreEntitySet="ComprobanteConceptos">
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="TasaOCuota" ColumnName="TasaOCuota" />
+                <ScalarProperty Name="TipoFactor" ColumnName="TipoFactor" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+                <ScalarProperty Name="Base" ColumnName="Base" />
                 <ScalarProperty Name="IdConceptos" ColumnName="IdConceptos" />
                 <ScalarProperty Name="IdFactura" ColumnName="IdFactura" />
                 <ScalarProperty Name="ClaveProdServ" ColumnName="ClaveProdServ" />

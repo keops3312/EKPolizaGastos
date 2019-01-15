@@ -26,5 +26,10 @@ namespace EKPolizaGastos.Context
         public string ImporteX { get; set; }
         public string DescuentoX { get; set; }
         public string UUID { get; set; }
+        public string Base { get; set; }
+        public string Impuesto { get; set; }
+        public string TipoFactor { get; set; }
+        public string TasaOCuota { get; set; }
+        public string Importe { get; set; }
     }
 }
