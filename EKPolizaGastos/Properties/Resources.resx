@@ -121,11 +121,11 @@
   <data name="New-Database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\New-Database.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Poliza_de _Servicio" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Poliza_de _Servicio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="xmlLogo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\xmlLogo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png-empresa" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png-empresa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="directorioM" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\directorioM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,14 +133,17 @@
   <data name="attachment-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\attachment-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ZIP-File-Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ZIP-File-Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="New-DatabaseP.fw" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\New-DatabaseP.fw.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="My_Documents_Folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\My_Documents_Folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ZIP-File-Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ZIP-File-Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png-empresa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png-empresa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="empresa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\empresa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -148,7 +151,7 @@
   <data name="directorio" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\directorio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Poliza_de _Servicio" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Poliza_de _Servicio.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="diot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\diot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -20,6 +20,8 @@ namespace EKPolizaGastos
     using System.IO.Compression;
     using System.Data;
     using System.Globalization;
+    using System.Drawing;
+    using ClosedXML.Excel;
     #endregion
 
 
@@ -34,7 +36,8 @@ namespace EKPolizaGastos
         #region Attributtes
         private FolderBrowserDialog folderBrowserDialog;
         private ReadSATFactura readSATFactura;
-        
+        private diotClass diot;
+
         #endregion
 
         #region Properties
@@ -47,6 +50,7 @@ namespace EKPolizaGastos
         private string nameFile;
         private int TotalRegistrosEnNuevaTabla;
         public string ejercicio;
+        private string NoEmpresa;
         #endregion
 
         #region Methods
@@ -58,6 +62,7 @@ namespace EKPolizaGastos
             db = new SEMP_SATContext();
             folderBrowserDialog = new FolderBrowserDialog();
             readSATFactura = new ReadSATFactura();
+            diot = new diotClass();
 
             backgroundWorker1.WorkerReportsProgress = true;
             backgroundWorker1.WorkerSupportsCancellation = true;
@@ -146,6 +151,7 @@ namespace EKPolizaGastos
             
             letra = cmbEmpresa.SelectedValue.ToString();
             lblItemSeleted.Text = "-";
+            NoEmpresa = Convert.ToString(diot.EmpresaId(letra, cnx));
 
             if (!String.IsNullOrEmpty(letra))
             {
@@ -525,8 +531,180 @@ namespace EKPolizaGastos
 
 
 
+
         #endregion
 
-     
+
+        //Crear Reporte de DIOT
+        private void buttonX1_Click(object sender, EventArgs e)
+        {
+
+            if (!string.IsNullOrEmpty(ejercicio))
+            {
+                MessageBoxEx.EnableGlass = false;
+
+                DialogResult result = MessageBoxEx.Show("¿Generar Diot del Ejercicio Seleccionado? (" + ejercicio + ")", "EKDIOT",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        {
+
+                            BeginDiot();
+
+                            break;
+                        }
+                    case DialogResult.No:
+                        {
+
+                            break;
+                        }
+                }
+            }
+            else
+            {
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("No has Seleccionado Ejercicio", "EKDIOT",
+              MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+          
+                
+
+        }
+
+
+        //Generar DIOT
+        private void BeginDiot()
+        {
+            try
+            {
+                string value = ".16";
+                if (InputBox("Generacion de DIOT", "Ingrese el valor del IVA:", ref value) == DialogResult.OK)
+                {
+                    if (decimal.Parse(value)>0)
+                    {
+
+                        DataTable resultados = new DataTable();
+                        resultados = diot.ToListPRV(ejercicio, cnx, value, NoEmpresa, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+
+                        DataTable result = new DataTable();
+                        result = diot.DIOT(resultados, ejercicio, cnx, value, NoEmpresa, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+                       
+                        Export(result);
+
+
+
+
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Valor no Valido para Generar DIOT" + ex.Message, "EKDIOT",
+                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+
+        }
+
+
+        public void Export(DataTable Result)
+        {
+            string ruta;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "Excel files (*.xlsx)|*.xlsx";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                ruta = saveFileDialog1.FileName;
+
+                if (string.IsNullOrEmpty(ruta))
+                {
+                    MessageBoxEx.EnableGlass = false;
+                    MessageBoxEx.Show("No hay directorio Seleccionado",
+                        "EKDIOT", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+
+                    //Formato a las filas
+                    Result.Columns[3].DataType = System.Type.GetType("System.Decimal");
+                    Result.Columns[4].DataType = System.Type.GetType("System.Decimal");
+                    Result.Columns[5].DataType = System.Type.GetType("System.Decimal");
+
+                    DataView dataview = new DataView(Result);
+                    
+
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        //wb.Cells("Iva_Trasladado").Style.NumberFormat.Format = "C2";//$0.00
+                        //wb.Cells("Base").Style.NumberFormat.Format = "C2";
+                        //wb.Cells("Iva_Trasladado_Calculado").Style.NumberFormat.Format = "C2";
+
+                       // wb.Cells().DataType = XLDataType.Number.ToString("C2"); 
+
+                        wb.Worksheets.Add(dataview.ToTable());
+                        wb.SaveAs(ruta);
+
+                    }
+
+
+                }
+            }
+          
+           
+
+        }
+
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new System.Drawing.Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new System.Drawing.Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
+        }
+
     }
 }

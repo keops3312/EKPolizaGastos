@@ -1,0 +1,9 @@
+  <add name="SEMP_SATConetxt" 
+         connectionString="metadata=res://*/Context.Context.csdl|res://*/Context.Context.ssdl|res://*/Context.Context.msl;provider=System.Data.SqlClient;provider connection string=&quot;
+         data source=DESKTOP-D63VL22\SQLOFC;initial catalog=SEMP_SAT;integrated security=False;multipleactiveresultsets=True;application name=EntityFramework&quot;" 
+    providerName="System.Data.EntityClient" />
+    <add name="SEMP_SATContext" 
+         connectionString="metadata=res://*/Context.Context.csdl|res://*/Context.Context.ssdl|res://*/Context.Context.msl;provider=System.Data.SqlClient;provider connection string=&quot;
+         data source=DESKTOP-D63VL22\SQLOFC;initial catalog=SEMP_SAT;integrated security=False;multipleactiveresultsets=True;application name=EntityFramework&quot;" 
+    providerName="System.Data.EntityClient" />
+  

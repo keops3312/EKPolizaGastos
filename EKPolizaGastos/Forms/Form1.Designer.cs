@@ -31,6 +31,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtpath = new System.Windows.Forms.TextBox();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.circularProgress1 = new DevComponents.DotNetBar.Controls.CircularProgress();
@@ -52,6 +53,8 @@
             this.listTables = new DevComponents.DotNetBar.Controls.ListViewEx();
             this.lblEmpresa = new DevComponents.DotNetBar.LabelX();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.listXML2 = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -59,11 +62,12 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLeer = new DevComponents.DotNetBar.ButtonX();
             this.btnCargarRuta = new DevComponents.DotNetBar.ButtonX();
-            this.listXML2 = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtpath
@@ -212,7 +216,6 @@
             this.listZip.BackgroundStyle.BorderTopWidth = 2;
             this.listZip.BackgroundStyle.Class = "TreeBorderKey";
             this.listZip.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.listZip.CheckStateMember = null;
             this.listZip.ContainerControlProcessDialogKey = true;
             this.listZip.DragDropSupport = true;
             this.listZip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
@@ -327,6 +330,35 @@
             this.listBox1.Size = new System.Drawing.Size(31, 30);
             this.listBox1.TabIndex = 23;
             // 
+            // listXML2
+            // 
+            // 
+            // 
+            // 
+            this.listXML2.Border.Class = "ListViewBorder";
+            this.listXML2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.listXML2.DisabledBackColor = System.Drawing.Color.Empty;
+            this.listXML2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listXML2.Location = new System.Drawing.Point(379, 122);
+            this.listXML2.Name = "listXML2";
+            this.listXML2.Size = new System.Drawing.Size(287, 238);
+            this.listXML2.TabIndex = 25;
+            this.listXML2.UseCompatibleStateImageBehavior = false;
+            // 
+            // buttonX1
+            // 
+            this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX1.Image = global::EKPolizaGastos.Properties.Resources.diot;
+            this.buttonX1.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonX1.Location = new System.Drawing.Point(868, 413);
+            this.buttonX1.Name = "buttonX1";
+            this.buttonX1.Size = new System.Drawing.Size(138, 50);
+            this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX1.TabIndex = 26;
+            this.buttonX1.Text = "Hacer DIOT";
+            this.buttonX1.Click += new System.EventHandler(this.buttonX1_Click);
+            // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::EKPolizaGastos.Properties.Resources.png_empresa;
@@ -363,9 +395,9 @@
             this.btnPoliza.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnPoliza.Image = global::EKPolizaGastos.Properties.Resources.attachment_icon;
             this.btnPoliza.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.btnPoliza.Location = new System.Drawing.Point(762, 413);
+            this.btnPoliza.Location = new System.Drawing.Point(719, 413);
             this.btnPoliza.Name = "btnPoliza";
-            this.btnPoliza.Size = new System.Drawing.Size(187, 50);
+            this.btnPoliza.Size = new System.Drawing.Size(138, 50);
             this.btnPoliza.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnPoliza.TabIndex = 9;
             this.btnPoliza.Text = "Revisar XML\'s Registrados";
@@ -411,26 +443,30 @@
             this.btnCargarRuta.Click += new System.EventHandler(this.btnCargarRuta_Click);
             this.btnCargarRuta.MouseHover += new System.EventHandler(this.btnCargarRuta_MouseHover);
             // 
-            // listXML2
+            // dataGridViewX1
             // 
-            // 
-            // 
-            // 
-            this.listXML2.Border.Class = "ListViewBorder";
-            this.listXML2.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.listXML2.DisabledBackColor = System.Drawing.Color.Empty;
-            this.listXML2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listXML2.Location = new System.Drawing.Point(379, 122);
-            this.listXML2.Name = "listXML2";
-            this.listXML2.Size = new System.Drawing.Size(287, 238);
-            this.listXML2.TabIndex = 25;
-            this.listXML2.UseCompatibleStateImageBehavior = false;
+            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(198)))), ((int)(((byte)(217)))));
+            this.dataGridViewX1.Location = new System.Drawing.Point(274, 382);
+            this.dataGridViewX1.Name = "dataGridViewX1";
+            this.dataGridViewX1.Size = new System.Drawing.Size(96, 80);
+            this.dataGridViewX1.TabIndex = 27;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 504);
+            this.Controls.Add(this.dataGridViewX1);
+            this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.lblEmpresa);
@@ -471,6 +507,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -506,6 +543,8 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.PictureBox pictureBox4;
         private DevComponents.DotNetBar.Controls.ListViewEx listXML2;
+        private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
     }
 }
 
