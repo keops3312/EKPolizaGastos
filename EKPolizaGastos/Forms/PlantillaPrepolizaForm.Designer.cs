@@ -68,8 +68,9 @@
             this.line1 = new DevComponents.DotNetBar.Controls.Line();
             this.line2 = new DevComponents.DotNetBar.Controls.Line();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.line3 = new DevComponents.DotNetBar.Controls.Line();
+            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poliza)).BeginInit();
             this.SuspendLayout();
@@ -93,7 +94,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -321,7 +322,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.poliza.DefaultCellStyle = dataGridViewCellStyle5;
             this.poliza.EnableHeadersVisualStyles = false;
@@ -374,7 +375,7 @@
             this.cmbLocalidades.ItemHeight = 20;
             this.cmbLocalidades.Location = new System.Drawing.Point(36, 625);
             this.cmbLocalidades.Name = "cmbLocalidades";
-            this.cmbLocalidades.Size = new System.Drawing.Size(334, 28);
+            this.cmbLocalidades.Size = new System.Drawing.Size(299, 28);
             this.cmbLocalidades.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbLocalidades.TabIndex = 32;
             this.cmbLocalidades.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidades_SelectedIndexChanged);
@@ -400,10 +401,10 @@
             this.txtDepto.Border.Class = "TextBoxBorder";
             this.txtDepto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDepto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDepto.Location = new System.Drawing.Point(597, 624);
+            this.txtDepto.Location = new System.Drawing.Point(558, 624);
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.PreventEnterBeep = true;
-            this.txtDepto.Size = new System.Drawing.Size(143, 29);
+            this.txtDepto.Size = new System.Drawing.Size(100, 29);
             this.txtDepto.TabIndex = 34;
             // 
             // labelX8
@@ -412,7 +413,7 @@
             // 
             // 
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(392, 615);
+            this.labelX8.Location = new System.Drawing.Point(350, 615);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(199, 38);
             this.labelX8.TabIndex = 35;
@@ -488,6 +489,28 @@
             this.buttonX1.TabIndex = 41;
             this.buttonX1.Text = "buttonX1";
             // 
+            // line3
+            // 
+            this.line3.Location = new System.Drawing.Point(33, 82);
+            this.line3.Name = "line3";
+            this.line3.Size = new System.Drawing.Size(1007, 10);
+            this.line3.TabIndex = 42;
+            this.line3.Text = "line3";
+            // 
+            // buttonX3
+            // 
+            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX3.Image = global::EKPolizaGastos.Properties.Resources.refresProveedor;
+            this.buttonX3.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonX3.Location = new System.Drawing.Point(700, 598);
+            this.buttonX3.Name = "buttonX3";
+            this.buttonX3.Size = new System.Drawing.Size(114, 53);
+            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX3.TabIndex = 43;
+            this.buttonX3.Text = "Cuentas";
+            this.buttonX3.Click += new System.EventHandler(this.buttonX3_Click);
+            // 
             // buttonX2
             // 
             this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -502,19 +525,12 @@
             this.buttonX2.Text = "Pre-Poliza";
             this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
             // 
-            // line3
-            // 
-            this.line3.Location = new System.Drawing.Point(33, 82);
-            this.line3.Name = "line3";
-            this.line3.Size = new System.Drawing.Size(1007, 10);
-            this.line3.TabIndex = 42;
-            this.line3.Text = "line3";
-            // 
             // PlantillaPrepolizaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1085, 676);
+            this.Controls.Add(this.buttonX3);
             this.Controls.Add(this.line3);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.line2);
@@ -592,5 +608,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Haber;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private DevComponents.DotNetBar.Controls.Line line3;
+        private DevComponents.DotNetBar.ButtonX buttonX3;
     }
 }

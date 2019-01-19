@@ -163,6 +163,16 @@ namespace EKPolizaGastos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap refresProveedor {
+            get {
+                object obj = ResourceManager.GetObject("refresProveedor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap xmlLogo {
             get {
                 object obj = ResourceManager.GetObject("xmlLogo", resourceCulture);

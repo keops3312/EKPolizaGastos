@@ -846,15 +846,6 @@ namespace EKPolizaGastos.Common.Classes
 
 
 
-
-
-
-
-
-
-
-
-
         public DataTable listExerciseDate(string cnx, string ejercicio, string Fecha)
         {
             SqlConnection conn = new SqlConnection(cnx);
@@ -884,6 +875,16 @@ namespace EKPolizaGastos.Common.Classes
 
             return result;
         }
+
+
+
+
+
+
+        ////////////METODOS PARA LA FACTURACION DE NOMINA
+        // SUMARY
+        //INSERT DATA TU XML NOMINA
+
 
         #endregion
 

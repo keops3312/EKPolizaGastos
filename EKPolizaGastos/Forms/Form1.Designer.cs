@@ -31,7 +31,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtpath = new System.Windows.Forms.TextBox();
             this.lblCount = new DevComponents.DotNetBar.LabelX();
             this.circularProgress1 = new DevComponents.DotNetBar.Controls.CircularProgress();
@@ -62,12 +61,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLeer = new DevComponents.DotNetBar.ButtonX();
             this.btnCargarRuta = new DevComponents.DotNetBar.ButtonX();
-            this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtpath
@@ -216,6 +213,7 @@
             this.listZip.BackgroundStyle.BorderTopWidth = 2;
             this.listZip.BackgroundStyle.Class = "TreeBorderKey";
             this.listZip.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.listZip.CheckStateMember = null;
             this.listZip.ContainerControlProcessDialogKey = true;
             this.listZip.DragDropSupport = true;
             this.listZip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
@@ -443,29 +441,11 @@
             this.btnCargarRuta.Click += new System.EventHandler(this.btnCargarRuta_Click);
             this.btnCargarRuta.MouseHover += new System.EventHandler(this.btnCargarRuta_MouseHover);
             // 
-            // dataGridViewX1
-            // 
-            this.dataGridViewX1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(198)))), ((int)(((byte)(217)))));
-            this.dataGridViewX1.Location = new System.Drawing.Point(274, 382);
-            this.dataGridViewX1.Name = "dataGridViewX1";
-            this.dataGridViewX1.Size = new System.Drawing.Size(96, 80);
-            this.dataGridViewX1.TabIndex = 27;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 504);
-            this.Controls.Add(this.dataGridViewX1);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.listBox1);
@@ -507,7 +487,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -544,7 +523,6 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private DevComponents.DotNetBar.Controls.ListViewEx listXML2;
         private DevComponents.DotNetBar.ButtonX buttonX1;
-        private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
     }
 }
 

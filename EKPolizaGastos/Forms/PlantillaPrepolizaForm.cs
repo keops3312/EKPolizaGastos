@@ -296,7 +296,7 @@ namespace EKPolizaGastos.Forms
             Cuenta_iva_retenido = "0000-000-000";
 
             var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor &&
-                                p.IdEmpresa == IdEmpresaEjercicio && Departamento == txtDepto.Text).FirstOrDefault();
+                                p.IdEmpresa == IdEmpresaEjercicio ).FirstOrDefault();//&& Departamento == txtDepto.Text
             //rev parte uno
 
             if (Folio.Length > 5)
@@ -990,6 +990,26 @@ namespace EKPolizaGastos.Forms
             }
             txtDebe.Text = Debe.ToString("C2");
             txtHaber.Text = haber.ToString("C2");
+
+            //Actualizacion 17 enero 2019
+            decimal diferencia;
+            if (decimal.Parse(txtDebe.Text) > decimal.Parse(txtHaber.Text))
+            {
+                diferencia = decimal.Parse(txtDebe.Text) - decimal.Parse(txtHaber.Text);
+
+                poliza.Rows.Insert(1, Cuenta_Abono_2, "IEPS", diferencia, "0.00", "IEPS TRASLADADO");
+
+            }
+            else if (decimal.Parse(txtDebe.Text) < decimal.Parse(txtHaber.Text))
+            {
+                diferencia = decimal.Parse(txtHaber.Text) - decimal.Parse(txtDebe.Text);
+
+                poliza.Rows.Insert(1, Cuenta_Abono_2, "IEPS", diferencia, "0.00", "IEPS TRASLADADO");
+
+
+            }
+
+
             #endregion
 
         }
@@ -1305,7 +1325,7 @@ namespace EKPolizaGastos.Forms
                 ///
                 //1 comprubeo si existe empresa con este departamento
                 var ExisteProovedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor
-                && p.Departamento == txtDepto.Text.Trim()).FirstOrDefault();
+                && p.IdEmpresa == IdEmpresa).FirstOrDefault();
                 string numeroProvedorConvertido = "0";
                 if (ExisteProovedor != null)
                 {
@@ -1364,47 +1384,7 @@ namespace EKPolizaGastos.Forms
                     db.SaveChanges();
 
                 }
-                else
-                {
-                    DialogResult actualizarProveedor = MessageBoxEx.Show("¿Este Proveedor ya existe ! \n" + 
-                                                                    "¿Desea Actualizar datos de Proveedor?",
-                                                     "EKPolizaGastos",
-                                                     MessageBoxButtons.YesNo,
-                                                     MessageBoxIcon.Question);
-                    if (actualizarProveedor == DialogResult.Yes)
-                    {
-
-                        Proveedores proveedoresM = new Proveedores();
-                        proveedoresM = ExisteProovedor;
-
-                        proveedoresM.Proveedor = Proveedor_Completo;
-                        proveedoresM.RFC = RFC_proveedor;
-                        proveedoresM.NoProveedor = numeroProvedorConvertido;
-                        proveedoresM.IdEmpresa = IdEmpresa;
-                        proveedoresM.IdLocalidad = IdLocalidad;
-                        proveedoresM.Cuenta_cargo_1 = Cuenta_cargo_1;
-                        proveedoresM.Cuenta_cargo_2 = Cuenta_cargo_2;
-                        proveedoresM.Cuenta_cargo_3 = Cuenta_cargo_3;
-                        proveedoresM.Cuenta_Cargo_Iva = Cuenta_cargo_Iva;
-                        proveedoresM.Cuenta_Abono_1 = Cuenta_Abono_1;
-                        proveedoresM.Cuenta_Abono_2 = Cuenta_Abono_2;
-                        proveedoresM.Cuenta_Abono_3 = Cuenta_Abono_3;
-                        proveedoresM.Titulo_principal = Titulo_principal;
-                        proveedoresM.Titulo_secundario = Titulo_secundario;
-                        proveedoresM.Titulo_tercero = Titulo_tercero;
-
-                        proveedoresM.Departamento = txtDepto.Text;
-                        proveedoresM.Isr_Retenido = Cuenta_isr_retenido;
-                        proveedoresM.Iva_Retenido = Cuenta_iva_retenido;
-                        //modifico las propiedades
-                        db.Proveedores.Attach(proveedoresM);
-                        db.Entry(proveedoresM).State =
-                            EntityState.Modified;
-                        db.SaveChanges();
-                    }
-
-
-                }
+               
 
 
 
@@ -1465,7 +1445,7 @@ namespace EKPolizaGastos.Forms
                 Departamento = txtDepto.Text.Trim();
 
                 var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor &&
-                                    p.IdEmpresa == IdEmpresa && p.IdLocalidad == IdLocalidad && p.Departamento == Departamento).FirstOrDefault();
+                                    p.IdEmpresa == IdEmpresa).FirstOrDefault();//&& p.IdLocalidad == IdLocalidad && p.Departamento == Departamento
 
                 if (Folio.Length > 5)
                 {
@@ -1962,7 +1942,7 @@ namespace EKPolizaGastos.Forms
                         if (sumaSubtotalSumadoConIvaIEPS == TotalFactura)//significa que agrego el IEPS en la Factura
                         {
                             //AGREGO IEPS
-                            poliza.Rows.Insert(1, Cuenta_cargo_Iva, leyenda_IEPS, IEPS, "0.00", "IEPS TRASLADADO");
+                            poliza.Rows.Insert(1, Cuenta_Abono_2, leyenda_IEPS, IEPS, "0.00", "IEPS TRASLADADO");
                         }
 
 
@@ -1981,7 +1961,7 @@ namespace EKPolizaGastos.Forms
                         diferenciaIEPS = TotalFactura - sumaSubtotalSumadoConIvaIEPS;
 
 
-                        poliza.Rows.Insert(1, Cuenta_cargo_Iva, leyenda_IEPS, diferenciaIEPS, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(1, Cuenta_Abono_2, leyenda_IEPS, diferenciaIEPS, "0.00", "IEPS TRASLADADO");
                     }
 
 
@@ -2069,6 +2049,29 @@ namespace EKPolizaGastos.Forms
                 }
                 txtDebe.Text = Debe.ToString("C2");
                 txtHaber.Text = haber.ToString("C2");
+
+
+                //Actualizacion 17 enero 2019
+                decimal diferencia;
+                if (decimal.Parse(txtDebe.Text) > decimal.Parse(txtHaber.Text))
+                {
+                    diferencia = decimal.Parse(txtDebe.Text) - decimal.Parse(txtHaber.Text);
+
+                    poliza.Rows.Insert(1, Cuenta_Abono_2, "IEPS", diferencia, "0.00", "IEPS TRASLADADO");
+
+                }
+                else if (decimal.Parse(txtDebe.Text) < decimal.Parse(txtHaber.Text))
+                {
+                    diferencia = decimal.Parse(txtHaber.Text) - decimal.Parse(txtDebe.Text);
+
+                    poliza.Rows.Insert(1, Cuenta_Abono_2, "IEPS", diferencia, "0.00", "IEPS TRASLADADO");
+
+
+                }
+
+              
+
+
                 #endregion
             }
             else
@@ -2680,11 +2683,97 @@ namespace EKPolizaGastos.Forms
             }
         }
 
+
+
+
+
         #endregion
+        //Actualizar datos de proovedor en proceso
+
+
+        private void buttonX3_Click(object sender, EventArgs e)
+        {
+            
+            //1 comprubeo si existe empresa con este departamento
+            var ExisteProovedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor
+            && p.IdEmpresa == IdEmpresa).FirstOrDefault();
+            string numeroProvedorConvertido = "0";
+            if (ExisteProovedor != null)
+            {
+
+                numeroProvedorConvertido = Convert.ToString(ExisteProovedor.IdProveedor);
 
 
 
 
+                if (int.Parse(numeroProvedorConvertido) < 10)
+                {
+                    numeroProvedorConvertido = "00" + numeroProvedorConvertido;
 
+                }
+                else if (int.Parse(numeroProvedorConvertido) >= 10 && int.Parse(numeroProvedorConvertido) <= 99)
+                {
+
+                    numeroProvedorConvertido = "0" + numeroProvedorConvertido;
+                }
+
+
+                MessageBoxEx.EnableGlass = false;
+
+                DialogResult actualizarProveedor = MessageBoxEx.Show("¿Este Proveedor ya existe ! \n" +
+                                                                   "¿Desea Actualizar datos de Proveedor?",
+                                                    "EKPolizaGastos",
+                                                    MessageBoxButtons.YesNo,
+                                                    MessageBoxIcon.Question);
+
+                if (actualizarProveedor == DialogResult.Yes)
+                {
+
+                    Proveedores proveedoresM = new Proveedores();
+                    proveedoresM = ExisteProovedor;
+
+                    proveedoresM.Proveedor = Proveedor_Completo;
+                    proveedoresM.RFC = RFC_proveedor;
+                    proveedoresM.NoProveedor = numeroProvedorConvertido;
+                    proveedoresM.IdEmpresa = IdEmpresa;
+                    proveedoresM.IdLocalidad = IdLocalidad;
+                    proveedoresM.Cuenta_cargo_1 = Cuenta_cargo_1;
+                    proveedoresM.Cuenta_cargo_2 = Cuenta_cargo_2;
+                    proveedoresM.Cuenta_cargo_3 = Cuenta_cargo_3;
+                    proveedoresM.Cuenta_Cargo_Iva = Cuenta_cargo_Iva;
+                    proveedoresM.Cuenta_Abono_1 = Cuenta_Abono_1;
+                    proveedoresM.Cuenta_Abono_2 = Cuenta_Abono_2;
+                    proveedoresM.Cuenta_Abono_3 = Cuenta_Abono_3;
+                    proveedoresM.Titulo_principal = Titulo_principal;
+                    proveedoresM.Titulo_secundario = Titulo_secundario;
+                    proveedoresM.Titulo_tercero = Titulo_tercero;
+
+                    proveedoresM.Departamento = txtDepto.Text;
+                    proveedoresM.Isr_Retenido = Cuenta_isr_retenido;
+                    proveedoresM.Iva_Retenido = Cuenta_iva_retenido;
+                    //modifico las propiedades
+                    db.Proveedores.Attach(proveedoresM);
+                    db.Entry(proveedoresM).State =
+                        EntityState.Modified;
+                    db.SaveChanges();
+
+
+                    MessageBoxEx.Show("Proveedor Actualizado con Exito!",
+                                                   "EKPolizaGastos",
+                                                   MessageBoxButtons.OK,
+                                                   MessageBoxIcon.Information);
+                }
+
+            }
+
+
+
+
+           
+
+         
+
+
+        }
     }
 }
