@@ -34,9 +34,12 @@ namespace EKPolizaGastos.Context
         public virtual DbSet<Localidades> Localidades { get; set; }
         public virtual DbSet<Proveedores> Proveedores { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<CIS_NOV2018> CIS_NOV2018 { get; set; }
-        public virtual DbSet<CIS_NOV2018Conceptos> CIS_NOV2018Conceptos { get; set; }
         public virtual DbSet<ComprobanteConceptos> ComprobanteConceptos { get; set; }
+        public virtual DbSet<ConceptosNominas> ConceptosNominas { get; set; }
+        public virtual DbSet<DeduccionesNominas> DeduccionesNominas { get; set; }
+        public virtual DbSet<Diot> Diot { get; set; }
+        public virtual DbSet<Nominas> Nominas { get; set; }
+        public virtual DbSet<PercepcionesNominas> PercepcionesNominas { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -344,6 +347,307 @@ namespace EKPolizaGastos.Context
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<SP_NominasInsert_Result> SP_NominasInsert(string version, string serie, string folio, string sello, string formaPago, string noCertificado, string certificado, string subTotal, string descuento, string moneda, string total, string tipodeComprobante, string metodoPago, string lugarExpedicion, string emisor_Rfc, string emisor_Nombre, string emisor_RegimenFiscal, string receptor_Rfc, string receptor_Nombre, string receptor_UsoCFDI, string fechaFinalPago, string fechaInicialPago, string fechaPago, string numDiasPagados, string tipoNomina, string totalDeducciones, string totalPercepciones, string complemento_Version, string registroPatronal, string antiguedad, string banco, string claveEntFed, string cuentaBancaria, string curp, string departamento, string fechaInicioRelLaboral, string numEmpleado, string numSeguridadSocial, string periodicidadPago, string puesto, string riesgoPuesto, string salarioBaseCotApor, string salarioDiarioIntegrado, string sindicalizado, string tipoContrato, string tipoJornada, string tipoRegimen, string totalExento, string totalGravado, string totalSueldos, string totalImpuestoRetenidos, string totalOtrasDeducciones, string t_RfcProvCertif, string t_Version, string uUID, string t_FechaTimbrado, string t_SelloCFD, string noCertificadoSAT, Nullable<System.DateTime> fechaConvert, Nullable<int> estatusNomina, Nullable<int> opcion, ObjectParameter msg, ObjectParameter capto, Nullable<int> idNomina, string clave, string concepto, string importeExento, string importeGravado, string tipoPercepcion, string importe, string tipoDeduccion, string claveProdServ, string cantidad, string claveUnidad, string descripcion, string valorUnitario)
+        {
+            var versionParameter = version != null ?
+                new ObjectParameter("Version", version) :
+                new ObjectParameter("Version", typeof(string));
+    
+            var serieParameter = serie != null ?
+                new ObjectParameter("Serie", serie) :
+                new ObjectParameter("Serie", typeof(string));
+    
+            var folioParameter = folio != null ?
+                new ObjectParameter("Folio", folio) :
+                new ObjectParameter("Folio", typeof(string));
+    
+            var selloParameter = sello != null ?
+                new ObjectParameter("Sello", sello) :
+                new ObjectParameter("Sello", typeof(string));
+    
+            var formaPagoParameter = formaPago != null ?
+                new ObjectParameter("FormaPago", formaPago) :
+                new ObjectParameter("FormaPago", typeof(string));
+    
+            var noCertificadoParameter = noCertificado != null ?
+                new ObjectParameter("NoCertificado", noCertificado) :
+                new ObjectParameter("NoCertificado", typeof(string));
+    
+            var certificadoParameter = certificado != null ?
+                new ObjectParameter("Certificado", certificado) :
+                new ObjectParameter("Certificado", typeof(string));
+    
+            var subTotalParameter = subTotal != null ?
+                new ObjectParameter("SubTotal", subTotal) :
+                new ObjectParameter("SubTotal", typeof(string));
+    
+            var descuentoParameter = descuento != null ?
+                new ObjectParameter("Descuento", descuento) :
+                new ObjectParameter("Descuento", typeof(string));
+    
+            var monedaParameter = moneda != null ?
+                new ObjectParameter("Moneda", moneda) :
+                new ObjectParameter("Moneda", typeof(string));
+    
+            var totalParameter = total != null ?
+                new ObjectParameter("Total", total) :
+                new ObjectParameter("Total", typeof(string));
+    
+            var tipodeComprobanteParameter = tipodeComprobante != null ?
+                new ObjectParameter("TipodeComprobante", tipodeComprobante) :
+                new ObjectParameter("TipodeComprobante", typeof(string));
+    
+            var metodoPagoParameter = metodoPago != null ?
+                new ObjectParameter("MetodoPago", metodoPago) :
+                new ObjectParameter("MetodoPago", typeof(string));
+    
+            var lugarExpedicionParameter = lugarExpedicion != null ?
+                new ObjectParameter("LugarExpedicion", lugarExpedicion) :
+                new ObjectParameter("LugarExpedicion", typeof(string));
+    
+            var emisor_RfcParameter = emisor_Rfc != null ?
+                new ObjectParameter("Emisor_Rfc", emisor_Rfc) :
+                new ObjectParameter("Emisor_Rfc", typeof(string));
+    
+            var emisor_NombreParameter = emisor_Nombre != null ?
+                new ObjectParameter("Emisor_Nombre", emisor_Nombre) :
+                new ObjectParameter("Emisor_Nombre", typeof(string));
+    
+            var emisor_RegimenFiscalParameter = emisor_RegimenFiscal != null ?
+                new ObjectParameter("Emisor_RegimenFiscal", emisor_RegimenFiscal) :
+                new ObjectParameter("Emisor_RegimenFiscal", typeof(string));
+    
+            var receptor_RfcParameter = receptor_Rfc != null ?
+                new ObjectParameter("Receptor_Rfc", receptor_Rfc) :
+                new ObjectParameter("Receptor_Rfc", typeof(string));
+    
+            var receptor_NombreParameter = receptor_Nombre != null ?
+                new ObjectParameter("Receptor_Nombre", receptor_Nombre) :
+                new ObjectParameter("Receptor_Nombre", typeof(string));
+    
+            var receptor_UsoCFDIParameter = receptor_UsoCFDI != null ?
+                new ObjectParameter("Receptor_UsoCFDI", receptor_UsoCFDI) :
+                new ObjectParameter("Receptor_UsoCFDI", typeof(string));
+    
+            var fechaFinalPagoParameter = fechaFinalPago != null ?
+                new ObjectParameter("FechaFinalPago", fechaFinalPago) :
+                new ObjectParameter("FechaFinalPago", typeof(string));
+    
+            var fechaInicialPagoParameter = fechaInicialPago != null ?
+                new ObjectParameter("FechaInicialPago", fechaInicialPago) :
+                new ObjectParameter("FechaInicialPago", typeof(string));
+    
+            var fechaPagoParameter = fechaPago != null ?
+                new ObjectParameter("FechaPago", fechaPago) :
+                new ObjectParameter("FechaPago", typeof(string));
+    
+            var numDiasPagadosParameter = numDiasPagados != null ?
+                new ObjectParameter("NumDiasPagados", numDiasPagados) :
+                new ObjectParameter("NumDiasPagados", typeof(string));
+    
+            var tipoNominaParameter = tipoNomina != null ?
+                new ObjectParameter("TipoNomina", tipoNomina) :
+                new ObjectParameter("TipoNomina", typeof(string));
+    
+            var totalDeduccionesParameter = totalDeducciones != null ?
+                new ObjectParameter("TotalDeducciones", totalDeducciones) :
+                new ObjectParameter("TotalDeducciones", typeof(string));
+    
+            var totalPercepcionesParameter = totalPercepciones != null ?
+                new ObjectParameter("TotalPercepciones", totalPercepciones) :
+                new ObjectParameter("TotalPercepciones", typeof(string));
+    
+            var complemento_VersionParameter = complemento_Version != null ?
+                new ObjectParameter("Complemento_Version", complemento_Version) :
+                new ObjectParameter("Complemento_Version", typeof(string));
+    
+            var registroPatronalParameter = registroPatronal != null ?
+                new ObjectParameter("RegistroPatronal", registroPatronal) :
+                new ObjectParameter("RegistroPatronal", typeof(string));
+    
+            var antiguedadParameter = antiguedad != null ?
+                new ObjectParameter("Antiguedad", antiguedad) :
+                new ObjectParameter("Antiguedad", typeof(string));
+    
+            var bancoParameter = banco != null ?
+                new ObjectParameter("Banco", banco) :
+                new ObjectParameter("Banco", typeof(string));
+    
+            var claveEntFedParameter = claveEntFed != null ?
+                new ObjectParameter("ClaveEntFed", claveEntFed) :
+                new ObjectParameter("ClaveEntFed", typeof(string));
+    
+            var cuentaBancariaParameter = cuentaBancaria != null ?
+                new ObjectParameter("CuentaBancaria", cuentaBancaria) :
+                new ObjectParameter("CuentaBancaria", typeof(string));
+    
+            var curpParameter = curp != null ?
+                new ObjectParameter("Curp", curp) :
+                new ObjectParameter("Curp", typeof(string));
+    
+            var departamentoParameter = departamento != null ?
+                new ObjectParameter("Departamento", departamento) :
+                new ObjectParameter("Departamento", typeof(string));
+    
+            var fechaInicioRelLaboralParameter = fechaInicioRelLaboral != null ?
+                new ObjectParameter("FechaInicioRelLaboral", fechaInicioRelLaboral) :
+                new ObjectParameter("FechaInicioRelLaboral", typeof(string));
+    
+            var numEmpleadoParameter = numEmpleado != null ?
+                new ObjectParameter("NumEmpleado", numEmpleado) :
+                new ObjectParameter("NumEmpleado", typeof(string));
+    
+            var numSeguridadSocialParameter = numSeguridadSocial != null ?
+                new ObjectParameter("NumSeguridadSocial", numSeguridadSocial) :
+                new ObjectParameter("NumSeguridadSocial", typeof(string));
+    
+            var periodicidadPagoParameter = periodicidadPago != null ?
+                new ObjectParameter("PeriodicidadPago", periodicidadPago) :
+                new ObjectParameter("PeriodicidadPago", typeof(string));
+    
+            var puestoParameter = puesto != null ?
+                new ObjectParameter("Puesto", puesto) :
+                new ObjectParameter("Puesto", typeof(string));
+    
+            var riesgoPuestoParameter = riesgoPuesto != null ?
+                new ObjectParameter("RiesgoPuesto", riesgoPuesto) :
+                new ObjectParameter("RiesgoPuesto", typeof(string));
+    
+            var salarioBaseCotAporParameter = salarioBaseCotApor != null ?
+                new ObjectParameter("SalarioBaseCotApor", salarioBaseCotApor) :
+                new ObjectParameter("SalarioBaseCotApor", typeof(string));
+    
+            var salarioDiarioIntegradoParameter = salarioDiarioIntegrado != null ?
+                new ObjectParameter("SalarioDiarioIntegrado", salarioDiarioIntegrado) :
+                new ObjectParameter("SalarioDiarioIntegrado", typeof(string));
+    
+            var sindicalizadoParameter = sindicalizado != null ?
+                new ObjectParameter("Sindicalizado", sindicalizado) :
+                new ObjectParameter("Sindicalizado", typeof(string));
+    
+            var tipoContratoParameter = tipoContrato != null ?
+                new ObjectParameter("TipoContrato", tipoContrato) :
+                new ObjectParameter("TipoContrato", typeof(string));
+    
+            var tipoJornadaParameter = tipoJornada != null ?
+                new ObjectParameter("TipoJornada", tipoJornada) :
+                new ObjectParameter("TipoJornada", typeof(string));
+    
+            var tipoRegimenParameter = tipoRegimen != null ?
+                new ObjectParameter("TipoRegimen", tipoRegimen) :
+                new ObjectParameter("TipoRegimen", typeof(string));
+    
+            var totalExentoParameter = totalExento != null ?
+                new ObjectParameter("TotalExento", totalExento) :
+                new ObjectParameter("TotalExento", typeof(string));
+    
+            var totalGravadoParameter = totalGravado != null ?
+                new ObjectParameter("TotalGravado", totalGravado) :
+                new ObjectParameter("TotalGravado", typeof(string));
+    
+            var totalSueldosParameter = totalSueldos != null ?
+                new ObjectParameter("TotalSueldos", totalSueldos) :
+                new ObjectParameter("TotalSueldos", typeof(string));
+    
+            var totalImpuestoRetenidosParameter = totalImpuestoRetenidos != null ?
+                new ObjectParameter("TotalImpuestoRetenidos", totalImpuestoRetenidos) :
+                new ObjectParameter("TotalImpuestoRetenidos", typeof(string));
+    
+            var totalOtrasDeduccionesParameter = totalOtrasDeducciones != null ?
+                new ObjectParameter("TotalOtrasDeducciones", totalOtrasDeducciones) :
+                new ObjectParameter("TotalOtrasDeducciones", typeof(string));
+    
+            var t_RfcProvCertifParameter = t_RfcProvCertif != null ?
+                new ObjectParameter("T_RfcProvCertif", t_RfcProvCertif) :
+                new ObjectParameter("T_RfcProvCertif", typeof(string));
+    
+            var t_VersionParameter = t_Version != null ?
+                new ObjectParameter("T_Version", t_Version) :
+                new ObjectParameter("T_Version", typeof(string));
+    
+            var uUIDParameter = uUID != null ?
+                new ObjectParameter("UUID", uUID) :
+                new ObjectParameter("UUID", typeof(string));
+    
+            var t_FechaTimbradoParameter = t_FechaTimbrado != null ?
+                new ObjectParameter("T_FechaTimbrado", t_FechaTimbrado) :
+                new ObjectParameter("T_FechaTimbrado", typeof(string));
+    
+            var t_SelloCFDParameter = t_SelloCFD != null ?
+                new ObjectParameter("T_SelloCFD", t_SelloCFD) :
+                new ObjectParameter("T_SelloCFD", typeof(string));
+    
+            var noCertificadoSATParameter = noCertificadoSAT != null ?
+                new ObjectParameter("NoCertificadoSAT", noCertificadoSAT) :
+                new ObjectParameter("NoCertificadoSAT", typeof(string));
+    
+            var fechaConvertParameter = fechaConvert.HasValue ?
+                new ObjectParameter("FechaConvert", fechaConvert) :
+                new ObjectParameter("FechaConvert", typeof(System.DateTime));
+    
+            var estatusNominaParameter = estatusNomina.HasValue ?
+                new ObjectParameter("EstatusNomina", estatusNomina) :
+                new ObjectParameter("EstatusNomina", typeof(int));
+    
+            var opcionParameter = opcion.HasValue ?
+                new ObjectParameter("opcion", opcion) :
+                new ObjectParameter("opcion", typeof(int));
+    
+            var idNominaParameter = idNomina.HasValue ?
+                new ObjectParameter("IdNomina", idNomina) :
+                new ObjectParameter("IdNomina", typeof(int));
+    
+            var claveParameter = clave != null ?
+                new ObjectParameter("Clave", clave) :
+                new ObjectParameter("Clave", typeof(string));
+    
+            var conceptoParameter = concepto != null ?
+                new ObjectParameter("Concepto", concepto) :
+                new ObjectParameter("Concepto", typeof(string));
+    
+            var importeExentoParameter = importeExento != null ?
+                new ObjectParameter("ImporteExento", importeExento) :
+                new ObjectParameter("ImporteExento", typeof(string));
+    
+            var importeGravadoParameter = importeGravado != null ?
+                new ObjectParameter("ImporteGravado", importeGravado) :
+                new ObjectParameter("ImporteGravado", typeof(string));
+    
+            var tipoPercepcionParameter = tipoPercepcion != null ?
+                new ObjectParameter("TipoPercepcion", tipoPercepcion) :
+                new ObjectParameter("TipoPercepcion", typeof(string));
+    
+            var importeParameter = importe != null ?
+                new ObjectParameter("Importe", importe) :
+                new ObjectParameter("Importe", typeof(string));
+    
+            var tipoDeduccionParameter = tipoDeduccion != null ?
+                new ObjectParameter("TipoDeduccion", tipoDeduccion) :
+                new ObjectParameter("TipoDeduccion", typeof(string));
+    
+            var claveProdServParameter = claveProdServ != null ?
+                new ObjectParameter("ClaveProdServ", claveProdServ) :
+                new ObjectParameter("ClaveProdServ", typeof(string));
+    
+            var cantidadParameter = cantidad != null ?
+                new ObjectParameter("Cantidad", cantidad) :
+                new ObjectParameter("Cantidad", typeof(string));
+    
+            var claveUnidadParameter = claveUnidad != null ?
+                new ObjectParameter("ClaveUnidad", claveUnidad) :
+                new ObjectParameter("ClaveUnidad", typeof(string));
+    
+            var descripcionParameter = descripcion != null ?
+                new ObjectParameter("Descripcion", descripcion) :
+                new ObjectParameter("Descripcion", typeof(string));
+    
+            var valorUnitarioParameter = valorUnitario != null ?
+                new ObjectParameter("ValorUnitario", valorUnitario) :
+                new ObjectParameter("ValorUnitario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_NominasInsert_Result>("SP_NominasInsert", versionParameter, serieParameter, folioParameter, selloParameter, formaPagoParameter, noCertificadoParameter, certificadoParameter, subTotalParameter, descuentoParameter, monedaParameter, totalParameter, tipodeComprobanteParameter, metodoPagoParameter, lugarExpedicionParameter, emisor_RfcParameter, emisor_NombreParameter, emisor_RegimenFiscalParameter, receptor_RfcParameter, receptor_NombreParameter, receptor_UsoCFDIParameter, fechaFinalPagoParameter, fechaInicialPagoParameter, fechaPagoParameter, numDiasPagadosParameter, tipoNominaParameter, totalDeduccionesParameter, totalPercepcionesParameter, complemento_VersionParameter, registroPatronalParameter, antiguedadParameter, bancoParameter, claveEntFedParameter, cuentaBancariaParameter, curpParameter, departamentoParameter, fechaInicioRelLaboralParameter, numEmpleadoParameter, numSeguridadSocialParameter, periodicidadPagoParameter, puestoParameter, riesgoPuestoParameter, salarioBaseCotAporParameter, salarioDiarioIntegradoParameter, sindicalizadoParameter, tipoContratoParameter, tipoJornadaParameter, tipoRegimenParameter, totalExentoParameter, totalGravadoParameter, totalSueldosParameter, totalImpuestoRetenidosParameter, totalOtrasDeduccionesParameter, t_RfcProvCertifParameter, t_VersionParameter, uUIDParameter, t_FechaTimbradoParameter, t_SelloCFDParameter, noCertificadoSATParameter, fechaConvertParameter, estatusNominaParameter, opcionParameter, msg, capto, idNominaParameter, claveParameter, conceptoParameter, importeExentoParameter, importeGravadoParameter, tipoPercepcionParameter, importeParameter, tipoDeduccionParameter, claveProdServParameter, cantidadParameter, claveUnidadParameter, descripcionParameter, valorUnitarioParameter);
         }
     }
 }

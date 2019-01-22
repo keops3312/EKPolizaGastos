@@ -10,14 +10,13 @@ namespace EKPolizaGastos.Common.Classes
     using System.Data.SqlClient;
     using System.IO;
     using System.Xml;
-    using System.Xml.XPath;
     using ClosedXML.Excel;
     using EDsemp.Classes;
     #endregion
     public class ReadSATFactura
     {
 
-        #region Attributes
+        #region Properties (Propiedades)
         private string Serie;
         private string Folio;
         private string Fecha;
@@ -90,7 +89,7 @@ namespace EKPolizaGastos.Common.Classes
         #endregion
 
 
-        #region Methods
+        #region Methods (Metodos)
 
         public string CheckDataConection()
         {

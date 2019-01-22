@@ -37,6 +37,7 @@ namespace EKPolizaGastos
         private FolderBrowserDialog folderBrowserDialog;
         private ReadSATFactura readSATFactura;
         private diotClass diot;
+        private ReadSatNominas readSatNominas;
 
         #endregion
 
@@ -62,6 +63,7 @@ namespace EKPolizaGastos
             db = new SEMP_SATContext();
             folderBrowserDialog = new FolderBrowserDialog();
             readSATFactura = new ReadSATFactura();
+            readSatNominas = new ReadSatNominas();
             diot = new diotClass();
 
             backgroundWorker1.WorkerReportsProgress = true;
@@ -124,9 +126,18 @@ namespace EKPolizaGastos
         private void ReadAndStart()
         {
 
-            ReadSATFactura readSATFactura = new ReadSATFactura();
+            if (switchButton1.Value == true)
+            {
+                ReadSATFactura readSATFactura = new ReadSATFactura();
 
-            TotalRegistrosEnNuevaTabla = readSATFactura.Scan(path,cnx,nameFile);
+                TotalRegistrosEnNuevaTabla = readSATFactura.Scan(path, cnx, nameFile);
+            }
+            else
+            {
+                nameFile = lblItemSeleted.Text.Substring(0, nameFile.Length);
+                TotalRegistrosEnNuevaTabla = readSatNominas.Scan(path, cnx, nameFile);
+
+            }
 
            
 
@@ -157,11 +168,24 @@ namespace EKPolizaGastos
             {
                 var empresa = db.Empresas.Where(p => p.Letra == letra).First();
 
-                txtpath.Text = empresa.Path;
+                //Nueva linea para Defini si es la carga de archivos tipo Gastos o Nomina
+                if (switchButton1.Value == true)
+                {
+                    txtpath.Text = empresa.Path;
+                }
+                else
+                {
+                   txtpath.Text = empresa.PathNomina;
+                }
+
+
+
+
+               
                 lblEmpresa.Text = "Empresa Seleccionada: \n" + empresa.Empresa;
                 //Buscamos archivos zip comprimidos y agregamos a la lista
 
-                 dirs = Directory.GetFiles(empresa.Path, "*.zip");
+                 dirs = Directory.GetFiles(txtpath.Text, "*.zip");
 
                 cantidad = dirs.Length;
 
@@ -171,7 +195,20 @@ namespace EKPolizaGastos
             }
 
             DataTable list = new DataTable();
-            list=readSATFactura.ToListDTB(letra.Trim(), cnx);
+            //Lista de Bases de datos de Gastos
+            if (switchButton1.Value == true)
+            {
+                list = readSATFactura.ToListDTB(letra.Trim(), cnx);
+            }
+            //Lista de Base de Datos de Nominas
+            else
+            {
+                list = readSatNominas.ToListDTB(letra.Trim(), cnx);
+            }
+
+
+           
+          
 
             listTables.Items.Clear();
             listBox1.Items.Clear();
@@ -202,7 +239,18 @@ namespace EKPolizaGastos
             {
                 foreach (var zip in dirs)
                 {
-                    listZip.Items.Add(zip.Substring(13));
+
+                    if (switchButton1.Value == true)
+                    {
+                        listZip.Items.Add(zip.Substring(13));
+                    }
+                    else
+                    {
+                        listZip.Items.Add(zip.Substring(22));
+                    }
+
+
+                   
                 }
 
                 lblCount.Text = "Numero de documentos Zip encontrados: " + cantidad;
@@ -253,14 +301,33 @@ namespace EKPolizaGastos
             //listView1.View = View.List;
             foreach (var item in xmlFiles)
             {
-                listXML.Items.Add(item.Substring(26));
+                if (switchButton1.Value == true)
+                {
+                    listXML.Items.Add(item.Substring(26));
+                }
+                else
+                {
+                    listXML.Items.Add(item.Substring(38));
+                }
+
+
+               
 
             }
 
 
             foreach (var item in xmlFiles)
             {
-                listXML2.Items.Add(item.Substring(26),0);
+
+                if (switchButton1.Value == true)
+                {
+                    listXML2.Items.Add(item.Substring(26), 0);
+                }
+                else
+                {
+                    listXML2.Items.Add(item.Substring(38), 0);
+                }
+               
 
             }
 
@@ -283,7 +350,7 @@ namespace EKPolizaGastos
             }
             else
             {
-
+                MessageBoxEx.EnableGlass = false;
                 MessageBoxEx.Show("No has seleccionado un archivo para descomprimir",
                     "EK Poliza Gastos",
                     MessageBoxButtons.OK,
@@ -706,5 +773,9 @@ namespace EKPolizaGastos
             return dialogResult;
         }
 
+        private void switchButton1_ValueChanged(object sender, EventArgs e)
+        {
+            LoadCompaniesProperties();
+        }
     }
 }

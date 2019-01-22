@@ -98,12 +98,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context\CIS_NOV2018.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\CIS_NOV2018Conceptos.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\Comprobante.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -111,6 +105,9 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\ComprobanteEstatus.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\ConceptosNominas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Context.Context.cs">
@@ -131,10 +128,22 @@
     <Compile Include="Context\CuentasGastos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\DeduccionesNominas.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Diot.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\Empresas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Localidades.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Nominas.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\PercepcionesNominas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Proveedores.cs">
@@ -147,6 +156,9 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\SP_InsertFactura_Result.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\SP_NominasInsert_Result.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\sysdiagrams.cs">

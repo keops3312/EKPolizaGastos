@@ -27,6 +27,7 @@ namespace EKPolizaGastos.Context
         public string RFC { get; set; }
         public string Path { get; set; }
         public string Letra { get; set; }
+        public string PathNomina { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Localidades> Localidades { get; set; }

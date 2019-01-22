@@ -61,6 +61,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLeer = new DevComponents.DotNetBar.ButtonX();
             this.btnCargarRuta = new DevComponents.DotNetBar.ButtonX();
+            this.switchButton1 = new DevComponents.DotNetBar.Controls.SwitchButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -69,7 +70,7 @@
             // 
             // txtpath
             // 
-            this.txtpath.Location = new System.Drawing.Point(12, 122);
+            this.txtpath.Location = new System.Drawing.Point(12, 136);
             this.txtpath.Name = "txtpath";
             this.txtpath.Size = new System.Drawing.Size(308, 20);
             this.txtpath.TabIndex = 1;
@@ -83,7 +84,7 @@
             this.lblCount.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCount.ForeColor = System.Drawing.Color.Black;
-            this.lblCount.Location = new System.Drawing.Point(12, 163);
+            this.lblCount.Location = new System.Drawing.Point(12, 186);
             this.lblCount.Name = "lblCount";
             this.lblCount.Size = new System.Drawing.Size(308, 41);
             this.lblCount.TabIndex = 3;
@@ -129,7 +130,7 @@
             // 
             this.lblLeyenda.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblLeyenda.ForeColor = System.Drawing.Color.Black;
-            this.lblLeyenda.Location = new System.Drawing.Point(12, 93);
+            this.lblLeyenda.Location = new System.Drawing.Point(12, 107);
             this.lblLeyenda.Name = "lblLeyenda";
             this.lblLeyenda.Size = new System.Drawing.Size(308, 23);
             this.lblLeyenda.TabIndex = 7;
@@ -157,7 +158,7 @@
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX1.ForeColor = System.Drawing.Color.Black;
-            this.labelX1.Location = new System.Drawing.Point(12, 37);
+            this.labelX1.Location = new System.Drawing.Point(12, 9);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(139, 23);
             this.labelX1.TabIndex = 10;
@@ -171,7 +172,7 @@
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX2.ForeColor = System.Drawing.Color.Black;
-            this.labelX2.Location = new System.Drawing.Point(379, 37);
+            this.labelX2.Location = new System.Drawing.Point(379, 9);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(277, 23);
             this.labelX2.TabIndex = 11;
@@ -185,7 +186,7 @@
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelX3.ForeColor = System.Drawing.Color.Black;
-            this.labelX3.Location = new System.Drawing.Point(719, 37);
+            this.labelX3.Location = new System.Drawing.Point(719, 9);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(121, 23);
             this.labelX3.TabIndex = 12;
@@ -194,7 +195,7 @@
             // cmbEmpresa
             // 
             this.cmbEmpresa.FormattingEnabled = true;
-            this.cmbEmpresa.Location = new System.Drawing.Point(12, 66);
+            this.cmbEmpresa.Location = new System.Drawing.Point(14, 38);
             this.cmbEmpresa.Name = "cmbEmpresa";
             this.cmbEmpresa.Size = new System.Drawing.Size(308, 21);
             this.cmbEmpresa.TabIndex = 13;
@@ -213,11 +214,10 @@
             this.listZip.BackgroundStyle.BorderTopWidth = 2;
             this.listZip.BackgroundStyle.Class = "TreeBorderKey";
             this.listZip.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.listZip.CheckStateMember = null;
             this.listZip.ContainerControlProcessDialogKey = true;
             this.listZip.DragDropSupport = true;
             this.listZip.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
-            this.listZip.Location = new System.Drawing.Point(12, 210);
+            this.listZip.Location = new System.Drawing.Point(14, 233);
             this.listZip.Name = "listZip";
             this.listZip.Size = new System.Drawing.Size(308, 139);
             this.listZip.TabIndex = 14;
@@ -232,7 +232,7 @@
             // 
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX4.ForeColor = System.Drawing.Color.Black;
-            this.labelX4.Location = new System.Drawing.Point(12, 143);
+            this.labelX4.Location = new System.Drawing.Point(12, 157);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(308, 23);
             this.labelX4.TabIndex = 15;
@@ -246,7 +246,7 @@
             this.lblItemSeleted.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.lblItemSeleted.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblItemSeleted.ForeColor = System.Drawing.Color.Black;
-            this.lblItemSeleted.Location = new System.Drawing.Point(12, 384);
+            this.lblItemSeleted.Location = new System.Drawing.Point(14, 413);
             this.lblItemSeleted.Name = "lblItemSeleted";
             this.lblItemSeleted.Size = new System.Drawing.Size(308, 23);
             this.lblItemSeleted.TabIndex = 16;
@@ -275,7 +275,7 @@
             // 
             // 
             this.labelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX5.Location = new System.Drawing.Point(50, 355);
+            this.labelX5.Location = new System.Drawing.Point(52, 378);
             this.labelX5.Name = "labelX5";
             this.labelX5.Size = new System.Drawing.Size(148, 30);
             this.labelX5.TabIndex = 18;
@@ -349,7 +349,7 @@
             this.buttonX1.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX1.Image = global::EKPolizaGastos.Properties.Resources.diot;
             this.buttonX1.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonX1.Location = new System.Drawing.Point(868, 413);
+            this.buttonX1.Location = new System.Drawing.Point(868, 442);
             this.buttonX1.Name = "buttonX1";
             this.buttonX1.Size = new System.Drawing.Size(138, 50);
             this.buttonX1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -380,7 +380,7 @@
             // pictureBox2
             // 
             this.pictureBox2.Image = global::EKPolizaGastos.Properties.Resources.ZIP_File_Logo;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 355);
+            this.pictureBox2.Location = new System.Drawing.Point(14, 378);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(32, 30);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -393,7 +393,7 @@
             this.btnPoliza.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnPoliza.Image = global::EKPolizaGastos.Properties.Resources.attachment_icon;
             this.btnPoliza.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.btnPoliza.Location = new System.Drawing.Point(719, 413);
+            this.btnPoliza.Location = new System.Drawing.Point(719, 442);
             this.btnPoliza.Name = "btnPoliza";
             this.btnPoliza.Size = new System.Drawing.Size(138, 50);
             this.btnPoliza.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -417,7 +417,7 @@
             this.btnLeer.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnLeer.Image = global::EKPolizaGastos.Properties.Resources.New_Database;
             this.btnLeer.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.btnLeer.Location = new System.Drawing.Point(441, 413);
+            this.btnLeer.Location = new System.Drawing.Point(433, 442);
             this.btnLeer.Name = "btnLeer";
             this.btnLeer.Size = new System.Drawing.Size(187, 50);
             this.btnLeer.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -432,7 +432,7 @@
             this.btnCargarRuta.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnCargarRuta.Image = global::EKPolizaGastos.Properties.Resources.My_Documents_Folder;
             this.btnCargarRuta.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.btnCargarRuta.Location = new System.Drawing.Point(70, 413);
+            this.btnCargarRuta.Location = new System.Drawing.Point(80, 442);
             this.btnCargarRuta.Name = "btnCargarRuta";
             this.btnCargarRuta.Size = new System.Drawing.Size(162, 50);
             this.btnCargarRuta.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -441,11 +441,30 @@
             this.btnCargarRuta.Click += new System.EventHandler(this.btnCargarRuta_Click);
             this.btnCargarRuta.MouseHover += new System.EventHandler(this.btnCargarRuta_MouseHover);
             // 
+            // switchButton1
+            // 
+            // 
+            // 
+            // 
+            this.switchButton1.BackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarCaptionBackground2;
+            this.switchButton1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.switchButton1.Location = new System.Drawing.Point(185, 75);
+            this.switchButton1.Name = "switchButton1";
+            this.switchButton1.OffText = "Nomina";
+            this.switchButton1.OnText = "Gastos";
+            this.switchButton1.Size = new System.Drawing.Size(135, 34);
+            this.switchButton1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.switchButton1.TabIndex = 27;
+            this.switchButton1.Value = true;
+            this.switchButton1.ValueObject = "Y";
+            this.switchButton1.ValueChanged += new System.EventHandler(this.switchButton1_ValueChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 504);
+            this.Controls.Add(this.switchButton1);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.listBox1);
@@ -523,6 +542,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private DevComponents.DotNetBar.Controls.ListViewEx listXML2;
         private DevComponents.DotNetBar.ButtonX buttonX1;
+        private DevComponents.DotNetBar.Controls.SwitchButton switchButton1;
     }
 }
 

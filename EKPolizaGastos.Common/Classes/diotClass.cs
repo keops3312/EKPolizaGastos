@@ -1,22 +1,23 @@
-﻿using EDsemp.Classes;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace EKPolizaGastos.Common.Classes
 {
+
+    #region Libraries (Librerias)
+    using EDsemp.Classes;
+    using System;
+    using System.Data;
+    using System.Data.SqlClient;
+    using System.IO;
+    #endregion
+
+
     public class diotClass
     {
+
+
         #region Properties (propiedades)
         private string sqlcnx, a, b, c, f;
         #endregion
-
-
 
         #region Methods (Metodos)
 
