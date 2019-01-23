@@ -417,6 +417,349 @@ namespace EKPolizaGastos.Common.Classes
             return total;
         }
 
+        public void Emitidas(string path,string cnx)
+        {
+
+            XmlDocument xDoc = new XmlDocument();
+
+            ////INSERT NEW REGISTRES
+
+            xDoc.Load(path);
+
+
+
+            XmlNodeList xFactura = xDoc.GetElementsByTagName("cfdi:Comprobante");//cfdi:comprobante
+            XmlNodeList xEmisor = xDoc.GetElementsByTagName("cfdi:Emisor");
+            XmlNodeList xReceptor = xDoc.GetElementsByTagName("cfdi:Receptor");
+            XmlNodeList xCFDIComplemento = xDoc.GetElementsByTagName("tfd:TimbreFiscalDigital");
+            XmlNodeList xTax = xDoc.GetElementsByTagName("cfdi:Traslado");
+            XmlNodeList xConceptos = xDoc.GetElementsByTagName("cfdi:Concepto");//sin s
+
+
+
+            foreach (XmlElement nodo in xFactura)
+                {
+
+                    Serie = string.Empty;
+                    Folio = string.Empty;
+                    Fecha = string.Empty;
+                    Version = string.Empty;
+                    Sello = string.Empty;
+                    FormaPago = string.Empty;
+                    NoCertificado = string.Empty;
+                    MetodoPago = string.Empty;
+                    LugarExpedicion = string.Empty;
+                    schemaLocation = string.Empty;
+                    CondicionesDePago = string.Empty;
+                    SubTotal = string.Empty;
+                    Moneda = string.Empty;
+                    Total = string.Empty;
+                    TipoDeComprobante = string.Empty;
+                    Descuento = string.Empty;
+
+
+
+                    Nombre = string.Empty;
+                    RegimenFiscal = string.Empty;
+                    Rfc = string.Empty;
+
+                    NombreR = string.Empty;
+                    UsoCFDI = string.Empty;
+                    RfcR = string.Empty;
+
+                    SelloCFD = string.Empty;
+                    NoCertificadoSAT = string.Empty;
+                    RfcProvCertif = string.Empty;
+                    UUID = string.Empty;
+                    FechaTimbrado = string.Empty;
+                    SelloSAT = string.Empty;
+
+
+                    Importe = string.Empty;
+                    Impuesto = string.Empty;
+                    TasaOCuota = string.Empty;
+                    TipoFactor = string.Empty;
+
+                    TotalImpuestosTrasladados = string.Empty;
+
+
+                    Serie = nodo.GetAttribute("Serie");
+                    Folio = nodo.GetAttribute("Folio");
+                    Fecha = nodo.GetAttribute("Fecha");
+                    Version = nodo.GetAttribute("Version");
+                    Sello = nodo.GetAttribute("Sello");
+                    FormaPago = nodo.GetAttribute("FormaPago");
+                    NoCertificado = nodo.GetAttribute("NoCertificado");
+                    MetodoPago = nodo.GetAttribute("MetodoPago");
+                    LugarExpedicion = nodo.GetAttribute("LugarExpedicion");
+                    schemaLocation = nodo.GetAttribute("xsi:schemaLocation");
+                    CondicionesDePago = nodo.GetAttribute("CondicionesDePago");
+                    SubTotal = nodo.GetAttribute("SubTotal");
+                    Moneda = nodo.GetAttribute("Moneda");
+                    Total = nodo.GetAttribute("Total");
+                    TipoDeComprobante = nodo.GetAttribute("TipoDeComprobante");
+                    Descuento = nodo.GetAttribute("Descuento");
+
+
+                    //Taxes 
+                    foreach (XmlElement nodoReceptor in xTax)
+                    {
+
+                        Importe = nodoReceptor.GetAttribute("Importe");
+                        Impuesto = nodoReceptor.GetAttribute("Impuesto");
+                        TasaOCuota = nodoReceptor.GetAttribute("TasaOCuota");
+                        TipoFactor = nodoReceptor.GetAttribute("TipoFactor");
+
+
+                        if (string.IsNullOrEmpty(Importe) || string.IsNullOrWhiteSpace(Importe))
+                        {
+                            Importe = "0";
+                        }
+
+                        if (string.IsNullOrEmpty(Impuesto) || string.IsNullOrWhiteSpace(Impuesto))
+                        {
+                            Impuesto = "0";
+                        }
+                        if (string.IsNullOrEmpty(TasaOCuota) || string.IsNullOrWhiteSpace(TasaOCuota))
+                        {
+                            TasaOCuota = "0";
+                        }
+                        if (string.IsNullOrEmpty(TipoFactor) || string.IsNullOrWhiteSpace(TipoFactor))
+                        {
+                            TipoFactor = "0";
+                        }
+
+
+
+                    }
+
+                    //Emisor Data
+                    foreach (XmlElement nodoEmisor in xEmisor)
+                    {
+                        Nombre = nodoEmisor.GetAttribute("Nombre");
+                        RegimenFiscal = nodoEmisor.GetAttribute("RegimenFiscal");
+                        Rfc = nodoEmisor.GetAttribute("Rfc");
+                    }
+                    //Receptor Data
+                    foreach (XmlElement nodoReceptor in xReceptor)
+                    {
+                        NombreR = nodoReceptor.GetAttribute("Nombre");
+                        UsoCFDI = nodoReceptor.GetAttribute("UsoCFDI");
+                        RfcR = nodoReceptor.GetAttribute("Rfc");
+                    }
+                    //DigitalFiscal
+                    foreach (XmlElement nodoReceptor in xCFDIComplemento)
+                    {
+                        SelloCFD = nodoReceptor.GetAttribute("SelloCFD");
+                        NoCertificadoSAT = nodoReceptor.GetAttribute("NoCertificadoSAT");
+                        RfcProvCertif = nodoReceptor.GetAttribute("RfcProvCertif");
+                        UUID = nodoReceptor.GetAttribute("UUID");
+                        FechaTimbrado = nodoReceptor.GetAttribute("FechaTimbrado");
+                        SelloSAT = nodoReceptor.GetAttribute("SelloSAT");
+
+
+
+                    }
+                    //Taxes 
+                    foreach (XmlElement nodoReceptor in xTax)
+                    {
+
+                        Importe = nodoReceptor.GetAttribute("Importe");
+                        Impuesto = nodoReceptor.GetAttribute("Impuesto");
+                        TasaOCuota = nodoReceptor.GetAttribute("TasaOCuota");
+                        TipoFactor = nodoReceptor.GetAttribute("TipoFactor");
+
+
+                        if (string.IsNullOrEmpty(Importe) || string.IsNullOrWhiteSpace(Importe))
+                        {
+                            Importe = "0";
+                        }
+
+                        if (string.IsNullOrEmpty(Impuesto) || string.IsNullOrWhiteSpace(Impuesto))
+                        {
+                            Impuesto = "0";
+                        }
+                        if (string.IsNullOrEmpty(TasaOCuota) || string.IsNullOrWhiteSpace(TasaOCuota))
+                        {
+                            TasaOCuota = "0";
+                        }
+                        if (string.IsNullOrEmpty(TipoFactor) || string.IsNullOrWhiteSpace(TipoFactor))
+                        {
+                            TipoFactor = "0";
+                        }
+
+
+
+                    }
+
+                InsertDataEMITIDAS(cnx);
+
+                foreach (XmlElement nodoReceptor in xConceptos)
+                {
+
+                    ClaveProdServ = string.Empty;
+                    NoIdentificacion = string.Empty;
+                    Cantidad = string.Empty;
+                    ClaveUnidad = string.Empty;
+                    Unidad = string.Empty;
+                    Descripcion = string.Empty;
+                    ValorUnitario = string.Empty;
+                    ImporteX = string.Empty;
+                    DescuentoX = string.Empty;
+
+
+                    ClaveProdServ = nodoReceptor.GetAttribute("ClaveProdServ");
+                    NoIdentificacion = nodoReceptor.GetAttribute("NoIdentificacion");
+                    Cantidad = nodoReceptor.GetAttribute("Cantidad");
+                    ClaveUnidad = nodoReceptor.GetAttribute("ClaveUnidad");
+                    Unidad = nodoReceptor.GetAttribute("Unidad");
+                    Descripcion = nodoReceptor.GetAttribute("Descripcion");
+                    ValorUnitario = nodoReceptor.GetAttribute("ValorUnitario");
+                    ImporteX = nodoReceptor.GetAttribute("Importe");
+                    DescuentoX = nodoReceptor.GetAttribute("Descuento");
+                    //BaseTR = nodoReceptor.FirstChild.FirstChild["cfdi:Traslado"].GetAttribute("Base");
+
+
+                    InserConceptsEMITIDAS(cnx);
+                }
+
+
+            }
+        
+
+
+           
+        }
+
+
+        //PARA PAGOS DE FACTURAS EMITIDAS
+        public void InsertDataEMITIDAS(string cnx)
+        {
+
+            try
+            {
+               
+                SqlConnection conn = new SqlConnection(cnx);
+
+                conn.Open();
+                SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("Serie", Serie);//
+                command.Parameters.AddWithValue("Folio", Folio);//
+                command.Parameters.AddWithValue("Fecha", Fecha);//
+                command.Parameters.AddWithValue("Versions", Version);//
+                command.Parameters.AddWithValue("Sello", Sello);//
+                command.Parameters.AddWithValue("FormaPago", FormaPago);//
+                command.Parameters.AddWithValue("NoCertificado", NoCertificado);//
+                command.Parameters.AddWithValue("MetodoPago", MetodoPago);//
+                command.Parameters.AddWithValue("LugarExpedicion", LugarExpedicion);//
+                
+                command.Parameters.AddWithValue("CondicionesDePago", CondicionesDePago);//
+                command.Parameters.AddWithValue("SubTotal", SubTotal);//
+                command.Parameters.AddWithValue("Moneda", Moneda);//
+                command.Parameters.AddWithValue("Total", Total);//
+                command.Parameters.AddWithValue("TipoDeComprobante", TipoDeComprobante);//
+                
+                command.Parameters.AddWithValue("Emisor", Nombre);//
+               command.Parameters.AddWithValue("RegimenFiscalReceptor", RegimenFiscal);//
+                command.Parameters.AddWithValue("RFCEmisor", Rfc);//
+                command.Parameters.AddWithValue("Receptor", NombreR);//
+                command.Parameters.AddWithValue("RFCReceptor", RfcR);//
+                command.Parameters.AddWithValue("UsoCFDI", UsoCFDI);//
+                command.Parameters.AddWithValue("Importe", Importe);//entes importe
+                command.Parameters.AddWithValue("Impuesto", Impuesto);//
+                command.Parameters.AddWithValue("TasaOCuota", TasaOCuota);//
+                command.Parameters.AddWithValue("TipoFactor", TipoFactor);//
+                command.Parameters.AddWithValue("SelloCFD", SelloCFD);
+                command.Parameters.AddWithValue("NoCertificadoSAT", NoCertificadoSAT);
+                command.Parameters.AddWithValue("RFcProvCertif", RfcProvCertif);
+                command.Parameters.AddWithValue("UUID", UUID);
+                command.Parameters.AddWithValue("FechaTimbrado", FechaTimbrado);
+                command.Parameters.AddWithValue("SelloSAT", SelloSAT);
+                command.Parameters.AddWithValue("IdEstatus", 2);
+                DateTime tiempo = DateTime.Parse(Fecha);
+                string conv = tiempo.ToString("yyyy-MM-dd");
+                command.Parameters.AddWithValue("FechaC", conv);
+                command.Parameters.AddWithValue("Año", tiempo.Year);
+                command.Parameters.AddWithValue("Mes", tiempo.Month);
+               
+                command.Parameters.AddWithValue("opcion", 5);
+                command.Parameters.AddWithValue("msg", "2");
+                command.Parameters.AddWithValue("Capto", 2);
+                command.ExecuteNonQuery();
+                conn.Close();
+               
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+
+
+
+        }
+        public void InserConceptsEMITIDAS(string cnx)
+        {
+            try
+            {
+
+
+                SqlConnection conn = new SqlConnection(cnx);
+
+                //search de las register
+                DataTable lastRegister = new DataTable();
+                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM FacturasEmitidas  ORDER BY IdFactura desc", conn);
+                using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+                {
+                    a.Fill(lastRegister);
+
+                }
+                int indice = int.Parse(lastRegister.Rows[0][0].ToString());
+
+                conn.Open();
+
+                SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("opcion", 6);
+                command.Parameters.AddWithValue("ClaveProdServ", ClaveProdServ);
+                // command.Parameters.AddWithValue("NoIdentificacion", NoIdentificacion);
+                command.Parameters.AddWithValue("Cantidad", Cantidad);
+                command.Parameters.AddWithValue("ClaveUnidad", ClaveUnidad);
+                command.Parameters.AddWithValue("Unidad", Unidad);
+                command.Parameters.AddWithValue("Descripcion", Descripcion);
+                command.Parameters.AddWithValue("ValorUnitario", ValorUnitario);
+                command.Parameters.AddWithValue("ImporteX", ImporteX);
+                command.Parameters.AddWithValue("DescuentoX", DescuentoX);
+                command.Parameters.AddWithValue("IdFactura", indice);
+
+                command.Parameters.AddWithValue("BaseTR", "0.00");
+                command.Parameters.AddWithValue("ImpuestoTR", "0.00");
+                command.Parameters.AddWithValue("TipoFactorTR", "0.00");
+                command.Parameters.AddWithValue("TasaOCuotaTR", "0.00");
+                command.Parameters.AddWithValue("ImporteTR", "0.00");
+                command.Parameters.AddWithValue("UUID", UUID);
+                command.Parameters.AddWithValue("@msg", "2");
+
+                command.Parameters.AddWithValue("@Capto", 2);
+                command.Parameters.AddWithValue("RFCEmisor", Rfc);
+                DateTime tiempo = DateTime.Parse(Fecha);
+                string conv = tiempo.ToString("yyyy-MM-dd");
+
+                command.Parameters.AddWithValue("Año", tiempo.Year);
+                command.Parameters.AddWithValue("Mes", tiempo.Month);
+                command.ExecuteNonQuery();
+                conn.Close();
+                //return Convert.ToInt32(command.Parameters["CodRetorno"].Value);
+            } catch (Exception ex)
+            { }
+
+        }
+
+
+
+
+
 
         public int InsertProvedores(string cnx, string nameTable, string letra)
         {

@@ -52,6 +52,7 @@ namespace EKPolizaGastos
         private int TotalRegistrosEnNuevaTabla;
         public string ejercicio;
         private string NoEmpresa;
+        private string nombreBase;
         #endregion
 
         #region Methods
@@ -131,11 +132,19 @@ namespace EKPolizaGastos
                 ReadSATFactura readSATFactura = new ReadSATFactura();
 
                 TotalRegistrosEnNuevaTabla = readSATFactura.Scan(path, cnx, nameFile);
+
+
+                readSATFactura.ToExcel(nameFile, path, cnx, txtpath.Text);
+                LoadCompaniesProperties();
+
             }
             else
             {
-                nameFile = lblItemSeleted.Text.Substring(0, nameFile.Length);
-                TotalRegistrosEnNuevaTabla = readSatNominas.Scan(path, cnx, nameFile);
+                nombreBase = lblItemSeleted.Text.Substring(0, nameFile.Length);
+                readSatNominas.NombreBase = nombreBase;
+                TotalRegistrosEnNuevaTabla = readSatNominas.Scan(path, cnx, nombreBase);
+
+                readSatNominas.ToExcel(nameFile, path, cnx, txtpath.Text);
 
             }
 
@@ -552,12 +561,14 @@ namespace EKPolizaGastos
             circularProgress1.Visible = false;
             circularProgress1.IsRunning = false;
 
+
+
+          
             MessageBoxEx.EnableGlass = false;
             MessageBoxEx.Show("Numero de XML's Capturados: " + TotalRegistrosEnNuevaTabla.ToString() + "",
                 "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            readSATFactura.ToExcel(nameFile, path,cnx,txtpath.Text);
-            LoadCompaniesProperties();
+
 
             listXML.Items.Clear();
             listXML2.Items.Clear();

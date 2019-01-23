@@ -2,6 +2,7 @@
 
 namespace EKPolizaGastos.Common.Classes
 {
+   
 
     #region Libraries (Librerias)
     using System;
@@ -9,13 +10,20 @@ namespace EKPolizaGastos.Common.Classes
     using System.Data.SqlClient;
     using System.IO;
     using System.Xml;
+    using ClosedXML.Excel;
+
     #endregion
 
 
     public class ReadSatNominas
     {
+        #region Atrributes (Atributos)
+        ReadSATFactura readSATFactura = new ReadSATFactura();
+        #endregion
+
 
         #region Properties (Propiedades)
+        public string NombreBase;
         //comprobante
         private string xsi_schemaLocation;
         private string Version;
@@ -154,25 +162,13 @@ namespace EKPolizaGastos.Common.Classes
 
         public int Scan(string path, string cnx, string nameTable)//ruta carpeta descomprimida + conexion + el nombre de la tabla que es el nombre de la carpeta
         {
-            int total;
-
+            int total=0;
+            string nameTables = NombreBase;
             //Documento
             XmlDocument VarDocumentoXML = new XmlDocument();
 
 
             string[] archivos = Directory.GetFiles(path, "*.XML");
-
-            SqlConnection conn = new SqlConnection(cnx);
-
-            //TRUNCATE TABLE NOMINAS
-            conn.Open();
-            SqlCommand command = new SqlCommand("SP_NominasInsert", conn);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.AddWithValue("opcion", 1);
-            command.Parameters.AddWithValue("@msg", "2");
-            command.Parameters.AddWithValue("@Capto", 2);
-            command.ExecuteNonQuery();
-            conn.Close();
 
 
 
@@ -180,27 +176,22 @@ namespace EKPolizaGastos.Common.Classes
             foreach (var file in archivos)
             {
                 VarDocumentoXML.Load(file);
-
-                //Ruta
-                //string file = @"T:\CFDIS_Emitidos\MRO\MRO_EMI_ABR2018\A9CD77F7-4C55-4905-BCB1-18FB53BD9385.xml";
-                // VarDocumentoXML.Load(file);
-                //Nombres de Espacio
-                XmlNamespaceManager VarManager = new XmlNamespaceManager(VarDocumentoXML.NameTable);
-                VarManager.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
-                VarManager.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
-                VarManager.AddNamespace("implocal", "http://www.sat.gob.mx/implocal");
-                VarManager.AddNamespace("xs", "http://www.w3.org/2001/XMLSchema");
-                VarManager.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
-
-               
+                //total = total + 1;
+                
                 XmlNodeList xFacturaV = VarDocumentoXML.GetElementsByTagName("cfdi:Comprobante");//cfdi:comprobante
                 foreach (XmlElement nodo in xFacturaV)
                 {
                     Serie = nodo.GetAttribute("Serie");
                 }
-
-                    if (Serie.Equals("NOMINA"))
+               
+                if (Serie.Equals("NOMINA"))
                     {
+                    XmlNamespaceManager VarManager = new XmlNamespaceManager(VarDocumentoXML.NameTable);
+                    VarManager.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
+                    VarManager.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
+                    VarManager.AddNamespace("implocal", "http://www.sat.gob.mx/implocal");
+                    VarManager.AddNamespace("xs", "http://www.w3.org/2001/XMLSchema");
+                    VarManager.AddNamespace("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 
                     //Limpiar Variables
                     #region Limpiar variables
@@ -280,104 +271,118 @@ namespace EKPolizaGastos.Common.Classes
 
 
                     #endregion
-
-
-
-                    Version = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Version", VarManager).InnerText;
-                    Serie = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Serie", VarManager).InnerText;
-                    Folio = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Folio", VarManager).InnerText;
-                    Fecha = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Fecha", VarManager).InnerText;
-                    Sello = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Sello", VarManager).InnerText;
-                    FormaPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@FormaPago", VarManager).InnerText;
-                    NoCertificado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@NoCertificado", VarManager).InnerText;
-                    Certificado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Certificado", VarManager).InnerText;
-                    SubTotal = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@SubTotal", VarManager).InnerText;
-                    Total = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Total", VarManager).InnerText;
-                    TipoDeComprobante = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@TipoDeComprobante", VarManager).InnerText;
-                    MetodoDePago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@MetodoPago", VarManager).InnerText;
-                    LugarExpedicion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@LugarExpedicion", VarManager).InnerText;
-
                     string PathNomina = "";
-                    string Nomina;
-                    int i = 0;
-                    XmlNodeList xFactura = VarDocumentoXML.GetElementsByTagName("cfdi:Comprobante");//cfdi:comprobante
-                    foreach (XmlElement nodo in xFactura)
+                    string Nomina="";
+
+
+                    try
                     {
-                        PathNomina = nodo.GetAttribute("xmlns:nomina" + i.ToString() + "");
-                        for (i = 0; i < 100; i++)
+                        Version = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Version", VarManager).InnerText;
+                        Serie = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Serie", VarManager).InnerText;
+                        Folio = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Folio", VarManager).InnerText;
+                        Fecha = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Fecha", VarManager).InnerText;
+                        Sello = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Sello", VarManager).InnerText;
+                        FormaPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@FormaPago", VarManager).InnerText;
+                        NoCertificado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@NoCertificado", VarManager).InnerText;
+                        Certificado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Certificado", VarManager).InnerText;
+                        SubTotal = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@SubTotal", VarManager).InnerText;
+                        Total = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Total", VarManager).InnerText;
+                        TipoDeComprobante = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@TipoDeComprobante", VarManager).InnerText;
+                        MetodoDePago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@MetodoPago", VarManager).InnerText;
+                        LugarExpedicion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@LugarExpedicion", VarManager).InnerText;
+
+                        Emisor_Rfc = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Emisor/@Rfc", VarManager).InnerText;
+                        Emisor_Nombre = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Emisor/@Nombre", VarManager).InnerText;
+                        Emisor_RegimenFiscal = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Emisor/@RegimenFiscal", VarManager).InnerText;
+
+                        Receptor_Rfc = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Receptor/@Rfc", VarManager).InnerText;
+                        Receptor_Nombre = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Receptor/@Nombre", VarManager).InnerText;
+                        Receptor_UsoCFDI = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Receptor/@UsoCFDI", VarManager).InnerText;
+
+                     
+                        Moneda = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Moneda", VarManager).InnerText;
+
+                        int i = 0;
+                        XmlNodeList xFactura = VarDocumentoXML.GetElementsByTagName("cfdi:Comprobante");//cfdi:comprobante
+                        foreach (XmlElement nodo in xFactura)
                         {
-                            if (PathNomina == "")
+                            PathNomina = nodo.GetAttribute("xmlns:nomina" + i.ToString() + "");
+                            for (i = 0; i < 100; i++)
                             {
-                                PathNomina = nodo.GetAttribute("xmlns:nomina" + i.ToString() + "");
+                                if (PathNomina == "")
+                                {
+                                    PathNomina = nodo.GetAttribute("xmlns:nomina" + i.ToString() + "");
 
+                                }
+                                else
+                                {
+                                    i = i - 1;
+                                    break;
+                                }
                             }
-                            else
-                            {
-                                i = i - 1;
-                                break;
-                            }
+
                         }
+                        Nomina = "nomina" + i.ToString();
+                        VarManager.AddNamespace("nomina" + i.ToString(), PathNomina);
 
+                      
+                        FechaFinalPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@FechaFinalPago", VarManager).InnerText;
+                        FechaInicialPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@FechaInicialPago", VarManager).InnerText;
+                        FechaPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@FechaPago", VarManager).InnerText;
+                        NumDiasPagados = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@NumDiasPagados", VarManager).InnerText;
+                        TipoNomina = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@TipoNomina", VarManager).InnerText;
+                       
+                        Complemento_Version = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@Version", VarManager).InnerText;
+
+                        RegistroPatronal = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Emisor/@RegistroPatronal", VarManager).InnerText;
+
+                        Antiguedad = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Antigüedad", VarManager).InnerText;
+                        Banco = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Banco", VarManager).InnerText;
+                        ClaveEntFed = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@ClaveEntFed", VarManager).InnerText;
+                        CuentaBancaria = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@CuentaBancaria", VarManager).InnerText;
+                        Curp = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Curp", VarManager).InnerText;
+                        Departamento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Departamento", VarManager).InnerText;
+                        FechaInicioRelLaboral = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@FechaInicioRelLaboral", VarManager).InnerText;
+                        NumEmpleado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@NumEmpleado", VarManager).InnerText;
+                        NumSeguridadSocial = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@NumSeguridadSocial", VarManager).InnerText;
+                        PeriodicidadPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@PeriodicidadPago", VarManager).InnerText;
+                        Puesto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Puesto", VarManager).InnerText;
+                        RiesgoPuesto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@RiesgoPuesto", VarManager).InnerText;
+                        SalarioBaseCotApor = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@SalarioBaseCotApor", VarManager).InnerText;
+                        SalarioDiarioIntegrado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@SalarioDiarioIntegrado", VarManager).InnerText;
+                        Sindicalizado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Sindicalizado", VarManager).InnerText;
+                        TipoContrato = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@TipoContrato", VarManager).InnerText;
+                        TipoJornada = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@TipoJornada", VarManager).InnerText;
+                        TipoRegimen = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@TipoRegimen", VarManager).InnerText;
+
+                        TotalDeducciones = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@TotalDeducciones", VarManager).InnerText;
+                        TotalPercepciones = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@ TotalPercepciones", VarManager).InnerText;
+
+
+                        TotalExento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/@TotalExento", VarManager).InnerText;
+                        TotalGravado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/@TotalGravado", VarManager).InnerText;
+                        TotalSueldos = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/@TotalSueldos", VarManager).InnerText;
+
+                        DescuentoR = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Descuento", VarManager).InnerText;
                     }
-                    Nomina = "nomina" + i.ToString();
-                    VarManager.AddNamespace("nomina" + i.ToString(), PathNomina);
+                    catch (Exception)
+                    {
 
+                        
+                    }
+                    //Existen unas nominas que no graban Impuestos Retenidos
+                    try
+                    {
+                        TotalImpuestosRetenidos = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/@TotalImpuestosRetenidos", VarManager).InnerText;
+                        TotalOtrasDeducciones = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/@TotalOtrasDeducciones", VarManager).InnerText;
+                    }
+                    catch (Exception)
+                    {
 
-
-
-                    DescuentoR = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Descuento", VarManager).InnerText;
-                    Moneda = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/@Moneda", VarManager).InnerText;
-
-
-                    Emisor_Rfc = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Emisor/@Rfc", VarManager).InnerText;
-                    Emisor_Nombre = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Emisor/@Nombre", VarManager).InnerText;
-                    Emisor_RegimenFiscal = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Emisor/@RegimenFiscal", VarManager).InnerText;
-
-                    Receptor_Rfc = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Receptor/@Rfc", VarManager).InnerText;
-                    Receptor_Nombre = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Receptor/@Nombre", VarManager).InnerText;
-                    Receptor_UsoCFDI = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Receptor/@UsoCFDI", VarManager).InnerText;
-
-
-
-                    FechaFinalPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@FechaFinalPago", VarManager).InnerText;
-                    FechaInicialPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@FechaInicialPago", VarManager).InnerText;
-                    FechaPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@FechaPago", VarManager).InnerText;
-                    NumDiasPagados = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@NumDiasPagados", VarManager).InnerText;
-                    TipoNomina = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@TipoNomina", VarManager).InnerText;
-                    TotalDeducciones = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@TotalDeducciones", VarManager).InnerText;
-                    TotalPercepciones = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@ TotalPercepciones", VarManager).InnerText;
-                    Complemento_Version = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/@Version", VarManager).InnerText;
-
-                    RegistroPatronal = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Emisor/@RegistroPatronal", VarManager).InnerText;
-
-                    Antiguedad = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Antigüedad", VarManager).InnerText;
-                    Banco = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Banco", VarManager).InnerText;
-                    ClaveEntFed = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@ClaveEntFed", VarManager).InnerText;
-                    CuentaBancaria = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@CuentaBancaria", VarManager).InnerText;
-                    Curp = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Curp", VarManager).InnerText;
-                    Departamento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Departamento", VarManager).InnerText;
-                    FechaInicioRelLaboral = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@FechaInicioRelLaboral", VarManager).InnerText;
-                    NumEmpleado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@NumEmpleado", VarManager).InnerText;
-                    NumSeguridadSocial = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@NumSeguridadSocial", VarManager).InnerText;
-                    PeriodicidadPago = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@PeriodicidadPago", VarManager).InnerText;
-                    Puesto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Puesto", VarManager).InnerText;
-                    RiesgoPuesto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@RiesgoPuesto", VarManager).InnerText;
-                    SalarioBaseCotApor = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@SalarioBaseCotApor", VarManager).InnerText;
-                    SalarioDiarioIntegrado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@SalarioDiarioIntegrado", VarManager).InnerText;
-                    Sindicalizado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@Sindicalizado", VarManager).InnerText;
-                    TipoContrato = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@TipoContrato", VarManager).InnerText;
-                    TipoJornada = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@TipoJornada", VarManager).InnerText;
-                    TipoRegimen = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Receptor/@TipoRegimen", VarManager).InnerText;
-
-
-                    TotalExento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/@TotalExento", VarManager).InnerText;
-                    TotalGravado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/@TotalGravado", VarManager).InnerText;
-                    TotalSueldos = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/@TotalSueldos", VarManager).InnerText;
-
-
-
-                    TotalImpuestosRetenidos = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/@TotalImpuestosRetenidos", VarManager).InnerText;
-                    TotalOtrasDeducciones = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/@TotalOtrasDeducciones", VarManager).InnerText;
+                       
+                    }
+                  
+                   
 
 
 
@@ -399,148 +404,162 @@ namespace EKPolizaGastos.Common.Classes
 
                     //ciclos para percepciones , deducciones y conceptos
 
-                    //XmlNodeList xConcepto = VarDocumentoXML.GetElementsByTagName("cfdi:Concepto");//cfdi:comprobante
-                    //foreach (XmlElement nodo in xConcepto)
-                    //{
-                    //    ClaveProdServ = string.Empty;
-                    //    Cantidad = string.Empty;
-                    //    CLaveUnidad = string.Empty;
-                    //    Descripcion = string.Empty;
-                    //    ValorUnitario = string.Empty;
-                    //    Importe = string.Empty;
-                    //    Descuento = string.Empty;
+                    XmlNodeList xConcepto = VarDocumentoXML.GetElementsByTagName("cfdi:Concepto");//cfdi:comprobante
+                    foreach (XmlElement nodo in xConcepto)
+                    {
+                        ClaveProdServ = string.Empty;
+                        Cantidad = string.Empty;
+                        CLaveUnidad = string.Empty;
+                        Descripcion = string.Empty;
+                        ValorUnitario = string.Empty;
+                        Importe = string.Empty;
+                        Descuento = string.Empty;
 
 
 
-                    //    ClaveProdServ = nodo.GetAttribute("ClaveProdServ");
-                    //    Cantidad = nodo.GetAttribute("Cantidad");
-                    //    CLaveUnidad = nodo.GetAttribute("ClaveUnidad");
-                    //    Descripcion = nodo.GetAttribute("Descripcion");
-                    //    ValorUnitario = nodo.GetAttribute("ValorUnitario");
-                    //    Importe = nodo.GetAttribute("Importe");
-                    //    Descuento = nodo.GetAttribute("Descuento");
+                        ClaveProdServ = nodo.GetAttribute("ClaveProdServ");
+                        Cantidad = nodo.GetAttribute("Cantidad");
+                        CLaveUnidad = nodo.GetAttribute("ClaveUnidad");
+                        Descripcion = nodo.GetAttribute("Descripcion");
+                        ValorUnitario = nodo.GetAttribute("ValorUnitario");
+                        Importe = nodo.GetAttribute("Importe");
+                        Descuento = nodo.GetAttribute("Descuento");
 
 
-                    //    //Inyeccion a NominasConcepto
-                    //    InsertDataConcept(cnx);
+                        //Inyeccion a NominasConcepto
+                        InsertDataConcept(cnx);
 
 
-                    //}
-
-
-
-                    //string Impuestos;
-                    //XmlDocument xmlImpuestos = new XmlDocument();
-                    //Impuestos = string.Empty;
-
-                    //XmlNodeList VarConceptos =
-                    //       VarDocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones", VarManager);
-
-
-                    //XmlNodeList VarConceptos2 =
-                    //     VarDocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones", VarManager);
-
-
-                    //int cuantos;
-                    //cuantos = VarConceptos.Item(0).ChildNodes.Count;
-
-                    //int cuantos2;
-                    //cuantos2 = VarConceptos2.Item(0).ChildNodes.Count;
+                        }
 
 
 
-                    //try
-                    //{
-                    //    //Deducciones
-                    //    if (cuantos > 0)
-                    //    {
-                    //        for (int nodosHijos = 1; nodosHijos <= cuantos; nodosHijos++)
-                    //        {
-                    //            D_Clave = string.Empty;
-                    //            D_Concepto = string.Empty;
-                    //            D_Importe = string.Empty;
-                    //            D_TipoDeduccion = string.Empty;
+                    string Impuestos;
+                    XmlDocument xmlImpuestos = new XmlDocument();
+                    Impuestos = string.Empty;
+                    int cuantos = 0;
+                    int cuantos2 = 0;
 
-                    //            if (nodosHijos == 1)
-                    //            {
-                    //                D_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@Clave", VarManager).InnerText;
-                    //                D_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@Concepto", VarManager).InnerText;
-                    //                D_Importe = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@Importe", VarManager).InnerText;
-                    //                D_TipoDeduccion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@TipoDeduccion", VarManager).InnerText;
+                    try
+                    {
 
-                    //                InsertDataDeducciones(cnx);
-                    //            }
-                    //            else
-                    //            {
-
-                    //                D_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@Clave", VarManager).InnerText;
-                    //                D_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@Concepto", VarManager).InnerText;
-                    //                D_Importe = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@Importe", VarManager).InnerText;
-                    //                D_TipoDeduccion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@TipoDeduccion", VarManager).InnerText;
-                    //                InsertDataDeducciones(cnx);
-                    //            }
+                        XmlNodeList VarConceptos =
+                               VarDocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones", VarManager);
 
 
-                    //        }
-                    //    }
-
-                    //    //Percepciones
-                    //    if (cuantos2 > 0)
-                    //    {
-                    //        for (int nodosHijos2 = 1; nodosHijos2 <= cuantos2; nodosHijos2++)
-                    //        {
-                    //            P_Clave = string.Empty;
-                    //            P_Concepto = string.Empty;
-                    //            P_ImporteExento = string.Empty;
-                    //            P_ImporteGravado = string.Empty;
-                    //            P_TipoPercepcion = string.Empty;
-
-                    //            if (nodosHijos2 == 1)
-                    //            {
-                    //                P_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@Clave", VarManager).InnerText;
-                    //                P_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@Concepto", VarManager).InnerText;
-                    //                P_ImporteExento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@ImporteExento", VarManager).InnerText;
-                    //                P_ImporteGravado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@ImporteGravado", VarManager).InnerText;
-                    //                P_TipoPercepcion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@TipoPercepcion", VarManager).InnerText;
-                    //                InsertDataPercepciones(cnx);
-
-                    //            }
-                    //            else
-                    //            {
-
-
-                    //                P_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@Clave", VarManager).InnerText;
-                    //                P_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@Concepto", VarManager).InnerText;
-                    //                P_ImporteExento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@ImporteExento", VarManager).InnerText;
-                    //                P_ImporteGravado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@ImporteGravado", VarManager).InnerText;
-                    //                P_TipoPercepcion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@TipoPercepcion", VarManager).InnerText;
-                    //                InsertDataPercepciones(cnx);
-                    //            }
-
-
-                    //        }
-                    //    }
+                        XmlNodeList VarConceptos2 =
+                             VarDocumentoXML.SelectNodes("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones", VarManager);
 
 
 
+                        cuantos = VarConceptos.Item(0).ChildNodes.Count;
 
 
-                    //}
-                    //catch (Exception)
-                    //{
+                        cuantos2 = VarConceptos2.Item(0).ChildNodes.Count;
 
-                    //    throw;
-                    //}
+                    }
+                    catch (Exception)
+                    {
+
+                       
+                    }
+
+
+                    try
+                    {
+                        //Deducciones
+                        if (cuantos > 0)
+                        {
+                            for (int nodosHijos = 1; nodosHijos <= cuantos; nodosHijos++)
+                            {
+                                D_Clave = string.Empty;
+                                D_Concepto = string.Empty;
+                                D_Importe = string.Empty;
+                                D_TipoDeduccion = string.Empty;
+
+                                if (nodosHijos == 1)
+                                {
+                                    D_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@Clave", VarManager).InnerText;
+                                    D_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@Concepto", VarManager).InnerText;
+                                    D_Importe = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@Importe", VarManager).InnerText;
+                                    D_TipoDeduccion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion/@TipoDeduccion", VarManager).InnerText;
+
+                                    InsertDataDeducciones(cnx);
+                                }
+                                else
+                                {
+
+                                    D_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@Clave", VarManager).InnerText;
+                                    D_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@Concepto", VarManager).InnerText;
+                                    D_Importe = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@Importe", VarManager).InnerText;
+                                    D_TipoDeduccion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Deducciones/" + Nomina + ":Deduccion[" + nodosHijos + "]/@TipoDeduccion", VarManager).InnerText;
+                                    InsertDataDeducciones(cnx);
+                                }
+
+
+                            }
+                        }
+
+                        ////Percepciones
+                        if (cuantos2 > 0)
+                        {
+                            for (int nodosHijos2 = 1; nodosHijos2 <= cuantos2; nodosHijos2++)
+                            {
+                                P_Clave = string.Empty;
+                                P_Concepto = string.Empty;
+                                P_ImporteExento = string.Empty;
+                                P_ImporteGravado = string.Empty;
+                                P_TipoPercepcion = string.Empty;
+
+                                if (nodosHijos2 == 1)
+                                {
+                                    P_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@Clave", VarManager).InnerText;
+                                    P_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@Concepto", VarManager).InnerText;
+                                    P_ImporteExento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@ImporteExento", VarManager).InnerText;
+                                    P_ImporteGravado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@ImporteGravado", VarManager).InnerText;
+                                    P_TipoPercepcion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion/@TipoPercepcion", VarManager).InnerText;
+                                    InsertDataPercepciones(cnx);
+
+                                }
+                                else
+                                {
+
+
+                                    P_Clave = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@Clave", VarManager).InnerText;
+                                    P_Concepto = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@Concepto", VarManager).InnerText;
+                                    P_ImporteExento = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@ImporteExento", VarManager).InnerText;
+                                    P_ImporteGravado = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@ImporteGravado", VarManager).InnerText;
+                                    P_TipoPercepcion = VarDocumentoXML.SelectSingleNode("/cfdi:Comprobante/cfdi:Complemento/" + Nomina + ":Nomina/" + Nomina + ":Percepciones/" + Nomina + ":Percepcion[" + nodosHijos2 + "]/@TipoPercepcion", VarManager).InnerText;
+                                    InsertDataPercepciones(cnx);
+                                }
+
+
+                            }
+                        }
+
+
+                    }
+                    catch (Exception)
+                    {
+
+                        
+                    }
 
                 }
+                else
+                {
+                    
+                    readSATFactura.Emitidas(file,cnx);
+                    
+                }
+             
 
-               
-
+                Serie = string.Empty;
 
             }
 
 
-            //#region Crear Tabla
+            #region Crear Tabla
             //conn.Open();
             //SqlCommand commandCreate = new SqlCommand("USE SEMP_SAT " +
             //                  "SELECT * INTO BASENominas FROM Nominas", conn);
@@ -549,12 +568,12 @@ namespace EKPolizaGastos.Common.Classes
 
             //conn.Open();
             //SqlCommand commandRename = new SqlCommand("USE SEMP_SAT " +
-            //                  "EXEC SP_RENAME 'BASENominas' , '" + nameTable + "'", conn);
+            //                  "EXEC SP_RENAME 'BASENominas' , '" + nameTables + "'", conn);
             //commandRename.ExecuteNonQuery();
             //conn.Close();
 
 
-            ////SE hace esto 3 veces para la tabla de deducciones, percepciones y conceptos de la nomina
+            //////SE hace esto 3 veces para la tabla de deducciones, percepciones y conceptos de la nomina
             //conn.Open();
             //SqlCommand commandCreateC = new SqlCommand("USE SEMP_SAT " +
             //                  "SELECT * INTO BASENominasDecucciones FROM DeduccionesNominas", conn);
@@ -563,10 +582,10 @@ namespace EKPolizaGastos.Common.Classes
 
             //conn.Open();
             //SqlCommand commandRenameC = new SqlCommand("USE SEMP_SAT " +
-            //                  "EXEC SP_RENAME 'BASENominasDeducciones' , '" + nameTable + "_Deducciones'", conn);
+            //                  "EXEC SP_RENAME 'BASENominasDeducciones' , '" + nameTables + "_Deducciones'", conn);
             //commandRenameC.ExecuteNonQuery();
             //conn.Close();
-            ////
+            //////
             //conn.Open();
             //SqlCommand commandCreateC2 = new SqlCommand("USE SEMP_SAT " +
             //                  "SELECT * INTO BASENominasPercepciones FROM PercepcionesNominas", conn);
@@ -575,11 +594,11 @@ namespace EKPolizaGastos.Common.Classes
 
             //conn.Open();
             //SqlCommand commandRenameC3 = new SqlCommand("USE SEMP_SAT " +
-            //                  "EXEC SP_RENAME 'BASENominasPercepciones' , '" + nameTable + "_Percepciones'", conn);
+            //                  "EXEC SP_RENAME 'BASENominasPercepciones' , '" + nameTables + "_Percepciones'", conn);
             //commandRenameC3.ExecuteNonQuery();
             //conn.Close();
 
-            ////
+            //////
             //conn.Open();
             //SqlCommand commandCreateC4 = new SqlCommand("USE SEMP_SAT " +
             //                  "SELECT * INTO BASENominasConceptos FROM ConceptosNominas", conn);
@@ -588,40 +607,41 @@ namespace EKPolizaGastos.Common.Classes
 
             //conn.Open();
             //SqlCommand commandRenameC5 = new SqlCommand("USE SEMP_SAT " +
-            //                  "EXEC SP_RENAME 'BASENominasConceptos' , '" + nameTable + "_Conceptos'", conn);
+            //                  "EXEC SP_RENAME 'BASENominasConceptos' , '" + nameTables + "_Conceptos'", conn);
             //commandRenameC5.ExecuteNonQuery();
             //conn.Close();
 
 
             //////CLON DE TABLE COMPROBANTES AND RETURN ROWS COPIED
 
-            //conn.Open();
-            //SqlCommand commandClear = new SqlCommand("SP_NominasInsert", conn);
-            //commandClear.CommandType = CommandType.StoredProcedure;
-            //commandClear.Parameters.AddWithValue("opcion", 3);
-            //commandClear.Parameters.AddWithValue("msg", "2");
-            //SqlParameter param = new SqlParameter("Capto", SqlDbType.Int);
-            //param.Direction = ParameterDirection.Output;
-            //commandClear.Parameters.Add(param);
 
-            //commandClear.ExecuteNonQuery();
-            //total = int.Parse(param.Value.ToString());
 
-            //#endregion
+            #endregion
 
-            return total=1;
+
+
+           
+            return total;
         }
 
         private void InsertDataPercepciones(string cnx)
         {
-            using (SqlConnection conn = new SqlConnection(cnx))
+            try
             {
+                //using (SqlConnection conn = new SqlConnection(cnx))
+                //{
 
+
+                SqlConnection conn = new SqlConnection(cnx);
+
+                conn.Open();
+                SqlCommand command = new SqlCommand("SP_NominasInsert", conn);
+                command.CommandType = CommandType.StoredProcedure;
 
 
                 //search de las register
                 DataTable lastRegister = new DataTable();
-                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM Nomina  ORDER BY IdNomina desc", conn);
+                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM Nominas  ORDER BY IdNomina desc", conn);
                 using (SqlDataAdapter a = new SqlDataAdapter(cmd))
                 {
                     a.Fill(lastRegister);
@@ -629,11 +649,7 @@ namespace EKPolizaGastos.Common.Classes
                 }
                 int indice = int.Parse(lastRegister.Rows[0][0].ToString());
 
-                conn.Open();
-
-                SqlCommand command = new SqlCommand("SP_NominasInsert", conn);
-                command.CommandType = CommandType.StoredProcedure;
-
+             
                 command.Parameters.AddWithValue("opcion", 4);
                 command.Parameters.AddWithValue("IdNomina", indice);
 
@@ -643,6 +659,8 @@ namespace EKPolizaGastos.Common.Classes
                 DateTime tiempo = DateTime.Parse(Fecha);
                 string conv = tiempo.ToString("yyyy-MM-dd");
                 command.Parameters.AddWithValue("FechaConvert", conv);
+                command.Parameters.AddWithValue("Año", tiempo.Year);
+                command.Parameters.AddWithValue("Mes", tiempo.Month);
 
 
                 command.Parameters.AddWithValue("Clave", P_Clave);
@@ -655,33 +673,43 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("@Capto", 2);
 
                 command.ExecuteNonQuery();
-
+                conn.Close();
                 //return Convert.ToInt32(command.Parameters["CodRetorno"].Value);
+            }
+            catch(Exception ex)
+            {
+
             }
         }
 
         private void InsertDataDeducciones(string cnx)
         {
-            using (SqlConnection conn = new SqlConnection(cnx))
+            try
             {
+                //using (SqlConnection conn = new SqlConnection(cnx))
+                //{
+
+
+                SqlConnection conn = new SqlConnection(cnx);
+
+                conn.Open();
+                SqlCommand command = new SqlCommand("SP_NominasInsert", conn);
+                command.CommandType = CommandType.StoredProcedure;
 
 
 
                 //search de las register
                 DataTable lastRegister = new DataTable();
-                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM Nomina  ORDER BY IdNomina desc", conn);
+                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM Nominas  ORDER BY IdNomina desc", conn);
                 using (SqlDataAdapter a = new SqlDataAdapter(cmd))
                 {
+                    lastRegister.Clear();
                     a.Fill(lastRegister);
 
                 }
                 int indice = int.Parse(lastRegister.Rows[0][0].ToString());
 
-                conn.Open();
-
-                SqlCommand command = new SqlCommand("SP_NominasInsert", conn);
-                command.CommandType = CommandType.StoredProcedure;
-
+              
                 command.Parameters.AddWithValue("opcion", 5);
                 command.Parameters.AddWithValue("IdNomina", indice);
 
@@ -691,7 +719,8 @@ namespace EKPolizaGastos.Common.Classes
                 DateTime tiempo = DateTime.Parse(Fecha);
                 string conv = tiempo.ToString("yyyy-MM-dd");
                 command.Parameters.AddWithValue("FechaConvert", conv);
-
+                command.Parameters.AddWithValue("Año", tiempo.Year);
+                command.Parameters.AddWithValue("Mes", tiempo.Month);
 
                 command.Parameters.AddWithValue("Clave", D_Clave);
                 command.Parameters.AddWithValue("Concepto", D_Concepto);
@@ -702,35 +731,44 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("@Capto", 2);
 
                 command.ExecuteNonQuery();
-
+                conn.Close();
                 //return Convert.ToInt32(command.Parameters["CodRetorno"].Value);
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
         //Registro de Conceptos de Nomina
         private void InsertDataConcept(string cnx)
         {
-            using (SqlConnection conn = new SqlConnection(cnx))
+            try
             {
+                //using (SqlConnection conn = new SqlConnection(cnx))
+                //{
 
+
+                SqlConnection conn = new SqlConnection(cnx);
+
+                conn.Open();
+                SqlCommand command = new SqlCommand("SP_NominasInsert", conn);
+                command.CommandType = CommandType.StoredProcedure;
 
 
                 //search de las register
                 DataTable lastRegister = new DataTable();
-                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM Nomina  ORDER BY IdNomina desc", conn);
+                SqlCommand cmd = new SqlCommand("SELECT top(1)* FROM Nominas  ORDER BY IdNomina desc", conn);
                 using (SqlDataAdapter a = new SqlDataAdapter(cmd))
                 {
+                    lastRegister.Clear();
                     a.Fill(lastRegister);
 
                 }
                 int indice = int.Parse(lastRegister.Rows[0][0].ToString());
 
-                conn.Open();
-
-                SqlCommand command = new SqlCommand("SP_NominasInsert", conn);
-                command.CommandType = CommandType.StoredProcedure;
-
-                command.Parameters.AddWithValue("opcion", 5);
+             
+                command.Parameters.AddWithValue("opcion", 6);
                 command.Parameters.AddWithValue("IdNomina", indice);
 
                 command.Parameters.AddWithValue("UUID", UUID);
@@ -739,7 +777,8 @@ namespace EKPolizaGastos.Common.Classes
                 DateTime tiempo = DateTime.Parse(Fecha);
                 string conv = tiempo.ToString("yyyy-MM-dd");
                 command.Parameters.AddWithValue("FechaConvert", conv);
-
+                command.Parameters.AddWithValue("Año", tiempo.Year);
+                command.Parameters.AddWithValue("Mes", tiempo.Month);
 
                 command.Parameters.AddWithValue("ClaveProdServ", ClaveProdServ);
                 command.Parameters.AddWithValue("Cantidad", Cantidad);
@@ -753,10 +792,12 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("@Capto", 2);
 
                 command.ExecuteNonQuery();
-
-
-
+                conn.Close();
                 //return Convert.ToInt32(command.Parameters["CodRetorno"].Value);
+            }
+            catch(Exception ex)
+            {
+                Console.Write("Error AQUI:" + ex.Message);
             }
         }
 
@@ -783,65 +824,66 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("Folio", Folio);// 
                 command.Parameters.AddWithValue("Fecha", Fecha);// 
                 command.Parameters.AddWithValue("Sello", Sello);// 
-                //command.Parameters.AddWithValue("FormaPago", FormaPago);//
-                //command.Parameters.AddWithValue("NoCertificado", NoCertificado);//
-                //command.Parameters.AddWithValue("Certificado", Certificado);// 
-                //command.Parameters.AddWithValue("SubTotal", SubTotal);// 
-                //command.Parameters.AddWithValue("Total", Total);// 
-                //command.Parameters.AddWithValue("TipoDeComprobante", TipoDeComprobante);//
-                //command.Parameters.AddWithValue("MetodoPago", MetodoDePago);//
-                //command.Parameters.AddWithValue("LugarExpedicion", LugarExpedicion);//
-                //command.Parameters.AddWithValue("Descuento", DescuentoR);// 
-                //command.Parameters.AddWithValue("Moneda", Moneda);// 
-                //command.Parameters.AddWithValue("[Emisor_Rfc]", Emisor_Rfc);//
-                //command.Parameters.AddWithValue("[Emisor_Nombre]", Emisor_Nombre);//[]
-                //command.Parameters.AddWithValue("[Emisor_RegimenFiscal]", Emisor_RegimenFiscal);//
-                //command.Parameters.AddWithValue("[Receptor_Rfc]", Receptor_Rfc);// 
-                //command.Parameters.AddWithValue("[Receptor_Nombre]", Receptor_Nombre);//
-                //command.Parameters.AddWithValue("[Receptor_UsoCFDI]", Receptor_UsoCFDI);// 
-                //command.Parameters.AddWithValue("FechaFinalPago", FechaFinalPago);//
-                //command.Parameters.AddWithValue("FechaInicialPago", FechaInicialPago);// 
-                //command.Parameters.AddWithValue("FechaPago", FechaPago);// 
-                //command.Parameters.AddWithValue("NumDiasPagados", NumDiasPagados);// 
-                //command.Parameters.AddWithValue("TipoNomina", TipoNomina);// 
-                //command.Parameters.AddWithValue("TotalDeducciones", TotalDeducciones);// 
-                //command.Parameters.AddWithValue("TotalPercepciones", TotalPercepciones);// 
-                //command.Parameters.AddWithValue("[Complemento_Version]", Complemento_Version);//
-                //command.Parameters.AddWithValue("RegistroPatronal", RegistroPatronal);//
-                //command.Parameters.AddWithValue("Antiguedad", Antiguedad);//
-                //command.Parameters.AddWithValue("Banco", Banco);// 
-                //command.Parameters.AddWithValue("ClaveEntFed", ClaveEntFed);//
-                //command.Parameters.AddWithValue("CuentaBancaria", CuentaBancaria);//
-                //command.Parameters.AddWithValue("Curp", Curp);//
-                //command.Parameters.AddWithValue("Departamento", Departamento);//
-                //command.Parameters.AddWithValue("FechaInicioRelLaboral", FechaInicioRelLaboral);//
-                //command.Parameters.AddWithValue("NumEmpleado", NumEmpleado);// 
-                //command.Parameters.AddWithValue("NumSeguridadSocial", NumSeguridadSocial);//
-                //command.Parameters.AddWithValue("PeriodicidadPago", PeriodicidadPago);//
-                //command.Parameters.AddWithValue("Puesto", Puesto);// 
-                //command.Parameters.AddWithValue("RiesgoPuesto", RiesgoPuesto);//
-                //command.Parameters.AddWithValue("SalarioBaseCotApor", SalarioBaseCotApor);// 
-                //command.Parameters.AddWithValue("SalarioDiarioIntegrado", SalarioDiarioIntegrado);// 
-                //command.Parameters.AddWithValue("Sindicalizado", Sindicalizado);//
-                //command.Parameters.AddWithValue("TipoContrato", TipoContrato);//
-                //command.Parameters.AddWithValue("TipoJornada", TipoJornada);//
-                //command.Parameters.AddWithValue("TipoRegimen", TipoRegimen);//
-                //command.Parameters.AddWithValue("TotalExento", TotalExento);//
-                //command.Parameters.AddWithValue("TotalGravado", TotalGravado);//
-                //command.Parameters.AddWithValue("TotalSueldos", TotalSueldos);//
-                //command.Parameters.AddWithValue("TotalImpuestosRetenidos", TotalImpuestosRetenidos);//
-                //command.Parameters.AddWithValue("TotalOtrasDeducciones", TotalOtrasDeducciones);//
-                //command.Parameters.AddWithValue("[T_RfcProvCertif]", T_RfcProvCertif);//
-                //command.Parameters.AddWithValue("[T_Version]", T_Version);//
-                //command.Parameters.AddWithValue("UUID", UUID);//
-                //command.Parameters.AddWithValue("[T_FechaTimbrado]", T_FechaTimbrado);//
-                //command.Parameters.AddWithValue("[T_SelloCFD]", T_SelloCFD);//
-                //command.Parameters.AddWithValue("NoCertificadoSAT", NoCertificadoSAT);// 
-                //command.Parameters.AddWithValue("EstatusNomina", 2);// 
-                //DateTime tiempo = DateTime.Parse(Fecha);
-                //string conv = tiempo.ToString("yyyy-MM-dd");
-                //command.Parameters.AddWithValue("FechaConvert", conv);
-
+                command.Parameters.AddWithValue("FormaPago", FormaPago);//
+                command.Parameters.AddWithValue("NoCertificado", NoCertificado);//
+                command.Parameters.AddWithValue("Certificado", Certificado);// 
+                command.Parameters.AddWithValue("SubTotal", SubTotal);// 
+                command.Parameters.AddWithValue("Total", Total);// 
+                command.Parameters.AddWithValue("TipoDeComprobante", TipoDeComprobante);//
+                command.Parameters.AddWithValue("MetodoPago", MetodoDePago);//
+                command.Parameters.AddWithValue("LugarExpedicion", LugarExpedicion);//
+                command.Parameters.AddWithValue("Descuento", DescuentoR);// 
+                command.Parameters.AddWithValue("Moneda", Moneda);// 
+                command.Parameters.AddWithValue("Emisor_Rfc", Emisor_Rfc);//
+                command.Parameters.AddWithValue("Emisor_Nombre", Emisor_Nombre);//[]
+                command.Parameters.AddWithValue("Emisor_RegimenFiscal", Emisor_RegimenFiscal);//
+                command.Parameters.AddWithValue("Receptor_Rfc", Receptor_Rfc);// 
+                command.Parameters.AddWithValue("Receptor_Nombre", Receptor_Nombre);//
+                command.Parameters.AddWithValue("Receptor_UsoCFDI", Receptor_UsoCFDI);// 
+                command.Parameters.AddWithValue("FechaFinalPago", FechaFinalPago);//
+                command.Parameters.AddWithValue("FechaInicialPago", FechaInicialPago);// 
+                command.Parameters.AddWithValue("FechaPago", FechaPago);// 
+                command.Parameters.AddWithValue("NumDiasPagados", NumDiasPagados);// 
+                command.Parameters.AddWithValue("TipoNomina", TipoNomina);// 
+                command.Parameters.AddWithValue("TotalDeducciones", TotalDeducciones);// 
+                command.Parameters.AddWithValue("TotalPercepciones", TotalPercepciones);// 
+                command.Parameters.AddWithValue("Complemento_Version", Complemento_Version);//
+                command.Parameters.AddWithValue("RegistroPatronal", RegistroPatronal);//
+                command.Parameters.AddWithValue("Antiguedad", Antiguedad);//
+                command.Parameters.AddWithValue("Banco", Banco);// 
+                command.Parameters.AddWithValue("ClaveEntFed", ClaveEntFed);//
+                command.Parameters.AddWithValue("CuentaBancaria", CuentaBancaria);//
+                command.Parameters.AddWithValue("Curp", Curp);//
+                command.Parameters.AddWithValue("Departamento", Departamento);//
+                command.Parameters.AddWithValue("FechaInicioRelLaboral", FechaInicioRelLaboral);//
+                command.Parameters.AddWithValue("NumEmpleado", NumEmpleado);// 
+                command.Parameters.AddWithValue("NumSeguridadSocial", NumSeguridadSocial);//
+                command.Parameters.AddWithValue("PeriodicidadPago", PeriodicidadPago);//
+                command.Parameters.AddWithValue("Puesto", Puesto);// 
+                command.Parameters.AddWithValue("RiesgoPuesto", RiesgoPuesto);//
+                command.Parameters.AddWithValue("SalarioBaseCotApor", SalarioBaseCotApor);// 
+                command.Parameters.AddWithValue("SalarioDiarioIntegrado", SalarioDiarioIntegrado);// 
+                command.Parameters.AddWithValue("Sindicalizado", Sindicalizado);//
+                command.Parameters.AddWithValue("TipoContrato", TipoContrato);//
+                command.Parameters.AddWithValue("TipoJornada", TipoJornada);//
+                command.Parameters.AddWithValue("TipoRegimen", TipoRegimen);//
+                command.Parameters.AddWithValue("TotalExento", TotalExento);//
+                command.Parameters.AddWithValue("TotalGravado", TotalGravado);//
+                command.Parameters.AddWithValue("TotalSueldos", TotalSueldos);//
+                command.Parameters.AddWithValue("TotalImpuestoRetenidos", TotalImpuestosRetenidos);//
+                command.Parameters.AddWithValue("TotalOtrasDeducciones", TotalOtrasDeducciones);//
+                command.Parameters.AddWithValue("T_RfcProvCertif", T_RfcProvCertif);//
+                command.Parameters.AddWithValue("T_Version", T_Version);//
+                command.Parameters.AddWithValue("UUID", UUID);//
+                command.Parameters.AddWithValue("T_FechaTimbrado", T_FechaTimbrado);//
+                command.Parameters.AddWithValue("T_SelloCFD", T_SelloCFD);//
+                command.Parameters.AddWithValue("NoCertificadoSAT", NoCertificadoSAT);// 
+                command.Parameters.AddWithValue("EstatusNomina", 2);// 
+                DateTime tiempo = DateTime.Parse(Fecha);
+                string conv = tiempo.ToString("yyyy-MM-dd");
+                command.Parameters.AddWithValue("FechaConvert", conv);
+                command.Parameters.AddWithValue("Año", tiempo.Year);
+                command.Parameters.AddWithValue("Mes", tiempo.Month);
                 command.ExecuteNonQuery();
                 conn.Close();
 
@@ -855,7 +897,59 @@ namespace EKPolizaGastos.Common.Classes
             }
           
 
-        } 
+        }
+
+        public void ToExcel(string nameTable, string path, string cnx, string root)
+        {
+
+            //SqlConnection conn = new SqlConnection(cnx);
+            ////CREATE TABLE TO EXCEL FILE
+            //DataTable excel = new DataTable(nameTable);
+
+            ////CHARGE DATA 
+            //SqlCommand cmd = new SqlCommand("SELECT * FROM  [" + nameTable + "]  ORDER BY IdFactura ASC", conn);
+            //using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+            //{
+            //    a.Fill(excel);
+
+            //}
+
+
+            //using (XLWorkbook wb = new XLWorkbook())
+            //{
+            //    wb.Worksheets.Add(excel);
+            //    wb.SaveAs(path + "/" + nameTable + ".xlsx");
+
+            //}
+
+
+
+            ////CREATE TABLE TO EXCEL FILE Concepts
+            //DataTable excel2 = new DataTable(nameTable);
+
+            ////CHARGE DATA Concepts
+            //SqlCommand cmd2 = new SqlCommand("SELECT * FROM  [" + nameTable + "Conceptos" + "]  ORDER BY IdFactura ASC", conn);
+            //using (SqlDataAdapter a = new SqlDataAdapter(cmd2))
+            //{
+            //    a.Fill(excel2);
+
+            //}
+
+
+            //using (XLWorkbook wb = new XLWorkbook())
+            //{
+            //    wb.Worksheets.Add(excel2);
+            //    wb.SaveAs(path + "/" + nameTable + "Conceptos.xlsx");
+
+            //}
+
+
+            System.IO.Directory.Move(root + "/" + NombreBase + ".zip", path + "/" + NombreBase + ".zip");
+
+        }
+
+
+
         #endregion
 
 
