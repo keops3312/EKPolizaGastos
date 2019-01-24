@@ -176,7 +176,7 @@ namespace EKPolizaGastos.Common.Classes
             foreach (var file in archivos)
             {
                 VarDocumentoXML.Load(file);
-                //total = total + 1;
+                total = total + 1;
                 
                 XmlNodeList xFacturaV = VarDocumentoXML.GetElementsByTagName("cfdi:Comprobante");//cfdi:comprobante
                 foreach (XmlElement nodo in xFacturaV)
@@ -668,7 +668,7 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("ImporteExento", P_ImporteExento);
                 command.Parameters.AddWithValue("ImporteGravado", P_ImporteGravado);
                 command.Parameters.AddWithValue("TipoPercepcion", P_TipoPercepcion);
-
+                command.Parameters.AddWithValue("Emisor_Rfc", Emisor_Rfc);
                 command.Parameters.AddWithValue("@msg", "2");
                 command.Parameters.AddWithValue("@Capto", 2);
 
@@ -726,7 +726,7 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("Concepto", D_Concepto);
                 command.Parameters.AddWithValue("Importe", D_Importe);
                 command.Parameters.AddWithValue("TipoDeduccion", D_TipoDeduccion);
-
+                command.Parameters.AddWithValue("Emisor_Rfc", Emisor_Rfc);
                 command.Parameters.AddWithValue("@msg", "2");
                 command.Parameters.AddWithValue("@Capto", 2);
 
@@ -787,6 +787,7 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("ValorUnitario", ValorUnitario);
                 command.Parameters.AddWithValue("Importe", Importe);
                 command.Parameters.AddWithValue("Descuento", Descuento);
+                command.Parameters.AddWithValue("Emisor_Rfc", Emisor_Rfc);
 
                 command.Parameters.AddWithValue("@msg", "2");
                 command.Parameters.AddWithValue("@Capto", 2);
@@ -902,53 +903,180 @@ namespace EKPolizaGastos.Common.Classes
         public void ToExcel(string nameTable, string path, string cnx, string root)
         {
 
-            //SqlConnection conn = new SqlConnection(cnx);
-            ////CREATE TABLE TO EXCEL FILE
-            //DataTable excel = new DataTable(nameTable);
+           
+            //Buscamos RFC de empresa
+            string RfcEmpresa;
+            string Letra;
+            string BuscarMes;
+            string año;
+            int Mes;
+            Letra = nameTable.Substring(0, 3);
+            BuscarMes = nameTable.Substring(8, 3);
+            año = nameTable.Substring(11,4);
+            Mes=SearchMonth(BuscarMes);
+            DataTable excel = new DataTable();
+            SqlConnection conn = new SqlConnection(cnx);
+            SqlCommand letras = new SqlCommand("SELECT RFC FROM Empresas where Letra='" + Letra + "'", conn);
+            using (SqlDataAdapter result = new SqlDataAdapter(letras))
+            {
+               // excel.Clear();
+                result.Fill(excel);
+                RfcEmpresa =Convert.ToString(excel.Rows[0][0].ToString());
 
-            ////CHARGE DATA 
-            //SqlCommand cmd = new SqlCommand("SELECT * FROM  [" + nameTable + "]  ORDER BY IdFactura ASC", conn);
-            //using (SqlDataAdapter a = new SqlDataAdapter(cmd))
-            //{
-            //    a.Fill(excel);
-
-            //}
-
-
-            //using (XLWorkbook wb = new XLWorkbook())
-            //{
-            //    wb.Worksheets.Add(excel);
-            //    wb.SaveAs(path + "/" + nameTable + ".xlsx");
-
-            //}
-
-
-
-            ////CREATE TABLE TO EXCEL FILE Concepts
-            //DataTable excel2 = new DataTable(nameTable);
-
-            ////CHARGE DATA Concepts
-            //SqlCommand cmd2 = new SqlCommand("SELECT * FROM  [" + nameTable + "Conceptos" + "]  ORDER BY IdFactura ASC", conn);
-            //using (SqlDataAdapter a = new SqlDataAdapter(cmd2))
-            //{
-            //    a.Fill(excel2);
-
-            //}
+            }
+           
+            //CHARGE DATA 
+            SqlCommand nominas = new SqlCommand("SELECT * FROM  Nominas  where Año='"+ año+ "' and Mes='"+Mes+"' and Emisor_Rfc='" + RfcEmpresa + "' ORDER BY IdNomina ASC", conn);
+            SqlCommand conceptosNominas = new SqlCommand("SELECT * FROM  ConceptosNominas where Año='" + año + "' and Mes='" + Mes + "' and RFC='" + RfcEmpresa + "' ORDER BY IdNomina ASC ", conn);
+            SqlCommand deduccionesNominas = new SqlCommand("SELECT * FROM  PercepcionesNominas where Año='" + año + "' and Mes='" + Mes + "' and RFC='" + RfcEmpresa + "' ORDER BY IdNomina ASC", conn);
+            SqlCommand percepcionesNominas = new SqlCommand("SELECT * FROM  DeduccionesNominas where Año='" + año + "' and Mes='" + Mes + "' and RFC='" + RfcEmpresa + "' ORDER BY IdNomina ASC", conn);
 
 
-            //using (XLWorkbook wb = new XLWorkbook())
-            //{
-            //    wb.Worksheets.Add(excel2);
-            //    wb.SaveAs(path + "/" + nameTable + "Conceptos.xlsx");
+            SqlCommand facturasEmitidas = new SqlCommand("SELECT * FROM  FacturasEmitidas where Año='" + año + "' and Mes='" + Mes + "' and RFCEmisor='" + RfcEmpresa + "'   ORDER BY IdFactura ASC", conn);
+            SqlCommand facturasEmitidasConceptos = new SqlCommand("SELECT * FROM  FacturasEmitidasConceptos  where Año='" + año + "' and Mes='" + Mes + "' and RFC='" + RfcEmpresa + "'    ORDER BY IdFactura ASC", conn);
 
-            //}
+            using (SqlDataAdapter a = new SqlDataAdapter(nominas))
+            {
+                excel.Rows.Clear();
+                excel.Columns.Clear();
+                excel.TableName = "Nominas";
+                a.Fill(excel);
+
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel);
+                wb.SaveAs(path + "/"+nameTable+"_Nominas.xlsx");
+
+            }
+            using (SqlDataAdapter a = new SqlDataAdapter(conceptosNominas))
+            {
+                excel.Rows.Clear();
+                excel.Columns.Clear();
+                excel.TableName = "conceptosNominas";
+                a.Fill(excel);
+
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel);
+                wb.SaveAs(path + "/" + nameTable + "_ConceptosNominas.xlsx");
+
+            }
+            using (SqlDataAdapter a = new SqlDataAdapter(deduccionesNominas))
+            {
+                excel.Rows.Clear();
+                excel.Columns.Clear();
+                excel.TableName = "deduccionesNominas";
+                a.Fill(excel);
+
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel);
+                wb.SaveAs(path + "/" + nameTable + "_DeduccionesNominas.xlsx");
+
+            }
+            using (SqlDataAdapter a = new SqlDataAdapter(percepcionesNominas))
+            {
+                excel.Rows.Clear();
+                excel.Columns.Clear();
+                excel.TableName = "percepcionesNominas";
+                a.Fill(excel);
+
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel);
+                wb.SaveAs(path + "/" + nameTable + "_PercepcionesNominas.xlsx");
+
+            }
+            using (SqlDataAdapter a = new SqlDataAdapter(facturasEmitidas))
+            {
+                excel.Rows.Clear();
+                excel.Columns.Clear();
+                excel.TableName = "facturasEmitidas";
+                a.Fill(excel);
+
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel);
+                wb.SaveAs(path + "/" + nameTable + "_FacturasEmitidas.xlsx");
+
+            }
+            using (SqlDataAdapter a = new SqlDataAdapter(facturasEmitidasConceptos))
+            {
+                excel.Rows.Clear();
+                excel.Columns.Clear();
+                excel.TableName = "facturasEmitidasConceptoss";
+                a.Fill(excel);
+
+            }
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(excel);
+                wb.SaveAs(path + "/" + nameTable + "_FacturasEmitidasConceptos.xlsx");
+
+            }
 
 
-            System.IO.Directory.Move(root + "/" + NombreBase + ".zip", path + "/" + NombreBase + ".zip");
+
+            System.IO.Directory.Move(root + "/" + nameTable + ".zip", path + "/" + nameTable + ".zip");
 
         }
 
+        private int SearchMonth(string v)
+        {
+            int month =0;
+            switch (v)
+            {
+                case "ENE":
+                    month = 1;
+                    break;
+                case "FEB":
+                    month = 2;
+                    break;
+                case "MAR":
+                    month = 3;
+                    break;
+                case "ABR":
+                    month = 4;
+                    break;
+                case "MAY":
+                    month = 5;
+                    break;
+                case "JUN":
+                    month = 6;
+                    break;
+                case "JUL":
+                    month =7;
+                    break;
+                case "AGO":
+                    month = 8;
+                    break;
+                case "SEP":
+                    month = 9;
+                    break;
+                case "OCT":
+                    month = 10;
+                    break;
+                case "NOV":
+                    month = 11;
+                    break;
+                case "DIC":
+                    month = 12;
+                    break;
 
+                default:
+
+                    break;
+
+
+            }
+
+            return month;
+        }
 
         #endregion
 

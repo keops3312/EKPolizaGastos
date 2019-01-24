@@ -143,8 +143,9 @@ namespace EKPolizaGastos
                 nombreBase = lblItemSeleted.Text.Substring(0, nameFile.Length);
                 readSatNominas.NombreBase = nombreBase;
                 TotalRegistrosEnNuevaTabla = readSatNominas.Scan(path, cnx, nombreBase);
-
+                //LE CREAMOS EL EXCEL Y MOVEMOS A LA CARPETA 
                 readSatNominas.ToExcel(nameFile, path, cnx, txtpath.Text);
+                LoadCompaniesProperties();
 
             }
 

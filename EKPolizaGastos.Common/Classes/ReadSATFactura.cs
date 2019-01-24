@@ -417,6 +417,9 @@ namespace EKPolizaGastos.Common.Classes
             return total;
         }
 
+
+
+        //ESCANEO DE FACTURAS EMITIDAS
         public void Emitidas(string path,string cnx)
         {
 
@@ -617,9 +620,7 @@ namespace EKPolizaGastos.Common.Classes
                     ValorUnitario = nodoReceptor.GetAttribute("ValorUnitario");
                     ImporteX = nodoReceptor.GetAttribute("Importe");
                     DescuentoX = nodoReceptor.GetAttribute("Descuento");
-                    //BaseTR = nodoReceptor.FirstChild.FirstChild["cfdi:Traslado"].GetAttribute("Base");
-
-
+                  
                     InserConceptsEMITIDAS(cnx);
                 }
 
@@ -750,7 +751,7 @@ namespace EKPolizaGastos.Common.Classes
                 command.Parameters.AddWithValue("Mes", tiempo.Month);
                 command.ExecuteNonQuery();
                 conn.Close();
-                //return Convert.ToInt32(command.Parameters["CodRetorno"].Value);
+               
             } catch (Exception ex)
             { }
 
