@@ -12,20 +12,19 @@ namespace EKPolizaGastos.Context
     using System;
     using System.Collections.Generic;
     
-    public partial class PercepcionesNominas
+    public partial class FactEmi_RFCMesAño
     {
-        public int IdPercepciones { get; set; }
-        public Nullable<int> IdNomina { get; set; }
+        public int IdFactura { get; set; }
+        public string Serie { get; set; }
+        public string Folio { get; set; }
+        public string Fecha { get; set; }
+        public string SubTotal { get; set; }
+        public string IVA { get; set; }
+        public string Total { get; set; }
+        public string Receptor { get; set; }
+        public string RFCReceptor { get; set; }
         public string UUID { get; set; }
-        public string NumEmpleado { get; set; }
-        public Nullable<System.DateTime> FechaConvert { get; set; }
-        public string Clave { get; set; }
-        public string Concepto { get; set; }
-        public string ImporteExento { get; set; }
-        public string ImporteGravado { get; set; }
-        public string TipoPercepcion { get; set; }
         public Nullable<int> Año { get; set; }
         public Nullable<int> Mes { get; set; }
-        public string RFC { get; set; }
     }
 }

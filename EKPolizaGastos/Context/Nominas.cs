@@ -75,5 +75,8 @@ namespace EKPolizaGastos.Context
         public string NoCertificadoSAT { get; set; }
         public Nullable<System.DateTime> FechaConvert { get; set; }
         public Nullable<int> EstatusNomina { get; set; }
+        public string Fecha { get; set; }
+        public Nullable<int> Año { get; set; }
+        public Nullable<int> Mes { get; set; }
     }
 }

@@ -98,6 +98,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\CIS_ENE2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_ENE2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_ENE2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_ENE2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\Comprobante.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -128,6 +140,12 @@
     <Compile Include="Context\CuentasGastos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\DDR_ENE2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_ENE2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\DeduccionesNominas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -137,7 +155,22 @@
     <Compile Include="Context\Empresas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\FactEmi_RFCMesAño.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\FacturasEmitidas.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\FacturasEmitidasConceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\Localidades.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_ENE2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_ENE2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Nominas.cs">
@@ -277,6 +310,8 @@
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
     <Content Include="polizaGastos.ico" />
+    <None Include="Resources\plus_PNG8.png" />
+    <None Include="Resources\256px-Database.svg.png" />
     <None Include="Resources\refresProveedor.png" />
     <None Include="Resources\diot.png" />
     <None Include="Resources\Poliza_de _Servicio.png" />

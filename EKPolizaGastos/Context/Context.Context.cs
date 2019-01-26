@@ -40,6 +40,17 @@ namespace EKPolizaGastos.Context
         public virtual DbSet<Diot> Diot { get; set; }
         public virtual DbSet<Nominas> Nominas { get; set; }
         public virtual DbSet<PercepcionesNominas> PercepcionesNominas { get; set; }
+        public virtual DbSet<FacturasEmitidas> FacturasEmitidas { get; set; }
+        public virtual DbSet<FacturasEmitidasConceptos> FacturasEmitidasConceptos { get; set; }
+        public virtual DbSet<CIS_ENE2018> CIS_ENE2018 { get; set; }
+        public virtual DbSet<CIS_ENE2018Conceptos> CIS_ENE2018Conceptos { get; set; }
+        public virtual DbSet<CMG_ENE2018> CMG_ENE2018 { get; set; }
+        public virtual DbSet<CMG_ENE2018Conceptos> CMG_ENE2018Conceptos { get; set; }
+        public virtual DbSet<DDR_ENE2018> DDR_ENE2018 { get; set; }
+        public virtual DbSet<DDR_ENE2018Conceptos> DDR_ENE2018Conceptos { get; set; }
+        public virtual DbSet<MRO_ENE2018> MRO_ENE2018 { get; set; }
+        public virtual DbSet<MRO_ENE2018Conceptos> MRO_ENE2018Conceptos { get; set; }
+        public virtual DbSet<FactEmi_RFCMesAño> FactEmi_RFCMesAño { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -122,7 +133,7 @@ namespace EKPolizaGastos.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<SP_InsertFactura_Result> SP_InsertFactura(Nullable<int> opcion, string serie, string folio, string fecha, string version, string sello, string formaPago, string noCertificado, string metodoPago, string lugarExpedicion, string schemaLocation, string condicionesDePago, string subTotal, string moneda, string total, string tipoDeComprobante, string descuento, string nombre, string regimenFiscal, string rfc, string nombreR, string rfcR, string usoCFDI, string importe, string impuesto, string tasaOCuota, string tipoFactor, string selloCFD, string noCertificadoSAT, string rfcProvCertif, string uUID, string fechaTimbrado, string selloSAT, string idFactura, string claveProdServ, string noIdentificacion, string cantidad, string claveUnidad, string unidad, string descripcion, string valorUnitario, string importeX, string descuentoX, string nombreTabla, Nullable<System.DateTime> fechaC, string baseTR, string impuestoTR, string tipoFactorTR, string tasaOCuotaTR, string importeTR, ObjectParameter msg, ObjectParameter capto)
+        public virtual ObjectResult<SP_InsertFactura_Result> SP_InsertFactura(Nullable<int> opcion, string serie, string folio, string fecha, string version, string sello, string formaPago, string noCertificado, string metodoPago, string lugarExpedicion, string schemaLocation, string condicionesDePago, string subTotal, string moneda, string total, string tipoDeComprobante, string descuento, string nombre, string regimenFiscal, string rfc, string nombreR, string rfcR, string usoCFDI, string importe, string impuesto, string tasaOCuota, string tipoFactor, string selloCFD, string noCertificadoSAT, string rfcProvCertif, string uUID, string fechaTimbrado, string selloSAT, string idFactura, string claveProdServ, string noIdentificacion, string cantidad, string claveUnidad, string unidad, string descripcion, string valorUnitario, string importeX, string descuentoX, string nombreTabla, Nullable<System.DateTime> fechaC, string baseTR, string impuestoTR, string tipoFactorTR, string tasaOCuotaTR, string importeTR, string emisor, string regimenFiscalReceptor, string rFCEmisor, string receptor, string rFCReceptor, string versions, Nullable<System.DateTime> registro, Nullable<int> idEstatus, Nullable<int> año, Nullable<int> mes, string @base, ObjectParameter msg, ObjectParameter capto)
         {
             var opcionParameter = opcion.HasValue ?
                 new ObjectParameter("opcion", opcion) :
@@ -324,7 +335,51 @@ namespace EKPolizaGastos.Context
                 new ObjectParameter("ImporteTR", importeTR) :
                 new ObjectParameter("ImporteTR", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertFactura_Result>("SP_InsertFactura", opcionParameter, serieParameter, folioParameter, fechaParameter, versionParameter, selloParameter, formaPagoParameter, noCertificadoParameter, metodoPagoParameter, lugarExpedicionParameter, schemaLocationParameter, condicionesDePagoParameter, subTotalParameter, monedaParameter, totalParameter, tipoDeComprobanteParameter, descuentoParameter, nombreParameter, regimenFiscalParameter, rfcParameter, nombreRParameter, rfcRParameter, usoCFDIParameter, importeParameter, impuestoParameter, tasaOCuotaParameter, tipoFactorParameter, selloCFDParameter, noCertificadoSATParameter, rfcProvCertifParameter, uUIDParameter, fechaTimbradoParameter, selloSATParameter, idFacturaParameter, claveProdServParameter, noIdentificacionParameter, cantidadParameter, claveUnidadParameter, unidadParameter, descripcionParameter, valorUnitarioParameter, importeXParameter, descuentoXParameter, nombreTablaParameter, fechaCParameter, baseTRParameter, impuestoTRParameter, tipoFactorTRParameter, tasaOCuotaTRParameter, importeTRParameter, msg, capto);
+            var emisorParameter = emisor != null ?
+                new ObjectParameter("Emisor", emisor) :
+                new ObjectParameter("Emisor", typeof(string));
+    
+            var regimenFiscalReceptorParameter = regimenFiscalReceptor != null ?
+                new ObjectParameter("RegimenFiscalReceptor", regimenFiscalReceptor) :
+                new ObjectParameter("RegimenFiscalReceptor", typeof(string));
+    
+            var rFCEmisorParameter = rFCEmisor != null ?
+                new ObjectParameter("RFCEmisor", rFCEmisor) :
+                new ObjectParameter("RFCEmisor", typeof(string));
+    
+            var receptorParameter = receptor != null ?
+                new ObjectParameter("Receptor", receptor) :
+                new ObjectParameter("Receptor", typeof(string));
+    
+            var rFCReceptorParameter = rFCReceptor != null ?
+                new ObjectParameter("RFCReceptor", rFCReceptor) :
+                new ObjectParameter("RFCReceptor", typeof(string));
+    
+            var versionsParameter = versions != null ?
+                new ObjectParameter("Versions", versions) :
+                new ObjectParameter("Versions", typeof(string));
+    
+            var registroParameter = registro.HasValue ?
+                new ObjectParameter("Registro", registro) :
+                new ObjectParameter("Registro", typeof(System.DateTime));
+    
+            var idEstatusParameter = idEstatus.HasValue ?
+                new ObjectParameter("IdEstatus", idEstatus) :
+                new ObjectParameter("IdEstatus", typeof(int));
+    
+            var añoParameter = año.HasValue ?
+                new ObjectParameter("Año", año) :
+                new ObjectParameter("Año", typeof(int));
+    
+            var mesParameter = mes.HasValue ?
+                new ObjectParameter("Mes", mes) :
+                new ObjectParameter("Mes", typeof(int));
+    
+            var baseParameter = @base != null ?
+                new ObjectParameter("Base", @base) :
+                new ObjectParameter("Base", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertFactura_Result>("SP_InsertFactura", opcionParameter, serieParameter, folioParameter, fechaParameter, versionParameter, selloParameter, formaPagoParameter, noCertificadoParameter, metodoPagoParameter, lugarExpedicionParameter, schemaLocationParameter, condicionesDePagoParameter, subTotalParameter, monedaParameter, totalParameter, tipoDeComprobanteParameter, descuentoParameter, nombreParameter, regimenFiscalParameter, rfcParameter, nombreRParameter, rfcRParameter, usoCFDIParameter, importeParameter, impuestoParameter, tasaOCuotaParameter, tipoFactorParameter, selloCFDParameter, noCertificadoSATParameter, rfcProvCertifParameter, uUIDParameter, fechaTimbradoParameter, selloSATParameter, idFacturaParameter, claveProdServParameter, noIdentificacionParameter, cantidadParameter, claveUnidadParameter, unidadParameter, descripcionParameter, valorUnitarioParameter, importeXParameter, descuentoXParameter, nombreTablaParameter, fechaCParameter, baseTRParameter, impuestoTRParameter, tipoFactorTRParameter, tasaOCuotaTRParameter, importeTRParameter, emisorParameter, regimenFiscalReceptorParameter, rFCEmisorParameter, receptorParameter, rFCReceptorParameter, versionsParameter, registroParameter, idEstatusParameter, añoParameter, mesParameter, baseParameter, msg, capto);
         }
     
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
@@ -349,7 +404,7 @@ namespace EKPolizaGastos.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
-        public virtual ObjectResult<SP_NominasInsert_Result> SP_NominasInsert(string version, string serie, string folio, string sello, string formaPago, string noCertificado, string certificado, string subTotal, string descuento, string moneda, string total, string tipodeComprobante, string metodoPago, string lugarExpedicion, string emisor_Rfc, string emisor_Nombre, string emisor_RegimenFiscal, string receptor_Rfc, string receptor_Nombre, string receptor_UsoCFDI, string fechaFinalPago, string fechaInicialPago, string fechaPago, string numDiasPagados, string tipoNomina, string totalDeducciones, string totalPercepciones, string complemento_Version, string registroPatronal, string antiguedad, string banco, string claveEntFed, string cuentaBancaria, string curp, string departamento, string fechaInicioRelLaboral, string numEmpleado, string numSeguridadSocial, string periodicidadPago, string puesto, string riesgoPuesto, string salarioBaseCotApor, string salarioDiarioIntegrado, string sindicalizado, string tipoContrato, string tipoJornada, string tipoRegimen, string totalExento, string totalGravado, string totalSueldos, string totalImpuestoRetenidos, string totalOtrasDeducciones, string t_RfcProvCertif, string t_Version, string uUID, string t_FechaTimbrado, string t_SelloCFD, string noCertificadoSAT, Nullable<System.DateTime> fechaConvert, Nullable<int> estatusNomina, Nullable<int> opcion, ObjectParameter msg, ObjectParameter capto, Nullable<int> idNomina, string clave, string concepto, string importeExento, string importeGravado, string tipoPercepcion, string importe, string tipoDeduccion, string claveProdServ, string cantidad, string claveUnidad, string descripcion, string valorUnitario)
+        public virtual ObjectResult<SP_NominasInsert_Result> SP_NominasInsert(string version, string serie, string folio, string fecha, string sello, string formaPago, string noCertificado, string certificado, string subTotal, string descuento, string moneda, string total, string tipodeComprobante, string metodoPago, string lugarExpedicion, string emisor_Rfc, string emisor_Nombre, string emisor_RegimenFiscal, string receptor_Rfc, string receptor_Nombre, string receptor_UsoCFDI, string fechaFinalPago, string fechaInicialPago, string fechaPago, string numDiasPagados, string tipoNomina, string totalDeducciones, string totalPercepciones, string complemento_Version, string registroPatronal, string antiguedad, string banco, string claveEntFed, string cuentaBancaria, string curp, string departamento, string fechaInicioRelLaboral, string numEmpleado, string numSeguridadSocial, string periodicidadPago, string puesto, string riesgoPuesto, string salarioBaseCotApor, string salarioDiarioIntegrado, string sindicalizado, string tipoContrato, string tipoJornada, string tipoRegimen, string totalExento, string totalGravado, string totalSueldos, string totalImpuestoRetenidos, string totalOtrasDeducciones, string t_RfcProvCertif, string t_Version, string uUID, string t_FechaTimbrado, string t_SelloCFD, string noCertificadoSAT, Nullable<System.DateTime> fechaConvert, Nullable<int> estatusNomina, Nullable<int> opcion, ObjectParameter msg, ObjectParameter capto, Nullable<int> idNomina, string clave, string concepto, string importeExento, string importeGravado, string tipoPercepcion, string importe, string tipoDeduccion, string claveProdServ, string cantidad, string claveUnidad, string descripcion, string valorUnitario, Nullable<int> año, Nullable<int> mes)
         {
             var versionParameter = version != null ?
                 new ObjectParameter("Version", version) :
@@ -362,6 +417,10 @@ namespace EKPolizaGastos.Context
             var folioParameter = folio != null ?
                 new ObjectParameter("Folio", folio) :
                 new ObjectParameter("Folio", typeof(string));
+    
+            var fechaParameter = fecha != null ?
+                new ObjectParameter("Fecha", fecha) :
+                new ObjectParameter("Fecha", typeof(string));
     
             var selloParameter = sello != null ?
                 new ObjectParameter("Sello", sello) :
@@ -647,7 +706,15 @@ namespace EKPolizaGastos.Context
                 new ObjectParameter("ValorUnitario", valorUnitario) :
                 new ObjectParameter("ValorUnitario", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_NominasInsert_Result>("SP_NominasInsert", versionParameter, serieParameter, folioParameter, selloParameter, formaPagoParameter, noCertificadoParameter, certificadoParameter, subTotalParameter, descuentoParameter, monedaParameter, totalParameter, tipodeComprobanteParameter, metodoPagoParameter, lugarExpedicionParameter, emisor_RfcParameter, emisor_NombreParameter, emisor_RegimenFiscalParameter, receptor_RfcParameter, receptor_NombreParameter, receptor_UsoCFDIParameter, fechaFinalPagoParameter, fechaInicialPagoParameter, fechaPagoParameter, numDiasPagadosParameter, tipoNominaParameter, totalDeduccionesParameter, totalPercepcionesParameter, complemento_VersionParameter, registroPatronalParameter, antiguedadParameter, bancoParameter, claveEntFedParameter, cuentaBancariaParameter, curpParameter, departamentoParameter, fechaInicioRelLaboralParameter, numEmpleadoParameter, numSeguridadSocialParameter, periodicidadPagoParameter, puestoParameter, riesgoPuestoParameter, salarioBaseCotAporParameter, salarioDiarioIntegradoParameter, sindicalizadoParameter, tipoContratoParameter, tipoJornadaParameter, tipoRegimenParameter, totalExentoParameter, totalGravadoParameter, totalSueldosParameter, totalImpuestoRetenidosParameter, totalOtrasDeduccionesParameter, t_RfcProvCertifParameter, t_VersionParameter, uUIDParameter, t_FechaTimbradoParameter, t_SelloCFDParameter, noCertificadoSATParameter, fechaConvertParameter, estatusNominaParameter, opcionParameter, msg, capto, idNominaParameter, claveParameter, conceptoParameter, importeExentoParameter, importeGravadoParameter, tipoPercepcionParameter, importeParameter, tipoDeduccionParameter, claveProdServParameter, cantidadParameter, claveUnidadParameter, descripcionParameter, valorUnitarioParameter);
+            var añoParameter = año.HasValue ?
+                new ObjectParameter("Año", año) :
+                new ObjectParameter("Año", typeof(int));
+    
+            var mesParameter = mes.HasValue ?
+                new ObjectParameter("Mes", mes) :
+                new ObjectParameter("Mes", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_NominasInsert_Result>("SP_NominasInsert", versionParameter, serieParameter, folioParameter, fechaParameter, selloParameter, formaPagoParameter, noCertificadoParameter, certificadoParameter, subTotalParameter, descuentoParameter, monedaParameter, totalParameter, tipodeComprobanteParameter, metodoPagoParameter, lugarExpedicionParameter, emisor_RfcParameter, emisor_NombreParameter, emisor_RegimenFiscalParameter, receptor_RfcParameter, receptor_NombreParameter, receptor_UsoCFDIParameter, fechaFinalPagoParameter, fechaInicialPagoParameter, fechaPagoParameter, numDiasPagadosParameter, tipoNominaParameter, totalDeduccionesParameter, totalPercepcionesParameter, complemento_VersionParameter, registroPatronalParameter, antiguedadParameter, bancoParameter, claveEntFedParameter, cuentaBancariaParameter, curpParameter, departamentoParameter, fechaInicioRelLaboralParameter, numEmpleadoParameter, numSeguridadSocialParameter, periodicidadPagoParameter, puestoParameter, riesgoPuestoParameter, salarioBaseCotAporParameter, salarioDiarioIntegradoParameter, sindicalizadoParameter, tipoContratoParameter, tipoJornadaParameter, tipoRegimenParameter, totalExentoParameter, totalGravadoParameter, totalSueldosParameter, totalImpuestoRetenidosParameter, totalOtrasDeduccionesParameter, t_RfcProvCertifParameter, t_VersionParameter, uUIDParameter, t_FechaTimbradoParameter, t_SelloCFDParameter, noCertificadoSATParameter, fechaConvertParameter, estatusNominaParameter, opcionParameter, msg, capto, idNominaParameter, claveParameter, conceptoParameter, importeExentoParameter, importeGravadoParameter, tipoPercepcionParameter, importeParameter, tipoDeduccionParameter, claveProdServParameter, cantidadParameter, claveUnidadParameter, descripcionParameter, valorUnitarioParameter, añoParameter, mesParameter);
         }
     }
 }

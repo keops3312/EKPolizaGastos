@@ -23,5 +23,8 @@ namespace EKPolizaGastos.Context
         public string Concepto { get; set; }
         public string Importe { get; set; }
         public string TipoDeduccion { get; set; }
+        public Nullable<int> Año { get; set; }
+        public Nullable<int> Mes { get; set; }
+        public string RFC { get; set; }
     }
 }

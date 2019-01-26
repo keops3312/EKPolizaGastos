@@ -63,6 +63,16 @@ namespace EKPolizaGastos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _256px_Database_svg {
+            get {
+                object obj = ResourceManager.GetObject("256px-Database.svg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap attachment_icon {
             get {
                 object obj = ResourceManager.GetObject("attachment-icon", resourceCulture);
@@ -136,6 +146,16 @@ namespace EKPolizaGastos.Properties {
         internal static System.Drawing.Bitmap New_DatabaseP_fw {
             get {
                 object obj = ResourceManager.GetObject("New-DatabaseP.fw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap plus_PNG8 {
+            get {
+                object obj = ResourceManager.GetObject("plus_PNG8", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -22,6 +22,17 @@
         <EntityTypeShape EntityType="SEMP_SATModel.Diot" Width="1.5" PointX="12.375" PointY="4.75" />
         <EntityTypeShape EntityType="SEMP_SATModel.Nominas" Width="1.5" PointX="5.375" PointY="12.75" />
         <EntityTypeShape EntityType="SEMP_SATModel.PercepcionesNominas" Width="1.5" PointX="7.375" PointY="13.125" />
+        <EntityTypeShape EntityType="SEMP_SATModel.FacturasEmitidas" Width="1.5" PointX="11.75" PointY="11.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.FacturasEmitidasConceptos" Width="1.5" PointX="13.75" PointY="8.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2018" Width="1.5" PointX="13.75" PointY="14.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2018Conceptos" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ENE2018" Width="1.5" PointX="15.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ENE2018Conceptos" Width="1.5" PointX="15.75" PointY="15.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2018" Width="1.5" PointX="0.75" PointY="16.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2018Conceptos" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2018" Width="1.5" PointX="2.75" PointY="16.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2018Conceptos" Width="1.5" PointX="17.75" PointY="6.75" />
+        <EntityTypeShape EntityType="SEMP_SATModel.FactEmi_RFCMesAño" Width="1.5" PointX="17.75" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

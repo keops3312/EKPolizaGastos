@@ -33,6 +33,9 @@ namespace EKPolizaGastos.Context
         public string Departamento { get; set; }
         public string Iva_Retenido { get; set; }
         public string Isr_Retenido { get; set; }
+        public string Ieps_Retenido { get; set; }
+        public string Ieps_Trasladado { get; set; }
+        public string Isr_Trasladado { get; set; }
     
         public virtual Empresas Empresas { get; set; }
         public virtual Localidades Localidades { get; set; }

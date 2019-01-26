@@ -69,6 +69,7 @@
             this.line2 = new DevComponents.DotNetBar.Controls.Line();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.line3 = new DevComponents.DotNetBar.Controls.Line();
+            this.buttonX4 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
@@ -327,7 +328,7 @@
             this.poliza.DefaultCellStyle = dataGridViewCellStyle5;
             this.poliza.EnableHeadersVisualStyles = false;
             this.poliza.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(198)))), ((int)(((byte)(217)))));
-            this.poliza.Location = new System.Drawing.Point(36, 198);
+            this.poliza.Location = new System.Drawing.Point(86, 198);
             this.poliza.Name = "poliza";
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
@@ -337,8 +338,10 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.poliza.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.poliza.Size = new System.Drawing.Size(1004, 317);
+            this.poliza.Size = new System.Drawing.Size(954, 317);
             this.poliza.TabIndex = 30;
+            this.poliza.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.poliza_CellValueChanged);
+            this.poliza.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.poliza_UserDeletedRow);
             // 
             // Cuenta
             // 
@@ -406,6 +409,7 @@
             this.txtDepto.PreventEnterBeep = true;
             this.txtDepto.Size = new System.Drawing.Size(100, 29);
             this.txtDepto.TabIndex = 34;
+            this.txtDepto.Text = "2";
             // 
             // labelX8
             // 
@@ -497,6 +501,20 @@
             this.line3.TabIndex = 42;
             this.line3.Text = "line3";
             // 
+            // buttonX4
+            // 
+            this.buttonX4.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX4.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX4.Image = global::EKPolizaGastos.Properties.Resources.plus_PNG8;
+            this.buttonX4.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonX4.Location = new System.Drawing.Point(33, 198);
+            this.buttonX4.Name = "buttonX4";
+            this.buttonX4.ShowSubItems = false;
+            this.buttonX4.Size = new System.Drawing.Size(45, 35);
+            this.buttonX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX4.TabIndex = 44;
+            this.buttonX4.Click += new System.EventHandler(this.buttonX4_Click);
+            // 
             // buttonX3
             // 
             this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -530,6 +548,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1085, 676);
+            this.Controls.Add(this.buttonX4);
             this.Controls.Add(this.buttonX3);
             this.Controls.Add(this.line3);
             this.Controls.Add(this.buttonX1);
@@ -609,5 +628,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private DevComponents.DotNetBar.Controls.Line line3;
         private DevComponents.DotNetBar.ButtonX buttonX3;
+        private DevComponents.DotNetBar.ButtonX buttonX4;
     }
 }

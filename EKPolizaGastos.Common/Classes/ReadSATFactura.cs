@@ -1167,7 +1167,7 @@ namespace EKPolizaGastos.Common.Classes
 
             return result;
         }
-
+        //COMBO LOCALIDADES
         public DataTable Localidades(string cnx)
         {
             SqlConnection conn = new SqlConnection(cnx);
@@ -1175,6 +1175,25 @@ namespace EKPolizaGastos.Common.Classes
             //CHARGE DATA 
             SqlCommand cmd = new SqlCommand("SELECT * FROM Localidades " +
                                " order by IdLocalidad asc", conn);
+            using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+            {
+                a.Fill(result);
+
+            }
+
+
+
+            return result;
+
+        }
+        //COMBO EMPRESA
+        public DataTable Empresas(string cnx)
+        {
+            SqlConnection conn = new SqlConnection(cnx);
+            DataTable result = new DataTable();
+            //CHARGE DATA 
+            SqlCommand cmd = new SqlCommand("SELECT * FROM Empresas " +
+                               " order by IdEmpresa asc", conn);
             using (SqlDataAdapter a = new SqlDataAdapter(cmd))
             {
                 a.Fill(result);
