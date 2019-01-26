@@ -197,6 +197,12 @@
     <Compile Include="Context\sysdiagrams.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CuentasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CuentasForm.Designer.cs">
+      <DependentUpon>CuentasForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -310,6 +316,7 @@
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
     <Content Include="polizaGastos.ico" />
+    <None Include="Resources\libros.png" />
     <None Include="Resources\plus_PNG8.png" />
     <None Include="Resources\256px-Database.svg.png" />
     <None Include="Resources\refresProveedor.png" />

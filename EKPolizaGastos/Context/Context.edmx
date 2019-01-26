@@ -666,30 +666,6 @@ warning 6002: The table/view 'SEMP_SAT.dbo.FactEmi_RFCMesAño' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedores_Empresas">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresas">
-              <PropertyRef Name="IdEmpresa" />
-            </Principal>
-            <Dependent Role="Proveedores">
-              <PropertyRef Name="IdEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedores_Localidades">
-          <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidades">
-              <PropertyRef Name="IdLocalidad" />
-            </Principal>
-            <Dependent Role="Proveedores">
-              <PropertyRef Name="IdLocalidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -1171,14 +1147,6 @@ warning 6002: The table/view 'SEMP_SAT.dbo.FactEmi_RFCMesAño' does not have a p
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Localidades" EntitySet="Localidades" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_Empresas" Association="Self.FK_Proveedores_Empresas">
-            <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_Localidades" Association="Self.FK_Proveedores_Localidades">
-            <End Role="Localidades" EntitySet="Localidades" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1254,7 +1222,6 @@ warning 6002: The table/view 'SEMP_SAT.dbo.FactEmi_RFCMesAño' does not have a p
           <Property Name="Path" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Letra" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Localidades" Relationship="Self.FK_Localidades_Empresas" FromRole="Empresas" ToRole="Localidades" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Empresas" FromRole="Empresas" ToRole="Proveedores" />
           <Property Name="PathNomina" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Localidades">
@@ -1266,7 +1233,6 @@ warning 6002: The table/view 'SEMP_SAT.dbo.FactEmi_RFCMesAño' does not have a p
           <Property Name="Sigla_Sucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdEmpresa" Type="Int32" />
           <NavigationProperty Name="Empresas" Relationship="Self.FK_Localidades_Empresas" FromRole="Localidades" ToRole="Empresas" />
-          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Localidades" FromRole="Localidades" ToRole="Proveedores" />
           <Property Name="Departamento" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Proveedores">
@@ -1290,8 +1256,6 @@ warning 6002: The table/view 'SEMP_SAT.dbo.FactEmi_RFCMesAño' does not have a p
           <Property Name="Titulo_secundario" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Titulo_tercero" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Departamento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Empresas" Relationship="Self.FK_Proveedores_Empresas" FromRole="Proveedores" ToRole="Empresas" />
-          <NavigationProperty Name="Localidades" Relationship="Self.FK_Proveedores_Localidades" FromRole="Proveedores" ToRole="Localidades" />
           <Property Name="Iva_Retenido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Isr_Retenido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Ieps_Retenido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1354,30 +1318,6 @@ warning 6002: The table/view 'SEMP_SAT.dbo.FactEmi_RFCMesAño' does not have a p
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedores_Empresas">
-          <End Role="Empresas" Type="Self.Empresas" Multiplicity="1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Empresas">
-              <PropertyRef Name="IdEmpresa" />
-            </Principal>
-            <Dependent Role="Proveedores">
-              <PropertyRef Name="IdEmpresa" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedores_Localidades">
-          <End Role="Localidades" Type="Self.Localidades" Multiplicity="1" />
-          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidades">
-              <PropertyRef Name="IdLocalidad" />
-            </Principal>
-            <Dependent Role="Proveedores">
-              <PropertyRef Name="IdLocalidad" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="SEMP_SATContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comprobante" EntityType="Self.Comprobante" />
           <EntitySet Name="ComprobanteEstatus" EntityType="Self.ComprobanteEstatus" />
@@ -1394,14 +1334,6 @@ warning 6002: The table/view 'SEMP_SAT.dbo.FactEmi_RFCMesAño' does not have a p
           <AssociationSet Name="FK_Localidades_Empresas" Association="Self.FK_Localidades_Empresas">
             <End Role="Empresas" EntitySet="Empresas" />
             <End Role="Localidades" EntitySet="Localidades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_Empresas" Association="Self.FK_Proveedores_Empresas">
-            <End Role="Empresas" EntitySet="Empresas" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_Localidades" Association="Self.FK_Proveedores_Localidades">
-            <End Role="Localidades" EntitySet="Localidades" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
           </AssociationSet>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />

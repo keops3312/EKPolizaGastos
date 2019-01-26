@@ -18,7 +18,6 @@ namespace EKPolizaGastos.Context
         public Empresas()
         {
             this.Localidades = new HashSet<Localidades>();
-            this.Proveedores = new HashSet<Proveedores>();
         }
     
         public int IdEmpresa { get; set; }
@@ -31,7 +30,5 @@ namespace EKPolizaGastos.Context
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Localidades> Localidades { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedores> Proveedores { get; set; }
     }
 }

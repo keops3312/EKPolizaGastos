@@ -14,12 +14,6 @@ namespace EKPolizaGastos.Context
     
     public partial class Localidades
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Localidades()
-        {
-            this.Proveedores = new HashSet<Proveedores>();
-        }
-    
         public int IdLocalidad { get; set; }
         public string Localidad { get; set; }
         public string Sigla_Sucursal { get; set; }
@@ -27,7 +21,5 @@ namespace EKPolizaGastos.Context
         public string Departamento { get; set; }
     
         public virtual Empresas Empresas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedores> Proveedores { get; set; }
     }
 }

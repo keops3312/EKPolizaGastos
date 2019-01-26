@@ -1214,16 +1214,20 @@ namespace EKPolizaGastos.Forms
             Cuenta_Abono_1 = "0000-000-000";
             Cuenta_Abono_2 = "0000-000-000";
             Cuenta_Abono_3 = "0000-000-000";
+
+            Cuenta_isr_retenido = "0000-000-000";
+            Cuenta_iva_retenido = "0000-000-000";
+            Cuenta_isr_trasladado = "0000-000-000";
+            Cuenta_ieps_trasladado = "0000-000-000";
+            Cuenta_ieps_trasladado = "0000-000-000";
+
             Titulo_principal = "Proveedor X";
             Titulo_secundario = "RFCXXX";
             Titulo_tercero = "SIN TITULO";
-            Departamento = "0";
-            Cuenta_isr_retenido = "0000-000-000";
-            Cuenta_iva_retenido = "0000-000-000";
+            Departamento = "2";
             Departamento = txtDepto.Text.Trim();
 
-            var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor &&
-                                p.IdEmpresa == IdEmpresa).FirstOrDefault();//&& p.IdLocalidad == IdLocalidad && p.Departamento == Departamento
+            var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor).FirstOrDefault();
 
             if (Folio.Length > 5)
             {
@@ -1263,11 +1267,14 @@ namespace EKPolizaGastos.Forms
                 Cuenta_cargo_2 = proveedor.Cuenta_cargo_2;
                 Cuenta_cargo_3 = proveedor.Cuenta_cargo_3;
                 Cuenta_cargo_Iva = proveedor.Cuenta_Cargo_Iva;
+                Cuenta_iva_retenido = proveedor.Iva_Retenido;
                 Cuenta_Abono_1 = proveedor.Cuenta_Abono_1;
                 Cuenta_Abono_2 = proveedor.Cuenta_Abono_2;
                 Cuenta_Abono_3 = proveedor.Cuenta_Abono_3;
 
                 Cuenta_isr_retenido = proveedor.Isr_Retenido;//cuenta isr retenido
+                Cuenta_isr_trasladado = proveedor.Isr_Trasladado;
+
                 Cuenta_iva_retenido = proveedor.Iva_Retenido;//cuenta iva retenido
 
                 Titulo_principal = proveedor.Titulo_principal;//el concepto del encabezado
@@ -1276,9 +1283,9 @@ namespace EKPolizaGastos.Forms
 
                 //NUEVAS CUENTAS
                 Cuenta_ieps_trasladado = proveedor.Ieps_Trasladado;
-                Cuenta_isr_trasladado = proveedor.Isr_Trasladado;
-                Cuenta_iva_retenido = proveedor.Iva_Retenido;
                 Cuenta_ieps_retenido = proveedor.Ieps_Retenido;
+               
+               
 
                 Departamento = txtDepto.Text;
 
@@ -1331,11 +1338,6 @@ namespace EKPolizaGastos.Forms
                     Cuenta_isr_retenido = "0000-000-000";
 
                 }
-                if (Cuenta_iva_retenido == "" || string.IsNullOrEmpty(Cuenta_iva_retenido))
-                {
-                    Cuenta_iva_retenido = "0000-000-000";
-                }
-                //
                 if (Cuenta_ieps_trasladado == "" || string.IsNullOrEmpty(Cuenta_ieps_trasladado))
                 {
                     Cuenta_ieps_trasladado = "0000-000-000";
@@ -1408,10 +1410,6 @@ namespace EKPolizaGastos.Forms
             }
 
 
-
-
-
-
             //Agregando los conceptos al grid
             string descripcion;
             string subtotal;
@@ -1428,7 +1426,7 @@ namespace EKPolizaGastos.Forms
             VarManager.AddNamespace("xs", "http://www.w3.org/2001/XMLSchema");
 
             //El total de la poliza
-            poliza.Rows.Insert(0, Cuenta_cargo_1, Titulo_secundario, "0.00", total, "TOTAL");
+            poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", total, "TOTAL");
 
             if (xTax.Count == 0)//Infonavit
             {
@@ -1466,8 +1464,10 @@ namespace EKPolizaGastos.Forms
             //
 
             //Los Conceptos de la poliza
+           
             if (xTax.Count == 0)//Infonavit
             {
+                int indice_concepto = 1;
                 foreach (DataRow item in conceptos.Rows)
                 {
                     descripcion = item[0].ToString();
@@ -1481,7 +1481,27 @@ namespace EKPolizaGastos.Forms
                         descripcion = descripcion.Substring(0, 25);
                     }
 
-                    poliza.Rows.Insert(2, Cuenta_cargo_3, descripcion, subtotal, "0.00", "CONCEPTO");
+                    if (indice_concepto == 1)
+                    {
+                        poliza.Rows.Insert(2, Cuenta_cargo_1, descripcion, subtotal, "0.00", "CONCEPTO");
+                        indice_concepto += 1;
+                    }
+                    if (indice_concepto == 2)
+                    {
+                        poliza.Rows.Insert(2, Cuenta_cargo_2, descripcion, subtotal, "0.00", "CONCEPTO");
+                        indice_concepto += 1;
+                    }
+                    if (indice_concepto == 3)
+                    {
+                        poliza.Rows.Insert(2, Cuenta_cargo_3, descripcion, subtotal, "0.00", "CONCEPTO");
+
+                    }
+
+
+
+
+
+                   
                 }
             }
             else
@@ -1673,7 +1693,7 @@ namespace EKPolizaGastos.Forms
                 }
 
 
-
+                int indice_concepto = 1;
                 foreach (XmlElement node in VarConceptos)
                 {
 
@@ -1838,7 +1858,21 @@ namespace EKPolizaGastos.Forms
                         descripcionxml = descripcionxml.Substring(0, 25);
                     }
 
-                    poliza.Rows.Insert(1, Cuenta_cargo_3, descripcionxml, subtotal, "0.00", "CONCEPTO");
+                    if (indice_concepto == 1)
+                    {
+                        poliza.Rows.Insert(1, Cuenta_cargo_1, descripcionxml, subtotal, "0.00", "CONCEPTO");
+                        indice_concepto += 1;
+                    }
+                    if (indice_concepto == 2)
+                    {
+                        poliza.Rows.Insert(1, Cuenta_cargo_2, descripcionxml, subtotal, "0.00", "CONCEPTO");
+                        indice_concepto += 1;
+                    }
+                    if (indice_concepto == 3)
+                    {
+                        poliza.Rows.Insert(1, Cuenta_cargo_3, descripcionxml, subtotal, "0.00", "CONCEPTO");
+                       
+                    }
 
 
                 }
@@ -1859,7 +1893,7 @@ namespace EKPolizaGastos.Forms
 
                 if (ISR > 0)
                 {
-                    poliza.Rows.Insert(1, Cuenta_cargo_Iva, leyenda_ISR, ISR, "0.00", "ISR TRASLADADO");
+                    poliza.Rows.Insert(1, Cuenta_isr_trasladado, leyenda_ISR, ISR, "0.00", "ISR TRASLADADO");
                 }
 
                 if (IEPS > 0)
@@ -1870,7 +1904,7 @@ namespace EKPolizaGastos.Forms
                     if (sumaSubtotalSumadoConIvaIEPS == TotalFactura)//significa que agrego el IEPS en la Factura
                     {
                         //AGREGO IEPS
-                        poliza.Rows.Insert(1, Cuenta_Abono_2, leyenda_IEPS, IEPS, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(1, Cuenta_ieps_trasladado, leyenda_IEPS, IEPS, "0.00", "IEPS TRASLADADO");
                     }
 
 
@@ -1889,7 +1923,7 @@ namespace EKPolizaGastos.Forms
                     diferenciaIEPS = TotalFactura - sumaSubtotalSumadoConIvaIEPS;
 
 
-                    poliza.Rows.Insert(1, Cuenta_Abono_2, leyenda_IEPS, diferenciaIEPS, "0.00", "IEPS TRASLADADO");
+                    poliza.Rows.Insert(1, Cuenta_ieps_trasladado, leyenda_IEPS, diferenciaIEPS, "0.00", "IEPS TRASLADADO");
                 }
 
 
@@ -1906,58 +1940,58 @@ namespace EKPolizaGastos.Forms
 
 
 
-            //LLeno las cuentas de poliza
-            foreach (DataGridViewRow item in poliza.Rows)
-            {
+            ////LLeno las cuentas de poliza
+            //foreach (DataGridViewRow item in poliza.Rows)
+            //{
 
-                if (item.Cells[4].Value.ToString() == "TOTAL")
-                {
-                    item.Cells[0].Value = Cuenta_cargo_1;
-                }
-                if (item.Cells[4].Value.ToString() == "IVA TRASLADADO")
-                {
-                    item.Cells[0].Value = Cuenta_cargo_Iva;
-
-
-
-                }
-                if (item.Cells[4].Value.ToString() == "IVA RETENIDO")
-                {
-                    item.Cells[0].Value = Cuenta_iva_retenido;
-
-
-                }
-                if (item.Cells[4].Value.ToString() == "ISR RETENIDO")
-                {
-                    item.Cells[0].Value = Cuenta_isr_retenido;
-
-                }
-                if (item.Cells[4].Value.ToString() == "ISR TRASLADADO")
-                {
-                    item.Cells[0].Value = Cuenta_cargo_2;
-
-
-                }
-                if (item.Cells[4].Value.ToString() == "IEPS RETENIDO")
-                {
-                    item.Cells[0].Value = Cuenta_Abono_1;
-
-
-                }
-                if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")
-                {
-                    item.Cells[0].Value = Cuenta_Abono_2;
-
-                }
-                if (item.Cells[4].Value.ToString() == "CONCEPTO")
-                {
-                    item.Cells[0].Value = Cuenta_cargo_3;
-
-                }
+            //    if (item.Cells[4].Value.ToString() == "TOTAL")
+            //    {
+            //        item.Cells[0].Value = Cuenta_Abono_1;
+            //    }
+            //    if (item.Cells[4].Value.ToString() == "IVA TRASLADADO")
+            //    {
+            //        item.Cells[0].Value = Cuenta_cargo_Iva;
 
 
 
-            }
+            //    }
+            //    if (item.Cells[4].Value.ToString() == "IVA RETENIDO")
+            //    {
+            //        item.Cells[0].Value = Cuenta_iva_retenido;
+
+
+            //    }
+            //    if (item.Cells[4].Value.ToString() == "ISR RETENIDO")
+            //    {
+            //        item.Cells[0].Value = Cuenta_isr_retenido;
+
+            //    }
+            //    if (item.Cells[4].Value.ToString() == "ISR TRASLADADO")
+            //    {
+            //        item.Cells[0].Value = Cuenta_isr_trasladado;
+
+
+            //    }
+            //    if (item.Cells[4].Value.ToString() == "IEPS RETENIDO")
+            //    {
+            //        item.Cells[0].Value = Cuenta_ieps_retenido;
+
+
+            //    }
+            //    if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")
+            //    {
+            //        item.Cells[0].Value = Cuenta_ieps_trasladado;
+
+            //    }
+            //    if (item.Cells[4].Value.ToString() == "CONCEPTO")
+            //    {
+            //        item.Cells[0].Value = Cuenta_cargo_3;
+
+            //    }
+
+
+
+            //}
 
 
 
@@ -1996,14 +2030,14 @@ namespace EKPolizaGastos.Forms
             {
                 diferencia = decimal.Parse(txtDebe.Text) - decimal.Parse(txtHaber.Text);
 
-                poliza.Rows.Insert(1, Cuenta_Abono_2, "OTROS", "0.00", diferencia, "IEPS TRASLADADO");
+                poliza.Rows.Insert(1, Cuenta_ieps_trasladado, "OTROS", "0.00", diferencia, "IEPS TRASLADADO");
                 RECALCULAR();
             }
             else if (decimal.Parse(txtDebe.Text) < decimal.Parse(txtHaber.Text))
             {
                 diferencia = decimal.Parse(txtHaber.Text) - decimal.Parse(txtDebe.Text);
 
-                poliza.Rows.Insert(1, Cuenta_Abono_2, "OTROS", diferencia, "0.00", "IEPS TRASLADADO");
+                poliza.Rows.Insert(1, Cuenta_ieps_trasladado, "OTROS", diferencia, "0.00", "IEPS TRASLADADO");
                 RECALCULAR();
 
             }
@@ -2012,6 +2046,16 @@ namespace EKPolizaGastos.Forms
 
 
             #endregion
+        }
+        //AGREGAR NUEVA FILA
+        private void agregarFila()
+        {
+            int i = poliza.Rows.Count;
+            //i = i;
+
+            poliza.Rows.Insert(i, "0000-000-000", "INGRESE CONCEPTO", 0.00, 0.00, "CONCEPTO");
+            poliza.FirstDisplayedScrollingRowIndex = poliza.RowCount - 1;
+            poliza.Rows[i].Selected = true;
         }
         #endregion
 
@@ -2229,8 +2273,9 @@ namespace EKPolizaGastos.Forms
 
 
                     //Ahora Creamos la Poliza
-                    string comparar_cuenta="";
-                    int indice=1;
+                    string comparar_cuenta = "";
+                    int indice = 1;
+                    string cuentaBase = "0000-000-000";
                     foreach (DataGridViewRow item in poliza.Rows)
                     {
 
@@ -2367,33 +2412,37 @@ namespace EKPolizaGastos.Forms
                             escritor.WriteLine(cuentaWrite);
                             escritor.WriteLine(tituloWrite);
                             escritor.WriteLine(importeWrite);
-                            Cuenta_cargo_1 = item.Cells[0].Value.ToString();
-                           
-                            if (indice==1)
-                            {
-                                comparar_cuenta = Cuenta_cargo_1;
+                            
+                            cuentaBase= item.Cells[0].Value.ToString();
 
+                            if (indice == 1)
+                            {
+                                Cuenta_cargo_1 = cuentaBase;
+                                comparar_cuenta = Cuenta_cargo_1;
+                                indice += 1;
                             }
                             if (indice == 2)
                             {
                                 //comparar
-                                if (comparar_cuenta != Cuenta_cargo_1)
+                                if (comparar_cuenta != cuentaBase && cuentaBase != Cuenta_cargo_1)
                                 {
-                                    Cuenta_cargo_2 = Cuenta_cargo_1;
-                                    comparar_cuenta = Cuenta_cargo_2;
+                                    Cuenta_cargo_2 = cuentaBase;
+                                    comparar_cuenta = cuentaBase;
+                                    indice += 1;
                                 }
 
                             }
                             if (indice == 3)
                             {
                                 //comparar
-                                if (comparar_cuenta != Cuenta_cargo_1)
+                                if (comparar_cuenta != cuentaBase && cuentaBase != Cuenta_cargo_1 && cuentaBase != Cuenta_cargo_2)
                                 {
-                                    Cuenta_cargo_3 = Cuenta_cargo_1;
+                                    Cuenta_cargo_3 = cuentaBase;
+                                    indice += 1;
                                 }
 
                             }
-                            indice += 1;
+                           
 
                         }
 
@@ -2445,11 +2494,11 @@ namespace EKPolizaGastos.Forms
                     IdEmpresa = IdEmpresa,
                     IdLocalidad = 1,//IdLocalidad,
                     Cuenta_cargo_1 = Cuenta_cargo_1,//TOTAL
-                    Cuenta_cargo_2 = Cuenta_cargo_2,//ISR TRASLADADO
-                    Cuenta_cargo_3 = Cuenta_cargo_3,//CONCEPTOS
-                    Cuenta_Cargo_Iva = Cuenta_cargo_Iva,//IVA TRASLADADO
-                    Cuenta_Abono_1 = Cuenta_Abono_1,//IEPS RETENIDO
-                    Cuenta_Abono_2 = Cuenta_Abono_2,//ISR TRASLADADO
+                    Cuenta_cargo_2 = Cuenta_cargo_2,
+                    Cuenta_cargo_3 = Cuenta_cargo_3,
+                    Cuenta_Cargo_Iva = Cuenta_cargo_Iva,
+                    Cuenta_Abono_1 = Cuenta_Abono_1,
+                    Cuenta_Abono_2 = Cuenta_Abono_2,
                     Cuenta_Abono_3 = Cuenta_Abono_3,
                     Titulo_principal = Titulo_principal,
                     Titulo_secundario = Titulo_secundario,
@@ -2539,16 +2588,13 @@ namespace EKPolizaGastos.Forms
         {
             if (txtDepto.Text != "")
             {
-                //1 comprubeo si existe empresa con este departamento
+
+                int empresa =int.Parse( cmbLocalidades.SelectedValue.ToString());
+                var empresas = db.Empresas.Where(p => p.IdEmpresa == empresa).FirstOrDefault();
+
+               
                 var ExisteProovedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor
-                && p.IdEmpresa == IdEmpresa).FirstOrDefault() ;
-
-
-
-
-
-
-
+                && p.IdEmpresa ==empresas.IdEmpresa).FirstOrDefault() ;
 
                 string numeroProvedorConvertido = "0";
                 if (ExisteProovedor != null)
@@ -2581,6 +2627,19 @@ namespace EKPolizaGastos.Forms
 
                     if (actualizarProveedor == DialogResult.Yes)
                     {
+                        Cuenta_cargo_1 = "0000-000-000";
+                        Cuenta_cargo_2 = "0000-000-000";
+                        Cuenta_cargo_3 = "0000-000-000";
+                        Cuenta_cargo_Iva = "0000-000-000";
+                        Cuenta_Abono_1 = "0000-000-000";
+                        Cuenta_Abono_2 = "0000-000-000";
+                        Cuenta_Abono_3 = "0000-000-000";
+                       
+                        Cuenta_isr_retenido = "0000-000-000";
+                        Cuenta_iva_retenido = "0000-000-000";          
+                        Cuenta_isr_trasladado = "0000-000-000";
+                        Cuenta_ieps_trasladado = "0000-000-000";
+                        Cuenta_ieps_trasladado = "0000-000-000";
 
                         foreach (DataGridViewRow item in poliza.Rows)
                         {
@@ -2617,56 +2676,105 @@ namespace EKPolizaGastos.Forms
                                 //Cuenta_Abono_1 = item.Cells[0].Value.ToString();
                                 Cuenta_ieps_retenido = item.Cells[0].Value.ToString();
                             }
-                            if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")
+                            if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")//EN DESCRIPCIONPUEDE DECIR OTROS
                             {
 
                                 //  Cuenta_Abono_2 = item.Cells[0].Value.ToString();
                                 Cuenta_ieps_trasladado = item.Cells[0].Value.ToString();
                             }
-                            if (item.Cells[4].Value.ToString() == "CONCEPTO")
-                            {
-                               
-                                Cuenta_cargo_3 = item.Cells[0].Value.ToString();
-                            }
+                          
 
 
 
                         }
 
+                        string comparar_cuenta = "";
+                        int indice = 1;
+                        string cuentaBase = "0000-000-000";
+                        foreach (DataGridViewRow item in poliza.Rows)
+                        {
+                            if (item.Cells[4].Value.ToString() == "CONCEPTO")
+                            {
+
+                                cuentaBase = item.Cells[0].Value.ToString();
 
 
 
+                                if (indice == 1)
+                                {
+                                    Cuenta_cargo_1 = cuentaBase;
+                                    comparar_cuenta = Cuenta_cargo_1;
+                                    indice += 1;
+                                }
+                                if (indice == 2)
+                                {
+                                    //comparar
+                                    if (comparar_cuenta != cuentaBase && cuentaBase != Cuenta_cargo_1)
+                                    {
+                                        Cuenta_cargo_2 = cuentaBase;
+                                        comparar_cuenta = cuentaBase;
+                                        indice += 1;
+                                    }
+                                   
+                                }
+                                if (indice == 3)
+                                {
+                                    //comparar
+                                    if (comparar_cuenta != cuentaBase && cuentaBase != Cuenta_cargo_1 && cuentaBase != Cuenta_cargo_2)
+                                    {
+                                        Cuenta_cargo_3 = cuentaBase;
+                                        indice += 1;
+                                    }
+
+                                }
+                               
+                            }
+                        }
+
+
+                        var listaProveedores = db.Proveedores.Where(C => C.RFC == RFC_proveedor).ToList();
                         Proveedores proveedoresM = new Proveedores();
-                        proveedoresM = ExisteProovedor;
+                        foreach (var item in listaProveedores)
+                        {
+                            //proveedoresM = ExisteProovedor;
 
-                        proveedoresM.Proveedor = Proveedor_Completo;
-                        proveedoresM.RFC = RFC_proveedor;
-                        proveedoresM.NoProveedor = numeroProvedorConvertido;
-                        proveedoresM.IdEmpresa = IdEmpresa;
-                        proveedoresM.IdLocalidad = IdLocalidad;
-                        proveedoresM.Cuenta_cargo_1 = Cuenta_cargo_1;
-                        proveedoresM.Cuenta_cargo_2 = Cuenta_cargo_2;
-                        proveedoresM.Cuenta_cargo_3 = Cuenta_cargo_3;
-                        proveedoresM.Cuenta_Cargo_Iva = Cuenta_cargo_Iva;
-                        proveedoresM.Cuenta_Abono_1 = Cuenta_Abono_1;
-                        proveedoresM.Cuenta_Abono_2 = Cuenta_Abono_2;
-                        proveedoresM.Cuenta_Abono_3 = Cuenta_Abono_3;
-                        proveedoresM.Titulo_principal = Titulo_principal;
-                        proveedoresM.Titulo_secundario = Titulo_secundario;
-                        proveedoresM.Titulo_tercero = Titulo_tercero;
+                            item.Proveedor = Proveedor_Completo;
+                            item.RFC = RFC_proveedor;
+                            item.NoProveedor = item.IdProveedor.ToString();
+                            item.IdEmpresa = empresas.IdEmpresa;
+                            item.IdLocalidad = 1;
+                            item.Cuenta_cargo_1 = Cuenta_cargo_1;
+                            item.Cuenta_cargo_2 = Cuenta_cargo_2;
+                            item.Cuenta_cargo_3 = Cuenta_cargo_3;
+                            item.Cuenta_Cargo_Iva = Cuenta_cargo_Iva;
+                            item.Cuenta_Abono_1 = Cuenta_Abono_1;
+                            item.Cuenta_Abono_2 = Cuenta_Abono_2;
+                            item.Cuenta_Abono_3 = Cuenta_Abono_3;
+                            item.Titulo_principal = Titulo_principal;
+                            item.Titulo_secundario = Titulo_secundario;
+                            item.Titulo_tercero = Titulo_tercero;
 
-                        proveedoresM.Departamento = txtDepto.Text;
-                        proveedoresM.Isr_Retenido = Cuenta_isr_retenido;
-                        proveedoresM.Iva_Retenido = Cuenta_iva_retenido;
-                        //MODIFICAR SOLO UNA ENTIDAD CON  ENTY FRAMEWORK
+                            item.Departamento = txtDepto.Text;
+                            item.Isr_Retenido = Cuenta_isr_retenido;
+                            item.Isr_Trasladado = Cuenta_isr_trasladado;
+                            item.Iva_Retenido = Cuenta_iva_retenido;
+                            item.Ieps_Trasladado = Cuenta_ieps_trasladado;
+                            item.Ieps_Trasladado = Cuenta_ieps_trasladado;
 
-                        //db.Proveedores.Attach(proveedoresM);
+                            //MODIFICAR SOLO UNA ENTIDAD CON  ENTY FRAMEWORK
 
-                        //db.Entry(proveedoresM).State =
-                        //    EntityState.Modified;
-                        //db.SaveChanges();
-                        //ACTUALIZAR VARIAS ENTIDADES CON ENTITY FRAMEWORK
-                        db.SaveChanges();
+                            db.Proveedores.Attach(item);
+
+                            db.Entry(item).State =
+                                EntityState.Modified;
+                            db.SaveChanges();
+                            //ACTUALIZAR VARIAS ENTIDADES CON ENTITY FRAMEWORK
+                            //db.SaveChanges();
+                        }
+
+                       
+                       
+
 
 
 
@@ -2719,23 +2827,26 @@ namespace EKPolizaGastos.Forms
             RECALCULAR();
 
         }
-
-
-        #endregion
         //AGREGAR FILA NUEVA
         private void buttonX4_Click(object sender, EventArgs e)
         {
             agregarFila();
         }
 
-        private void agregarFila()
-        {
-            int i = poliza.Rows.Count;
-            //i = i;
 
-            poliza.Rows.Insert(i, "0000-000-000", "INGRESE CONCEPTO", 0.00, 0.00,"CONCEPTO");
-            poliza.FirstDisplayedScrollingRowIndex = poliza.RowCount - 1;
-            poliza.Rows[i].Selected = true;
+
+        #endregion
+
+        //SELECCION DE CUENTA ABONO
+        private void buttonX5_Click(object sender, EventArgs e)
+        {
+            CuentasForm cuentas = new CuentasForm();
+            cuentas.Show();
+        }
+
+        private void buttonItem3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

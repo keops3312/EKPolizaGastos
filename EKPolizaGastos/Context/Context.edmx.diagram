@@ -15,8 +15,6 @@
         <EntityTypeShape EntityType="SEMP_SATModel.ComprobanteConceptos" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
         <AssociationConnector Association="SEMP_SATModel.FK_Comprobante_ComprobanteEstatus" ManuallyRouted="false" />
         <AssociationConnector Association="SEMP_SATModel.FK_Localidades_Empresas" ManuallyRouted="false" />
-        <AssociationConnector Association="SEMP_SATModel.FK_Proveedores_Empresas" ManuallyRouted="false" />
-        <AssociationConnector Association="SEMP_SATModel.FK_Proveedores_Localidades" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SEMP_SATModel.ConceptosNominas" Width="1.5" PointX="7.375" PointY="16.375" />
         <EntityTypeShape EntityType="SEMP_SATModel.DeduccionesNominas" Width="1.5" PointX="9.125" PointY="14.125" />
         <EntityTypeShape EntityType="SEMP_SATModel.Diot" Width="1.5" PointX="12.375" PointY="4.75" />
