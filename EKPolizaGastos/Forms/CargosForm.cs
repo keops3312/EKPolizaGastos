@@ -13,9 +13,8 @@ using System.Windows.Forms;
 
 namespace EKPolizaGastos.Forms
 {
-   
-    public partial class CuentasForm : DevComponents.DotNetBar.Office2007Form
-    { 
+    public partial class CargosForm : DevComponents.DotNetBar.Office2007Form
+    {
 
         #region Context
         private SEMP_SATContext db;
@@ -26,46 +25,48 @@ namespace EKPolizaGastos.Forms
         #region 
         public string RfcDeProveedor;
         public string idEmpresa;
-        public string CuentaCapturada; 
+        public string CuentaCapturada;
         #endregion
 
 
 
-        public CuentasForm()
+
+        public CargosForm()
         {
             InitializeComponent();
             db = new SEMP_SATContext();
         }
 
-        private void CuentasForm_Load(object sender, EventArgs e)
+        private void CargosForm_Load(object sender, EventArgs e)
         {
             loadCuentas();
+
         }
 
         private void loadCuentas()
         {
             int empresa = Convert.ToInt32(idEmpresa);
 
-            var cuentas = db.Proveedores.Where(p => p.RFC==RfcDeProveedor && 
-                        p.IdEmpresa==empresa).FirstOrDefault();
+            var cuentas = db.Proveedores.Where(p => p.RFC == RfcDeProveedor &&
+                        p.IdEmpresa == empresa).FirstOrDefault();
 
             txtAbono1.Text = "0000-000-000";
             txtAbono2.Text = "0000-000-000";
             txtAbono3.Text = "0000-000-000";
             if (cuentas != null)
             {
-                txtAbono1.Text = cuentas.Cuenta_Abono_1;
-                txtAbono2.Text = cuentas.Cuenta_Abono_2;
-                txtAbono3.Text = cuentas.Cuenta_Abono_3;
+                txtAbono1.Text = cuentas.Cuenta_cargo_1;
+                txtAbono2.Text = cuentas.Cuenta_cargo_2;
+                txtAbono3.Text = cuentas.Cuenta_cargo_3;
 
                 var leyendaCuenta = db.CuentasGastos.Where(p => p.IdEmpresa ==
-                                  empresa && p.Cuenta == cuentas.Cuenta_Abono_1).FirstOrDefault();
+                                  empresa && p.Cuenta == cuentas.Cuenta_cargo_1).FirstOrDefault();
 
                 var leyendaCuenta2 = db.CuentasGastos.Where(p => p.IdEmpresa ==
-                                     empresa && p.Cuenta == cuentas.Cuenta_Abono_2).FirstOrDefault();
+                                     empresa && p.Cuenta == cuentas.Cuenta_cargo_2).FirstOrDefault();
 
                 var leyendaCuenta3 = db.CuentasGastos.Where(p => p.IdEmpresa ==
-                                     empresa && p.Cuenta == cuentas.Cuenta_Abono_3).FirstOrDefault();
+                                     empresa && p.Cuenta == cuentas.Cuenta_cargo_3).FirstOrDefault();
 
 
 
@@ -86,8 +87,8 @@ namespace EKPolizaGastos.Forms
             }
 
 
-           
-          
+
+
 
             txtCuentaBase.Text = CuentaCapturada;
 
@@ -96,10 +97,10 @@ namespace EKPolizaGastos.Forms
         private void btpUpdate_Click(object sender, EventArgs e)
         {
             MessageBoxEx.EnableGlass = false;
-            DialogResult actualizarProveedor = MessageBoxEx.Show("¿Actualizar esta cuenta de Abono?", 
-                "EKPolizaGastos", MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            int i=0;
-            if(actualizarProveedor == DialogResult.Yes)
+            DialogResult actualizarProveedor = MessageBoxEx.Show("¿Actualizar esta cuenta de Cargo?",
+                "EKPolizaGastos", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            int i = 0;
+            if (actualizarProveedor == DialogResult.Yes)
             {
                 if (radioButton1.Checked == true)
                 {
@@ -118,27 +119,27 @@ namespace EKPolizaGastos.Forms
                 }
 
                 MessageBoxEx.EnableGlass = false;
-               MessageBoxEx.Show("Cuenta Actualizada con Exito!",
-                    "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBoxEx.Show("Cuenta Actualizada con Exito!",
+                     "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-               
-               plantilla.CargarDatosCuentas(Convert.ToInt32(idEmpresa),i,txtCuentaBase.Text.Trim());
+
+                plantilla.CargarDatosCuentas2(Convert.ToInt32(idEmpresa), i, txtCuentaBase.Text.Trim());
 
 
                 this.Close();
 
             }
-
         }
+
 
         private void actualizarcuenta(int v)
         {
             int empresa = Convert.ToInt32(idEmpresa);
-            var cuentas = db.Proveedores.Where(p => p.RFC == RfcDeProveedor 
+            var cuentas = db.Proveedores.Where(p => p.RFC == RfcDeProveedor
                         && p.IdEmpresa == empresa).FirstOrDefault();
             Proveedores proveedores = new Proveedores();
-           
-            if (cuentas== null)
+
+            if (cuentas == null)
             {
                 proveedores.Cuenta_cargo_1 = "0000-000-000";
                 proveedores.Cuenta_cargo_2 = "0000-000-000";
@@ -165,16 +166,16 @@ namespace EKPolizaGastos.Forms
                 switch (v)
                 {
                     case 1:
-                        proveedores.Cuenta_Abono_1 = txtCuentaBase.Text.Trim();
+                        proveedores.Cuenta_cargo_1 = txtCuentaBase.Text.Trim();
 
 
                         break;
                     case 2:
-                        proveedores.Cuenta_Abono_2 = txtCuentaBase.Text.Trim();
+                        proveedores.Cuenta_cargo_2 = txtCuentaBase.Text.Trim();
 
                         break;
                     case 3:
-                        proveedores.Cuenta_Abono_3 = txtCuentaBase.Text.Trim();
+                        proveedores.Cuenta_cargo_3 = txtCuentaBase.Text.Trim();
 
                         break;
 
@@ -192,16 +193,16 @@ namespace EKPolizaGastos.Forms
                 switch (v)
                 {
                     case 1:
-                        proveedores.Cuenta_Abono_1 = txtCuentaBase.Text.Trim();
+                        proveedores.Cuenta_cargo_1 = txtCuentaBase.Text.Trim();
 
 
                         break;
                     case 2:
-                        proveedores.Cuenta_Abono_2 = txtCuentaBase.Text.Trim();
+                        proveedores.Cuenta_cargo_2 = txtCuentaBase.Text.Trim();
 
                         break;
                     case 3:
-                        proveedores.Cuenta_Abono_3 = txtCuentaBase.Text.Trim();
+                        proveedores.Cuenta_cargo_3 = txtCuentaBase.Text.Trim();
 
                         break;
 
@@ -217,10 +218,11 @@ namespace EKPolizaGastos.Forms
 
             }
 
-            
-            
-           
-          
+
+
+
+
         }
+
     }
 }

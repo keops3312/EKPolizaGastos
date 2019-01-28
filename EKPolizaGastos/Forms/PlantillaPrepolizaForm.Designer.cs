@@ -69,13 +69,20 @@
             this.line2 = new DevComponents.DotNetBar.Controls.Line();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.line3 = new DevComponents.DotNetBar.Controls.Line();
+            this.buttonX7 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX6 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonX5 = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX4 = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.btnAbono = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonX4 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poliza)).BeginInit();
             this.SuspendLayout();
@@ -505,22 +512,108 @@
             this.line3.TabIndex = 42;
             this.line3.Text = "line3";
             // 
+            // buttonX7
+            // 
+            this.buttonX7.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX7.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX7.Image = global::EKPolizaGastos.Properties.Resources.catalogoDeCuentas;
+            this.buttonX7.ImageFixedSize = new System.Drawing.Size(48, 48);
+            this.buttonX7.Location = new System.Drawing.Point(12, 419);
+            this.buttonX7.Name = "buttonX7";
+            this.buttonX7.Size = new System.Drawing.Size(68, 51);
+            this.buttonX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX7.TabIndex = 47;
+            this.buttonX7.Click += new System.EventHandler(this.buttonX7_Click);
+            // 
+            // buttonX6
+            // 
+            this.buttonX6.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX6.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX6.Image = global::EKPolizaGastos.Properties.Resources.cargosCat;
+            this.buttonX6.ImageFixedSize = new System.Drawing.Size(48, 48);
+            this.buttonX6.Location = new System.Drawing.Point(12, 342);
+            this.buttonX6.Name = "buttonX6";
+            this.buttonX6.Size = new System.Drawing.Size(68, 51);
+            this.buttonX6.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX6.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem4,
+            this.buttonItem5,
+            this.buttonItem6,
+            this.buttonItem7});
+            this.buttonX6.TabIndex = 46;
+            // 
+            // buttonItem4
+            // 
+            this.buttonItem4.GlobalItem = false;
+            this.buttonItem4.Name = "buttonItem4";
+            this.buttonItem4.Text = "buttonItem4";
+            this.buttonItem4.Click += new System.EventHandler(this.buttonItem4_Click);
+            // 
+            // buttonItem5
+            // 
+            this.buttonItem5.GlobalItem = false;
+            this.buttonItem5.Name = "buttonItem5";
+            this.buttonItem5.Text = "buttonItem5";
+            this.buttonItem5.Click += new System.EventHandler(this.buttonItem5_Click);
+            // 
+            // buttonItem6
+            // 
+            this.buttonItem6.GlobalItem = false;
+            this.buttonItem6.Name = "buttonItem6";
+            this.buttonItem6.Text = "buttonItem6";
+            this.buttonItem6.Click += new System.EventHandler(this.buttonItem6_Click);
+            // 
+            // buttonItem7
+            // 
+            this.buttonItem7.GlobalItem = false;
+            this.buttonItem7.Name = "buttonItem7";
+            this.buttonItem7.Text = "Actualizar Cuentas";
+            this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
+            // 
             // buttonX5
             // 
             this.buttonX5.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX5.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX5.Image = global::EKPolizaGastos.Properties.Resources.libros;
             this.buttonX5.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.buttonX5.Location = new System.Drawing.Point(12, 265);
+            this.buttonX5.Location = new System.Drawing.Point(12, 268);
             this.buttonX5.Name = "buttonX5";
             this.buttonX5.Size = new System.Drawing.Size(66, 51);
             this.buttonX5.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX5.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.btnAbono,
             this.buttonItem2,
-            this.buttonItem3});
+            this.buttonItem3,
+            this.buttonItem1});
             this.buttonX5.TabIndex = 45;
-            this.buttonX5.Click += new System.EventHandler(this.buttonX5_Click);
+            // 
+            // btnAbono
+            // 
+            this.btnAbono.GlobalItem = false;
+            this.btnAbono.Name = "btnAbono";
+            this.btnAbono.Text = "buttonItem1";
+            this.btnAbono.Click += new System.EventHandler(this.btnAbono_Click);
+            // 
+            // buttonItem2
+            // 
+            this.buttonItem2.GlobalItem = false;
+            this.buttonItem2.Name = "buttonItem2";
+            this.buttonItem2.Text = "buttonItem2";
+            this.buttonItem2.Click += new System.EventHandler(this.buttonItem2_Click);
+            // 
+            // buttonItem3
+            // 
+            this.buttonItem3.GlobalItem = false;
+            this.buttonItem3.Name = "buttonItem3";
+            this.buttonItem3.Text = "buttonItem3";
+            this.buttonItem3.Click += new System.EventHandler(this.buttonItem3_Click);
+            // 
+            // buttonItem1
+            // 
+            this.buttonItem1.GlobalItem = false;
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.Text = "Actualizar Cuentas";
+            this.buttonItem1.Click += new System.EventHandler(this.buttonItem1_Click);
             // 
             // buttonX4
             // 
@@ -564,30 +657,13 @@
             this.buttonX2.Text = "Pre-Poliza";
             this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
             // 
-            // btnAbono
-            // 
-            this.btnAbono.GlobalItem = false;
-            this.btnAbono.Name = "btnAbono";
-            this.btnAbono.Text = "buttonItem1";
-            // 
-            // buttonItem2
-            // 
-            this.buttonItem2.GlobalItem = false;
-            this.buttonItem2.Name = "buttonItem2";
-            this.buttonItem2.Text = "buttonItem2";
-            // 
-            // buttonItem3
-            // 
-            this.buttonItem3.GlobalItem = false;
-            this.buttonItem3.Name = "buttonItem3";
-            this.buttonItem3.Text = "buttonItem3";
-            this.buttonItem3.Click += new System.EventHandler(this.buttonItem3_Click);
-            // 
             // PlantillaPrepolizaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1085, 676);
+            this.Controls.Add(this.buttonX7);
+            this.Controls.Add(this.buttonX6);
             this.Controls.Add(this.buttonX5);
             this.Controls.Add(this.buttonX4);
             this.Controls.Add(this.buttonX3);
@@ -674,5 +750,12 @@
         private DevComponents.DotNetBar.ButtonItem btnAbono;
         private DevComponents.DotNetBar.ButtonItem buttonItem2;
         private DevComponents.DotNetBar.ButtonItem buttonItem3;
+        private DevComponents.DotNetBar.ButtonItem buttonItem1;
+        private DevComponents.DotNetBar.ButtonX buttonX6;
+        private DevComponents.DotNetBar.ButtonX buttonX7;
+        private DevComponents.DotNetBar.ButtonItem buttonItem4;
+        private DevComponents.DotNetBar.ButtonItem buttonItem5;
+        private DevComponents.DotNetBar.ButtonItem buttonItem6;
+        private DevComponents.DotNetBar.ButtonItem buttonItem7;
     }
 }

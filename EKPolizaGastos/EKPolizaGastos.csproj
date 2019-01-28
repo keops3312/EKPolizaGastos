@@ -197,6 +197,18 @@
     <Compile Include="Context\sysdiagrams.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CargosForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CargosForm.Designer.cs">
+      <DependentUpon>CargosForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\CatalogoDeCuentasForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CatalogoDeCuentasForm.Designer.cs">
+      <DependentUpon>CatalogoDeCuentasForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\CuentasForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -241,6 +253,15 @@
       <DependentUpon>CrystalReport1.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="Forms\CargosForm.resx">
+      <DependentUpon>CargosForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CatalogoDeCuentasForm.resx">
+      <DependentUpon>CatalogoDeCuentasForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CuentasForm.resx">
+      <DependentUpon>CuentasForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -316,6 +337,8 @@
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
     <Content Include="polizaGastos.ico" />
+    <None Include="Resources\catalogoDeCuentas.png" />
+    <None Include="Resources\cargosCat.png" />
     <None Include="Resources\libros.png" />
     <None Include="Resources\plus_PNG8.png" />
     <None Include="Resources\256px-Database.svg.png" />

@@ -109,11 +109,7 @@ namespace EKPolizaGastos.Forms
             cmbLocalidades.DataSource = empresas;
             cmbLocalidades.DisplayMember = "Empresa";
             cmbLocalidades.ValueMember = "IdEmpresa";
-            //localidad = readSATFactura.Localidades(cnx);
-
-            //cmbLocalidades.DataSource = localidad;
-            //cmbLocalidades.DisplayMember = "Localidad";
-            //cmbLocalidades.ValueMember = "IdLocalidad";
+          
 
         }
         //BUSQUEDA DEL MES
@@ -1098,9 +1094,65 @@ namespace EKPolizaGastos.Forms
 
                     //var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor &&
                     //                       p.IdEmpresa == IdEmpresa && p.IdLocalidad == IdLocalidad && p.Departamento == localidades.Departamento).FirstOrDefault();
+                   
 
                     if (proveedor != null)
                     {
+
+
+                        //boton de cuentas abono
+                        int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
+                        var leyendaCuenta = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                                empresa && p.Cuenta == proveedor.Cuenta_Abono_1).FirstOrDefault();
+
+                        var leyendaCuenta2 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                             empresa && p.Cuenta == proveedor.Cuenta_Abono_2).FirstOrDefault();
+
+                        var leyendaCuenta3 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                             empresa && p.Cuenta == proveedor.Cuenta_Abono_3).FirstOrDefault();
+
+                        var leyendaCuenta4 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                              empresa && p.Cuenta == proveedor.Cuenta_cargo_1).FirstOrDefault();
+
+                        var leyendaCuenta5 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                             empresa && p.Cuenta == proveedor.Cuenta_cargo_2).FirstOrDefault();
+
+                        var leyendaCuenta6 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                             empresa && p.Cuenta == proveedor.Cuenta_cargo_3).FirstOrDefault();
+
+
+
+                        if (leyendaCuenta != null)
+                        {
+                            btnAbono.Text = "Cuenta Abono: " + proveedor.Cuenta_Abono_1 + " -" + leyendaCuenta.Descripcion;
+
+                        }
+                        if (leyendaCuenta2 != null)
+                        {
+                            buttonItem2.Text = "Cuenta Abono: " + proveedor.Cuenta_Abono_2 + " -" + leyendaCuenta2.Descripcion;
+
+                        }
+                        if (leyendaCuenta3 != null)
+                        {
+                            buttonItem3.Text = "Cuenta Abono: " + proveedor.Cuenta_Abono_3 + " -" + leyendaCuenta3.Descripcion;
+                        }
+
+
+                        if (leyendaCuenta != null)
+                        {
+                           buttonItem4.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_1 + " -" + leyendaCuenta4.Descripcion;
+
+                        }
+                        if (leyendaCuenta2 != null)
+                        {
+                            buttonItem5.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_2 + " -" + leyendaCuenta5.Descripcion;
+
+                        }
+                        if (leyendaCuenta3 != null)
+                        {
+                            buttonItem6.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_3 + " -" + leyendaCuenta6.Descripcion;
+                        }
+
 
 
                         foreach (DataGridViewRow item in poliza.Rows)
@@ -1108,7 +1160,7 @@ namespace EKPolizaGastos.Forms
 
                             if (item.Cells[4].Value.ToString() == "TOTAL")
                             {
-                                item.Cells[0].Value = proveedor.Cuenta_cargo_1;
+                                item.Cells[0].Value = proveedor.Cuenta_Abono_1;
                             }
                             if (item.Cells[4].Value.ToString() == "IVA TRASLADADO")
                             {
@@ -1129,7 +1181,7 @@ namespace EKPolizaGastos.Forms
                             }
                             if (item.Cells[4].Value.ToString() == "ISR TRASLADADO")
                             {
-                                item.Cells[0].Value = proveedor.Cuenta_cargo_2;
+                                item.Cells[0].Value = proveedor.Isr_Trasladado;
 
 
 
@@ -1137,18 +1189,18 @@ namespace EKPolizaGastos.Forms
                             }
                             if (item.Cells[4].Value.ToString() == "IEPS RETENIDO")
                             {
-                                item.Cells[0].Value = Cuenta_Abono_1;
+                                item.Cells[0].Value = proveedor.Ieps_Retenido;
 
 
                             }
                             if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")
                             {
-                                item.Cells[0].Value = proveedor.Cuenta_Abono_2;
+                                item.Cells[0].Value = proveedor.Ieps_Trasladado;
 
                             }
                             if (item.Cells[4].Value.ToString() == "CONCEPTO")
                             {
-                                item.Cells[0].Value = proveedor.Cuenta_cargo_3;
+                                item.Cells[0].Value = proveedor.Cuenta_cargo_1;
 
                             }
 
@@ -1156,7 +1208,22 @@ namespace EKPolizaGastos.Forms
 
                         }
 
+                    }
+                    else
+                    {
+                        Cuenta_Abono_1 = "0000-000-000";
+                        Cuenta_Abono_2 = "0000-000-000";
+                        Cuenta_Abono_3 = "0000-000-000";
+                        btnAbono.Text = "Cuenta Abono: " + Cuenta_Abono_1;
+                        buttonItem2.Text = "Cuenta Abono: " + Cuenta_Abono_2;
+                        buttonItem3.Text = "Cuenta Abono: " + Cuenta_Abono_3;
 
+                        Cuenta_cargo_1 = "0000-000-000";
+                        Cuenta_cargo_2 = "0000-000-000";
+                        Cuenta_cargo_3 = "0000-000-000";
+                        buttonItem4.Text = "Cuenta Abono: " + Cuenta_cargo_1;
+                        buttonItem5.Text = "Cuenta Abono: " + Cuenta_cargo_2;
+                        buttonItem6.Text = "Cuenta Abono: " + Cuenta_cargo_3;
                     }
 
                 }
@@ -1167,6 +1234,122 @@ namespace EKPolizaGastos.Forms
             }
          
         }
+
+        //Recargar Datos de cuentas
+        public void CargarDatosCuentas(int empresa, int opc, string cuenta)
+        {
+            //boton de cuentas abono
+           
+
+            if (opc == 1)
+            {
+                btnAbono.Text = "Cuenta Abono: " + cuenta;
+                Cuenta_Abono_1 = cuenta;
+
+                var leyendaCuenta = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                        empresa && p.Cuenta == cuenta).FirstOrDefault();
+
+                if (leyendaCuenta != null)
+                {
+                    btnAbono.Text = "Cuenta Abono: " + cuenta + " -" + leyendaCuenta.Descripcion;
+
+
+                }
+               
+            }
+            if (opc == 2)
+            {
+
+                buttonItem2.Text = "Cuenta Abono: " + cuenta;
+                Cuenta_Abono_2 = cuenta;
+                var leyendaCuenta2 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                    empresa && p.Cuenta == cuenta).FirstOrDefault();
+
+                if (leyendaCuenta2 != null)
+                {
+                    buttonItem2.Text = "Cuenta Abono: " + cuenta + " -" + leyendaCuenta2.Descripcion;
+
+                }
+                
+            }
+            if (opc == 3)
+            {
+                buttonItem3.Text = "Cuenta Abono: " + Cuenta_Abono_3;
+                Cuenta_Abono_3 = cuenta;
+                var leyendaCuenta3 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                    empresa && p.Cuenta == cuenta).FirstOrDefault();
+                if (leyendaCuenta3 != null)
+                {
+                    buttonItem3.Text = "Cuenta Abono: " + cuenta + " -" + leyendaCuenta3.Descripcion;
+                }
+
+               
+            }
+
+           
+           
+           
+
+        }
+
+        public void CargarDatosCuentas2(int empresa, int opc, string cuenta)
+        {
+            //boton de cuentas de cargos
+
+
+            if (opc == 1)
+            {
+               buttonItem4.Text = "Cuenta Cargo: " + cuenta;
+               Cuenta_cargo_1 = cuenta;
+
+                var leyendaCuenta = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                        empresa && p.Cuenta == cuenta).FirstOrDefault();
+
+                if (leyendaCuenta != null)
+                {
+                    buttonItem4.Text = "Cuenta Cargo: " + cuenta + " -" + leyendaCuenta.Descripcion;
+
+
+                }
+
+            }
+            if (opc == 2)
+            {
+
+                buttonItem5.Text = "Cuenta Cargo: " + cuenta;
+                Cuenta_cargo_2 = cuenta;
+
+                var leyendaCuenta2 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                    empresa && p.Cuenta == cuenta).FirstOrDefault();
+
+                if (leyendaCuenta2 != null)
+                {
+                    buttonItem5.Text = "Cuenta Cargo: " + cuenta + " -" + leyendaCuenta2.Descripcion;
+
+                }
+
+            }
+            if (opc == 3)
+            {
+                buttonItem6.Text = "Cuenta Cargo: " + cuenta;
+                Cuenta_cargo_3 = cuenta;
+
+                var leyendaCuenta3 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                    empresa && p.Cuenta == cuenta).FirstOrDefault();
+                if (leyendaCuenta3 != null)
+                {
+                    buttonItem6.Text = "Cuenta Cargo: " + cuenta + " -" + leyendaCuenta3.Descripcion;
+                }
+
+
+            }
+
+
+
+
+
+        }
+
         private void LoadFacturas(string Fecha)
         {
             try
@@ -1219,13 +1402,15 @@ namespace EKPolizaGastos.Forms
             Cuenta_iva_retenido = "0000-000-000";
             Cuenta_isr_trasladado = "0000-000-000";
             Cuenta_ieps_trasladado = "0000-000-000";
-            Cuenta_ieps_trasladado = "0000-000-000";
+            Cuenta_ieps_retenido = "0000-000-000";
 
             Titulo_principal = "Proveedor X";
             Titulo_secundario = "RFCXXX";
             Titulo_tercero = "SIN TITULO";
             Departamento = "2";
             Departamento = txtDepto.Text.Trim();
+
+          
 
             var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor).FirstOrDefault();
 
@@ -1360,7 +1545,40 @@ namespace EKPolizaGastos.Forms
 
 
             }
+            //
 
+            //boton de cuentas abono
+            int empresa =int.Parse(cmbLocalidades.SelectedValue.ToString());
+            var leyendaCuenta = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                    empresa && p.Cuenta == Cuenta_Abono_1).FirstOrDefault();
+
+            var leyendaCuenta2 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                 empresa && p.Cuenta == Cuenta_Abono_2).FirstOrDefault();
+
+            var leyendaCuenta3 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                 empresa && p.Cuenta == Cuenta_Abono_3).FirstOrDefault();
+
+            btnAbono.Text = "Cuenta Abono: " + Cuenta_Abono_1;
+            buttonItem2.Text = "Cuenta Abono: " + Cuenta_Abono_2;
+            buttonItem3.Text = "Cuenta Abono: " + Cuenta_Abono_3;
+
+            if (leyendaCuenta != null)
+            {
+                btnAbono.Text = "Cuenta Abono: " + Cuenta_Abono_1 + " -" + leyendaCuenta.Descripcion;
+               
+            }
+            if (leyendaCuenta2 != null)
+            {
+                buttonItem2.Text = "Cuenta Abono: " + Cuenta_Abono_2 + " -" + leyendaCuenta2.Descripcion;
+               
+            }
+            if (leyendaCuenta3 != null)
+            {
+                buttonItem3.Text = "Cuenta Abono: " + Cuenta_Abono_3 + " -" + leyendaCuenta3.Descripcion;
+            }
+
+
+            
             //Titulo en cabecera
             txtConcepto.Text = Titulo_principal;
             //Fecha de la factura
@@ -1467,7 +1685,7 @@ namespace EKPolizaGastos.Forms
            
             if (xTax.Count == 0)//Infonavit
             {
-                int indice_concepto = 1;
+               
                 foreach (DataRow item in conceptos.Rows)
                 {
                     descripcion = item[0].ToString();
@@ -1481,25 +1699,9 @@ namespace EKPolizaGastos.Forms
                         descripcion = descripcion.Substring(0, 25);
                     }
 
-                    if (indice_concepto == 1)
-                    {
-                        poliza.Rows.Insert(2, Cuenta_cargo_1, descripcion, subtotal, "0.00", "CONCEPTO");
-                        indice_concepto += 1;
-                    }
-                    if (indice_concepto == 2)
-                    {
-                        poliza.Rows.Insert(2, Cuenta_cargo_2, descripcion, subtotal, "0.00", "CONCEPTO");
-                        indice_concepto += 1;
-                    }
-                    if (indice_concepto == 3)
-                    {
-                        poliza.Rows.Insert(2, Cuenta_cargo_3, descripcion, subtotal, "0.00", "CONCEPTO");
-
-                    }
-
-
-
-
+                 
+                    poliza.Rows.Insert(2, Cuenta_cargo_1, descripcion, subtotal, "0.00", "CONCEPTO");
+                   
 
                    
                 }
@@ -1693,7 +1895,7 @@ namespace EKPolizaGastos.Forms
                 }
 
 
-                int indice_concepto = 1;
+               
                 foreach (XmlElement node in VarConceptos)
                 {
 
@@ -1858,21 +2060,9 @@ namespace EKPolizaGastos.Forms
                         descripcionxml = descripcionxml.Substring(0, 25);
                     }
 
-                    if (indice_concepto == 1)
-                    {
-                        poliza.Rows.Insert(1, Cuenta_cargo_1, descripcionxml, subtotal, "0.00", "CONCEPTO");
-                        indice_concepto += 1;
-                    }
-                    if (indice_concepto == 2)
-                    {
-                        poliza.Rows.Insert(1, Cuenta_cargo_2, descripcionxml, subtotal, "0.00", "CONCEPTO");
-                        indice_concepto += 1;
-                    }
-                    if (indice_concepto == 3)
-                    {
-                        poliza.Rows.Insert(1, Cuenta_cargo_3, descripcionxml, subtotal, "0.00", "CONCEPTO");
-                       
-                    }
+                 
+                    poliza.Rows.Insert(1, Cuenta_cargo_1, descripcionxml, subtotal, "0.00", "CONCEPTO");
+                   
 
 
                 }
@@ -2747,9 +2937,9 @@ namespace EKPolizaGastos.Forms
                             item.Cuenta_cargo_2 = Cuenta_cargo_2;
                             item.Cuenta_cargo_3 = Cuenta_cargo_3;
                             item.Cuenta_Cargo_Iva = Cuenta_cargo_Iva;
-                            item.Cuenta_Abono_1 = Cuenta_Abono_1;
-                            item.Cuenta_Abono_2 = Cuenta_Abono_2;
-                            item.Cuenta_Abono_3 = Cuenta_Abono_3;
+                            //item.Cuenta_Abono_1 = Cuenta_Abono_1;
+                            //item.Cuenta_Abono_2 = Cuenta_Abono_2;
+                            //item.Cuenta_Abono_3 = Cuenta_Abono_3;
                             item.Titulo_principal = Titulo_principal;
                             item.Titulo_secundario = Titulo_secundario;
                             item.Titulo_tercero = Titulo_tercero;
@@ -2837,16 +3027,133 @@ namespace EKPolizaGastos.Forms
 
         #endregion
 
-        //SELECCION DE CUENTA ABONO
-        private void buttonX5_Click(object sender, EventArgs e)
+      
+
+       
+        //ACTUALIZAR CON CUENTA ABONO 1
+        private void btnAbono_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow item in poliza.Rows)
+            {
+
+                if (item.Cells[4].Value.ToString() == "TOTAL")
+                {
+                    item.Cells[0].Value = Cuenta_Abono_1;
+                }
+            }
+
+
+        }
+        //ACTUALIZAR CON CUENTA ABONO 2
+        private void buttonItem2_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in poliza.Rows)
+            {
+
+                if (item.Cells[4].Value.ToString() == "TOTAL")
+                {
+                    item.Cells[0].Value = Cuenta_Abono_2;
+                }
+            }
+        }
+        //ACTUALIZAR CON CUENTA ABONO 3
+        private void buttonItem3_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in poliza.Rows)
+            {
+
+                if (item.Cells[4].Value.ToString() == "TOTAL")
+                {
+                    item.Cells[0].Value = Cuenta_Abono_3;
+                }
+            }
+
+        }
+
+
+
+        //Actualizar cuentas de Abono para este proveedor
+
+        private void buttonItem1_Click(object sender, EventArgs e)
+        {
+            int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
+          
+
             CuentasForm cuentas = new CuentasForm();
+            cuentas.RfcDeProveedor=RFC_proveedor;
+            cuentas.idEmpresa = Convert.ToString(empresa).ToString();
+            cuentas.CuentaCapturada = poliza.Rows[0].Cells[0].Value.ToString();
+            PlantillaPrepolizaForm actual = new PlantillaPrepolizaForm();
+            actual = this;
+            cuentas.plantilla = actual;
             cuentas.Show();
         }
 
-        private void buttonItem3_Click(object sender, EventArgs e)
+       
+        
+        //ACTUALIZAR CON CUENTA CARGO 1
+        private void buttonItem4_Click(object sender, EventArgs e)
         {
+            foreach (DataGridViewRow item in poliza.Rows)
+            {
 
+                if (item.Cells[4].Value.ToString() == "CONCEPTO")
+                {
+                    item.Cells[0].Value = Cuenta_cargo_1;
+                }
+            }
+        }
+
+        //ACTUALIZAR CON CUENTA CARGO 2
+        private void buttonItem5_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in poliza.Rows)
+            {
+
+                if (item.Cells[4].Value.ToString() == "CONCEPTO")
+                {
+                    item.Cells[0].Value = Cuenta_cargo_2;
+                }
+            }
+        }
+
+        //ACTUALIZAR CON CUENTA CARGO 3
+        private void buttonItem6_Click(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow item in poliza.Rows)
+            {
+
+                if (item.Cells[4].Value.ToString() == "CONCEPTO")
+                {
+                    item.Cells[0].Value = Cuenta_cargo_3;
+                }
+            }
+        }
+
+
+        //Actualizar las cuentas de Cargos
+        private void buttonItem7_Click(object sender, EventArgs e)
+        {
+            int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
+
+
+            CargosForm cuentas = new CargosForm();
+            cuentas.RfcDeProveedor = RFC_proveedor;
+            cuentas.idEmpresa = Convert.ToString(empresa).ToString();
+            //CargosForm.CuentaCapturada = poliza.Rows[0].Cells[0].Value.ToString();
+            PlantillaPrepolizaForm actual = new PlantillaPrepolizaForm();
+            actual = this;
+            cuentas.plantilla = actual;
+            cuentas.Show();
+        }
+
+
+        //ACCEDE AL DICCIONARIO DEL CATALGO DE CUENTAS
+
+        private void buttonX7_Click(object sender, EventArgs e)
+        {
+            CatalogoDeCuentasForm catalogoDeCuentasForm = new CatalogoDeCuentasForm();
+            catalogoDeCuentasForm.Show();
         }
     }
 }
