@@ -351,6 +351,8 @@
             this.poliza.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.poliza.Size = new System.Drawing.Size(954, 317);
             this.poliza.TabIndex = 30;
+            this.poliza.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.poliza_CellClick);
+            this.poliza.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.poliza_CellContentClick);
             this.poliza.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.poliza_CellValueChanged);
             this.poliza.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.poliza_UserDeletedRow);
             // 
