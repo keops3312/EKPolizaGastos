@@ -34,6 +34,7 @@ namespace EKPolizaGastos.Forms
         DataTable PolizaGrid;
         DataTable localidad;
         DataTable empresas;
+        SuperTooltipInfo superTooltip;
         #endregion
 
         #region Attributes
@@ -101,7 +102,7 @@ namespace EKPolizaGastos.Forms
             readSATFactura = new ReadSATFactura();
             localidad = new DataTable();
             empresas = new DataTable();
-
+            superTooltip = new SuperTooltipInfo();
         }
         //COMBO DE EMPRESAS
         public void FillComboEmpresas()
@@ -232,13 +233,32 @@ namespace EKPolizaGastos.Forms
         //DURANTE EL LOAD
         private void LoadF()
         {
+
+
+            //Configuracion de los tool tip para botones
+
+            //superTooltip.HeaderText = "EKPolizaGastos";
+            //superTooltip.BodyText = "<strong>Agregar nuevo concepto</strong><strong> + </strong>  ";
+            //superTooltip.FooterText = "selecciona si es de tipo cargo ó abono el concepto nuevo";
+            //superTooltip1.SetSuperTooltip(buttonX4, superTooltip);
+           // //Super Tooltips can have multiple lines of text.\r\n\r\nTo better explain functionalit
+           // superTooltip1.SetSuperTooltip(buttonX4, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+           //     "<strong>Agregar nuevo concepto</strong><strong> + </strong>",
+           //     "\r\n\r\n Seleccione si sera de tipo cargo ó abono!" +
+           //"", null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.attachment_icon.)),
+           //     DevComponents.DotNetBar.eTooltipColor.Blue));
+           // //
+
             txtTipo.Text = "Eg";
             txtFecha.Text = "";
+
+           
 
             cmbLocalidades.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbLocalidades.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             cmbLocalidades.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            
             var datos = db.Empresas.Where(p => p.Letra == ejercicio.Substring(0, 3)).First();
 
             lblEmpresa.Text = "Empresa:  " + datos.Empresa;
@@ -249,6 +269,9 @@ namespace EKPolizaGastos.Forms
 
             IdEmpresaEjercicio =datos.IdEmpresa;
 
+           
+          
+
             dataGridViewX1.DataSource = readSATFactura.listExercise(cnx, ejercicio);
             lblCantidad.Text = "Numero de CFDI cargados del mes: " + dataGridViewX1.Rows.Count;
             totalFacturas = dataGridViewX1.Rows.Count;
@@ -256,7 +279,10 @@ namespace EKPolizaGastos.Forms
             string[] result = SearchMonthD(ejercicio.Substring(4, 3));
 
             FillComboEmpresas();
-           
+
+            cmbLocalidades.SelectedValue = datos.IdEmpresa;
+            cmbLocalidades.SelectedText = datos.Empresa;
+
             StartPoliza();
           
         }
@@ -1096,13 +1122,20 @@ namespace EKPolizaGastos.Forms
                     //var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor &&
                     //                       p.IdEmpresa == IdEmpresa && p.IdLocalidad == IdLocalidad && p.Departamento == localidades.Departamento).FirstOrDefault();
                     int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
+                    btnAbono.Text=string.Empty;
+                    buttonItem2.Text = string.Empty;
+                    buttonItem3.Text = string.Empty;
+                   
+                    buttonItem4.Text = string.Empty;
+                    buttonItem5.Text = string.Empty;
+                    buttonItem6.Text = string.Empty;
                     //abonos
                     if (proveedor != null)
                     {
 
-
+                      
                         //boton de cuentas abono
-                       
+
                         var leyendaCuenta = db.CuentasGastos.Where(p => p.IdEmpresa ==
                                                 empresa && p.Cuenta == proveedor.Cuenta_Abono_1).FirstOrDefault();
 
@@ -1121,18 +1154,86 @@ namespace EKPolizaGastos.Forms
                             btnAbono.Text = "Cuenta Abono: " + proveedor.Cuenta_Abono_1 + " -" + leyendaCuenta.Descripcion;
 
                         }
+                        else
+                        {
+                            Cuenta_Abono_1 = "0000-000-000";
+                           
+                            btnAbono.Text = "Cuenta Abono: " + Cuenta_Abono_1;
+                            
+                        }
                         if (leyendaCuenta2 != null)
                         {
                             buttonItem2.Text = "Cuenta Abono: " + proveedor.Cuenta_Abono_2 + " -" + leyendaCuenta2.Descripcion;
 
                         }
+                        else
+                        {
+                           
+                            Cuenta_Abono_2 = "0000-000-000";
+                           
+                            buttonItem2.Text = "Cuenta Abono: " + Cuenta_Abono_2;
+                           
+                        }
                         if (leyendaCuenta3 != null)
                         {
                             buttonItem3.Text = "Cuenta Abono: " + proveedor.Cuenta_Abono_3 + " -" + leyendaCuenta3.Descripcion;
                         }
+                        else
+                        {
+                         
+                            Cuenta_Abono_3 = "0000-000-000";
+                           
+                            buttonItem3.Text = "Cuenta Abono: " + Cuenta_Abono_3;
+                        }
+
+                        //boton de cuentas de cargo
+                        var leyendaCuenta4 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                         empresa && p.Cuenta == proveedor.Cuenta_cargo_1).FirstOrDefault();
+
+                        var leyendaCuenta5 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                             empresa && p.Cuenta == proveedor.Cuenta_cargo_2).FirstOrDefault();
+
+                        var leyendaCuenta6 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                                             empresa && p.Cuenta == proveedor.Cuenta_cargo_3).FirstOrDefault();
+
+                        if (leyendaCuenta4 != null)
+                        {
+                            buttonItem4.Text = "Cuenta Cargo: " + proveedor.Cuenta_cargo_1 + " -" + leyendaCuenta4.Descripcion;
+
+                        }
+                        else
+                        {
+                            Cuenta_cargo_1 = "0000-000-000";
+
+                            buttonItem4.Text = "Cuenta Cargo: " + Cuenta_cargo_1;
+
+                        }
+                        if (leyendaCuenta5 != null)
+                        {
+                            buttonItem5.Text = "Cuenta Cargo: " + proveedor.Cuenta_cargo_2 + " -" + leyendaCuenta5.Descripcion;
+
+                        }
+                        else
+                        {
+
+                            Cuenta_cargo_2 = "0000-000-000";
+
+                            buttonItem5.Text = "Cuenta Cargo: " + Cuenta_cargo_2;
+
+                        }
+                        if (leyendaCuenta6 != null)
+                        {
+                            buttonItem6.Text = "Cuenta Cargo: " + proveedor.Cuenta_cargo_3 + " -" + leyendaCuenta6.Descripcion;
+                        }
+                        else
+                        {
+
+                            Cuenta_cargo_3 = "0000-000-000";
+
+                            buttonItem6.Text = "Cuenta Cargo: " + Cuenta_cargo_3;
+                        }
 
 
-                      
 
 
 
@@ -1199,39 +1300,6 @@ namespace EKPolizaGastos.Forms
                         buttonItem2.Text = "Cuenta Abono: " + Cuenta_Abono_2;
                         buttonItem3.Text = "Cuenta Abono: " + Cuenta_Abono_3;
 
-                      
-                    }
-
-
-                    //cargos
-                    if (proveedor != null)
-                    {
-                        var leyendaCuenta4 = db.CuentasGastos.Where(p => p.IdEmpresa ==
-                                          empresa && p.Cuenta == proveedor.Cuenta_cargo_1).FirstOrDefault();
-
-                        var leyendaCuenta5 = db.CuentasGastos.Where(p => p.IdEmpresa ==
-                                             empresa && p.Cuenta == proveedor.Cuenta_cargo_2).FirstOrDefault();
-
-                        var leyendaCuenta6 = db.CuentasGastos.Where(p => p.IdEmpresa ==
-                                             empresa && p.Cuenta == proveedor.Cuenta_cargo_3).FirstOrDefault();
-
-                        if (leyendaCuenta4 != null)
-                        {
-                            buttonItem4.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_1 + " -" + leyendaCuenta4.Descripcion;
-
-                        }
-                        if (leyendaCuenta5 != null)
-                        {
-                            buttonItem5.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_2 + " -" + leyendaCuenta5.Descripcion;
-
-                        }
-                        if (leyendaCuenta6 != null)
-                        {
-                            buttonItem6.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_3 + " -" + leyendaCuenta6.Descripcion;
-                        }
-                    }
-                    else
-                    {
                         Cuenta_cargo_1 = "0000-000-000";
                         Cuenta_cargo_2 = "0000-000-000";
                         Cuenta_cargo_3 = "0000-000-000";
@@ -1239,6 +1307,121 @@ namespace EKPolizaGastos.Forms
                         buttonItem5.Text = "Cuenta Cargo: " + Cuenta_cargo_2;
                         buttonItem6.Text = "Cuenta Cargo: " + Cuenta_cargo_3;
                     }
+
+
+                    ////cargos
+                    //if (proveedor != null)
+                    //{
+                    //    var leyendaCuenta4 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                    //                      empresa && p.Cuenta == proveedor.Cuenta_cargo_1).FirstOrDefault();
+
+                    //    var leyendaCuenta5 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                    //                         empresa && p.Cuenta == proveedor.Cuenta_cargo_2).FirstOrDefault();
+
+                    //    var leyendaCuenta6 = db.CuentasGastos.Where(p => p.IdEmpresa ==
+                    //                         empresa && p.Cuenta == proveedor.Cuenta_cargo_3).FirstOrDefault();
+
+                    //    if (leyendaCuenta4 != null)
+                    //    {
+                    //        buttonItem4.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_1 + " -" + leyendaCuenta4.Descripcion;
+
+                    //    }
+                    //    else
+                    //    {
+                    //        Cuenta_cargo_1 = "0000-000-000";
+                           
+                    //        buttonItem4.Text = "Cuenta Cargo: " + Cuenta_cargo_1;
+                           
+                    //    }
+                    //    if (leyendaCuenta5 != null)
+                    //    {
+                    //        buttonItem5.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_2 + " -" + leyendaCuenta5.Descripcion;
+
+                    //    }
+                    //    else
+                    //    {
+                            
+                    //        Cuenta_cargo_2 = "0000-000-000";
+                          
+                    //        buttonItem5.Text = "Cuenta Cargo: " + Cuenta_cargo_2;
+                          
+                    //    }
+                    //    if (leyendaCuenta6 != null)
+                    //    {
+                    //        buttonItem6.Text = "Cuenta Cargo: " + proveedor.Cuenta_Abono_3 + " -" + leyendaCuenta6.Descripcion;
+                    //    }
+                    //    else
+                    //    {
+                           
+                    //        Cuenta_cargo_3 = "0000-000-000";
+                           
+                    //        buttonItem6.Text = "Cuenta Cargo: " + Cuenta_cargo_3;
+                    //    }
+
+
+
+                    //    foreach (DataGridViewRow item in poliza.Rows)
+                    //    {
+
+                    //        if (item.Cells[4].Value.ToString() == "TOTAL")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Cuenta_Abono_1;
+                    //        }
+                    //        if (item.Cells[4].Value.ToString() == "IVA TRASLADADO")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Cuenta_Cargo_Iva;
+
+
+                    //        }
+                    //        if (item.Cells[4].Value.ToString() == "IVA RETENIDO")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Iva_Retenido;
+
+
+                    //        }
+                    //        if (item.Cells[4].Value.ToString() == "ISR RETENIDO")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Isr_Retenido;
+
+                    //        }
+                    //        if (item.Cells[4].Value.ToString() == "ISR TRASLADADO")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Isr_Trasladado;
+
+
+
+
+                    //        }
+                    //        if (item.Cells[4].Value.ToString() == "IEPS RETENIDO")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Ieps_Retenido;
+
+
+                    //        }
+                    //        if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Ieps_Trasladado;
+
+                    //        }
+                    //        if (item.Cells[4].Value.ToString() == "CONCEPTO")
+                    //        {
+                    //            item.Cells[0].Value = proveedor.Cuenta_cargo_1;
+
+                    //        }
+
+
+
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    Cuenta_cargo_1 = "0000-000-000";
+                    //    Cuenta_cargo_2 = "0000-000-000";
+                    //    Cuenta_cargo_3 = "0000-000-000";
+                    //    buttonItem4.Text = "Cuenta Cargo: " + Cuenta_cargo_1;
+                    //    buttonItem5.Text = "Cuenta Cargo: " + Cuenta_cargo_2;
+                    //    buttonItem6.Text = "Cuenta Cargo: " + Cuenta_cargo_3;
+                    //}
 
                 }
             }
@@ -1421,12 +1604,12 @@ namespace EKPolizaGastos.Forms
             Titulo_principal = "Proveedor X";
             Titulo_secundario = "RFCXXX";
             Titulo_tercero = "SIN TITULO";
-            Departamento = "2";
+           // Departamento = "2";
             Departamento = txtDepto.Text.Trim();
 
           
 
-            var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor).FirstOrDefault();
+            var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor && p.IdEmpresa==IdEmpresaEjercicio).FirstOrDefault();
 
             if (Folio.Length > 5)
             {
@@ -1587,6 +1770,7 @@ namespace EKPolizaGastos.Forms
             btnAbono.Text = "Cuenta Abono: " + Cuenta_Abono_1;
             buttonItem2.Text = "Cuenta Abono: " + Cuenta_Abono_2;
             buttonItem3.Text = "Cuenta Abono: " + Cuenta_Abono_3;
+
             buttonItem4.Text = "Cuenta Cargo: " + Cuenta_cargo_1;
             buttonItem5.Text = "Cuenta Cargo: " + Cuenta_cargo_2;
             buttonItem6.Text = "Cuenta Cargo: " + Cuenta_cargo_3;
@@ -2282,14 +2466,30 @@ namespace EKPolizaGastos.Forms
             #endregion
         }
         //AGREGAR NUEVA FILA
-        private void agregarFila()
-        {
-            int i = poliza.Rows.Count;
-            //i = i;
+        private void agregarFila(int tipo)
+         {
+            if (tipo == 1)//cargo
+            {
+                int i = poliza.Rows.Count;
+                //i = i;
 
-            poliza.Rows.Insert(i, "0000-000-000", "INGRESE CONCEPTO", 0.00, 0.00, "CONCEPTO");
-            poliza.FirstDisplayedScrollingRowIndex = poliza.RowCount - 1;
-            poliza.Rows[i].Selected = true;
+                poliza.Rows.Insert(i, "0000-000-000", "INGRESE CARGO", 0.00, 0.00, "CONCEPTO");
+                poliza.FirstDisplayedScrollingRowIndex = poliza.RowCount - 1;
+                poliza.Rows[i].Selected = true;
+
+            }
+            else//Abono
+            {
+
+                int i = poliza.Rows.Count;
+                //i = i;
+
+                poliza.Rows.Insert(i, "0000-000-000", "INGRESE ABONO", 0.00, 0.00, "IEPS TRASLADADO");
+                poliza.FirstDisplayedScrollingRowIndex = poliza.RowCount - 1;
+                poliza.Rows[i].Selected = true;
+            }
+
+           
         }
         #endregion
 
@@ -2791,6 +2991,7 @@ namespace EKPolizaGastos.Forms
             }
             else
             {
+                MessageBoxEx.EnableGlass = false;
                 MessageBoxEx.Show("Fin del Ejercicio del Mes!" +
                                     "\n" + "Muchas Gracias! ;)",
                                                        "EKPolizaGastos",
@@ -2859,21 +3060,92 @@ namespace EKPolizaGastos.Forms
                                                         MessageBoxButtons.YesNo,
                                                         MessageBoxIcon.Question);
 
-                    if (actualizarProveedor == DialogResult.Yes)
+
+                    if (Cuenta_cargo_1.Length <= 1)
                     {
                         Cuenta_cargo_1 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_2.Length <= 1)
+                    {
+
                         Cuenta_cargo_2 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_3.Length <= 1)
+                    {
+
                         Cuenta_cargo_3 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_Iva.Length <= 1)
+                    {
+
                         Cuenta_cargo_Iva = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_1.Length <= 1)
+                    {
+
                         Cuenta_Abono_1 = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_2.Length <= 1)
+                    {
+
                         Cuenta_Abono_2 = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_3.Length <= 1)
+                    {
+
                         Cuenta_Abono_3 = "0000-000-000";
-                       
+
+                    }
+                    if (Cuenta_isr_retenido == "" || string.IsNullOrEmpty(Cuenta_isr_retenido))
+                    {
+
                         Cuenta_isr_retenido = "0000-000-000";
-                        Cuenta_iva_retenido = "0000-000-000";          
+
+                    }
+                    if (Cuenta_ieps_trasladado == "" || string.IsNullOrEmpty(Cuenta_ieps_trasladado))
+                    {
+                        Cuenta_ieps_trasladado = "0000-000-000";
+                    }
+                    if (Cuenta_isr_trasladado == "" || string.IsNullOrEmpty(Cuenta_isr_trasladado))
+                    {
                         Cuenta_isr_trasladado = "0000-000-000";
-                        Cuenta_ieps_trasladado = "0000-000-000";
-                        Cuenta_ieps_trasladado = "0000-000-000";
+                    }
+                    if (Cuenta_iva_retenido == "" || string.IsNullOrEmpty(Cuenta_iva_retenido))
+                    {
+                        Cuenta_iva_retenido = "0000-000-000";
+                    }
+                    if (Cuenta_ieps_retenido == "" || string.IsNullOrEmpty(Cuenta_ieps_retenido))
+                    {
+                        Cuenta_ieps_retenido = "0000-000-000";
+                    }
+
+
+
+
+
+
+
+                    if (actualizarProveedor == DialogResult.Yes)
+                    {
+                        //Cuenta_cargo_1 = "0000-000-000";
+                        //Cuenta_cargo_2 = "0000-000-000";
+                        //Cuenta_cargo_3 = "0000-000-000";
+                        //Cuenta_cargo_Iva = "0000-000-000";
+                        //Cuenta_Abono_1 = "0000-000-000";
+                        //Cuenta_Abono_2 = "0000-000-000";
+                        //Cuenta_Abono_3 = "0000-000-000";
+                       
+                        //Cuenta_isr_retenido = "0000-000-000";
+                        //Cuenta_iva_retenido = "0000-000-000";          
+                        //Cuenta_isr_trasladado = "0000-000-000";
+                        //Cuenta_ieps_trasladado = "0000-000-000";
+                        //Cuenta_ieps_trasladado = "0000-000-000";
 
                         foreach (DataGridViewRow item in poliza.Rows)
                         {
@@ -2966,7 +3238,7 @@ namespace EKPolizaGastos.Forms
                         }
 
 
-                        var listaProveedores = db.Proveedores.Where(C => C.RFC == RFC_proveedor).ToList();
+                        var listaProveedores = db.Proveedores.Where(C => C.RFC == RFC_proveedor && C.IdEmpresa==empresa).ToList();
                         Proveedores proveedoresM = new Proveedores();
                         foreach (var item in listaProveedores)
                         {
@@ -3064,7 +3336,7 @@ namespace EKPolizaGastos.Forms
         //AGREGAR FILA NUEVA
         private void buttonX4_Click(object sender, EventArgs e)
         {
-            agregarFila();
+           // agregarFila();
         }
 
 
@@ -3228,6 +3500,16 @@ namespace EKPolizaGastos.Forms
             {
 
             }
+        }
+        //CARGO
+        private void buttonItem8_Click(object sender, EventArgs e)
+        {
+            agregarFila(1);
+        }
+        //ABONO
+        private void buttonItem9_Click(object sender, EventArgs e)
+        {
+            agregarFila(2);
         }
     }
 }

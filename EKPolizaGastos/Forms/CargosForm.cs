@@ -195,7 +195,6 @@ namespace EKPolizaGastos.Forms
                     case 1:
                         proveedores.Cuenta_cargo_1 = txtCuentaBase.Text.Trim();
 
-
                         break;
                     case 2:
                         proveedores.Cuenta_cargo_2 = txtCuentaBase.Text.Trim();

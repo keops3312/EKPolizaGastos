@@ -182,7 +182,7 @@
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(100, 23);
             this.labelX2.TabIndex = 13;
-            this.labelX2.Text = "<b>1.</b> Cuenta Abono";
+            this.labelX2.Text = "<b>1.</b> Cuenta Cargo";
             // 
             // labelX1
             // 

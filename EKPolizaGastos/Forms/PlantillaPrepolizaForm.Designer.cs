@@ -83,6 +83,9 @@
             this.buttonX4 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
+            this.superTooltip1 = new DevComponents.DotNetBar.SuperTooltip();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poliza)).BeginInit();
             this.SuspendLayout();
@@ -106,7 +109,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -334,7 +337,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.poliza.DefaultCellStyle = dataGridViewCellStyle5;
             this.poliza.EnableHeadersVisualStyles = false;
@@ -407,7 +410,7 @@
             this.labelX7.Name = "labelX7";
             this.labelX7.Size = new System.Drawing.Size(260, 23);
             this.labelX7.TabIndex = 33;
-            this.labelX7.Text = "Seleccione Sucursal:";
+            this.labelX7.Text = "Seleccione Empresa:";
             // 
             // txtDepto
             // 
@@ -525,6 +528,7 @@
             this.buttonX7.Size = new System.Drawing.Size(68, 51);
             this.buttonX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX7.TabIndex = 47;
+            this.buttonX7.Tooltip = "Catalogo de Cuentas";
             this.buttonX7.Click += new System.EventHandler(this.buttonX7_Click);
             // 
             // buttonX6
@@ -543,6 +547,7 @@
             this.buttonItem6,
             this.buttonItem7});
             this.buttonX6.TabIndex = 46;
+            this.buttonX6.Tooltip = "Cuentas de Cargo";
             // 
             // buttonItem4
             // 
@@ -588,6 +593,7 @@
             this.buttonItem3,
             this.buttonItem1});
             this.buttonX5.TabIndex = 45;
+            this.buttonX5.Tooltip = "Cuentas de Abono";
             // 
             // btnAbono
             // 
@@ -622,13 +628,18 @@
             this.buttonX4.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.buttonX4.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX4.Image = global::EKPolizaGastos.Properties.Resources.plus_PNG8;
-            this.buttonX4.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonX4.ImageFixedSize = new System.Drawing.Size(48, 48);
             this.buttonX4.Location = new System.Drawing.Point(12, 198);
             this.buttonX4.Name = "buttonX4";
-            this.buttonX4.ShowSubItems = false;
             this.buttonX4.Size = new System.Drawing.Size(66, 51);
+            this.buttonX4.SplitButton = true;
+            this.buttonX4.StopPulseOnMouseOver = false;
             this.buttonX4.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX4.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem8,
+            this.buttonItem9});
             this.buttonX4.TabIndex = 44;
+            this.buttonX4.Tooltip = "Agrega nuevo concepto (Selecciona si es Cargo ó Abono)";
             this.buttonX4.Click += new System.EventHandler(this.buttonX4_Click);
             // 
             // buttonX3
@@ -643,6 +654,7 @@
             this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX3.TabIndex = 43;
             this.buttonX3.Text = "Cuentas";
+            this.buttonX3.Tooltip = "Actualizar Datos Proveedor";
             this.buttonX3.Click += new System.EventHandler(this.buttonX3_Click);
             // 
             // buttonX2
@@ -657,7 +669,27 @@
             this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX2.TabIndex = 21;
             this.buttonX2.Text = "Pre-Poliza";
+            this.buttonX2.Tooltip = "Genera Poliza y Continua con la siguiente";
             this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
+            // 
+            // buttonItem8
+            // 
+            this.buttonItem8.GlobalItem = false;
+            this.buttonItem8.Name = "buttonItem8";
+            this.buttonItem8.Text = "Agregar Cargo";
+            this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
+            // 
+            // buttonItem9
+            // 
+            this.buttonItem9.GlobalItem = false;
+            this.buttonItem9.Name = "buttonItem9";
+            this.buttonItem9.Text = "Agregar Abono";
+            this.buttonItem9.Click += new System.EventHandler(this.buttonItem9_Click);
+            // 
+            // superTooltip1
+            // 
+            this.superTooltip1.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+            this.superTooltip1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
             // 
             // PlantillaPrepolizaForm
             // 
@@ -759,5 +791,8 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem5;
         private DevComponents.DotNetBar.ButtonItem buttonItem6;
         private DevComponents.DotNetBar.ButtonItem buttonItem7;
+        private DevComponents.DotNetBar.ButtonItem buttonItem8;
+        private DevComponents.DotNetBar.ButtonItem buttonItem9;
+        private DevComponents.DotNetBar.SuperTooltip superTooltip1;
     }
 }
