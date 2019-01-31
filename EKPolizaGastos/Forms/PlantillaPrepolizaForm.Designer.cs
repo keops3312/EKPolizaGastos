@@ -69,6 +69,7 @@
             this.line2 = new DevComponents.DotNetBar.Controls.Line();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.line3 = new DevComponents.DotNetBar.Controls.Line();
+            this.superTooltip1 = new DevComponents.DotNetBar.SuperTooltip();
             this.buttonX7 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX6 = new DevComponents.DotNetBar.ButtonX();
             this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
@@ -81,11 +82,10 @@
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonX4 = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
-            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
-            this.superTooltip1 = new DevComponents.DotNetBar.SuperTooltip();
+            this.buttonX3 = new DevComponents.DotNetBar.ButtonX();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.poliza)).BeginInit();
             this.SuspendLayout();
@@ -109,7 +109,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewX1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -337,7 +337,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.poliza.DefaultCellStyle = dataGridViewCellStyle5;
             this.poliza.EnableHeadersVisualStyles = false;
@@ -517,6 +517,11 @@
             this.line3.TabIndex = 42;
             this.line3.Text = "line3";
             // 
+            // superTooltip1
+            // 
+            this.superTooltip1.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
+            this.superTooltip1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            // 
             // buttonX7
             // 
             this.buttonX7.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -528,7 +533,6 @@
             this.buttonX7.Size = new System.Drawing.Size(68, 51);
             this.buttonX7.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.buttonX7.TabIndex = 47;
-            this.buttonX7.Tooltip = "Catalogo de Cuentas";
             this.buttonX7.Click += new System.EventHandler(this.buttonX7_Click);
             // 
             // buttonX6
@@ -547,7 +551,6 @@
             this.buttonItem6,
             this.buttonItem7});
             this.buttonX6.TabIndex = 46;
-            this.buttonX6.Tooltip = "Cuentas de Cargo";
             // 
             // buttonItem4
             // 
@@ -593,7 +596,6 @@
             this.buttonItem3,
             this.buttonItem1});
             this.buttonX5.TabIndex = 45;
-            this.buttonX5.Tooltip = "Cuentas de Abono";
             // 
             // btnAbono
             // 
@@ -639,38 +641,7 @@
             this.buttonItem8,
             this.buttonItem9});
             this.buttonX4.TabIndex = 44;
-            this.buttonX4.Tooltip = "Agrega nuevo concepto (Selecciona si es Cargo ó Abono)";
             this.buttonX4.Click += new System.EventHandler(this.buttonX4_Click);
-            // 
-            // buttonX3
-            // 
-            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX3.Image = global::EKPolizaGastos.Properties.Resources.refresProveedor;
-            this.buttonX3.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonX3.Location = new System.Drawing.Point(700, 598);
-            this.buttonX3.Name = "buttonX3";
-            this.buttonX3.Size = new System.Drawing.Size(114, 53);
-            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX3.TabIndex = 43;
-            this.buttonX3.Text = "Cuentas";
-            this.buttonX3.Tooltip = "Actualizar Datos Proveedor";
-            this.buttonX3.Click += new System.EventHandler(this.buttonX3_Click);
-            // 
-            // buttonX2
-            // 
-            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.buttonX2.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
-            this.buttonX2.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.buttonX2.Location = new System.Drawing.Point(820, 598);
-            this.buttonX2.Name = "buttonX2";
-            this.buttonX2.Size = new System.Drawing.Size(220, 53);
-            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.buttonX2.TabIndex = 21;
-            this.buttonX2.Text = "Pre-Poliza";
-            this.buttonX2.Tooltip = "Genera Poliza y Continua con la siguiente";
-            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
             // 
             // buttonItem8
             // 
@@ -686,10 +657,33 @@
             this.buttonItem9.Text = "Agregar Abono";
             this.buttonItem9.Click += new System.EventHandler(this.buttonItem9_Click);
             // 
-            // superTooltip1
+            // buttonX3
             // 
-            this.superTooltip1.DefaultTooltipSettings = new DevComponents.DotNetBar.SuperTooltipInfo("", "", "", null, null, DevComponents.DotNetBar.eTooltipColor.Gray);
-            this.superTooltip1.LicenseKey = "F962CEC7-CD8F-4911-A9E9-CAB39962FC1F";
+            this.buttonX3.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX3.Image = global::EKPolizaGastos.Properties.Resources.refresProveedor;
+            this.buttonX3.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.buttonX3.Location = new System.Drawing.Point(700, 598);
+            this.buttonX3.Name = "buttonX3";
+            this.buttonX3.Size = new System.Drawing.Size(114, 53);
+            this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX3.TabIndex = 43;
+            this.buttonX3.Text = "Cuentas";
+            this.buttonX3.Click += new System.EventHandler(this.buttonX3_Click);
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
+            this.buttonX2.ImageFixedSize = new System.Drawing.Size(48, 48);
+            this.buttonX2.Location = new System.Drawing.Point(820, 598);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(220, 53);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.TabIndex = 21;
+            this.buttonX2.Text = "Pre-Poliza";
+            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
             // 
             // PlantillaPrepolizaForm
             // 

@@ -337,6 +337,7 @@
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
     <Content Include="polizaGastos.ico" />
+    <None Include="Resources\iconToolTip.fw.png" />
     <None Include="Resources\catalogoDeCuentas.png" />
     <None Include="Resources\cargosCat.png" />
     <None Include="Resources\libros.png" />

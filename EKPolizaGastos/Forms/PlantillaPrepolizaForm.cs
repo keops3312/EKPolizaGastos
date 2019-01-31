@@ -237,17 +237,47 @@ namespace EKPolizaGastos.Forms
 
             //Configuracion de los tool tip para botones
 
+            #region  Tooltips buttons
             //superTooltip.HeaderText = "EKPolizaGastos";
             //superTooltip.BodyText = "<strong>Agregar nuevo concepto</strong><strong> + </strong>  ";
             //superTooltip.FooterText = "selecciona si es de tipo cargo ó abono el concepto nuevo";
             //superTooltip1.SetSuperTooltip(buttonX4, superTooltip);
-           // //Super Tooltips can have multiple lines of text.\r\n\r\nTo better explain functionalit
-           // superTooltip1.SetSuperTooltip(buttonX4, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
-           //     "<strong>Agregar nuevo concepto</strong><strong> + </strong>",
-           //     "\r\n\r\n Seleccione si sera de tipo cargo ó abono!" +
-           //"", null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.attachment_icon.)),
-           //     DevComponents.DotNetBar.eTooltipColor.Blue));
-           // //
+
+
+            //Super Tooltips can have multiple lines of text.\r\n\r\nTo better explain functionalit
+            superTooltip1.SetSuperTooltip(buttonX4, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+                "<strong>Agregar nuevo concepto</strong>",
+                "\n Seleccione si sera de tipo cargo ó abono!"
+           , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
+                DevComponents.DotNetBar.eTooltipColor.Blue));
+            // //
+            superTooltip1.SetSuperTooltip(buttonX5, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+              "<strong>Cuentas de Abono</strong>",
+              "\n Seleccione ó Actualize cuentas de Abono!"
+         , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
+              DevComponents.DotNetBar.eTooltipColor.Green));
+
+            superTooltip1.SetSuperTooltip(buttonX6, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+            "<strong>Cuentas de Cargo</strong>",
+            "\n  Seleccione ó Actualize cuentas de Cargo!"
+       , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
+            DevComponents.DotNetBar.eTooltipColor.Green));
+
+            superTooltip1.SetSuperTooltip(buttonX7, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+            "<strong>Catalogo de Cuentas</strong>", ""
+       , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
+            DevComponents.DotNetBar.eTooltipColor.Red));
+
+            superTooltip1.SetSuperTooltip(buttonX3, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+          "<strong>Actualizar cuentas de proveedor</strong>", ""
+     , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
+          DevComponents.DotNetBar.eTooltipColor.Gray));
+
+            superTooltip1.SetSuperTooltip(buttonX2, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+         "<strong>Generar Poliza!</strong>", ""
+    , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
+         DevComponents.DotNetBar.eTooltipColor.Gray)); 
+            #endregion
 
             txtTipo.Text = "Eg";
             txtFecha.Text = "";

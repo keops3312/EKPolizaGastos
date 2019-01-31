@@ -38,14 +38,14 @@ namespace EKPolizaGastos.Forms
             var datos = db.CuentasGastos.ToList().OrderBy(p => p.IdCuenta).ThenBy(p=> p.IdEmpresa);
             tabla.Columns.Add("Cuenta");
             tabla.Columns.Add("Descripcion");
-            tabla.Columns.Add("IdEmpresa");
+            //tabla.Columns.Add("IdEmpresa");
             
 
             foreach (var item in datos)
             {
                 //var empresa = db.Empresas.Where(p => p.IdEmpresa == item.IdEmpresa).First();
-                tabla.Rows.Add(item.Cuenta, item.Descripcion, item.IdEmpresa);
-               
+                tabla.Rows.Add(item.Cuenta, item.Descripcion);//, item.IdEmpresa
+
             }
             dataGridViewX1.DataSource = tabla;
 
