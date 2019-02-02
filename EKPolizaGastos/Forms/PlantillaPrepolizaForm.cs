@@ -3442,13 +3442,6 @@ namespace EKPolizaGastos.Forms
            // agregarFila();
         }
 
-
-
-        #endregion
-
-      
-
-       
         //ACTUALIZAR CON CUENTA ABONO 1
         private void btnAbono_Click(object sender, EventArgs e)
         {
@@ -3496,10 +3489,10 @@ namespace EKPolizaGastos.Forms
         private void buttonItem1_Click(object sender, EventArgs e)
         {
             int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
-          
+
 
             CuentasForm cuentas = new CuentasForm();
-            cuentas.RfcDeProveedor=RFC_proveedor;
+            cuentas.RfcDeProveedor = RFC_proveedor;
             cuentas.idEmpresa = Convert.ToString(empresa).ToString();
             cuentas.CuentaCapturada = poliza.Rows[0].Cells[0].Value.ToString();
             PlantillaPrepolizaForm actual = new PlantillaPrepolizaForm();
@@ -3508,22 +3501,22 @@ namespace EKPolizaGastos.Forms
             cuentas.Show();
         }
 
-       
-        
+
+
         //ACTUALIZAR CON CUENTA CARGO 1
         private void buttonItem4_Click(object sender, EventArgs e)
         {
             try
             {
-                poliza.Rows[Fila_actualizar_cargo].Cells[0].Value= Cuenta_cargo_1;
-               
+                poliza.Rows[Fila_actualizar_cargo].Cells[0].Value = Cuenta_cargo_1;
+
             }
             catch (Exception ex)
             {
 
             }
 
-           
+
         }
 
         //ACTUALIZAR CON CUENTA CARGO 2
@@ -3586,7 +3579,7 @@ namespace EKPolizaGastos.Forms
             {
                 Fila_actualizar_cargo = poliza.CurrentCell.RowIndex;//e.-columnindex para saber que columna seleccione
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -3614,5 +3607,10 @@ namespace EKPolizaGastos.Forms
         {
             agregarFila(2);
         }
+
+
+        #endregion
+
+
     }
 }
