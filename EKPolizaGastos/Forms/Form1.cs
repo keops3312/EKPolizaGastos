@@ -720,7 +720,28 @@ namespace EKPolizaGastos
                     Result.Columns[5].DataType = System.Type.GetType("System.Decimal");
 
                     DataView dataview = new DataView(Result);
-                    
+
+                    //ALTERNAMENTE DISEÑAMOS EL BLOC DE NOTAS
+                    using (System.IO.StreamWriter escritor = new System.IO.StreamWriter(ruta + ".txt"))
+                    {
+                        int importe;
+                        string rfc;
+                       
+                       
+                        for (int i = 0;  i <Result.Rows.Count-1;  i++)
+                        {
+                            rfc = Result.Rows[i][1].ToString();
+                            
+                          
+                            if (decimal.Parse(Result.Rows[i][4].ToString()) > 0)
+                            {
+                                importe = (int)Math.Round(Convert.ToDouble(Result.Rows[i][4].ToString()), 0, MidpointRounding.ToEven);
+                                escritor.WriteLine("04|85|" + rfc + "|||||" + importe + "||||||||||||||||");
+                            }
+                        }
+                      
+
+                    }
 
                     using (XLWorkbook wb = new XLWorkbook())
                     {
@@ -734,6 +755,10 @@ namespace EKPolizaGastos
                         wb.SaveAs(ruta);
 
                     }
+
+                    MessageBoxEx.EnableGlass = false;
+                    MessageBoxEx.Show("DIOT GENERADA CON EXITO" , "EKDIOT",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
                 }
