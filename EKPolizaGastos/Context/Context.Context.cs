@@ -51,6 +51,21 @@ namespace EKPolizaGastos.Context
         public virtual DbSet<MRO_ENE2018> MRO_ENE2018 { get; set; }
         public virtual DbSet<MRO_ENE2018Conceptos> MRO_ENE2018Conceptos { get; set; }
         public virtual DbSet<FactEmi_RFCMesAño> FactEmi_RFCMesAño { get; set; }
+        public virtual DbSet<CISFACTRECIBIDAS> CISFACTRECIBIDAS { get; set; }
+        public virtual DbSet<CISFACTSEMITIDAS> CISFACTSEMITIDAS { get; set; }
+        public virtual DbSet<CMGFACTEMITIDAS> CMGFACTEMITIDAS { get; set; }
+        public virtual DbSet<CMGFACTRECIBIDAS> CMGFACTRECIBIDAS { get; set; }
+        public virtual DbSet<DDRFACTEMITIDAS> DDRFACTEMITIDAS { get; set; }
+        public virtual DbSet<DDRFACTRECIBIDAS> DDRFACTRECIBIDAS { get; set; }
+        public virtual DbSet<JMRFACTEMITIDAS> JMRFACTEMITIDAS { get; set; }
+        public virtual DbSet<JMRFACTRECIBIDAS> JMRFACTRECIBIDAS { get; set; }
+        public virtual DbSet<MROFACTEMITIDAS> MROFACTEMITIDAS { get; set; }
+        public virtual DbSet<MROFACTRECIBIDAS> MROFACTRECIBIDAS { get; set; }
+        public virtual DbSet<NotasPagoPolizaUnoAuno> NotasPagoPolizaUnoAuno { get; set; }
+        public virtual DbSet<PrestamosPolizaUnoAUno> PrestamosPolizaUnoAUno { get; set; }
+        public virtual DbSet<PrestamosPolizaXdiaResumen> PrestamosPolizaXdiaResumen { get; set; }
+        public virtual DbSet<CIS_DIC2018> CIS_DIC2018 { get; set; }
+        public virtual DbSet<CIS_DIC2018Conceptos> CIS_DIC2018Conceptos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

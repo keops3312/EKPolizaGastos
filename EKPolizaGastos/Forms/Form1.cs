@@ -38,7 +38,7 @@ namespace EKPolizaGastos
         private ReadSATFactura readSATFactura;
         private diotClass diot;
         private ReadSatNominas readSatNominas;
-
+        private ReadSatFactura2 readSatFactura2;
         #endregion
 
         #region Properties
@@ -65,6 +65,7 @@ namespace EKPolizaGastos
             folderBrowserDialog = new FolderBrowserDialog();
             readSATFactura = new ReadSATFactura();
             readSatNominas = new ReadSatNominas();
+            readSatFactura2 = new ReadSatFactura2();
             diot = new diotClass();
 
             backgroundWorker1.WorkerReportsProgress = true;
@@ -518,17 +519,12 @@ namespace EKPolizaGastos
         {
             if (!string.IsNullOrEmpty(ejercicio))
             {
-                MessageBoxEx.EnableGlass = false;
-                MessageBoxEx.Show("Ejercicio Elejido: " + ejercicio + "",
-                    "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                PlantillaPrepolizaForm plantillaPrepoliza = new PlantillaPrepolizaForm();
-                plantillaPrepoliza.ejercicio = ejercicio;
-                plantillaPrepoliza.path=txtpath.Text;
-                plantillaPrepoliza.cnx = cnx;
-                plantillaPrepoliza.ShowDialog();
-                return;
+                TaskDialogInfo info = CreateTaskDialogInfoInv();
+                eTaskDialogResult result = TaskDialog.Show(info);
             }
+
+
+
 
             MessageBoxEx.EnableGlass = false;
             MessageBoxEx.Show("No has Seleccionado Ejercicio!",
@@ -613,7 +609,28 @@ namespace EKPolizaGastos
 
         #endregion
 
+        #region EtaskDialogs
+        private TaskDialogInfo CreateTaskDialogInfoInv()
+        {
+            TaskDialogInfo info = new TaskDialogInfo("EKPolizaGastos",
+                                                        eTaskDialogIcon.Information,
+                                                        "¿Que version Voy a Utilizar?",
+                                                        "",
+                                                        eTaskDialogButton.Cancel,
+                                                        eTaskDialogBackgroundColor.Blue, null, GetCommandButtonsInvs(), null, "", null);
 
+            return info;
+        }
+     
+        private Command[] GetCommandButtonsInvs()
+        {
+
+
+            return new Command[] { command1, command2 };
+
+
+        }
+        #endregion
         //Crear Reporte de DIOT
         private void buttonX1_Click(object sender, EventArgs e)
         {
@@ -664,15 +681,23 @@ namespace EKPolizaGastos
                     {
 
                         DataTable resultados = new DataTable();
-                        resultados = diot.ToListPRV(ejercicio, cnx, value, NoEmpresa, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+                        //resultados = diot.ToListPRV(ejercicio, cnx, value, NoEmpresa, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+
+                        //DataTable result = new DataTable();
+                        //result = diot.DIOT(resultados, ejercicio, cnx, value, NoEmpresa, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+
+                        //Export(result);
+                        //Lo creamos con la nueva version para la diot
+                        //Hacemos el desgloce
+                        //ejercicio CIS-ENE2018 CIC ENE 2018
+                        int no = int.Parse(NoEmpresa);
+                        var rfc = db.Empresas.Where(p => p.IdEmpresa == no).First(); 
+                        resultados = readSatFactura2.ToListPRV(ejercicio, cnx, value, rfc.RFC, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
 
                         DataTable result = new DataTable();
-                        result = diot.DIOT(resultados, ejercicio, cnx, value, NoEmpresa, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
-                       
+                        result = readSatFactura2.DIOT(resultados, ejercicio, cnx, value, NoEmpresa, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+
                         Export(result);
-
-
-
 
                     }
                 }
@@ -813,6 +838,56 @@ namespace EKPolizaGastos
         private void switchButton1_ValueChanged(object sender, EventArgs e)
         {
             LoadCompaniesProperties();
+        }
+
+        private void buttonX2_Click(object sender, EventArgs e)
+        {
+            ExcelForm excel = new ExcelForm();
+            excel.ShowDialog();
+        }
+
+
+        //1 version
+        private void command1_Executed(object sender, EventArgs e)
+        {
+            MessageBoxEx.EnableGlass = false;
+            MessageBoxEx.Show("Ejercicio Elejido: " + ejercicio + "",
+                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            PlantillaPrepolizaForm plantillaPrepoliza = new PlantillaPrepolizaForm();
+            plantillaPrepoliza.ejercicio = ejercicio;
+            plantillaPrepoliza.path = txtpath.Text;
+            plantillaPrepoliza.cnx = cnx;
+            plantillaPrepoliza.ShowDialog();
+            return;
+        }
+        //2 version
+        private void command2_Executed(object sender, EventArgs e)
+        {
+            MessageBoxEx.EnableGlass = false;
+            MessageBoxEx.Show("Ejercicio Elejido: " + ejercicio + "",
+                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            PolizaSatForm polizaSatForm = new PolizaSatForm();
+            polizaSatForm.ejercicio = ejercicio;
+            polizaSatForm.path = txtpath.Text;
+            polizaSatForm.cnx = cnx;
+            polizaSatForm.ShowDialog();
+            return;
+        }
+        
+        
+        
+        //NUEVA VERSION
+        private void buttonItem2_Click(object sender, EventArgs e)
+        {
+            VentanaForm ventanaForm = new VentanaForm();
+            ventanaForm.ShowDialog();
+        }
+        //VERSION ANTERIOR
+        private void buttonItem1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

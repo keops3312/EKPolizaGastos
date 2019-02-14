@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="Classes\diotClass.cs" />
     <Compile Include="Classes\ReadSATFactura.cs" />
+    <Compile Include="Classes\ReadSatFactura2.cs" />
     <Compile Include="Classes\ReadSatNominas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

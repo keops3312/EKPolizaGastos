@@ -1,117 +1,78 @@
-﻿
+﻿using ClosedXML.Excel;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 namespace EKPolizaGastos.Common.Classes
 {
-
-    #region Libraries (Librerias)
-    using EDsemp.Classes;
-    using System;
-    using System.Data;
-    using System.Data.SqlClient;
-    using System.IO;
-    #endregion
-
-
-    public class diotClass
+    public class ReadSatFactura2
     {
+       
 
-
-        #region Properties (propiedades)
-        private string sqlcnx, a, b, c, f;
-        #endregion
-
-        #region Methods (Metodos)
-
-        //CheckConectionEnrypt
-        public string CheckDataConection()
+        //EXCEL DATATABLE
+        public DataTable ExcelImport(string path, string nombreHoja)
         {
+            //Create a new DataTable.
+            DataTable dt = new DataTable();
 
-
-            //aligual que las demas aplicaciones cargaremos nuestra llave al servidor de oficinas para la conexion directa
-            string cadena = "C:/SEMP2013/EKPolizaGastos/EKPolizaGastos/cdb.txt";
-
-            using (StreamReader sr1 = new StreamReader(cadena, true))
+            using (XLWorkbook workBook = new XLWorkbook(path))
             {
+                //Read the first Sheet from Excel file.
+                IXLWorksheet workSheet = workBook.Worksheet(1);
 
-                string lineA = sr1.ReadLine();
-                string lineB = sr1.ReadLine();
-                string lineC = sr1.ReadLine();
-                string lineF = sr1.ReadLine();
+                //Create a new DataTable.
 
-                //ahroa desecrypto la informacion             
-                a = Encriptar_Desencriptar.DecryptKeyMD5(lineA);
-                b = Encriptar_Desencriptar.DecryptKeyMD5(lineB);
-                c = Encriptar_Desencriptar.DecryptKeyMD5(lineC);
-                f = Encriptar_Desencriptar.DecryptKeyMD5(lineF);
-                //ahora realizo la conexion par amostrar las sucursales
-
-
-                sqlcnx = "Data Source=" + a + " ;" +
-                    "Initial Catalog=" + b + ";" +
-                    "Persist Security Info=True;" +
-                    "User ID=" + c + ";Password=" + f + "";
-                SqlConnection conexion = new SqlConnection();
-                conexion.ConnectionString = sqlcnx;
-                conexion.Open();
-
-                if (true)
+                //Loop through the Worksheet rows.
+                bool firstRow = true;
+                foreach (IXLRow row in workSheet.Rows())
                 {
-                    return sqlcnx;
+                    //Use the first row to add columns to DataTable.
+                    if (firstRow)
+                    {
+                        foreach (IXLCell cell in row.Cells())
+                        {
+                            if (!string.IsNullOrEmpty(cell.Value.ToString()))
+                            {
+                                dt.Columns.Add(cell.Value.ToString());
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                        firstRow = false;
+                    }
+                    else
+                    {
+                        int i = 0;
+                        DataRow toInsert = dt.NewRow();
+                        foreach (IXLCell cell in row.Cells(1, dt.Columns.Count))
+                        {
+                            try
+                            {
+                                toInsert[i] = cell.Value.ToString();
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                            i++;
+                        }
+                        dt.Rows.Add(toInsert);
+                    }
                 }
 
 
 
-
+                return dt;
             }
-
-
-
-
         }
 
-
-        //Fill Empresas
-        public DataTable Empresas(string cnx)
-        {
-            DataTable empresas = new DataTable();
-
-            using (SqlConnection conn = new SqlConnection(cnx))
-            {
-
-                SqlCommand cmd = new SqlCommand("SELECT * FROM Empresas Order by IdEmpresa", conn);
-                using (SqlDataAdapter a = new SqlDataAdapter(cmd))
-                {
-                    a.Fill(empresas);
-
-                }
-
-            }
-
-            return empresas;
-        }
-
-
-        //Fill Excersise Load to Empresas
-        public DataTable ToListDTB(string Letra, string cnx)
-        {
-
-            SqlConnection conn = new SqlConnection(cnx);
-            //CREATE TABLE TO EXCEL FILE
-            DataTable list = new DataTable();
-
-            //CHARGE DATA 
-            SqlCommand cmd = new SqlCommand("select name from sysobjects where type='U'" +
-                                " and name like '%" + Letra + "%' and name not like '%conceptos%'", conn);
-            using (SqlDataAdapter a = new SqlDataAdapter(cmd))
-            {
-                a.Fill(list);
-
-            }
-
-
-
-            return list;
-        }
-
+        //CREATING DIOT
         //Catch Empresa Number
         public int EmpresaId(string Letra, string cnx)
         {
@@ -135,14 +96,17 @@ namespace EKPolizaGastos.Common.Classes
 
         //Estep 1
         //Fill Proveddor Compare
-        public DataTable ToListPRV(string Ejercicio, string cnx, string base_Iva, string IdEmpresa, string Mes, string Periodo)
+        public DataTable ToListPRV(string Ejercicio, string cnx, string base_Iva, string RFCEmpresa, string Mes, string Periodo)
         {
+            string Tabla;
+            Tabla = Ejercicio.Substring(0, 3) + "FACTRECIBIDAS";
+            int mes = SearchMonthD(Mes);
 
             SqlConnection conn = new SqlConnection(cnx);
             DataTable Proveedores = new DataTable();
             //CHARGE DATA 
-            SqlCommand cmd = new SqlCommand("select distinct(RFC_emisor)," +
-                " Emisor from [" + Ejercicio + "] order by emisor", conn);
+            SqlCommand cmd = new SqlCommand("select distinct(RFCEmisor)," +
+                "NombreEmisor from " + Tabla + " where Ano='"+ Periodo + "' and Mes='"+ mes + "' and Empresa='" + RFCEmpresa + "' order by RFCEmisor", conn);
             using (SqlDataAdapter a = new SqlDataAdapter(cmd))
             {
                 a.Fill(Proveedores);
@@ -156,6 +120,10 @@ namespace EKPolizaGastos.Common.Classes
         //Fill Excersise DIOT
         public DataTable DIOT(DataTable proovedores, string Ejercicio, string cnx, string base_Iva, string IdEmpresa, string Mes, string Periodo)
         {
+            string Tabla;
+            Tabla = Ejercicio.Substring(0, 3) + "FACTRECIBIDAS";
+            
+
             SqlConnection conn = new SqlConnection(cnx);
             //CREATE TABLE TO EXCEL FILE
             DataTable result = new DataTable();
@@ -168,16 +136,7 @@ namespace EKPolizaGastos.Common.Classes
             decimal BaseD;//NO redondeado
             decimal iva_calculado; //NO redondeado
 
-            //update Conceptos Table;
-            conn.Open();
-            SqlCommand cmdUpdate = new SqlCommand("update [" + Ejercicio + "] set Importe='0.001' where Importe='' ", conn);        
-            cmdUpdate.ExecuteNonQuery();
-            conn.Close();
-
-            conn.Open();
-            SqlCommand cmdUpdate2 = new SqlCommand("update [" + Ejercicio + "] set Total='0.001' where total='' ", conn);
-            cmdUpdate2.ExecuteNonQuery();
-            conn.Close();
+          
 
             Mes = Convert.ToString(SearchMonthD(Mes));
 
@@ -201,11 +160,13 @@ namespace EKPolizaGastos.Common.Classes
                     RFC_Emisor = item[0].ToString();
                     Proveedor_Emisor = item[1].ToString();
 
-                    SqlCommand cmd = new SqlCommand("select sum(Convert(decimal(18,2),Importe)) as IVA_trasladado," +
-                        " sum(Convert(decimal(18, 2), Importe) /" + base_Iva + ") as Base," +
-                        " sum(Convert(decimal(18, 2), Importe) /" + base_Iva + ") * " + base_Iva + " as iva_calculado" +
-                        " from [" + Ejercicio + "] " +
-                        " where RFC_emisor = '" + RFC_Emisor + "'", conn);
+                 
+                    SqlCommand cmd = new SqlCommand("select sum(Convert(decimal(18,2),IVA)) as IVA," +
+                        " sum(Convert(decimal(18,2),IVA)/ "+ base_Iva +") as Base, " +//- CONVERT(decimal(18, 2), Descuento)
+                        " sum(Convert(decimal(18,2),RetenidoIVA)) as IVARetenido" +
+                        " from " + Tabla + "" +
+                        " where RFCEmisor = '" + RFC_Emisor + "' and Ano='" + Periodo +"' and " +
+                        "Mes='" +  Mes + "'", conn);
                     using (SqlDataAdapter a = new SqlDataAdapter(cmd))
                     {
                         result.Clear();
@@ -218,15 +179,12 @@ namespace EKPolizaGastos.Common.Classes
                     BaseD = decimal.Parse(result.Rows[0][1].ToString()); //NO redondeado
                     BaseR = (int)Math.Round(Convert.ToDouble(BaseD), 0, MidpointRounding.ToEven);
 
+                   iva_calculado = (int)Math.Round(Convert.ToDouble(Iva_trasladado), 0, MidpointRounding.ToEven); ; //redondeado
 
-                    iva_calculado = BaseR * decimal.Parse(base_Iva);
-                    // iva_calculado = Convert.ToInt32(Math.Floor(iva_calculado));
-
-
-
-
-                    Register(RFC_Emisor, Proveedor_Emisor, Iva_trasladado, BaseR, iva_calculado, cnx, IdEmpresa, Mes, Periodo);
-
+                    if (iva_calculado > 0)
+                    {
+                        Register(RFC_Emisor, Proveedor_Emisor, Iva_trasladado, BaseR, iva_calculado, cnx, IdEmpresa, Mes, Periodo);
+                    }
                     RFC_Emisor = string.Empty;
                     Proveedor_Emisor = string.Empty;
 
@@ -234,13 +192,13 @@ namespace EKPolizaGastos.Common.Classes
                 }
 
             }
-        
+
 
 
             DataTable ResultadoDIOT = new DataTable("DIOT");
 
-            SqlCommand cmddiot = new SqlCommand("select * from diot where mes='"+ Mes + "' and periodo='" + Periodo + "' and " +
-                                    "IdEmpresa='"+ IdEmpresa +"' order by Proveedor asc", conn);
+            SqlCommand cmddiot = new SqlCommand("select * from diot where mes='" + Mes + "' and periodo='" + Periodo + "' and " +
+                                    "IdEmpresa='" + IdEmpresa + "' order by Proveedor asc", conn);
             using (SqlDataAdapter a = new SqlDataAdapter(cmddiot))
             {
                 ResultadoDIOT.Clear();
@@ -249,7 +207,7 @@ namespace EKPolizaGastos.Common.Classes
             }
 
             decimal suma_A = 0;
-            decimal suma_B =0;
+            decimal suma_B = 0;
             decimal suma_C = 0;
 
             foreach (DataRow dr in ResultadoDIOT.Rows)
@@ -305,7 +263,7 @@ namespace EKPolizaGastos.Common.Classes
 
 
 
-        private int SearchMonthD(string v)
+        public int SearchMonthD(string v)
         {
             int month = 0;
 
@@ -359,12 +317,22 @@ namespace EKPolizaGastos.Common.Classes
             return month;
         }
 
+        //Poliza excersise Start (Read table excersise facturas)
+        public DataTable listExercise(string cnx, int año, int mes, int empresa, string tablaName)
+        {
+            SqlConnection conn = new SqlConnection(cnx);
+            DataTable result = new DataTable();
+            //CHARGE DATA 
+            SqlCommand cmd = new SqlCommand("SELECT * FROM " + tablaName + " " +
+                               "where realizada='2' and Ano='" + año + "' and Mes='" + mes + "' order by facturaId asc", conn);
+            using (SqlDataAdapter a = new SqlDataAdapter(cmd))
+            {
+                a.Fill(result);
+
+            }
 
 
-
-
-        #endregion
-
-
+            return result;
+        }
     }
 }

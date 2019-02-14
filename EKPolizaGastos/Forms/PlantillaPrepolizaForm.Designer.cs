@@ -198,8 +198,8 @@
             // styleManager1
             // 
             this.styleManager1.ManagerColorTint = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007VistaGlass;
-            this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(115)))), ((int)(((byte)(199))))));
+            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007Black;
+            this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48))))), System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204))))));
             // 
             // txtTipo
             // 
@@ -208,6 +208,7 @@
             // 
             this.txtTipo.Border.Class = "TextBoxBorder";
             this.txtTipo.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtTipo.DisabledBackColor = System.Drawing.Color.Black;
             this.txtTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTipo.Location = new System.Drawing.Point(127, 118);
             this.txtTipo.Name = "txtTipo";
@@ -249,6 +250,7 @@
             // 
             this.txtNumero.Border.Class = "TextBoxBorder";
             this.txtNumero.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtNumero.DisabledBackColor = System.Drawing.Color.Black;
             this.txtNumero.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNumero.Location = new System.Drawing.Point(350, 118);
             this.txtNumero.Name = "txtNumero";
@@ -264,6 +266,7 @@
             // 
             this.txtFecha.Border.Class = "TextBoxBorder";
             this.txtFecha.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtFecha.DisabledBackColor = System.Drawing.Color.Black;
             this.txtFecha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFecha.Location = new System.Drawing.Point(860, 118);
             this.txtFecha.Name = "txtFecha";
@@ -305,6 +308,7 @@
             // 
             this.txtConcepto.Border.Class = "TextBoxBorder";
             this.txtConcepto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtConcepto.DisabledBackColor = System.Drawing.Color.Black;
             this.txtConcepto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConcepto.Location = new System.Drawing.Point(127, 154);
             this.txtConcepto.Multiline = true;
@@ -419,6 +423,7 @@
             // 
             this.txtDepto.Border.Class = "TextBoxBorder";
             this.txtDepto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDepto.DisabledBackColor = System.Drawing.Color.Black;
             this.txtDepto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDepto.Location = new System.Drawing.Point(558, 624);
             this.txtDepto.Name = "txtDepto";
@@ -459,8 +464,8 @@
             // 
             this.txtDebe.Border.Class = "TextBoxBorder";
             this.txtDebe.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtDebe.DisabledBackColor = System.Drawing.Color.Black;
             this.txtDebe.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDebe.ForeColor = System.Drawing.SystemColors.HotTrack;
             this.txtDebe.Location = new System.Drawing.Point(610, 547);
             this.txtDebe.Name = "txtDebe";
             this.txtDebe.PreventEnterBeep = true;
@@ -474,8 +479,8 @@
             // 
             this.txtHaber.Border.Class = "TextBoxBorder";
             this.txtHaber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.txtHaber.DisabledBackColor = System.Drawing.Color.Black;
             this.txtHaber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHaber.ForeColor = System.Drawing.Color.Green;
             this.txtHaber.Location = new System.Drawing.Point(857, 547);
             this.txtHaber.Name = "txtHaber";
             this.txtHaber.PreventEnterBeep = true;

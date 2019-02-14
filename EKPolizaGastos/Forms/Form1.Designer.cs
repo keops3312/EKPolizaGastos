@@ -53,6 +53,8 @@
             this.lblEmpresa = new DevComponents.DotNetBar.LabelX();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listXML2 = new DevComponents.DotNetBar.Controls.ListViewEx();
+            this.switchButton1 = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.buttonX2 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX1 = new DevComponents.DotNetBar.ButtonX();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -61,7 +63,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLeer = new DevComponents.DotNetBar.ButtonX();
             this.btnCargarRuta = new DevComponents.DotNetBar.ButtonX();
-            this.switchButton1 = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.command1 = new DevComponents.DotNetBar.Command(this.components);
+            this.command2 = new DevComponents.DotNetBar.Command(this.components);
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -139,7 +144,7 @@
             // styleManager1
             // 
             this.styleManager1.ManagerColorTint = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2007VistaGlass;
+            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Office2010Blue;
             this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(115)))), ((int)(((byte)(199))))));
             // 
             // backgroundWorker1
@@ -343,6 +348,37 @@
             this.listXML2.TabIndex = 25;
             this.listXML2.UseCompatibleStateImageBehavior = false;
             // 
+            // switchButton1
+            // 
+            // 
+            // 
+            // 
+            this.switchButton1.BackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarCaptionBackground2;
+            this.switchButton1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
+            this.switchButton1.Location = new System.Drawing.Point(185, 75);
+            this.switchButton1.Name = "switchButton1";
+            this.switchButton1.OffText = "Nomina";
+            this.switchButton1.OnText = "Gastos";
+            this.switchButton1.Size = new System.Drawing.Size(135, 34);
+            this.switchButton1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.switchButton1.TabIndex = 27;
+            this.switchButton1.Value = true;
+            this.switchButton1.ValueObject = "Y";
+            this.switchButton1.ValueChanged += new System.EventHandler(this.switchButton1_ValueChanged);
+            // 
+            // buttonX2
+            // 
+            this.buttonX2.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.buttonX2.Location = new System.Drawing.Point(931, 12);
+            this.buttonX2.Name = "buttonX2";
+            this.buttonX2.Size = new System.Drawing.Size(116, 35);
+            this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.buttonX2.Symbol = "";
+            this.buttonX2.TabIndex = 28;
+            this.buttonX2.Text = "&Nueva Carga!";
+            this.buttonX2.Click += new System.EventHandler(this.buttonX2_Click);
+            // 
             // buttonX1
             // 
             this.buttonX1.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -397,6 +433,9 @@
             this.btnPoliza.Name = "btnPoliza";
             this.btnPoliza.Size = new System.Drawing.Size(138, 50);
             this.btnPoliza.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnPoliza.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem1,
+            this.buttonItem2});
             this.btnPoliza.TabIndex = 9;
             this.btnPoliza.Text = "Revisar XML\'s Registrados";
             this.btnPoliza.Click += new System.EventHandler(this.btnPoliza_Click);
@@ -441,29 +480,40 @@
             this.btnCargarRuta.Click += new System.EventHandler(this.btnCargarRuta_Click);
             this.btnCargarRuta.MouseHover += new System.EventHandler(this.btnCargarRuta_MouseHover);
             // 
-            // switchButton1
+            // command1
             // 
+            this.command1.Name = "command1";
+            this.command1.Text = "<font size=\"+2\"><b>Version 1.0</b><font color=\"#1F497D\">Carga en poliza Conceptos" +
+    " de compras (productos y servicios)</font></font><br/>";
+            this.command1.Executed += new System.EventHandler(this.command1_Executed);
             // 
+            // command2
             // 
+            this.command2.Name = "command2";
+            this.command2.Text = "<font size=\"+2\"><b><b>Version 2.0</b></b><font color=\"#1F497D\">Considera el Subto" +
+    "tal unicamente (NO incluye conceptos)</font></font><br/>";
+            this.command2.Executed += new System.EventHandler(this.command2_Executed);
             // 
-            this.switchButton1.BackgroundStyle.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.BarCaptionBackground2;
-            this.switchButton1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Rounded;
-            this.switchButton1.Location = new System.Drawing.Point(185, 75);
-            this.switchButton1.Name = "switchButton1";
-            this.switchButton1.OffText = "Nomina";
-            this.switchButton1.OnText = "Gastos";
-            this.switchButton1.Size = new System.Drawing.Size(135, 34);
-            this.switchButton1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.switchButton1.TabIndex = 27;
-            this.switchButton1.Value = true;
-            this.switchButton1.ValueObject = "Y";
-            this.switchButton1.ValueChanged += new System.EventHandler(this.switchButton1_ValueChanged);
+            // buttonItem1
+            // 
+            this.buttonItem1.GlobalItem = false;
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.Text = "Prepolizas Version 1.0";
+            this.buttonItem1.Click += new System.EventHandler(this.buttonItem1_Click);
+            // 
+            // buttonItem2
+            // 
+            this.buttonItem2.GlobalItem = false;
+            this.buttonItem2.Name = "buttonItem2";
+            this.buttonItem2.Text = "Prepolizas Version 2.0";
+            this.buttonItem2.Click += new System.EventHandler(this.buttonItem2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1059, 504);
+            this.Controls.Add(this.buttonX2);
             this.Controls.Add(this.switchButton1);
             this.Controls.Add(this.buttonX1);
             this.Controls.Add(this.pictureBox4);
@@ -543,6 +593,11 @@
         private DevComponents.DotNetBar.Controls.ListViewEx listXML2;
         private DevComponents.DotNetBar.ButtonX buttonX1;
         private DevComponents.DotNetBar.Controls.SwitchButton switchButton1;
+        private DevComponents.DotNetBar.ButtonX buttonX2;
+        private DevComponents.DotNetBar.Command command1;
+        private DevComponents.DotNetBar.Command command2;
+        private DevComponents.DotNetBar.ButtonItem buttonItem1;
+        private DevComponents.DotNetBar.ButtonItem buttonItem2;
     }
 }
 

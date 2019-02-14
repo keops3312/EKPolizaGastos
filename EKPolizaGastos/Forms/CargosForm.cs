@@ -1,35 +1,36 @@
-﻿using DevComponents.DotNetBar;
-using EKPolizaGastos.Context;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.Entity;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
+﻿
 namespace EKPolizaGastos.Forms
 {
+
+    #region Libraries (Librerias)
+    using System;
+    using System.Data;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Windows.Forms;
+    using DevComponents.DotNetBar;
+    using EKPolizaGastos.Context; 
+    #endregion
+
+
+
     public partial class CargosForm : DevComponents.DotNetBar.Office2007Form
     {
 
         #region Context
         private SEMP_SATContext db;
         public PlantillaPrepolizaForm plantilla;
+        public PolizaSatForm polizaSatForm;
+        public int opcion;
         #endregion
 
-
-        #region 
+        #region Properties
         public string RfcDeProveedor;
         public string idEmpresa;
         public string CuentaCapturada;
         #endregion
 
-
-
+        #region Methods (Metodos)
 
         public CargosForm()
         {
@@ -37,11 +38,7 @@ namespace EKPolizaGastos.Forms
             db = new SEMP_SATContext();
         }
 
-        private void CargosForm_Load(object sender, EventArgs e)
-        {
-            loadCuentas();
 
-        }
 
         private void loadCuentas()
         {
@@ -92,43 +89,6 @@ namespace EKPolizaGastos.Forms
 
             txtCuentaBase.Text = CuentaCapturada;
 
-        }
-
-        private void btpUpdate_Click(object sender, EventArgs e)
-        {
-            MessageBoxEx.EnableGlass = false;
-            DialogResult actualizarProveedor = MessageBoxEx.Show("¿Actualizar esta cuenta de Cargo?",
-                "EKPolizaGastos", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            int i = 0;
-            if (actualizarProveedor == DialogResult.Yes)
-            {
-                if (radioButton1.Checked == true)
-                {
-                    actualizarcuenta(1);
-                    i = 1;
-                }
-                if (radioButton2.Checked == true)
-                {
-                    actualizarcuenta(2);
-                    i = 2;
-                }
-                if (radioButton3.Checked == true)
-                {
-                    actualizarcuenta(3);
-                    i = 3;
-                }
-
-                MessageBoxEx.EnableGlass = false;
-                MessageBoxEx.Show("Cuenta Actualizada con Exito!",
-                     "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-
-                plantilla.CargarDatosCuentas2(Convert.ToInt32(idEmpresa), i, txtCuentaBase.Text.Trim());
-
-
-                this.Close();
-
-            }
         }
 
 
@@ -222,6 +182,63 @@ namespace EKPolizaGastos.Forms
 
 
         }
+
+        #endregion
+
+        #region Events (Eventos)
+        private void CargosForm_Load(object sender, EventArgs e)
+        {
+            loadCuentas();
+
+        }
+
+        private void btpUpdate_Click(object sender, EventArgs e)
+        {
+            MessageBoxEx.EnableGlass = false;
+            DialogResult actualizarProveedor = MessageBoxEx.Show("¿Actualizar esta cuenta de Cargo?",
+                "EKPolizaGastos", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            int i = 0;
+            if (actualizarProveedor == DialogResult.Yes)
+            {
+                if (radioButton1.Checked == true)
+                {
+                    actualizarcuenta(1);
+                    i = 1;
+                }
+                if (radioButton2.Checked == true)
+                {
+                    actualizarcuenta(2);
+                    i = 2;
+                }
+                if (radioButton3.Checked == true)
+                {
+                    actualizarcuenta(3);
+                    i = 3;
+                }
+
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Cuenta Actualizada con Exito!",
+                     "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                if (opcion == 1)
+                {
+                    polizaSatForm.CargarDatosCuentas2(Convert.ToInt32(idEmpresa), i, txtCuentaBase.Text.Trim());
+                    opcion = 0;
+                }
+                else
+                {
+                    plantilla.CargarDatosCuentas2(Convert.ToInt32(idEmpresa), i, txtCuentaBase.Text.Trim());
+
+                }
+
+
+                this.Close();
+
+            }
+        }
+
+        #endregion
+
 
     }
 }

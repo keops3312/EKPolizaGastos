@@ -60,17 +60,17 @@ namespace EKPolizaGastos.Common.Classes
         private string UUID;
         private string FechaTimbrado;
         private string SelloSAT;
-       // private string trasladados;
+        // private string trasladados;
 
         //concepts to tax
         private string ClaveProdServ;
         private string NoIdentificacion;
-        private string Cantidad ;
-        private string ClaveUnidad ;
-        private string Unidad ;
+        private string Cantidad;
+        private string ClaveUnidad;
+        private string Unidad;
         private string Descripcion;
-        private string ValorUnitario ;
-        private string ImporteX ;
+        private string ValorUnitario;
+        private string ImporteX;
         private string DescuentoX;
 
         private string BaseTR;
@@ -138,19 +138,19 @@ namespace EKPolizaGastos.Common.Classes
         }
 
 
-        public int Scan(string path, string cnx,string nameTable)//ruta carpeta descomprimida + conexion + el nombre de la tabla que es el nombre de la carpeta
+        public int Scan(string path, string cnx, string nameTable)//ruta carpeta descomprimida + conexion + el nombre de la tabla que es el nombre de la carpeta
         {
-            int total;
+            int total=0;
 
             XmlDocument xDoc = new XmlDocument();
+            XmlDocument VarDocumentXML = new XmlDocument();
 
 
-           
 
             string[] archivos = Directory.GetFiles(path, "*.XML");
 
             SqlConnection conn = new SqlConnection(cnx);
-          
+
             //TRUNCATE TABLE
             conn.Open();
             SqlCommand command = new SqlCommand("SP_InsertFactura", conn);
@@ -161,14 +161,17 @@ namespace EKPolizaGastos.Common.Classes
             command.ExecuteNonQuery();
             conn.Close();
 
-          
+
+
 
             ////INSERT NEW REGISTRES
             foreach (var file in archivos)
             {
                 xDoc.Load(file);
 
-            
+
+
+
 
                 XmlNodeList xFactura = xDoc.GetElementsByTagName("cfdi:Comprobante");//cfdi:comprobante
                 XmlNodeList xEmisor = xDoc.GetElementsByTagName("cfdi:Emisor");
@@ -243,6 +246,8 @@ namespace EKPolizaGastos.Common.Classes
                     Descuento = nodo.GetAttribute("Descuento");
 
 
+
+
                     //Taxes 
                     foreach (XmlElement nodoReceptor in xTax)
                     {
@@ -334,7 +339,7 @@ namespace EKPolizaGastos.Common.Classes
 
                     }
 
-                    InsertData(cnx);
+                     InsertData(cnx);
 
                     foreach (XmlElement nodoReceptor in xConceptos)
                     {
@@ -362,62 +367,63 @@ namespace EKPolizaGastos.Common.Classes
                         //BaseTR = nodoReceptor.FirstChild.FirstChild["cfdi:Traslado"].GetAttribute("Base");
 
 
-                        InserConcepts(cnx);
+                         InserConcepts(cnx);
                     }
-                   
+
+
 
                 }
+
+
+                #region Crear Tabla
+                conn.Open();
+                SqlCommand commandCreate = new SqlCommand("USE SEMP_SAT " +
+                                  "SELECT * INTO BASE FROM COMPROBANTE", conn);
+                commandCreate.ExecuteNonQuery();
+                conn.Close();
+
+                conn.Open();
+                SqlCommand commandRename = new SqlCommand("USE SEMP_SAT " +
+                                  "EXEC SP_RENAME 'BASE' , '" + nameTable + "'", conn);
+                commandRename.ExecuteNonQuery();
+                conn.Close();
+
+
+
+                conn.Open();
+                SqlCommand commandCreateC = new SqlCommand("USE SEMP_SAT " +
+                                  "SELECT * INTO BASE2 FROM COMPROBANTECONCEPTOS", conn);
+                commandCreateC.ExecuteNonQuery();
+                conn.Close();
+
+                conn.Open();
+                SqlCommand commandRenameC = new SqlCommand("USE SEMP_SAT " +
+                                  "EXEC SP_RENAME 'BASE2' , '" + nameTable + "Conceptos'", conn);
+                commandRenameC.ExecuteNonQuery();
+                conn.Close();
+
+
+                //CLON DE TABLE COMPROBANTES AND RETURN ROWS COPIED
+
+                conn.Open();
+                SqlCommand commandClear = new SqlCommand("SP_InsertFactura", conn);
+                commandClear.CommandType = CommandType.StoredProcedure;
+                commandClear.Parameters.AddWithValue("opcion", 3);
+                commandClear.Parameters.AddWithValue("msg", "2");
+                SqlParameter param = new SqlParameter("Capto", SqlDbType.Int);
+                param.Direction = ParameterDirection.Output;
+                commandClear.Parameters.Add(param);
+
+                commandClear.ExecuteNonQuery();
+                total = int.Parse(param.Value.ToString());
+
+                #endregion
+
+               // return total;
             }
-
-
-            #region Crear Tabla
-            conn.Open();
-            SqlCommand commandCreate = new SqlCommand("USE SEMP_SAT " +
-                              "SELECT * INTO BASE FROM COMPROBANTE", conn);
-            commandCreate.ExecuteNonQuery();
-            conn.Close();
-
-            conn.Open();
-            SqlCommand commandRename = new SqlCommand("USE SEMP_SAT " +
-                              "EXEC SP_RENAME 'BASE' , '" + nameTable + "'", conn);
-            commandRename.ExecuteNonQuery();
-            conn.Close();
-
-
-
-            conn.Open();
-            SqlCommand commandCreateC = new SqlCommand("USE SEMP_SAT " +
-                              "SELECT * INTO BASE2 FROM COMPROBANTECONCEPTOS", conn);
-            commandCreateC.ExecuteNonQuery();
-            conn.Close();
-
-            conn.Open();
-            SqlCommand commandRenameC = new SqlCommand("USE SEMP_SAT " +
-                              "EXEC SP_RENAME 'BASE2' , '" + nameTable + "Conceptos'", conn);
-            commandRenameC.ExecuteNonQuery();
-            conn.Close();
-
-
-            //CLON DE TABLE COMPROBANTES AND RETURN ROWS COPIED
-
-            conn.Open();
-            SqlCommand commandClear = new SqlCommand("SP_InsertFactura", conn);
-            commandClear.CommandType = CommandType.StoredProcedure;
-            commandClear.Parameters.AddWithValue("opcion", 3);
-            commandClear.Parameters.AddWithValue("msg", "2");
-            SqlParameter param = new SqlParameter("Capto", SqlDbType.Int);
-            param.Direction = ParameterDirection.Output;
-            commandClear.Parameters.Add(param);
-
-            commandClear.ExecuteNonQuery();
-            total = int.Parse(param.Value.ToString());
-
-            #endregion
 
             return total;
         }
-
-
 
         //ESCANEO DE FACTURAS EMITIDAS
         public void Emitidas(string path,string cnx)
@@ -438,7 +444,7 @@ namespace EKPolizaGastos.Common.Classes
             XmlNodeList xTax = xDoc.GetElementsByTagName("cfdi:Traslado");
             XmlNodeList xConceptos = xDoc.GetElementsByTagName("cfdi:Concepto");//sin s
 
-
+         
 
             foreach (XmlElement nodo in xFactura)
                 {
@@ -504,38 +510,46 @@ namespace EKPolizaGastos.Common.Classes
                     Descuento = nodo.GetAttribute("Descuento");
 
 
-                    //Taxes 
+                //Taxes 
+               
                     foreach (XmlElement nodoReceptor in xTax)
                     {
+
+
+                 
+
 
                         Importe = nodoReceptor.GetAttribute("Importe");
                         Impuesto = nodoReceptor.GetAttribute("Impuesto");
                         TasaOCuota = nodoReceptor.GetAttribute("TasaOCuota");
                         TipoFactor = nodoReceptor.GetAttribute("TipoFactor");
 
-
-                        if (string.IsNullOrEmpty(Importe) || string.IsNullOrWhiteSpace(Importe))
-                        {
-                            Importe = "0";
-                        }
-
-                        if (string.IsNullOrEmpty(Impuesto) || string.IsNullOrWhiteSpace(Impuesto))
-                        {
-                            Impuesto = "0";
-                        }
-                        if (string.IsNullOrEmpty(TasaOCuota) || string.IsNullOrWhiteSpace(TasaOCuota))
-                        {
-                            TasaOCuota = "0";
-                        }
-                        if (string.IsNullOrEmpty(TipoFactor) || string.IsNullOrWhiteSpace(TipoFactor))
-                        {
-                            TipoFactor = "0";
-                        }
-
-
-
+                    if (string.IsNullOrEmpty(Importe) || string.IsNullOrWhiteSpace(Importe))
+                    {
+                        Importe = "0";
                     }
 
+                    if (string.IsNullOrEmpty(Impuesto) || string.IsNullOrWhiteSpace(Impuesto))
+                    {
+                        Impuesto = "0";
+                    }
+                    if (string.IsNullOrEmpty(TasaOCuota) || string.IsNullOrWhiteSpace(TasaOCuota))
+                    {
+                        TasaOCuota = "0";
+                    }
+                    if (string.IsNullOrEmpty(TipoFactor) || string.IsNullOrWhiteSpace(TipoFactor))
+                    {
+                        TipoFactor = "0";
+                    }
+
+
+
+
+                 
+                     
+
+                     }
+             
                     //Emisor Data
                     foreach (XmlElement nodoEmisor in xEmisor)
                     {
@@ -595,7 +609,7 @@ namespace EKPolizaGastos.Common.Classes
 
                     }
 
-                InsertDataEMITIDAS(cnx);
+               InsertDataEMITIDAS(cnx);
 
                 foreach (XmlElement nodoReceptor in xConceptos)
                 {
@@ -621,7 +635,7 @@ namespace EKPolizaGastos.Common.Classes
                     ImporteX = nodoReceptor.GetAttribute("Importe");
                     DescuentoX = nodoReceptor.GetAttribute("Descuento");
                   
-                    InserConceptsEMITIDAS(cnx);
+                   InserConceptsEMITIDAS(cnx);
                 }
 
 
@@ -1137,7 +1151,7 @@ namespace EKPolizaGastos.Common.Classes
 
             //CHARGE DATA 
             SqlCommand cmd = new SqlCommand("select name from sysobjects where type='U'" +
-                                " and name like '%" + Letra  + "%' and name not like '%conceptos%'", conn);
+                                " and name like '%" + Letra  + "%' and name not like '%conceptos%' and name not like '%FACT%'", conn);
             using (SqlDataAdapter a = new SqlDataAdapter(cmd))
             {
                 a.Fill(list);
@@ -1242,10 +1256,6 @@ namespace EKPolizaGastos.Common.Classes
 
 
 
-
-        ////////////METODOS PARA LA FACTURACION DE NOMINA
-        // SUMARY
-        //INSERT DATA TU XML NOMINA
 
 
         #endregion
