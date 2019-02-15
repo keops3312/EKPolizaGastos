@@ -517,20 +517,20 @@ namespace EKPolizaGastos
 
         private void btnPoliza_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(ejercicio))
-            {
-                TaskDialogInfo info = CreateTaskDialogInfoInv();
-                eTaskDialogResult result = TaskDialog.Show(info);
-            }
+            //if (!string.IsNullOrEmpty(ejercicio))
+            //{
+            //    TaskDialogInfo info = CreateTaskDialogInfoInv();
+            //    eTaskDialogResult result = TaskDialog.Show(info);
+            //}
 
 
 
 
-            MessageBoxEx.EnableGlass = false;
-            MessageBoxEx.Show("No has Seleccionado Ejercicio!",
-                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBoxEx.EnableGlass = false;
+            //MessageBoxEx.Show("No has Seleccionado Ejercicio!",
+            //    "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            return;
+            //return;
         }
 
         private void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)

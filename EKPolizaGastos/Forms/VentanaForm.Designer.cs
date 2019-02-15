@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VentanaForm));
             this.cmbTipoFactura = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cmbEmpresa = new DevComponents.DotNetBar.Controls.ComboBoxEx();
             this.cmbMes = new DevComponents.DotNetBar.Controls.ComboBoxEx();
@@ -38,6 +39,7 @@
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
             this.btnCargar = new DevComponents.DotNetBar.ButtonX();
             this.btnComenzar = new DevComponents.DotNetBar.ButtonX();
+            this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.SuspendLayout();
             // 
             // cmbTipoFactura
@@ -46,11 +48,11 @@
             this.cmbTipoFactura.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbTipoFactura.FormattingEnabled = true;
             this.cmbTipoFactura.ItemHeight = 14;
-            this.cmbTipoFactura.Location = new System.Drawing.Point(91, 41);
+            this.cmbTipoFactura.Location = new System.Drawing.Point(89, 51);
             this.cmbTipoFactura.Name = "cmbTipoFactura";
             this.cmbTipoFactura.Size = new System.Drawing.Size(137, 20);
             this.cmbTipoFactura.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cmbTipoFactura.TabIndex = 1;
+            this.cmbTipoFactura.TabIndex = 0;
             // 
             // cmbEmpresa
             // 
@@ -62,7 +64,7 @@
             this.cmbEmpresa.Name = "cmbEmpresa";
             this.cmbEmpresa.Size = new System.Drawing.Size(282, 20);
             this.cmbEmpresa.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cmbEmpresa.TabIndex = 2;
+            this.cmbEmpresa.TabIndex = 1;
             this.cmbEmpresa.SelectedIndexChanged += new System.EventHandler(this.cmbEmpresa_SelectedIndexChanged);
             this.cmbEmpresa.SelectedValueChanged += new System.EventHandler(this.cmbEmpresa_SelectedValueChanged);
             // 
@@ -76,7 +78,7 @@
             this.cmbMes.Name = "cmbMes";
             this.cmbMes.Size = new System.Drawing.Size(127, 20);
             this.cmbMes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cmbMes.TabIndex = 3;
+            this.cmbMes.TabIndex = 4;
             // 
             // cmbAno
             // 
@@ -88,7 +90,7 @@
             this.cmbAno.Name = "cmbAno";
             this.cmbAno.Size = new System.Drawing.Size(115, 20);
             this.cmbAno.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.cmbAno.TabIndex = 4;
+            this.cmbAno.TabIndex = 3;
             this.cmbAno.SelectedIndexChanged += new System.EventHandler(this.cmbAno_SelectedIndexChanged);
             // 
             // labelX1
@@ -97,7 +99,7 @@
             // 
             // 
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(76, 12);
+            this.labelX1.Location = new System.Drawing.Point(88, 22);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(167, 23);
             this.labelX1.TabIndex = 5;
@@ -109,7 +111,7 @@
             // 
             // 
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(91, 89);
+            this.labelX2.Location = new System.Drawing.Point(98, 100);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(136, 23);
             this.labelX2.TabIndex = 6;
@@ -122,7 +124,7 @@
             // 
             // 
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(190, 260);
+            this.labelX3.Location = new System.Drawing.Point(193, 269);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(89, 23);
             this.labelX3.TabIndex = 7;
@@ -134,7 +136,7 @@
             // 
             // 
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(34, 260);
+            this.labelX4.Location = new System.Drawing.Point(36, 269);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(85, 23);
             this.labelX4.TabIndex = 8;
@@ -144,31 +146,49 @@
             // 
             this.btnCargar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnCargar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnCargar.Location = new System.Drawing.Point(119, 185);
+            this.btnCargar.Image = global::EKPolizaGastos.Properties.Resources._256px_Database_svg;
+            this.btnCargar.ImageFixedSize = new System.Drawing.Size(48, 48);
+            this.btnCargar.Location = new System.Drawing.Point(77, 174);
             this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(81, 30);
+            this.btnCargar.Size = new System.Drawing.Size(152, 60);
             this.btnCargar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnCargar.TabIndex = 9;
-            this.btnCargar.Text = "Iniciar";
+            this.btnCargar.TabIndex = 2;
+            this.btnCargar.Text = "Cargar Ejercicios";
             this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
             // btnComenzar
             // 
             this.btnComenzar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnComenzar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnComenzar.Location = new System.Drawing.Point(119, 355);
+            this.btnComenzar.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
+            this.btnComenzar.ImageFixedSize = new System.Drawing.Size(48, 48);
+            this.btnComenzar.Location = new System.Drawing.Point(77, 337);
             this.btnComenzar.Name = "btnComenzar";
-            this.btnComenzar.Size = new System.Drawing.Size(81, 32);
+            this.btnComenzar.Size = new System.Drawing.Size(152, 60);
             this.btnComenzar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnComenzar.TabIndex = 10;
-            this.btnComenzar.Text = "buttonX1";
+            this.btnComenzar.TabIndex = 5;
+            this.btnComenzar.Text = "Empezar";
             this.btnComenzar.Click += new System.EventHandler(this.btnComenzar_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClose.Image = global::EKPolizaGastos.Properties.Resources.cerrar;
+            this.btnClose.ImageFixedSize = new System.Drawing.Size(20, 20);
+            this.btnClose.Location = new System.Drawing.Point(269, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(47, 38);
+            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClose.TabIndex = 9;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // VentanaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(328, 429);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnComenzar);
             this.Controls.Add(this.btnCargar);
             this.Controls.Add(this.labelX4);
@@ -180,8 +200,14 @@
             this.Controls.Add(this.cmbEmpresa);
             this.Controls.Add(this.cmbTipoFactura);
             this.DoubleBuffered = true;
+            this.EnableGlass = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "VentanaForm";
-            this.Text = "VentanaForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Seleccione de Tipo de Polizas";
             this.Load += new System.EventHandler(this.VentanaForm_Load);
             this.ResumeLayout(false);
 
@@ -198,5 +224,6 @@
         private DevComponents.DotNetBar.LabelX labelX4;
         private DevComponents.DotNetBar.ButtonX btnCargar;
         private DevComponents.DotNetBar.ButtonX btnComenzar;
+        private DevComponents.DotNetBar.ButtonX btnClose;
     }
 }

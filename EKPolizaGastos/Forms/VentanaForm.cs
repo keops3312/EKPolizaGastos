@@ -58,6 +58,25 @@ namespace EKPolizaGastos.Forms
 
 
 
+            cmbTipoFactura.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbTipoFactura.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbTipoFactura.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            cmbEmpresa.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbEmpresa.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbEmpresa.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
+            cmbAno.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbAno.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbAno.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
+            cmbMes.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmbMes.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbMes.DropDownStyle = ComboBoxStyle.DropDownList;
+
+
 
             cmbTipoFactura.DataSource = dataTable;
             cmbTipoFactura.DisplayMember = "Tipo";
@@ -83,272 +102,307 @@ namespace EKPolizaGastos.Forms
 
         private void loadAnosCargados()
         {
-            int NoEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
-            int tipoFacturas = int.Parse(cmbTipoFactura.SelectedValue.ToString());
-
-            var empresa = db.Empresas.Where(p => p.IdEmpresa == NoEmpresa).First();
-            cmbAno.Items.Clear();
-            if (tipoFacturas == 1)
+            try
             {
-                if (empresa.Letra.Trim() == "CIS")
+                int NoEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
+                int tipoFacturas = int.Parse(cmbTipoFactura.SelectedValue.ToString());
+
+                var empresa = db.Empresas.Where(p => p.IdEmpresa == NoEmpresa).FirstOrDefault();
+                if (cmbAno.Items.Count > 0)
                 {
-                    var Resultado = (from s in db.CISFACTRECIBIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    loadMesesCargados();
-                }
 
-                if (empresa.Letra.Trim() == "MRO")
-                {
-                    var Resultado = (from s in db.MROFACTRECIBIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    loadMesesCargados();
-                }
-
-                if (empresa.Letra.Trim() == "CMG")
-                {
-                    var Resultado = (from s in db.CMGFACTRECIBIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    loadMesesCargados();
-                }
-
-                if (empresa.Letra.Trim() == "DDR")
-                {
-                    var Resultado = (from s in db.DDRFACTRECIBIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-
-                    loadMesesCargados();
-
-                }
-
-                if (empresa.Letra.Trim() == "JMR")
-                {
-                    var Resultado = (from s in db.JMRFACTRECIBIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    //los meses
-                    loadMesesCargados();
-
+                    cmbAno.Items.Clear();
                 }
 
 
+                if (tipoFacturas == 1)
+                {
+                    if (empresa.Letra.Trim() == "CIS")
+                    {
+                        var Resultado = (from s in db.CISFACTRECIBIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        loadMesesCargados();
+                    }
+
+                    if (empresa.Letra.Trim() == "MRO")
+                    {
+                        var Resultado = (from s in db.MROFACTRECIBIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        loadMesesCargados();
+                    }
+
+                    if (empresa.Letra.Trim() == "CMG")
+                    {
+                        var Resultado = (from s in db.CMGFACTRECIBIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        loadMesesCargados();
+                    }
+
+                    if (empresa.Letra.Trim() == "DDR")
+                    {
+                        var Resultado = (from s in db.DDRFACTRECIBIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+
+                        loadMesesCargados();
+
+                    }
+
+                    if (empresa.Letra.Trim() == "JMR")
+                    {
+                        var Resultado = (from s in db.JMRFACTRECIBIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        //los meses
+                        loadMesesCargados();
+
+                    }
+
+
+
+                }
+
+                //EMITIDAS
+                if (tipoFacturas == 2)
+                {
+                    if (empresa.Letra.Trim() == "CIS")
+                    {
+                        var Resultado = (from s in db.CISFACTSEMITIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        loadMesesCargados();
+                    }
+
+                    if (empresa.Letra.Trim() == "MRO")
+                    {
+                        var Resultado = (from s in db.MROFACTSEMITIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        loadMesesCargados();
+                    }
+
+                    if (empresa.Letra.Trim() == "CMG")
+                    {
+                        var Resultado = (from s in db.CMGFACTSEMITIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        loadMesesCargados();
+                    }
+
+                    if (empresa.Letra.Trim() == "DDR")
+                    {
+                        var Resultado = (from s in db.DDRFACTSEMITIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+
+                        loadMesesCargados();
+
+                    }
+
+                    if (empresa.Letra.Trim() == "JMR")
+                    {
+                        var Resultado = (from s in db.JMRFACTSEMITIDAS
+                                         select s.Ano).Distinct();
+                        cmbAno.DataSource = Resultado.ToList();
+                        //los meses
+                        loadMesesCargados();
+
+                    }
+
+
+
+                }
+
+                //NOMINA
 
             }
-
-            //EMITIDAS
-            if (tipoFacturas == 2)
+            catch (Exception)
             {
-                if (empresa.Letra.Trim() == "CIS")
-                {
-                    var Resultado = (from s in db.CISFACTSEMITIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    loadMesesCargados();
-                }
-
-                if (empresa.Letra.Trim() == "MRO")
-                {
-                    var Resultado = (from s in db.MROFACTEMITIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    loadMesesCargados();
-                }
-
-                if (empresa.Letra.Trim() == "CMG")
-                {
-                    var Resultado = (from s in db.CMGFACTEMITIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    loadMesesCargados();
-                }
-
-                if (empresa.Letra.Trim() == "DDR")
-                {
-                    var Resultado = (from s in db.DDRFACTEMITIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-
-                    loadMesesCargados();
-
-                }
-
-                if (empresa.Letra.Trim() == "JMR")
-                {
-                    var Resultado = (from s in db.JMRFACTEMITIDAS
-                                     select s.Ano).Distinct();
-                    cmbAno.DataSource = Resultado.ToList();
-                    //los meses
-                    loadMesesCargados();
-
-                }
-
-
-
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Esta Empresa No Contiene Ejercicios",
+                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            //NOMINA
-
+           
         }
 
         private void loadMesesCargados()
         {
-            int NoEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
-            int tipoFacturas = int.Parse(cmbTipoFactura.SelectedValue.ToString());
 
-            var empresa = db.Empresas.Where(p => p.IdEmpresa == NoEmpresa).First();
-            int ano = int.Parse(cmbAno.Text);
-            if (tipoFacturas == 1)
+            try
             {
-                if (empresa.Letra.Trim() == "CIS")
+                int NoEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
+                int tipoFacturas = int.Parse(cmbTipoFactura.SelectedValue.ToString());
+
+                var empresa = db.Empresas.Where(p => p.IdEmpresa == NoEmpresa).FirstOrDefault();
+                int ano = int.Parse(cmbAno.Text);
+
+                if (cmbMes.Items.Count > 0)
                 {
-                    var Resultado = (from s in db.CISFACTRECIBIDAS
-                                     where s.Ano==ano select s.Mes ).Distinct();
+
                     cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
+                }
+
+                if (tipoFacturas == 1)
+                {
+                    if (empresa.Letra.Trim() == "CIS")
                     {
-                        mesConvertido(item.Value);
+                        var Resultado = (from s in db.CISFACTRECIBIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+
+
+                    }
+
+                    if (empresa.Letra.Trim() == "MRO")
+                    {
+                        var Resultado = (from s in db.MROFACTRECIBIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+                    }
+
+                    if (empresa.Letra.Trim() == "CMG")
+                    {
+                        var Resultado = (from s in db.CMGFACTRECIBIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+                    }
+
+                    if (empresa.Letra.Trim() == "DDR")
+                    {
+                        var Resultado = (from s in db.DDRFACTRECIBIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+
+                    }
+
+                    if (empresa.Letra.Trim() == "JMR")
+                    {
+                        var Resultado = (from s in db.JMRFACTRECIBIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
                     }
 
 
 
                 }
 
-                if (empresa.Letra.Trim() == "MRO")
+                //EMITIDAS
+                if (tipoFacturas == 2)
                 {
-                    var Resultado = (from s in db.MROFACTRECIBIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
+                    if (empresa.Letra.Trim() == "CIS")
                     {
-                        mesConvertido(item.Value);
+                        var Resultado = (from s in db.CISFACTSEMITIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+
+
                     }
+
+                    if (empresa.Letra.Trim() == "MRO")
+                    {
+                        var Resultado = (from s in db.MROFACTSEMITIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+                    }
+
+                    if (empresa.Letra.Trim() == "CMG")
+                    {
+                        var Resultado = (from s in db.CMGFACTSEMITIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+                    }
+
+                    if (empresa.Letra.Trim() == "DDR")
+                    {
+                        var Resultado = (from s in db.DDRFACTSEMITIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+
+                    }
+
+                    if (empresa.Letra.Trim() == "JMR")
+                    {
+                        var Resultado = (from s in db.JMRFACTSEMITIDAS
+                                         where s.Ano == ano
+                                         select s.Mes).Distinct();
+
+                        foreach (var item in Resultado)
+                        {
+                            mesConvertido(item.Value);
+                        }
+
+                    }
+
+
 
                 }
 
-                if (empresa.Letra.Trim() == "CMG")
-                {
-                    var Resultado = (from s in db.CMGFACTRECIBIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-                }
-
-                if (empresa.Letra.Trim() == "DDR")
-                {
-                    var Resultado = (from s in db.DDRFACTRECIBIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-
-                }
-
-                if (empresa.Letra.Trim() == "JMR")
-                {
-                    var Resultado = (from s in db.JMRFACTRECIBIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-                }
-
-
-
+                //NOMINA
             }
-
-            //EMITIDAS
-            if (tipoFacturas == 2)
+            catch (Exception)
             {
-                if (empresa.Letra.Trim() == "CIS")
-                {
-                    var Resultado = (from s in db.CISFACTSEMITIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-
-
-                }
-
-                if (empresa.Letra.Trim() == "MRO")
-                {
-                    var Resultado = (from s in db.MROFACTEMITIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-                }
-
-                if (empresa.Letra.Trim() == "CMG")
-                {
-                    var Resultado = (from s in db.CMGFACTEMITIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-                }
-
-                if (empresa.Letra.Trim() == "DDR")
-                {
-                    var Resultado = (from s in db.DDRFACTEMITIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-
-                }
-
-                if (empresa.Letra.Trim() == "JMR")
-                {
-                    var Resultado = (from s in db.JMRFACTEMITIDAS
-                                     where s.Ano == ano
-                                     select s.Mes).Distinct();
-                    cmbMes.Items.Clear();
-                    foreach (var item in Resultado)
-                    {
-                        mesConvertido(item.Value);
-                    }
-
-                }
-
-
-
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Esta Empresa No Contiene Ejercicios",
+                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            //NOMINA
+           
         }
 
         private void mesConvertido(int Value)
@@ -431,27 +485,49 @@ namespace EKPolizaGastos.Forms
             var empresa = db.Empresas.Where(p => p.IdEmpresa == idEmpresa).FirstOrDefault();
             int tipoFacturas = int.Parse(cmbTipoFactura.SelectedValue.ToString());
 
-            ejercicio = empresa.Letra.Trim() + "-" + cmbMes.Text.Substring(0, 3) + cmbAno.Text;
-            MessageBoxEx.EnableGlass = false;
-            MessageBoxEx.Show("Ejercicio Elejido: " + ejercicio + "",
-                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            PolizaSatForm polizaSatForm = new PolizaSatForm();
-            polizaSatForm.ejercicio = ejercicio;
-            if (tipoFacturas == 1)
+            if(empresa!=null && cmbMes.Text!="" && cmbAno.Text != "")
             {
-                polizaSatForm.path = empresa.Path;
+                ejercicio = empresa.Letra.Trim() + "-" + cmbMes.Text.Substring(0, 3) + cmbAno.Text;
+
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Ejercicio Elejido: " + ejercicio + "",
+                    "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                PolizaSatForm polizaSatForm = new PolizaSatForm();
+                polizaSatForm.ejercicio = ejercicio;
+                if (tipoFacturas == 1)
+                {
+                    polizaSatForm.path = empresa.Path;
+                }
+                if (tipoFacturas == 2)
+                {
+                    polizaSatForm.path = empresa.PathNomina;
+                    //JMR_EMI_ENE2018
+                }
+
+                string cnx = readSATFactura.CheckDataConection();
+                polizaSatForm.tipoDeBase = cmbTipoFactura.Text;
+                polizaSatForm.cnx = cnx;
+                polizaSatForm.ShowDialog();
+                this.Close();
+                return;
+
             }
-            if (tipoFacturas == 2)
+            else
             {
-                polizaSatForm.path = empresa.PathNomina;
+
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("NO has seleccionado bien el Ejercicio!",
+                    "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
 
-            string cnx =readSATFactura.CheckDataConection();
+         
+        }
 
-            polizaSatForm.cnx = cnx;
-            polizaSatForm.ShowDialog();
-            return;
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

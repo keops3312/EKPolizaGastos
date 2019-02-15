@@ -440,8 +440,8 @@ namespace EKPolizaGastos.Forms
                     else
                     {
 
-                        MROFACTEMITIDAS mroFACTEMITIDAS =
-                      new MROFACTEMITIDAS
+                        MROFACTSEMITIDAS mroFACTEMITIDAS =
+                      new MROFACTSEMITIDAS
                       {
 
                           Verificado = row.Cells[0].Value.ToString(),
@@ -518,7 +518,7 @@ namespace EKPolizaGastos.Forms
                       };
 
 
-                        db.MROFACTEMITIDAS.Add(mroFACTEMITIDAS);
+                        db.MROFACTSEMITIDAS.Add(mroFACTEMITIDAS);
                         db.SaveChanges();
                     }
 
@@ -674,8 +674,8 @@ namespace EKPolizaGastos.Forms
                     else
                     {
 
-                        JMRFACTEMITIDAS jmrFACTEMITIDAS =
-                      new JMRFACTEMITIDAS
+                        JMRFACTSEMITIDAS jmrFACTEMITIDAS =
+                      new JMRFACTSEMITIDAS
                       {
 
                           Verificado = row.Cells[0].Value.ToString(),
@@ -752,7 +752,7 @@ namespace EKPolizaGastos.Forms
                       };
 
 
-                        db.JMRFACTEMITIDAS.Add(jmrFACTEMITIDAS);
+                        db.JMRFACTSEMITIDAS.Add(jmrFACTEMITIDAS);
                         db.SaveChanges();
                     }
 
@@ -914,8 +914,8 @@ namespace EKPolizaGastos.Forms
                     else
                     {
 
-                        DDRFACTEMITIDAS ddrFACTEMITIDAS =
-                      new DDRFACTEMITIDAS
+                        DDRFACTSEMITIDAS ddrFACTEMITIDAS =
+                      new DDRFACTSEMITIDAS
                       {
 
                           Verificado = row.Cells[0].Value.ToString(),
@@ -992,7 +992,7 @@ namespace EKPolizaGastos.Forms
                       };
 
 
-                        db.DDRFACTEMITIDAS.Add(ddrFACTEMITIDAS);
+                        db.DDRFACTSEMITIDAS.Add(ddrFACTEMITIDAS);
                         db.SaveChanges();
                     }
 
@@ -1153,8 +1153,8 @@ namespace EKPolizaGastos.Forms
                     else
                     {
 
-                        CMGFACTEMITIDAS cmgFACTEMITIDAS =
-                      new CMGFACTEMITIDAS
+                        CMGFACTSEMITIDAS cmgFACTEMITIDAS =
+                      new CMGFACTSEMITIDAS
                       {
 
                           Verificado = row.Cells[0].Value.ToString(),
@@ -1231,7 +1231,7 @@ namespace EKPolizaGastos.Forms
                       };
 
 
-                        db.CMGFACTEMITIDAS.Add(cmgFACTEMITIDAS);
+                        db.CMGFACTSEMITIDAS.Add(cmgFACTEMITIDAS);
                         db.SaveChanges();
                     }
 
@@ -1403,85 +1403,175 @@ namespace EKPolizaGastos.Forms
                 mes = int.Parse(gridMuestra.Rows[0].Cells[11].Value.ToString());
                 dia = int.Parse(gridMuestra.Rows[0].Cells[12].Value.ToString());
 
-                if (letra.Trim() == "CIS")
+
+                if (swtBtn.Value == true)
                 {
-                    var existe = db.CISFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
-                    if (existe.Count == 0)
+                    if (letra.Trim() == "CIS")
                     {
-                        Start();
+                        var existe = db.CISFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
-                    else
+
+                    if (letra.Trim() == "MRO")
                     {
-                        MessageBoxEx.EnableGlass = false;
-                        MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
-               "", "EKCFDI",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        var existe = db.MROFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
+
+                    if (letra.Trim() == "DDR")
+                    {
+                        var existe = db.DDRFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    if (letra.Trim() == "JMR")
+                    {
+                        var existe = db.JMRFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    if (letra.Trim() == "CMG")
+                    {
+                        var existe = db.CMGFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
+                else
+                {
+
+                    if (letra.Trim() == "CIS")
+                    {
+                        var existe = db.CISFACTSEMITIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    if (letra.Trim() == "MRO")
+                    {
+                        var existe = db.MROFACTSEMITIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    if (letra.Trim() == "DDR")
+                    {
+                        var existe = db.DDRFACTSEMITIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    if (letra.Trim() == "JMR")
+                    {
+                        var existe = db.JMRFACTSEMITIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+                    if (letra.Trim() == "CMG")
+                    {
+                        var existe = db.CMGFACTSEMITIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
+                        if (existe.Count == 0)
+                        {
+                            Start();
+                        }
+                        else
+                        {
+                            MessageBoxEx.EnableGlass = false;
+                            MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
+                   "", "EKCFDI",
+                       MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+
+
                 }
 
-                if (letra.Trim() == "MRO")
-                {
-                    var existe = db.MROFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
-                    if (existe.Count == 0)
-                    {
-                        Start();
-                    }
-                    else
-                    {
-                        MessageBoxEx.EnableGlass = false;
-                        MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
-               "", "EKCFDI",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-                if (letra.Trim() == "DDR")
-                {
-                    var existe = db.DDRFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
-                    if (existe.Count == 0)
-                    {
-                        Start();
-                    }
-                    else
-                    {
-                        MessageBoxEx.EnableGlass = false;
-                        MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
-               "", "EKCFDI",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-                if (letra.Trim() == "JMR")
-                {
-                    var existe = db.JMRFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
-                    if (existe.Count == 0)
-                    {
-                        Start();
-                    }
-                    else
-                    {
-                        MessageBoxEx.EnableGlass = false;
-                        MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
-               "", "EKCFDI",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
-
-                if (letra.Trim() == "CMG")
-                {
-                    var existe = db.CMGFACTRECIBIDAS.Where(p => p.Ano == periodo && p.Mes == mes).ToList();
-                    if (existe.Count == 0)
-                    {
-                        Start();
-                    }
-                    else
-                    {
-                        MessageBoxEx.EnableGlass = false;
-                        MessageBoxEx.Show("Este Ejercicio ya ha sido cargado!" +
-               "", "EKCFDI",
-                   MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                }
 
 
 

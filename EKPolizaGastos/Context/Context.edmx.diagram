@@ -4,48 +4,160 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="58cbb46272d449c4b53b21655e2d552f" Name="Diagram1">
-        <EntityTypeShape EntityType="SEMP_SATModel.Comprobante" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEMP_SATModel.ComprobanteEstatus" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CuentasGastos" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEMP_SATModel.Empresas" Width="1.5" PointX="0.75" PointY="2.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEMP_SATModel.Localidades" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEMP_SATModel.Proveedores" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEMP_SATModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SEMP_SATModel.ComprobanteConceptos" Width="1.5" PointX="9.75" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="2a539bd65cd04fbc97bc576876c39539" Name="Diagram1">
+        <EntityTypeShape EntityType="SEMP_SATModel.CISFACTRECIBIDAS" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CISFACTSEMITIDAS" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMGFACTRECIBIDAS" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMGFACTSEMITIDAS" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.Comprobante" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.ComprobanteEstatus" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.ConceptosNominas" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CuentasGastos" Width="1.5" PointX="13.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDRFACTRECIBIDAS" Width="1.5" PointX="13.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDRFACTSEMITIDAS" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DeduccionesNominas" Width="1.5" PointX="2.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.Diot" Width="1.5" PointX="15.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.Empresas" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.FacturasEmitidas" Width="1.5" PointX="15.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.FacturasEmitidasConceptos" Width="1.5" PointX="4.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMRFACTRECIBIDAS" Width="1.5" PointX="6.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMRFACTSEMITIDAS" Width="1.5" PointX="8.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.Localidades" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MROFACTRECIBIDAS" Width="1.5" PointX="10.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MROFACTSEMITIDAS" Width="1.5" PointX="15.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.Nominas" Width="1.5" PointX="17.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.PercepcionesNominas" Width="1.5" PointX="17.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.Proveedores" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.sysdiagrams" Width="1.5" PointX="19.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ABR2018" Width="1.5" PointX="19.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ABR2018Conceptos" Width="1.5" PointX="19.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_AGO2018" Width="1.5" PointX="21.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_AGO2018Conceptos" Width="1.5" PointX="2.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_DIC2018" Width="1.5" PointX="21.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_DIC2018Conceptos" Width="1.5" PointX="21.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2018" Width="1.5" PointX="23.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2018Conceptos" Width="1.5" PointX="23.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2019" Width="1.5" PointX="12.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2019Conceptos" Width="1.5" PointX="23.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_FEB2018" Width="1.5" PointX="23.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_FEB2018Conceptos" Width="1.5" PointX="17.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_JUL2018" Width="1.5" PointX="19.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_JUL2018Conceptos" Width="1.5" PointX="25.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_JUN2018" Width="1.5" PointX="25.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_JUN2018Conceptos" Width="1.5" PointX="25.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_MAR2018" Width="1.5" PointX="25.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_MAR2018Conceptos" Width="1.5" PointX="27.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_MAY2018" Width="1.5" PointX="2.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_MAY2018Conceptos" Width="1.5" PointX="27.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_NOV2018" Width="1.5" PointX="27.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_NOV2018Conceptos" Width="1.5" PointX="27.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_OCT2018" Width="1.5" PointX="27.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_OCT2018Conceptos" Width="1.5" PointX="29.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_SEP2018" Width="1.5" PointX="29.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CIS_SEP2018Conceptos" Width="1.5" PointX="14.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ABR2018" Width="1.5" PointX="29.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ABR2018Conceptos" Width="1.5" PointX="29.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_AGO2018" Width="1.5" PointX="4.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_AGO2018Conceptos" Width="1.5" PointX="6.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_DIC2018" Width="1.5" PointX="8.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_DIC2018Conceptos" Width="1.5" PointX="16.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ENE2018" Width="1.5" PointX="21.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ENE2018Conceptos" Width="1.5" PointX="23.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_FEB2018" Width="1.5" PointX="29.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_FEB2018Conceptos" Width="1.5" PointX="31.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_JUL2018" Width="1.5" PointX="31.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_JUL2018Conceptos" Width="1.5" PointX="31.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_JUN2018" Width="1.5" PointX="31.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_JUN2018Conceptos" Width="1.5" PointX="31.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_MAR2018" Width="1.5" PointX="10.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_MAR2018Conceptos" Width="1.5" PointX="33.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_MAY2018" Width="1.5" PointX="33.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_MAY2018Conceptos" Width="1.5" PointX="33.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_NOV2018" Width="1.5" PointX="18.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_NOV2018Conceptos" Width="1.5" PointX="33.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_OCT2018" Width="1.5" PointX="33.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_OCT2018Conceptos" Width="1.5" PointX="35.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_SEP2018" Width="1.5" PointX="35.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.CMG_SEP2018Conceptos" Width="1.5" PointX="12.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.ComprobanteConceptos" Width="1.5" PointX="35.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ABR2018" Width="1.5" PointX="35.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ABR2018Conceptos" Width="1.5" PointX="35.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_AGO2018" Width="1.5" PointX="0.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_AGO2018Conceptos" Width="1.5" PointX="14.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_DIC2018" Width="1.5" PointX="23.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_DIC2018Conceptos" Width="1.5" PointX="25.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2018" Width="1.5" PointX="31.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2018Conceptos" Width="1.5" PointX="33.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2019" Width="1.5" PointX="35.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2019Conceptos" Width="1.5" PointX="37.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_FEB2018" Width="1.5" PointX="37.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_FEB2018Conceptos" Width="1.5" PointX="37.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_JUL2018" Width="1.5" PointX="37.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_JUL2018Conceptos" Width="1.5" PointX="37.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_JUN2018" Width="1.5" PointX="37.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_JUN2018Conceptos" Width="1.5" PointX="39.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_MAR2018" Width="1.5" PointX="2.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_MAR2018Conceptos" Width="1.5" PointX="4.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_MAY2018" Width="1.5" PointX="39.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_MAY2018Conceptos" Width="1.5" PointX="6.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_NOV2018" Width="1.5" PointX="39.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_NOV2018Conceptos" Width="1.5" PointX="20.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_OCT2018" Width="1.5" PointX="39.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_OCT2018Conceptos" Width="1.5" PointX="27.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_SEP2018" Width="1.5" PointX="39.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.DDR_SEP2018Conceptos" Width="1.5" PointX="41.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_ABR2018" Width="1.5" PointX="41.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_ABR2018Conceptos" Width="1.5" PointX="8.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_AGO2018" Width="1.5" PointX="10.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_AGO2018Conceptos" Width="1.5" PointX="41.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_DIC2018" Width="1.5" PointX="41.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_DIC2018Conceptos" Width="1.5" PointX="41.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_ENE2018" Width="1.5" PointX="41.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_ENE2018Conceptos" Width="1.5" PointX="12.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_FEB2018" Width="1.5" PointX="14.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_FEB2018Conceptos" Width="1.5" PointX="16.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_JUL2018" Width="1.5" PointX="43.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_JUL2018Conceptos" Width="1.5" PointX="43.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_JUN2018" Width="1.5" PointX="43.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_JUN2018Conceptos" Width="1.5" PointX="43.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_MAR2018" Width="1.5" PointX="43.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_MAR2018Conceptos" Width="1.5" PointX="43.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_MAY2018" Width="1.5" PointX="45.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_MAY2018Conceptos" Width="1.5" PointX="4.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_NOV2018" Width="1.5" PointX="45.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_NOV2018Conceptos" Width="1.5" PointX="45.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_OCT2018" Width="1.5" PointX="18.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_OCT2018Conceptos" Width="1.5" PointX="20.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_SEP2018" Width="1.5" PointX="22.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.JMR_SEP2018Conceptos" Width="1.5" PointX="45.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ABR2018" Width="1.5" PointX="24.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ABR2018Conceptos" Width="1.5" PointX="26.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_AGO2018" Width="1.5" PointX="28.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_AGO2018Conceptos" Width="1.5" PointX="45.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_DIC2018" Width="1.5" PointX="30.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_DIC2018Conceptos" Width="1.5" PointX="32.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2018" Width="1.5" PointX="34.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2018Conceptos" Width="1.5" PointX="45.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2019" Width="1.5" PointX="36.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2019Conceptos" Width="1.5" PointX="38.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_FEB2018" Width="1.5" PointX="40.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_FEB2018Conceptos" Width="1.5" PointX="45.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_JUL2018" Width="1.5" PointX="42.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_JUL2018Conceptos" Width="1.5" PointX="47.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_JUN2018" Width="1.5" PointX="47.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_JUN2018Conceptos" Width="1.5" PointX="6.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_MAR2018" Width="1.5" PointX="47.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_MAR2018Conceptos" Width="1.5" PointX="47.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_MAY2018" Width="1.5" PointX="47.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_MAY2018Conceptos" Width="1.5" PointX="47.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_NOV2018" Width="1.5" PointX="47.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_NOV2018Conceptos" Width="1.5" PointX="0.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_OCT2018" Width="1.5" PointX="44.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_OCT2018Conceptos" Width="1.5" PointX="49.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_SEP2018" Width="1.5" PointX="49.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SEMP_SATModel.MRO_SEP2018Conceptos" Width="1.5" PointX="49.75" PointY="15.75" IsExpanded="true" />
         <AssociationConnector Association="SEMP_SATModel.FK_Comprobante_ComprobanteEstatus" ManuallyRouted="false" />
         <AssociationConnector Association="SEMP_SATModel.FK_Localidades_Empresas" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="SEMP_SATModel.ConceptosNominas" Width="1.5" PointX="7.375" PointY="16.375" />
-        <EntityTypeShape EntityType="SEMP_SATModel.DeduccionesNominas" Width="1.5" PointX="9.125" PointY="14.125" />
-        <EntityTypeShape EntityType="SEMP_SATModel.Diot" Width="1.5" PointX="12.375" PointY="4.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.Nominas" Width="1.5" PointX="5.375" PointY="12.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.PercepcionesNominas" Width="1.5" PointX="7.375" PointY="13.125" />
-        <EntityTypeShape EntityType="SEMP_SATModel.FacturasEmitidas" Width="1.5" PointX="11.75" PointY="11.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.FacturasEmitidasConceptos" Width="1.5" PointX="13.75" PointY="8.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2018" Width="1.5" PointX="13.75" PointY="14.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CIS_ENE2018Conceptos" Width="1.5" PointX="14.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ENE2018" Width="1.5" PointX="15.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CMG_ENE2018Conceptos" Width="1.5" PointX="15.75" PointY="15.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2018" Width="1.5" PointX="0.75" PointY="16.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.DDR_ENE2018Conceptos" Width="1.5" PointX="16.75" PointY="0.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2018" Width="1.5" PointX="2.75" PointY="16.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.MRO_ENE2018Conceptos" Width="1.5" PointX="17.75" PointY="6.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.FactEmi_RFCMesAño" Width="1.5" PointX="17.75" PointY="12.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CISFACTRECIBIDAS" Width="1.5" PointX="18.375" PointY="17.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CISFACTSEMITIDAS" Width="1.5" PointX="20.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CMGFACTEMITIDAS" Width="1.5" PointX="20.375" PointY="15.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CMGFACTRECIBIDAS" Width="1.5" PointX="7.375" PointY="21.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.DDRFACTEMITIDAS" Width="1.5" PointX="9.375" PointY="21.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.DDRFACTRECIBIDAS" Width="1.5" PointX="22.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.JMRFACTEMITIDAS" Width="1.5" PointX="22.375" PointY="15.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.JMRFACTRECIBIDAS" Width="1.5" PointX="11.375" PointY="23.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.MROFACTEMITIDAS" Width="1.5" PointX="13.375" PointY="23.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.MROFACTRECIBIDAS" Width="1.5" PointX="15.375" PointY="23.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.NotasPagoPolizaUnoAuno" Width="1.5" PointX="24.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.PrestamosPolizaUnoAUno" Width="1.5" PointX="10.375" PointY="0.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.PrestamosPolizaXdiaResumen" Width="1.5" PointX="24.375" PointY="5.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CIS_DIC2018" Width="1.5" PointX="24.375" PointY="9.75" />
-        <EntityTypeShape EntityType="SEMP_SATModel.CIS_DIC2018Conceptos" Width="1.5" PointX="24.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -38,6 +38,7 @@ namespace EKPolizaGastos.Forms
         //pra la tabla general
         public string bases;
         public string tipoDeComprobante;
+        public string tipoDeBase;
 
         public string ejercicio;
         public string cnx;
@@ -315,9 +316,21 @@ namespace EKPolizaGastos.Forms
             //armado para llamar a la clase
             int ano= int.Parse(ejercicio.Substring(7, 4));
             int mes = readSATFactura2.SearchMonthD(ejercicio.Substring(4, 3));
-            bases = ejercicio.Substring(0, 3) + "FACTRECIBIDAS";
 
-            dataGridViewX1.DataSource = readSATFactura2.listExercise(cnx,ano,mes,2,bases);
+            if (tipoDeBase.Equals("Recibidas"))
+            {
+                bases = ejercicio.Substring(0, 3) + "FACTRECIBIDAS";
+
+              
+            }
+            else if (tipoDeBase.Equals("Emitidas"))
+            {
+                bases = ejercicio.Substring(0, 3) + "FACTSEMITIDAS";
+
+               
+            }
+
+            dataGridViewX1.DataSource = readSATFactura2.listExercise(cnx, ano, mes, 2, bases);
             lblCantidad.Text = "Numero de CFDI cargados del mes: " + dataGridViewX1.Rows.Count;
             totalFacturas = dataGridViewX1.Rows.Count;
 
@@ -895,9 +908,14 @@ namespace EKPolizaGastos.Forms
         //LECTURA DE FACTURA
         private void Lectura_de_factura()
         {
-           
-            
+
+
             #region Lectura de Poliza
+           
+               
+          
+           
+
             dataGridViewX1.Rows[indexGridPosition].Selected = true;
             dataGridViewX1.CurrentCell = dataGridViewX1.Rows[indexGridPosition].Cells[0];
 
@@ -910,10 +928,71 @@ namespace EKPolizaGastos.Forms
             Folio = dataGridViewX1.Rows[indexGridPosition].Cells[16].Value.ToString();//FOLIOF
             txtNumero.Text = dataGridViewX1.Rows[indexGridPosition].Cells[0].Value.ToString();//NUMERO ID FACTURA
 
+            tipoDeComprobante = string.Empty;
+
             tipoDeComprobante = dataGridViewX1.Rows[indexGridPosition].Cells[7].Value.ToString();//TIPO DE COMPROBANTE
             labelX2.Text = "Tipo de Comprobante: " + tipoDeComprobante;
 
-            file = @"" + path + "/" + ejercicio + "/" + UUID + ".xml";
+
+            if(tipoDeComprobante.Trim().Equals("E")
+                || tipoDeComprobante.Trim().Equals("I"))
+            {
+               
+            }
+            else
+            {
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("No identifico letra de poliza\n" +
+                    "UUID :" + UUID,
+                                                  "EKPolizaGastos",
+                                                  MessageBoxButtons.OK,
+                                                  MessageBoxIcon.Warning);
+
+                if (indexGridPosition + 1 < totalFacturas)//antes <=
+                {
+                 
+                    indexGridPosition++;
+
+
+                    Lectura_de_factura();
+
+                }
+                else
+                {
+                    MessageBoxEx.EnableGlass = false;
+                    MessageBoxEx.Show("Fin del Ejercicio del Mes!" +
+                                        "\n" + "Muchas Gracias! ;)",
+                                                           "EKPolizaGastos",
+                                                           MessageBoxButtons.OK,
+                                                           MessageBoxIcon.Exclamation);
+                    this.Close();
+
+                }
+            }
+
+
+
+
+            poliza.Rows.Clear();
+
+
+            if (tipoDeBase.Equals("Recibidas"))
+            {
+
+                file = @"" + path + "/" + ejercicio + "/" + UUID + ".xml";
+
+            }
+            else if (tipoDeBase.Equals("Emitidas"))
+            {
+                file = @"" + path + "/" + ejercicio.Substring(0, 3) + "_EMI_" + ejercicio.Substring(4, 7) + "/" + UUID + ".xml";
+             
+
+
+
+            }
+
+
+           
 
             //Buscamos si ya existe titulo para proovedor y de no existir se hace un generico
             Cuenta_cargo_1 = "0000-000-000";
@@ -1159,179 +1238,322 @@ namespace EKPolizaGastos.Forms
             string leyenda_IEPS = "IEPS-" + Proveedor + "-" + Folio;
             string leyenda_ISR = "ISR-" + Proveedor + "-" + Folio;
 
-            if (tipoDeComprobante.Trim() == "I"){
-                //El total de la poliza
-                total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
-                poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", total, "TOTAL");
-            }
-            else if(tipoDeComprobante.Trim() == "E")
+            if (tipoDeBase.Equals("Recibidas"))
             {
-                //El total de la poliza
-                total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
-                poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, total,"0.00", "TOTAL");
-            }
-            
-            
-         
-
-          
-
-            //El Subtotal de la Poliza Subtotal(subtotal - descuento)
-           
-            string descuento = dataGridViewX1.Rows[indexGridPosition].Cells[30].Value.ToString();
-            string miSubtotal= dataGridViewX1.Rows[indexGridPosition].Cells[29].Value.ToString();
-            subtotal = Convert.ToString(decimal.Parse(miSubtotal) - decimal.Parse(descuento));
-
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                poliza.Rows.Insert(1, Cuenta_cargo_1, "SubTotal - " + RFC_proveedor, subtotal, "0.00", "CONCEPTO");
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                poliza.Rows.Insert(1, Cuenta_cargo_1, "SubTotal - " + RFC_proveedor, "0.00",subtotal, "CONCEPTO");
-            }
-
-
-
-
-
-            //ISR RETENIDO
-            isr_retenido = dataGridViewX1.Rows[indexGridPosition].Cells[34].Value.ToString();
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                if (!isr_retenido.Equals("0"))
+                if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", "0.00", isr_retenido, "ISR RETENIDO");
+                    //El total de la poliza
+                    total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", total, "TOTAL");
                 }
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                if (!isr_retenido.Equals("0"))
+                else if (tipoDeComprobante.Trim() == "E")
                 {
-                    poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", isr_retenido,"0.00", "ISR RETENIDO");
+                    //El total de la poliza
+                    total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, total, "0.00", "TOTAL");
+                }
+               
+                //El Subtotal de la Poliza Subtotal(subtotal - descuento)
+
+                string descuento = dataGridViewX1.Rows[indexGridPosition].Cells[30].Value.ToString();
+                string miSubtotal = dataGridViewX1.Rows[indexGridPosition].Cells[29].Value.ToString();
+                subtotal = Convert.ToString(decimal.Parse(miSubtotal) - decimal.Parse(descuento));
+
+                if (tipoDeComprobante.Trim() == "I")
+                {
+                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, subtotal, "0.00", "CONCEPTO");
+                }
+                else if (tipoDeComprobante.Trim() == "E")
+                {
+                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, "0.00", subtotal, "CONCEPTO");
                 }
 
-            }
-
-
-
-
-
-            //IVA RETENIDO
-            iva_retenido = dataGridViewX1.Rows[indexGridPosition].Cells[33].Value.ToString();
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                if (!iva_retenido.Equals("0"))
+                //ISR RETENIDO
+                isr_retenido = dataGridViewX1.Rows[indexGridPosition].Cells[34].Value.ToString();
+                if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                    if (!isr_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", "0.00", isr_retenido, "ISR RETENIDO");
+                    }
                 }
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                if (!iva_retenido.Equals("0"))
+                else if (tipoDeComprobante.Trim() == "E")
                 {
-                    poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO",iva_retenido,"0.00", "IVA RETENIDO");
-                }
-            }
+                    if (!isr_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", isr_retenido, "0.00", "ISR RETENIDO");
+                    }
 
-
-
-            ieps = dataGridViewX1.Rows[indexGridPosition].Cells[31].Value.ToString();
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                if (!ieps.Equals("0"))
-                {
-                    poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, ieps, "0.00", "IEPS TRASLADADO");
                 }
 
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                if (!ieps.Equals("0"))
+                //IVA RETENIDO
+                iva_retenido = dataGridViewX1.Rows[indexGridPosition].Cells[33].Value.ToString();
+                if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, "0.00",ieps, "IEPS TRASLADADO");
+                    if (!iva_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                    }
                 }
-            }
-
-
-
-
-
-             //ISH(IEPS TRASLADADO)
-            ish = dataGridViewX1.Rows[indexGridPosition].Cells[35].Value.ToString();
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                if (!ish.Equals("0"))
+                else if (tipoDeComprobante.Trim() == "E")
                 {
-                    poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", ieps, "0.00", "IEPS TRASLADADO");
+                    if (!iva_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                    }
                 }
 
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                if (!ish.Equals("0"))
+                ieps = dataGridViewX1.Rows[indexGridPosition].Cells[31].Value.ToString();
+                if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", "0.00",ieps, "IEPS TRASLADADO");
-                }
-            }
+                    if (!ieps.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, ieps, "0.00", "IEPS TRASLADADO");
+                    }
 
-            //TOTALLOCALTRASLADADO(IEPS TRASLADADO)
-            totalLocalTrasladado = dataGridViewX1.Rows[indexGridPosition].Cells[40].Value.ToString();
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                if (!totalLocalTrasladado.Equals("0"))
-                {
-                    poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", ieps, "0.00", "IEPS TRASLADADO");
                 }
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                if (!totalLocalTrasladado.Equals("0"))
+                else if (tipoDeComprobante.Trim() == "E")
                 {
-                    poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO",  "0.00",ieps, "IEPS TRASLADADO");
-                }
-            }
-
-
-
-            //TOTALLOCALRETENIDO(IEPS TRASLADADO) 
-            totalLocalRetenido = dataGridViewX1.Rows[indexGridPosition].Cells[41].Value.ToString();
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                if (!totalLocalRetenido.Equals("0"))
-                {
-                    poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
-                }
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                if (!totalLocalRetenido.Equals("0"))
-                {
-                    poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", iva_retenido,"0.00", "IVA RETENIDO");
+                    if (!ieps.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, "0.00", ieps, "IEPS TRASLADADO");
+                    }
                 }
 
-            }
-
-
-            //El total de Iva de la poliza
-            iva = dataGridViewX1.Rows[indexGridPosition].Cells[32].Value.ToString();
-            if (tipoDeComprobante.Trim() == "I")
-            {
-                if (!iva.Equals("0"))
+                //ISH(IEPS TRASLADADO)
+                ish = dataGridViewX1.Rows[indexGridPosition].Cells[35].Value.ToString();
+                if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, iva, "0.00", "IVA TRASLADADO");
+                    if (!ish.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", ieps, "0.00", "IEPS TRASLADADO");
+                    }
+
+                }
+                else if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!ish.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", "0.00", ieps, "IEPS TRASLADADO");
+                    }
                 }
 
-
-            }
-            else if (tipoDeComprobante.Trim() == "E")
-            {
-                if (!iva.Equals("0"))
+                //TOTALLOCALTRASLADADO(IEPS TRASLADADO)
+                totalLocalTrasladado = dataGridViewX1.Rows[indexGridPosition].Cells[40].Value.ToString();
+                if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, "0.00",iva, "IVA TRASLADADO");
+                    if (!totalLocalTrasladado.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", ieps, "0.00", "IEPS TRASLADADO");
+                    }
+                }
+                else if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!totalLocalTrasladado.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", "0.00", ieps, "IEPS TRASLADADO");
+                    }
+                }
+
+                //TOTALLOCALRETENIDO(IEPS TRASLADADO) 
+                totalLocalRetenido = dataGridViewX1.Rows[indexGridPosition].Cells[41].Value.ToString();
+                if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!totalLocalRetenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                    }
+                }
+                else if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!totalLocalRetenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                    }
+
+                }
+
+                //El total de Iva de la poliza
+                iva = dataGridViewX1.Rows[indexGridPosition].Cells[32].Value.ToString();
+                if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!iva.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, iva, "0.00", "IVA TRASLADADO");
+                    }
+
+
+                }
+                else if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!iva.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, "0.00", iva, "IVA TRASLADADO");
+                    }
+
                 }
 
             }
+            else if(tipoDeBase.Equals("Emitidas"))
+            {
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    //El total de la poliza
+                    total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", total, "TOTAL");
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    //El total de la poliza
+                    total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, total, "0.00", "TOTAL");
+                }
+              
+
+
+                //El Subtotal de la Poliza Subtotal(subtotal - descuento)
+
+                string descuento = dataGridViewX1.Rows[indexGridPosition].Cells[30].Value.ToString();
+                string miSubtotal = dataGridViewX1.Rows[indexGridPosition].Cells[29].Value.ToString();
+                subtotal = Convert.ToString(decimal.Parse(miSubtotal) - decimal.Parse(descuento));
+
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    poliza.Rows.Insert(1, Cuenta_cargo_1,Titulo_secundario, subtotal, "0.00", "CONCEPTO");
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, "0.00", subtotal, "CONCEPTO");
+                }
+
+                //ISR RETENIDO
+                isr_retenido = dataGridViewX1.Rows[indexGridPosition].Cells[34].Value.ToString();
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!isr_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", "0.00", isr_retenido, "ISR RETENIDO");
+                    }
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!isr_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", isr_retenido, "0.00", "ISR RETENIDO");
+                    }
+
+                }
+
+                //IVA RETENIDO
+                iva_retenido = dataGridViewX1.Rows[indexGridPosition].Cells[33].Value.ToString();
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!iva_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                    }
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!iva_retenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                    }
+                }
+
+                ieps = dataGridViewX1.Rows[indexGridPosition].Cells[31].Value.ToString();
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!ieps.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, ieps, "0.00", "IEPS TRASLADADO");
+                    }
+
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!ieps.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, "0.00", ieps, "IEPS TRASLADADO");
+                    }
+                }
+
+                //ISH(IEPS TRASLADADO)
+                ish = dataGridViewX1.Rows[indexGridPosition].Cells[35].Value.ToString();
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!ish.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", ieps, "0.00", "IEPS TRASLADADO");
+                    }
+
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!ish.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", "0.00", ieps, "IEPS TRASLADADO");
+                    }
+                }
+
+                //TOTALLOCALTRASLADADO(IEPS TRASLADADO)
+                totalLocalTrasladado = dataGridViewX1.Rows[indexGridPosition].Cells[40].Value.ToString();
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!totalLocalTrasladado.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", ieps, "0.00", "IEPS TRASLADADO");
+                    }
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!totalLocalTrasladado.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", "0.00", ieps, "IEPS TRASLADADO");
+                    }
+                }
+
+                //TOTALLOCALRETENIDO(IEPS TRASLADADO) 
+                totalLocalRetenido = dataGridViewX1.Rows[indexGridPosition].Cells[41].Value.ToString();
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!totalLocalRetenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                    }
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!totalLocalRetenido.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                    }
+
+                }
+
+                //El total de Iva de la poliza
+                iva = dataGridViewX1.Rows[indexGridPosition].Cells[32].Value.ToString();
+                if (tipoDeComprobante.Trim() == "E")
+                {
+                    if (!iva.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, iva, "0.00", "IVA TRASLADADO");
+                    }
+
+
+                }
+                else if (tipoDeComprobante.Trim() == "I")
+                {
+                    if (!iva.Equals("0"))
+                    {
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, "0.00", iva, "IVA TRASLADADO");
+                    }
+
+                }
+
+            }
+
+
 
 
 
@@ -1363,6 +1585,7 @@ namespace EKPolizaGastos.Forms
 
 
             //Actualizacion 17 enero 2019
+
             decimal diferencia;
             if (decimal.Parse(txtDebe.Text) > decimal.Parse(txtHaber.Text))
             {
@@ -1687,13 +1910,33 @@ namespace EKPolizaGastos.Forms
                 //Crear carpeta con nombre dia CIS-NOV-2018_10dic2018
                 string fecha_carpeta;
                 string carpeta_ejercicio;
-                string directorio_a_localizar;
+                string directorio_a_localizar="";
                 string numeroPolizaConvertido = "";
                 int consecutivo;
                 fecha_carpeta = Convert.ToDateTime(txtFecha.Text).ToString("ddMMMyyyy");
-                carpeta_ejercicio = ejercicio + "_" + fecha_carpeta;
 
-                directorio_a_localizar = path + "/" + ejercicio + "/Polizas";//+ carpeta_ejercicio;
+                if (tipoDeBase.Equals("Recibidas"))
+                {
+
+                    carpeta_ejercicio = ejercicio + "_" + fecha_carpeta;
+                    //JMR_EMI_ENE2018
+                    directorio_a_localizar = path + "/" + ejercicio + "/Polizas";//+ carpeta_ejercicio;
+
+                }
+                else if (tipoDeBase.Equals("Emitidas"))
+                {
+                    carpeta_ejercicio = ejercicio + "_" + fecha_carpeta;
+                    //JMR_EMI_ENE2018
+                    directorio_a_localizar = path + "/" + 
+                        ejercicio.Substring(0, 3) + "_EMI_" + ejercicio.Substring(4, 7) + 
+                        "/Polizas";//+ carpeta_ejercicio;
+                   
+
+
+                }
+
+
+              
 
 
                 if (!Directory.Exists(directorio_a_localizar))
@@ -1785,22 +2028,59 @@ namespace EKPolizaGastos.Forms
                             }
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
                             // tituloWrite = item.Cells[1].Value.ToString();
-                            if (tipoDeComprobante.Trim() == "I")
+
+                            if (tipoDeBase.Equals("Recibidas"))
                             {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";//haber
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";//haber
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                   
+                                    escritor.WriteLine(importeWrite);
+                                }
+
                             }
-                            else if (tipoDeComprobante.Trim() == "E")
+                            else if (tipoDeBase.Equals("Emitidas"))
                             {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+
                             }
 
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine("");
-                            escritor.WriteLine(importeWrite);
+
+                          
+
+
+                           
                             Titulo_principal = txtConcepto.Text;
                             Cuenta_Abono_1 = item.Cells[0].Value.ToString();
                         }
+
                         if (item.Cells[4].Value.ToString() == "IVA TRASLADADO")
                         {
                             tituloWrite = item.Cells[1].Value.ToString();
@@ -1810,22 +2090,59 @@ namespace EKPolizaGastos.Forms
                             }
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
 
-                            
-                            if (tipoDeComprobante.Trim() == "I")
+
+                            if (tipoDeBase.Equals("Recibidas"))
                             {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
+
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                   
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";//Haber
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+
                             }
-                            else if (tipoDeComprobante.Trim() == "E")
+                            else if (tipoDeBase.Equals("Emitidas"))
                             {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";//Haber
+
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";//Debe
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Haber
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+
                             }
 
 
 
 
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine(importeWrite);
+
+                           
                             Cuenta_cargo_Iva = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "IVA RETENIDO")
@@ -1837,24 +2154,55 @@ namespace EKPolizaGastos.Forms
                             }
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
                             //tituloWrite = item.Cells[1].Value.ToString();
+
+                            if (tipoDeBase.Equals("Recibidas"))
+                            {
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                   
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+                            }
+                            else if (tipoDeBase.Equals("Emitidas"))
+                            {
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                   
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+                            }
+
+                        
+
+
+
                            
-
-
-                            if (tipoDeComprobante.Trim() == "I")
-                            {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";
-                            }
-                            else if (tipoDeComprobante.Trim() == "E")
-                            {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";
-                            }
-
-
-
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine("");
-                            escritor.WriteLine(importeWrite);
                             iva_Retenido = item.Cells[0].Value.ToString();
                             Cuenta_iva_retenido = item.Cells[0].Value.ToString();
                         }
@@ -1867,20 +2215,58 @@ namespace EKPolizaGastos.Forms
                             }
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
                             // tituloWrite = item.Cells[1].Value.ToString();
-
-                            if (tipoDeComprobante.Trim() == "I")
+                            if (tipoDeBase.Equals("Recibidas"))
                             {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    
+                                    escritor.WriteLine(importeWrite);
+                                }
+
                             }
-                            else if (tipoDeComprobante.Trim() == "E")
+                            else if (tipoDeBase.Equals("Emitidas"))
                             {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+
                             }
 
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine("");
-                            escritor.WriteLine(importeWrite);
+
+                         
+
+
+
+
+
+                          
                             Cuenta_isr_retenido = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "ISR TRASLADADO")
@@ -1893,18 +2279,52 @@ namespace EKPolizaGastos.Forms
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
                             // tituloWrite = item.Cells[1].Value.ToString();
 
-                            if (tipoDeComprobante.Trim() == "I")
+                            if (tipoDeBase.Equals("Recibidas"))
                             {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+
                             }
-                            else if (tipoDeComprobante.Trim() == "E")
+                            else if (tipoDeBase.Equals("Emitidas"))
                             {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+
                             }
 
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine(importeWrite);
+
+
+                          
+
+                           
                             Cuenta_isr_trasladado = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "IEPS RETENIDO")
@@ -1916,20 +2336,52 @@ namespace EKPolizaGastos.Forms
                             }
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
                             // tituloWrite = item.Cells[1].Value.ToString();
-
-                            if (tipoDeComprobante.Trim() == "I")
+                            if (tipoDeBase.Equals("Recibidas"))
                             {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                   escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+
                             }
-                            else if (tipoDeComprobante.Trim() == "E")
+                            else if (tipoDeBase.Equals("Emitidas"))
                             {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+
                             }
 
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine("");
-                            escritor.WriteLine(importeWrite);
+
+
+                           
                             Cuenta_ieps_retenido = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")
@@ -1941,19 +2393,49 @@ namespace EKPolizaGastos.Forms
                             }
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
                             //tituloWrite = item.Cells[1].Value.ToString();
-
-                            if (tipoDeComprobante.Trim() == "I")
+                            if (tipoDeBase.Equals("Recibidas"))
                             {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";
-                            }
-                            else if (tipoDeComprobante.Trim() == "E")
-                            {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";
-                            }
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
 
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine(importeWrite);
+
+                            }
+                            else if (tipoDeBase.Equals("Emitidas"))
+                            {
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine(importeWrite);
+                                }
+
+                            }
+                          
+
+                           
                             Cuenta_ieps_trasladado = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "CONCEPTO")
@@ -1965,22 +2447,57 @@ namespace EKPolizaGastos.Forms
                             }
                             cuentaWrite = item.Cells[0].Value.ToString() + "                ,  " + txtDepto.Text.Trim();
 
-
-
-                            if (tipoDeComprobante.Trim() == "I")
+                            if (tipoDeBase.Equals("Recibidas"))
                             {
-                                importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine(importeWrite);
+
+
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+
                             }
-                            else if (tipoDeComprobante.Trim() == "E")
+                            else if (tipoDeBase.Equals("Emitidas"))
                             {
-                                importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+
+                                if (tipoDeComprobante.Trim() == "I")
+                                {
+                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine("");
+                                    escritor.WriteLine(importeWrite);
+                                }
+                                else if (tipoDeComprobante.Trim() == "E")
+                                {
+                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    escritor.WriteLine(cuentaWrite);
+                                    escritor.WriteLine(tituloWrite);
+                                    escritor.WriteLine(importeWrite);
+                                }
+
                             }
 
-                            escritor.WriteLine(cuentaWrite);
-                            escritor.WriteLine(tituloWrite);
-                            escritor.WriteLine(importeWrite);
+                         
 
-                            cuentaBase = item.Cells[0].Value.ToString();
+
+
+
+                                cuentaBase = item.Cells[0].Value.ToString();
 
                             if (indice == 1)
                             {

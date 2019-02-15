@@ -104,6 +104,18 @@
     <Compile Include="Context\CISFACTSEMITIDAS.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\CIS_ABR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_ABR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_AGO2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_AGO2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\CIS_DIC2018.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
@@ -116,16 +128,136 @@
     <Compile Include="Context\CIS_ENE2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\CMGFACTEMITIDAS.cs">
+    <Compile Include="Context\CIS_ENE2019.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_ENE2019Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_FEB2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_FEB2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_JUL2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_JUL2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_JUN2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_JUN2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_MAR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_MAR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_MAY2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_MAY2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_NOV2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_NOV2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_OCT2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_OCT2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_SEP2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CIS_SEP2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\CMGFACTRECIBIDAS.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMGFACTSEMITIDAS.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_ABR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_ABR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_AGO2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_AGO2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_DIC2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_DIC2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\CMG_ENE2018.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\CMG_ENE2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_FEB2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_FEB2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_JUL2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_JUL2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_JUN2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_JUN2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_MAR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_MAR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_MAY2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_MAY2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_NOV2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_NOV2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_OCT2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_OCT2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_SEP2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\CMG_SEP2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Comprobante.cs">
@@ -158,16 +290,88 @@
     <Compile Include="Context\CuentasGastos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\DDRFACTEMITIDAS.cs">
+    <Compile Include="Context\DDRFACTRECIBIDAS.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\DDRFACTRECIBIDAS.cs">
+    <Compile Include="Context\DDRFACTSEMITIDAS.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_ABR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_ABR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_AGO2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_AGO2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_DIC2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_DIC2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\DDR_ENE2018.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\DDR_ENE2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_ENE2019.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_ENE2019Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_FEB2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_FEB2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_JUL2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_JUL2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_JUN2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_JUN2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_MAR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_MAR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_MAY2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_MAY2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_NOV2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_NOV2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_OCT2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_OCT2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_SEP2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\DDR_SEP2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\DeduccionesNominas.cs">
@@ -179,28 +383,115 @@
     <Compile Include="Context\Empresas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\FactEmi_RFCMesAño.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\FacturasEmitidas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\FacturasEmitidasConceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\JMRFACTEMITIDAS.cs">
+    <Compile Include="Context\JMRFACTRECIBIDAS.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\JMRFACTRECIBIDAS.cs">
+    <Compile Include="Context\JMRFACTSEMITIDAS.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_ABR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_ABR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_AGO2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_AGO2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_DIC2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_DIC2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_ENE2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_ENE2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_FEB2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_FEB2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_JUL2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_JUL2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_JUN2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_JUN2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_MAR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_MAR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_MAY2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_MAY2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_NOV2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_NOV2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_OCT2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_OCT2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_SEP2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\JMR_SEP2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Localidades.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\MROFACTEMITIDAS.cs">
+    <Compile Include="Context\MROFACTRECIBIDAS.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\MROFACTRECIBIDAS.cs">
+    <Compile Include="Context\MROFACTSEMITIDAS.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_ABR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_ABR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_AGO2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_AGO2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_DIC2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_DIC2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\MRO_ENE2018.cs">
@@ -209,19 +500,64 @@
     <Compile Include="Context\MRO_ENE2018Conceptos.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\MRO_ENE2019.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_ENE2019Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_FEB2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_FEB2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_JUL2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_JUL2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_JUN2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_JUN2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_MAR2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_MAR2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_MAY2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_MAY2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_NOV2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_NOV2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_OCT2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_OCT2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_SEP2018.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MRO_SEP2018Conceptos.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\Nominas.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\NotasPagoPolizaUnoAuno.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\PercepcionesNominas.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\PrestamosPolizaUnoAUno.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\PrestamosPolizaXdiaResumen.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\Proveedores.cs">
@@ -234,9 +570,6 @@
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\SP_InsertFactura_Result.cs">
-      <DependentUpon>Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Context\SP_NominasInsert_Result.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Context\sysdiagrams.cs">

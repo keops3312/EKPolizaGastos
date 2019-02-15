@@ -27,45 +27,157 @@ namespace EKPolizaGastos.Context
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Comprobante> Comprobante { get; set; }
-        public virtual DbSet<ComprobanteEstatus> ComprobanteEstatus { get; set; }
-        public virtual DbSet<CuentasGastos> CuentasGastos { get; set; }
-        public virtual DbSet<Empresas> Empresas { get; set; }
-        public virtual DbSet<Localidades> Localidades { get; set; }
-        public virtual DbSet<Proveedores> Proveedores { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<ComprobanteConceptos> ComprobanteConceptos { get; set; }
-        public virtual DbSet<ConceptosNominas> ConceptosNominas { get; set; }
-        public virtual DbSet<DeduccionesNominas> DeduccionesNominas { get; set; }
-        public virtual DbSet<Diot> Diot { get; set; }
-        public virtual DbSet<Nominas> Nominas { get; set; }
-        public virtual DbSet<PercepcionesNominas> PercepcionesNominas { get; set; }
-        public virtual DbSet<FacturasEmitidas> FacturasEmitidas { get; set; }
-        public virtual DbSet<FacturasEmitidasConceptos> FacturasEmitidasConceptos { get; set; }
-        public virtual DbSet<CIS_ENE2018> CIS_ENE2018 { get; set; }
-        public virtual DbSet<CIS_ENE2018Conceptos> CIS_ENE2018Conceptos { get; set; }
-        public virtual DbSet<CMG_ENE2018> CMG_ENE2018 { get; set; }
-        public virtual DbSet<CMG_ENE2018Conceptos> CMG_ENE2018Conceptos { get; set; }
-        public virtual DbSet<DDR_ENE2018> DDR_ENE2018 { get; set; }
-        public virtual DbSet<DDR_ENE2018Conceptos> DDR_ENE2018Conceptos { get; set; }
-        public virtual DbSet<MRO_ENE2018> MRO_ENE2018 { get; set; }
-        public virtual DbSet<MRO_ENE2018Conceptos> MRO_ENE2018Conceptos { get; set; }
-        public virtual DbSet<FactEmi_RFCMesAño> FactEmi_RFCMesAño { get; set; }
         public virtual DbSet<CISFACTRECIBIDAS> CISFACTRECIBIDAS { get; set; }
         public virtual DbSet<CISFACTSEMITIDAS> CISFACTSEMITIDAS { get; set; }
-        public virtual DbSet<CMGFACTEMITIDAS> CMGFACTEMITIDAS { get; set; }
         public virtual DbSet<CMGFACTRECIBIDAS> CMGFACTRECIBIDAS { get; set; }
-        public virtual DbSet<DDRFACTEMITIDAS> DDRFACTEMITIDAS { get; set; }
+        public virtual DbSet<CMGFACTSEMITIDAS> CMGFACTSEMITIDAS { get; set; }
+        public virtual DbSet<Comprobante> Comprobante { get; set; }
+        public virtual DbSet<ComprobanteEstatus> ComprobanteEstatus { get; set; }
+        public virtual DbSet<ConceptosNominas> ConceptosNominas { get; set; }
+        public virtual DbSet<CuentasGastos> CuentasGastos { get; set; }
         public virtual DbSet<DDRFACTRECIBIDAS> DDRFACTRECIBIDAS { get; set; }
-        public virtual DbSet<JMRFACTEMITIDAS> JMRFACTEMITIDAS { get; set; }
+        public virtual DbSet<DDRFACTSEMITIDAS> DDRFACTSEMITIDAS { get; set; }
+        public virtual DbSet<DeduccionesNominas> DeduccionesNominas { get; set; }
+        public virtual DbSet<Diot> Diot { get; set; }
+        public virtual DbSet<Empresas> Empresas { get; set; }
+        public virtual DbSet<FacturasEmitidas> FacturasEmitidas { get; set; }
+        public virtual DbSet<FacturasEmitidasConceptos> FacturasEmitidasConceptos { get; set; }
         public virtual DbSet<JMRFACTRECIBIDAS> JMRFACTRECIBIDAS { get; set; }
-        public virtual DbSet<MROFACTEMITIDAS> MROFACTEMITIDAS { get; set; }
+        public virtual DbSet<JMRFACTSEMITIDAS> JMRFACTSEMITIDAS { get; set; }
+        public virtual DbSet<Localidades> Localidades { get; set; }
         public virtual DbSet<MROFACTRECIBIDAS> MROFACTRECIBIDAS { get; set; }
-        public virtual DbSet<NotasPagoPolizaUnoAuno> NotasPagoPolizaUnoAuno { get; set; }
-        public virtual DbSet<PrestamosPolizaUnoAUno> PrestamosPolizaUnoAUno { get; set; }
-        public virtual DbSet<PrestamosPolizaXdiaResumen> PrestamosPolizaXdiaResumen { get; set; }
+        public virtual DbSet<MROFACTSEMITIDAS> MROFACTSEMITIDAS { get; set; }
+        public virtual DbSet<Nominas> Nominas { get; set; }
+        public virtual DbSet<PercepcionesNominas> PercepcionesNominas { get; set; }
+        public virtual DbSet<Proveedores> Proveedores { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<CIS_ABR2018> CIS_ABR2018 { get; set; }
+        public virtual DbSet<CIS_ABR2018Conceptos> CIS_ABR2018Conceptos { get; set; }
+        public virtual DbSet<CIS_AGO2018> CIS_AGO2018 { get; set; }
+        public virtual DbSet<CIS_AGO2018Conceptos> CIS_AGO2018Conceptos { get; set; }
         public virtual DbSet<CIS_DIC2018> CIS_DIC2018 { get; set; }
         public virtual DbSet<CIS_DIC2018Conceptos> CIS_DIC2018Conceptos { get; set; }
+        public virtual DbSet<CIS_ENE2018> CIS_ENE2018 { get; set; }
+        public virtual DbSet<CIS_ENE2018Conceptos> CIS_ENE2018Conceptos { get; set; }
+        public virtual DbSet<CIS_ENE2019> CIS_ENE2019 { get; set; }
+        public virtual DbSet<CIS_ENE2019Conceptos> CIS_ENE2019Conceptos { get; set; }
+        public virtual DbSet<CIS_FEB2018> CIS_FEB2018 { get; set; }
+        public virtual DbSet<CIS_FEB2018Conceptos> CIS_FEB2018Conceptos { get; set; }
+        public virtual DbSet<CIS_JUL2018> CIS_JUL2018 { get; set; }
+        public virtual DbSet<CIS_JUL2018Conceptos> CIS_JUL2018Conceptos { get; set; }
+        public virtual DbSet<CIS_JUN2018> CIS_JUN2018 { get; set; }
+        public virtual DbSet<CIS_JUN2018Conceptos> CIS_JUN2018Conceptos { get; set; }
+        public virtual DbSet<CIS_MAR2018> CIS_MAR2018 { get; set; }
+        public virtual DbSet<CIS_MAR2018Conceptos> CIS_MAR2018Conceptos { get; set; }
+        public virtual DbSet<CIS_MAY2018> CIS_MAY2018 { get; set; }
+        public virtual DbSet<CIS_MAY2018Conceptos> CIS_MAY2018Conceptos { get; set; }
+        public virtual DbSet<CIS_NOV2018> CIS_NOV2018 { get; set; }
+        public virtual DbSet<CIS_NOV2018Conceptos> CIS_NOV2018Conceptos { get; set; }
+        public virtual DbSet<CIS_OCT2018> CIS_OCT2018 { get; set; }
+        public virtual DbSet<CIS_OCT2018Conceptos> CIS_OCT2018Conceptos { get; set; }
+        public virtual DbSet<CIS_SEP2018> CIS_SEP2018 { get; set; }
+        public virtual DbSet<CIS_SEP2018Conceptos> CIS_SEP2018Conceptos { get; set; }
+        public virtual DbSet<CMG_ABR2018> CMG_ABR2018 { get; set; }
+        public virtual DbSet<CMG_ABR2018Conceptos> CMG_ABR2018Conceptos { get; set; }
+        public virtual DbSet<CMG_AGO2018> CMG_AGO2018 { get; set; }
+        public virtual DbSet<CMG_AGO2018Conceptos> CMG_AGO2018Conceptos { get; set; }
+        public virtual DbSet<CMG_DIC2018> CMG_DIC2018 { get; set; }
+        public virtual DbSet<CMG_DIC2018Conceptos> CMG_DIC2018Conceptos { get; set; }
+        public virtual DbSet<CMG_ENE2018> CMG_ENE2018 { get; set; }
+        public virtual DbSet<CMG_ENE2018Conceptos> CMG_ENE2018Conceptos { get; set; }
+        public virtual DbSet<CMG_FEB2018> CMG_FEB2018 { get; set; }
+        public virtual DbSet<CMG_FEB2018Conceptos> CMG_FEB2018Conceptos { get; set; }
+        public virtual DbSet<CMG_JUL2018> CMG_JUL2018 { get; set; }
+        public virtual DbSet<CMG_JUL2018Conceptos> CMG_JUL2018Conceptos { get; set; }
+        public virtual DbSet<CMG_JUN2018> CMG_JUN2018 { get; set; }
+        public virtual DbSet<CMG_JUN2018Conceptos> CMG_JUN2018Conceptos { get; set; }
+        public virtual DbSet<CMG_MAR2018> CMG_MAR2018 { get; set; }
+        public virtual DbSet<CMG_MAR2018Conceptos> CMG_MAR2018Conceptos { get; set; }
+        public virtual DbSet<CMG_MAY2018> CMG_MAY2018 { get; set; }
+        public virtual DbSet<CMG_MAY2018Conceptos> CMG_MAY2018Conceptos { get; set; }
+        public virtual DbSet<CMG_NOV2018> CMG_NOV2018 { get; set; }
+        public virtual DbSet<CMG_NOV2018Conceptos> CMG_NOV2018Conceptos { get; set; }
+        public virtual DbSet<CMG_OCT2018> CMG_OCT2018 { get; set; }
+        public virtual DbSet<CMG_OCT2018Conceptos> CMG_OCT2018Conceptos { get; set; }
+        public virtual DbSet<CMG_SEP2018> CMG_SEP2018 { get; set; }
+        public virtual DbSet<CMG_SEP2018Conceptos> CMG_SEP2018Conceptos { get; set; }
+        public virtual DbSet<ComprobanteConceptos> ComprobanteConceptos { get; set; }
+        public virtual DbSet<DDR_ABR2018> DDR_ABR2018 { get; set; }
+        public virtual DbSet<DDR_ABR2018Conceptos> DDR_ABR2018Conceptos { get; set; }
+        public virtual DbSet<DDR_AGO2018> DDR_AGO2018 { get; set; }
+        public virtual DbSet<DDR_AGO2018Conceptos> DDR_AGO2018Conceptos { get; set; }
+        public virtual DbSet<DDR_DIC2018> DDR_DIC2018 { get; set; }
+        public virtual DbSet<DDR_DIC2018Conceptos> DDR_DIC2018Conceptos { get; set; }
+        public virtual DbSet<DDR_ENE2018> DDR_ENE2018 { get; set; }
+        public virtual DbSet<DDR_ENE2018Conceptos> DDR_ENE2018Conceptos { get; set; }
+        public virtual DbSet<DDR_ENE2019> DDR_ENE2019 { get; set; }
+        public virtual DbSet<DDR_ENE2019Conceptos> DDR_ENE2019Conceptos { get; set; }
+        public virtual DbSet<DDR_FEB2018> DDR_FEB2018 { get; set; }
+        public virtual DbSet<DDR_FEB2018Conceptos> DDR_FEB2018Conceptos { get; set; }
+        public virtual DbSet<DDR_JUL2018> DDR_JUL2018 { get; set; }
+        public virtual DbSet<DDR_JUL2018Conceptos> DDR_JUL2018Conceptos { get; set; }
+        public virtual DbSet<DDR_JUN2018> DDR_JUN2018 { get; set; }
+        public virtual DbSet<DDR_JUN2018Conceptos> DDR_JUN2018Conceptos { get; set; }
+        public virtual DbSet<DDR_MAR2018> DDR_MAR2018 { get; set; }
+        public virtual DbSet<DDR_MAR2018Conceptos> DDR_MAR2018Conceptos { get; set; }
+        public virtual DbSet<DDR_MAY2018> DDR_MAY2018 { get; set; }
+        public virtual DbSet<DDR_MAY2018Conceptos> DDR_MAY2018Conceptos { get; set; }
+        public virtual DbSet<DDR_NOV2018> DDR_NOV2018 { get; set; }
+        public virtual DbSet<DDR_NOV2018Conceptos> DDR_NOV2018Conceptos { get; set; }
+        public virtual DbSet<DDR_OCT2018> DDR_OCT2018 { get; set; }
+        public virtual DbSet<DDR_OCT2018Conceptos> DDR_OCT2018Conceptos { get; set; }
+        public virtual DbSet<DDR_SEP2018> DDR_SEP2018 { get; set; }
+        public virtual DbSet<DDR_SEP2018Conceptos> DDR_SEP2018Conceptos { get; set; }
+        public virtual DbSet<JMR_ABR2018> JMR_ABR2018 { get; set; }
+        public virtual DbSet<JMR_ABR2018Conceptos> JMR_ABR2018Conceptos { get; set; }
+        public virtual DbSet<JMR_AGO2018> JMR_AGO2018 { get; set; }
+        public virtual DbSet<JMR_AGO2018Conceptos> JMR_AGO2018Conceptos { get; set; }
+        public virtual DbSet<JMR_DIC2018> JMR_DIC2018 { get; set; }
+        public virtual DbSet<JMR_DIC2018Conceptos> JMR_DIC2018Conceptos { get; set; }
+        public virtual DbSet<JMR_ENE2018> JMR_ENE2018 { get; set; }
+        public virtual DbSet<JMR_ENE2018Conceptos> JMR_ENE2018Conceptos { get; set; }
+        public virtual DbSet<JMR_FEB2018> JMR_FEB2018 { get; set; }
+        public virtual DbSet<JMR_FEB2018Conceptos> JMR_FEB2018Conceptos { get; set; }
+        public virtual DbSet<JMR_JUL2018> JMR_JUL2018 { get; set; }
+        public virtual DbSet<JMR_JUL2018Conceptos> JMR_JUL2018Conceptos { get; set; }
+        public virtual DbSet<JMR_JUN2018> JMR_JUN2018 { get; set; }
+        public virtual DbSet<JMR_JUN2018Conceptos> JMR_JUN2018Conceptos { get; set; }
+        public virtual DbSet<JMR_MAR2018> JMR_MAR2018 { get; set; }
+        public virtual DbSet<JMR_MAR2018Conceptos> JMR_MAR2018Conceptos { get; set; }
+        public virtual DbSet<JMR_MAY2018> JMR_MAY2018 { get; set; }
+        public virtual DbSet<JMR_MAY2018Conceptos> JMR_MAY2018Conceptos { get; set; }
+        public virtual DbSet<JMR_NOV2018> JMR_NOV2018 { get; set; }
+        public virtual DbSet<JMR_NOV2018Conceptos> JMR_NOV2018Conceptos { get; set; }
+        public virtual DbSet<JMR_OCT2018> JMR_OCT2018 { get; set; }
+        public virtual DbSet<JMR_OCT2018Conceptos> JMR_OCT2018Conceptos { get; set; }
+        public virtual DbSet<JMR_SEP2018> JMR_SEP2018 { get; set; }
+        public virtual DbSet<JMR_SEP2018Conceptos> JMR_SEP2018Conceptos { get; set; }
+        public virtual DbSet<MRO_ABR2018> MRO_ABR2018 { get; set; }
+        public virtual DbSet<MRO_ABR2018Conceptos> MRO_ABR2018Conceptos { get; set; }
+        public virtual DbSet<MRO_AGO2018> MRO_AGO2018 { get; set; }
+        public virtual DbSet<MRO_AGO2018Conceptos> MRO_AGO2018Conceptos { get; set; }
+        public virtual DbSet<MRO_DIC2018> MRO_DIC2018 { get; set; }
+        public virtual DbSet<MRO_DIC2018Conceptos> MRO_DIC2018Conceptos { get; set; }
+        public virtual DbSet<MRO_ENE2018> MRO_ENE2018 { get; set; }
+        public virtual DbSet<MRO_ENE2018Conceptos> MRO_ENE2018Conceptos { get; set; }
+        public virtual DbSet<MRO_ENE2019> MRO_ENE2019 { get; set; }
+        public virtual DbSet<MRO_ENE2019Conceptos> MRO_ENE2019Conceptos { get; set; }
+        public virtual DbSet<MRO_FEB2018> MRO_FEB2018 { get; set; }
+        public virtual DbSet<MRO_FEB2018Conceptos> MRO_FEB2018Conceptos { get; set; }
+        public virtual DbSet<MRO_JUL2018> MRO_JUL2018 { get; set; }
+        public virtual DbSet<MRO_JUL2018Conceptos> MRO_JUL2018Conceptos { get; set; }
+        public virtual DbSet<MRO_JUN2018> MRO_JUN2018 { get; set; }
+        public virtual DbSet<MRO_JUN2018Conceptos> MRO_JUN2018Conceptos { get; set; }
+        public virtual DbSet<MRO_MAR2018> MRO_MAR2018 { get; set; }
+        public virtual DbSet<MRO_MAR2018Conceptos> MRO_MAR2018Conceptos { get; set; }
+        public virtual DbSet<MRO_MAY2018> MRO_MAY2018 { get; set; }
+        public virtual DbSet<MRO_MAY2018Conceptos> MRO_MAY2018Conceptos { get; set; }
+        public virtual DbSet<MRO_NOV2018> MRO_NOV2018 { get; set; }
+        public virtual DbSet<MRO_NOV2018Conceptos> MRO_NOV2018Conceptos { get; set; }
+        public virtual DbSet<MRO_OCT2018> MRO_OCT2018 { get; set; }
+        public virtual DbSet<MRO_OCT2018Conceptos> MRO_OCT2018Conceptos { get; set; }
+        public virtual DbSet<MRO_SEP2018> MRO_SEP2018 { get; set; }
+        public virtual DbSet<MRO_SEP2018Conceptos> MRO_SEP2018Conceptos { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -148,7 +260,7 @@ namespace EKPolizaGastos.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<SP_InsertFactura_Result> SP_InsertFactura(Nullable<int> opcion, string serie, string folio, string fecha, string version, string sello, string formaPago, string noCertificado, string metodoPago, string lugarExpedicion, string schemaLocation, string condicionesDePago, string subTotal, string moneda, string total, string tipoDeComprobante, string descuento, string nombre, string regimenFiscal, string rfc, string nombreR, string rfcR, string usoCFDI, string importe, string impuesto, string tasaOCuota, string tipoFactor, string selloCFD, string noCertificadoSAT, string rfcProvCertif, string uUID, string fechaTimbrado, string selloSAT, string idFactura, string claveProdServ, string noIdentificacion, string cantidad, string claveUnidad, string unidad, string descripcion, string valorUnitario, string importeX, string descuentoX, string nombreTabla, Nullable<System.DateTime> fechaC, string baseTR, string impuestoTR, string tipoFactorTR, string tasaOCuotaTR, string importeTR, string emisor, string regimenFiscalReceptor, string rFCEmisor, string receptor, string rFCReceptor, string versions, Nullable<System.DateTime> registro, Nullable<int> idEstatus, Nullable<int> año, Nullable<int> mes, string @base, ObjectParameter msg, ObjectParameter capto)
+        public virtual ObjectResult<SP_InsertFactura_Result> SP_InsertFactura(Nullable<int> opcion, string serie, string folio, string fecha, string version, string sello, string formaPago, string noCertificado, string metodoPago, string lugarExpedicion, string schemaLocation, string condicionesDePago, string subTotal, string moneda, string total, string tipoDeComprobante, string descuento, string nombre, string regimenFiscal, string rfc, string nombreR, string rfcR, string usoCFDI, string importe, string impuesto, string tasaOCuota, string tipoFactor, string selloCFD, string noCertificadoSAT, string rfcProvCertif, string uUID, string fechaTimbrado, string selloSAT, string idFactura, string claveProdServ, string noIdentificacion, string cantidad, string claveUnidad, string unidad, string descripcion, string valorUnitario, string importeX, string descuentoX, string nombreTabla, Nullable<System.DateTime> fechaC, string baseTR, string impuestoTR, string tipoFactorTR, string tasaOCuotaTR, string importeTR, ObjectParameter msg, ObjectParameter capto)
         {
             var opcionParameter = opcion.HasValue ?
                 new ObjectParameter("opcion", opcion) :
@@ -350,51 +462,7 @@ namespace EKPolizaGastos.Context
                 new ObjectParameter("ImporteTR", importeTR) :
                 new ObjectParameter("ImporteTR", typeof(string));
     
-            var emisorParameter = emisor != null ?
-                new ObjectParameter("Emisor", emisor) :
-                new ObjectParameter("Emisor", typeof(string));
-    
-            var regimenFiscalReceptorParameter = regimenFiscalReceptor != null ?
-                new ObjectParameter("RegimenFiscalReceptor", regimenFiscalReceptor) :
-                new ObjectParameter("RegimenFiscalReceptor", typeof(string));
-    
-            var rFCEmisorParameter = rFCEmisor != null ?
-                new ObjectParameter("RFCEmisor", rFCEmisor) :
-                new ObjectParameter("RFCEmisor", typeof(string));
-    
-            var receptorParameter = receptor != null ?
-                new ObjectParameter("Receptor", receptor) :
-                new ObjectParameter("Receptor", typeof(string));
-    
-            var rFCReceptorParameter = rFCReceptor != null ?
-                new ObjectParameter("RFCReceptor", rFCReceptor) :
-                new ObjectParameter("RFCReceptor", typeof(string));
-    
-            var versionsParameter = versions != null ?
-                new ObjectParameter("Versions", versions) :
-                new ObjectParameter("Versions", typeof(string));
-    
-            var registroParameter = registro.HasValue ?
-                new ObjectParameter("Registro", registro) :
-                new ObjectParameter("Registro", typeof(System.DateTime));
-    
-            var idEstatusParameter = idEstatus.HasValue ?
-                new ObjectParameter("IdEstatus", idEstatus) :
-                new ObjectParameter("IdEstatus", typeof(int));
-    
-            var añoParameter = año.HasValue ?
-                new ObjectParameter("Año", año) :
-                new ObjectParameter("Año", typeof(int));
-    
-            var mesParameter = mes.HasValue ?
-                new ObjectParameter("Mes", mes) :
-                new ObjectParameter("Mes", typeof(int));
-    
-            var baseParameter = @base != null ?
-                new ObjectParameter("Base", @base) :
-                new ObjectParameter("Base", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertFactura_Result>("SP_InsertFactura", opcionParameter, serieParameter, folioParameter, fechaParameter, versionParameter, selloParameter, formaPagoParameter, noCertificadoParameter, metodoPagoParameter, lugarExpedicionParameter, schemaLocationParameter, condicionesDePagoParameter, subTotalParameter, monedaParameter, totalParameter, tipoDeComprobanteParameter, descuentoParameter, nombreParameter, regimenFiscalParameter, rfcParameter, nombreRParameter, rfcRParameter, usoCFDIParameter, importeParameter, impuestoParameter, tasaOCuotaParameter, tipoFactorParameter, selloCFDParameter, noCertificadoSATParameter, rfcProvCertifParameter, uUIDParameter, fechaTimbradoParameter, selloSATParameter, idFacturaParameter, claveProdServParameter, noIdentificacionParameter, cantidadParameter, claveUnidadParameter, unidadParameter, descripcionParameter, valorUnitarioParameter, importeXParameter, descuentoXParameter, nombreTablaParameter, fechaCParameter, baseTRParameter, impuestoTRParameter, tipoFactorTRParameter, tasaOCuotaTRParameter, importeTRParameter, emisorParameter, regimenFiscalReceptorParameter, rFCEmisorParameter, receptorParameter, rFCReceptorParameter, versionsParameter, registroParameter, idEstatusParameter, añoParameter, mesParameter, baseParameter, msg, capto);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertFactura_Result>("SP_InsertFactura", opcionParameter, serieParameter, folioParameter, fechaParameter, versionParameter, selloParameter, formaPagoParameter, noCertificadoParameter, metodoPagoParameter, lugarExpedicionParameter, schemaLocationParameter, condicionesDePagoParameter, subTotalParameter, monedaParameter, totalParameter, tipoDeComprobanteParameter, descuentoParameter, nombreParameter, regimenFiscalParameter, rfcParameter, nombreRParameter, rfcRParameter, usoCFDIParameter, importeParameter, impuestoParameter, tasaOCuotaParameter, tipoFactorParameter, selloCFDParameter, noCertificadoSATParameter, rfcProvCertifParameter, uUIDParameter, fechaTimbradoParameter, selloSATParameter, idFacturaParameter, claveProdServParameter, noIdentificacionParameter, cantidadParameter, claveUnidadParameter, unidadParameter, descripcionParameter, valorUnitarioParameter, importeXParameter, descuentoXParameter, nombreTablaParameter, fechaCParameter, baseTRParameter, impuestoTRParameter, tipoFactorTRParameter, tasaOCuotaTRParameter, importeTRParameter, msg, capto);
         }
     
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
@@ -417,319 +485,6 @@ namespace EKPolizaGastos.Context
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual ObjectResult<SP_NominasInsert_Result> SP_NominasInsert(string version, string serie, string folio, string fecha, string sello, string formaPago, string noCertificado, string certificado, string subTotal, string descuento, string moneda, string total, string tipodeComprobante, string metodoPago, string lugarExpedicion, string emisor_Rfc, string emisor_Nombre, string emisor_RegimenFiscal, string receptor_Rfc, string receptor_Nombre, string receptor_UsoCFDI, string fechaFinalPago, string fechaInicialPago, string fechaPago, string numDiasPagados, string tipoNomina, string totalDeducciones, string totalPercepciones, string complemento_Version, string registroPatronal, string antiguedad, string banco, string claveEntFed, string cuentaBancaria, string curp, string departamento, string fechaInicioRelLaboral, string numEmpleado, string numSeguridadSocial, string periodicidadPago, string puesto, string riesgoPuesto, string salarioBaseCotApor, string salarioDiarioIntegrado, string sindicalizado, string tipoContrato, string tipoJornada, string tipoRegimen, string totalExento, string totalGravado, string totalSueldos, string totalImpuestoRetenidos, string totalOtrasDeducciones, string t_RfcProvCertif, string t_Version, string uUID, string t_FechaTimbrado, string t_SelloCFD, string noCertificadoSAT, Nullable<System.DateTime> fechaConvert, Nullable<int> estatusNomina, Nullable<int> opcion, ObjectParameter msg, ObjectParameter capto, Nullable<int> idNomina, string clave, string concepto, string importeExento, string importeGravado, string tipoPercepcion, string importe, string tipoDeduccion, string claveProdServ, string cantidad, string claveUnidad, string descripcion, string valorUnitario, Nullable<int> año, Nullable<int> mes)
-        {
-            var versionParameter = version != null ?
-                new ObjectParameter("Version", version) :
-                new ObjectParameter("Version", typeof(string));
-    
-            var serieParameter = serie != null ?
-                new ObjectParameter("Serie", serie) :
-                new ObjectParameter("Serie", typeof(string));
-    
-            var folioParameter = folio != null ?
-                new ObjectParameter("Folio", folio) :
-                new ObjectParameter("Folio", typeof(string));
-    
-            var fechaParameter = fecha != null ?
-                new ObjectParameter("Fecha", fecha) :
-                new ObjectParameter("Fecha", typeof(string));
-    
-            var selloParameter = sello != null ?
-                new ObjectParameter("Sello", sello) :
-                new ObjectParameter("Sello", typeof(string));
-    
-            var formaPagoParameter = formaPago != null ?
-                new ObjectParameter("FormaPago", formaPago) :
-                new ObjectParameter("FormaPago", typeof(string));
-    
-            var noCertificadoParameter = noCertificado != null ?
-                new ObjectParameter("NoCertificado", noCertificado) :
-                new ObjectParameter("NoCertificado", typeof(string));
-    
-            var certificadoParameter = certificado != null ?
-                new ObjectParameter("Certificado", certificado) :
-                new ObjectParameter("Certificado", typeof(string));
-    
-            var subTotalParameter = subTotal != null ?
-                new ObjectParameter("SubTotal", subTotal) :
-                new ObjectParameter("SubTotal", typeof(string));
-    
-            var descuentoParameter = descuento != null ?
-                new ObjectParameter("Descuento", descuento) :
-                new ObjectParameter("Descuento", typeof(string));
-    
-            var monedaParameter = moneda != null ?
-                new ObjectParameter("Moneda", moneda) :
-                new ObjectParameter("Moneda", typeof(string));
-    
-            var totalParameter = total != null ?
-                new ObjectParameter("Total", total) :
-                new ObjectParameter("Total", typeof(string));
-    
-            var tipodeComprobanteParameter = tipodeComprobante != null ?
-                new ObjectParameter("TipodeComprobante", tipodeComprobante) :
-                new ObjectParameter("TipodeComprobante", typeof(string));
-    
-            var metodoPagoParameter = metodoPago != null ?
-                new ObjectParameter("MetodoPago", metodoPago) :
-                new ObjectParameter("MetodoPago", typeof(string));
-    
-            var lugarExpedicionParameter = lugarExpedicion != null ?
-                new ObjectParameter("LugarExpedicion", lugarExpedicion) :
-                new ObjectParameter("LugarExpedicion", typeof(string));
-    
-            var emisor_RfcParameter = emisor_Rfc != null ?
-                new ObjectParameter("Emisor_Rfc", emisor_Rfc) :
-                new ObjectParameter("Emisor_Rfc", typeof(string));
-    
-            var emisor_NombreParameter = emisor_Nombre != null ?
-                new ObjectParameter("Emisor_Nombre", emisor_Nombre) :
-                new ObjectParameter("Emisor_Nombre", typeof(string));
-    
-            var emisor_RegimenFiscalParameter = emisor_RegimenFiscal != null ?
-                new ObjectParameter("Emisor_RegimenFiscal", emisor_RegimenFiscal) :
-                new ObjectParameter("Emisor_RegimenFiscal", typeof(string));
-    
-            var receptor_RfcParameter = receptor_Rfc != null ?
-                new ObjectParameter("Receptor_Rfc", receptor_Rfc) :
-                new ObjectParameter("Receptor_Rfc", typeof(string));
-    
-            var receptor_NombreParameter = receptor_Nombre != null ?
-                new ObjectParameter("Receptor_Nombre", receptor_Nombre) :
-                new ObjectParameter("Receptor_Nombre", typeof(string));
-    
-            var receptor_UsoCFDIParameter = receptor_UsoCFDI != null ?
-                new ObjectParameter("Receptor_UsoCFDI", receptor_UsoCFDI) :
-                new ObjectParameter("Receptor_UsoCFDI", typeof(string));
-    
-            var fechaFinalPagoParameter = fechaFinalPago != null ?
-                new ObjectParameter("FechaFinalPago", fechaFinalPago) :
-                new ObjectParameter("FechaFinalPago", typeof(string));
-    
-            var fechaInicialPagoParameter = fechaInicialPago != null ?
-                new ObjectParameter("FechaInicialPago", fechaInicialPago) :
-                new ObjectParameter("FechaInicialPago", typeof(string));
-    
-            var fechaPagoParameter = fechaPago != null ?
-                new ObjectParameter("FechaPago", fechaPago) :
-                new ObjectParameter("FechaPago", typeof(string));
-    
-            var numDiasPagadosParameter = numDiasPagados != null ?
-                new ObjectParameter("NumDiasPagados", numDiasPagados) :
-                new ObjectParameter("NumDiasPagados", typeof(string));
-    
-            var tipoNominaParameter = tipoNomina != null ?
-                new ObjectParameter("TipoNomina", tipoNomina) :
-                new ObjectParameter("TipoNomina", typeof(string));
-    
-            var totalDeduccionesParameter = totalDeducciones != null ?
-                new ObjectParameter("TotalDeducciones", totalDeducciones) :
-                new ObjectParameter("TotalDeducciones", typeof(string));
-    
-            var totalPercepcionesParameter = totalPercepciones != null ?
-                new ObjectParameter("TotalPercepciones", totalPercepciones) :
-                new ObjectParameter("TotalPercepciones", typeof(string));
-    
-            var complemento_VersionParameter = complemento_Version != null ?
-                new ObjectParameter("Complemento_Version", complemento_Version) :
-                new ObjectParameter("Complemento_Version", typeof(string));
-    
-            var registroPatronalParameter = registroPatronal != null ?
-                new ObjectParameter("RegistroPatronal", registroPatronal) :
-                new ObjectParameter("RegistroPatronal", typeof(string));
-    
-            var antiguedadParameter = antiguedad != null ?
-                new ObjectParameter("Antiguedad", antiguedad) :
-                new ObjectParameter("Antiguedad", typeof(string));
-    
-            var bancoParameter = banco != null ?
-                new ObjectParameter("Banco", banco) :
-                new ObjectParameter("Banco", typeof(string));
-    
-            var claveEntFedParameter = claveEntFed != null ?
-                new ObjectParameter("ClaveEntFed", claveEntFed) :
-                new ObjectParameter("ClaveEntFed", typeof(string));
-    
-            var cuentaBancariaParameter = cuentaBancaria != null ?
-                new ObjectParameter("CuentaBancaria", cuentaBancaria) :
-                new ObjectParameter("CuentaBancaria", typeof(string));
-    
-            var curpParameter = curp != null ?
-                new ObjectParameter("Curp", curp) :
-                new ObjectParameter("Curp", typeof(string));
-    
-            var departamentoParameter = departamento != null ?
-                new ObjectParameter("Departamento", departamento) :
-                new ObjectParameter("Departamento", typeof(string));
-    
-            var fechaInicioRelLaboralParameter = fechaInicioRelLaboral != null ?
-                new ObjectParameter("FechaInicioRelLaboral", fechaInicioRelLaboral) :
-                new ObjectParameter("FechaInicioRelLaboral", typeof(string));
-    
-            var numEmpleadoParameter = numEmpleado != null ?
-                new ObjectParameter("NumEmpleado", numEmpleado) :
-                new ObjectParameter("NumEmpleado", typeof(string));
-    
-            var numSeguridadSocialParameter = numSeguridadSocial != null ?
-                new ObjectParameter("NumSeguridadSocial", numSeguridadSocial) :
-                new ObjectParameter("NumSeguridadSocial", typeof(string));
-    
-            var periodicidadPagoParameter = periodicidadPago != null ?
-                new ObjectParameter("PeriodicidadPago", periodicidadPago) :
-                new ObjectParameter("PeriodicidadPago", typeof(string));
-    
-            var puestoParameter = puesto != null ?
-                new ObjectParameter("Puesto", puesto) :
-                new ObjectParameter("Puesto", typeof(string));
-    
-            var riesgoPuestoParameter = riesgoPuesto != null ?
-                new ObjectParameter("RiesgoPuesto", riesgoPuesto) :
-                new ObjectParameter("RiesgoPuesto", typeof(string));
-    
-            var salarioBaseCotAporParameter = salarioBaseCotApor != null ?
-                new ObjectParameter("SalarioBaseCotApor", salarioBaseCotApor) :
-                new ObjectParameter("SalarioBaseCotApor", typeof(string));
-    
-            var salarioDiarioIntegradoParameter = salarioDiarioIntegrado != null ?
-                new ObjectParameter("SalarioDiarioIntegrado", salarioDiarioIntegrado) :
-                new ObjectParameter("SalarioDiarioIntegrado", typeof(string));
-    
-            var sindicalizadoParameter = sindicalizado != null ?
-                new ObjectParameter("Sindicalizado", sindicalizado) :
-                new ObjectParameter("Sindicalizado", typeof(string));
-    
-            var tipoContratoParameter = tipoContrato != null ?
-                new ObjectParameter("TipoContrato", tipoContrato) :
-                new ObjectParameter("TipoContrato", typeof(string));
-    
-            var tipoJornadaParameter = tipoJornada != null ?
-                new ObjectParameter("TipoJornada", tipoJornada) :
-                new ObjectParameter("TipoJornada", typeof(string));
-    
-            var tipoRegimenParameter = tipoRegimen != null ?
-                new ObjectParameter("TipoRegimen", tipoRegimen) :
-                new ObjectParameter("TipoRegimen", typeof(string));
-    
-            var totalExentoParameter = totalExento != null ?
-                new ObjectParameter("TotalExento", totalExento) :
-                new ObjectParameter("TotalExento", typeof(string));
-    
-            var totalGravadoParameter = totalGravado != null ?
-                new ObjectParameter("TotalGravado", totalGravado) :
-                new ObjectParameter("TotalGravado", typeof(string));
-    
-            var totalSueldosParameter = totalSueldos != null ?
-                new ObjectParameter("TotalSueldos", totalSueldos) :
-                new ObjectParameter("TotalSueldos", typeof(string));
-    
-            var totalImpuestoRetenidosParameter = totalImpuestoRetenidos != null ?
-                new ObjectParameter("TotalImpuestoRetenidos", totalImpuestoRetenidos) :
-                new ObjectParameter("TotalImpuestoRetenidos", typeof(string));
-    
-            var totalOtrasDeduccionesParameter = totalOtrasDeducciones != null ?
-                new ObjectParameter("TotalOtrasDeducciones", totalOtrasDeducciones) :
-                new ObjectParameter("TotalOtrasDeducciones", typeof(string));
-    
-            var t_RfcProvCertifParameter = t_RfcProvCertif != null ?
-                new ObjectParameter("T_RfcProvCertif", t_RfcProvCertif) :
-                new ObjectParameter("T_RfcProvCertif", typeof(string));
-    
-            var t_VersionParameter = t_Version != null ?
-                new ObjectParameter("T_Version", t_Version) :
-                new ObjectParameter("T_Version", typeof(string));
-    
-            var uUIDParameter = uUID != null ?
-                new ObjectParameter("UUID", uUID) :
-                new ObjectParameter("UUID", typeof(string));
-    
-            var t_FechaTimbradoParameter = t_FechaTimbrado != null ?
-                new ObjectParameter("T_FechaTimbrado", t_FechaTimbrado) :
-                new ObjectParameter("T_FechaTimbrado", typeof(string));
-    
-            var t_SelloCFDParameter = t_SelloCFD != null ?
-                new ObjectParameter("T_SelloCFD", t_SelloCFD) :
-                new ObjectParameter("T_SelloCFD", typeof(string));
-    
-            var noCertificadoSATParameter = noCertificadoSAT != null ?
-                new ObjectParameter("NoCertificadoSAT", noCertificadoSAT) :
-                new ObjectParameter("NoCertificadoSAT", typeof(string));
-    
-            var fechaConvertParameter = fechaConvert.HasValue ?
-                new ObjectParameter("FechaConvert", fechaConvert) :
-                new ObjectParameter("FechaConvert", typeof(System.DateTime));
-    
-            var estatusNominaParameter = estatusNomina.HasValue ?
-                new ObjectParameter("EstatusNomina", estatusNomina) :
-                new ObjectParameter("EstatusNomina", typeof(int));
-    
-            var opcionParameter = opcion.HasValue ?
-                new ObjectParameter("opcion", opcion) :
-                new ObjectParameter("opcion", typeof(int));
-    
-            var idNominaParameter = idNomina.HasValue ?
-                new ObjectParameter("IdNomina", idNomina) :
-                new ObjectParameter("IdNomina", typeof(int));
-    
-            var claveParameter = clave != null ?
-                new ObjectParameter("Clave", clave) :
-                new ObjectParameter("Clave", typeof(string));
-    
-            var conceptoParameter = concepto != null ?
-                new ObjectParameter("Concepto", concepto) :
-                new ObjectParameter("Concepto", typeof(string));
-    
-            var importeExentoParameter = importeExento != null ?
-                new ObjectParameter("ImporteExento", importeExento) :
-                new ObjectParameter("ImporteExento", typeof(string));
-    
-            var importeGravadoParameter = importeGravado != null ?
-                new ObjectParameter("ImporteGravado", importeGravado) :
-                new ObjectParameter("ImporteGravado", typeof(string));
-    
-            var tipoPercepcionParameter = tipoPercepcion != null ?
-                new ObjectParameter("TipoPercepcion", tipoPercepcion) :
-                new ObjectParameter("TipoPercepcion", typeof(string));
-    
-            var importeParameter = importe != null ?
-                new ObjectParameter("Importe", importe) :
-                new ObjectParameter("Importe", typeof(string));
-    
-            var tipoDeduccionParameter = tipoDeduccion != null ?
-                new ObjectParameter("TipoDeduccion", tipoDeduccion) :
-                new ObjectParameter("TipoDeduccion", typeof(string));
-    
-            var claveProdServParameter = claveProdServ != null ?
-                new ObjectParameter("ClaveProdServ", claveProdServ) :
-                new ObjectParameter("ClaveProdServ", typeof(string));
-    
-            var cantidadParameter = cantidad != null ?
-                new ObjectParameter("Cantidad", cantidad) :
-                new ObjectParameter("Cantidad", typeof(string));
-    
-            var claveUnidadParameter = claveUnidad != null ?
-                new ObjectParameter("ClaveUnidad", claveUnidad) :
-                new ObjectParameter("ClaveUnidad", typeof(string));
-    
-            var descripcionParameter = descripcion != null ?
-                new ObjectParameter("Descripcion", descripcion) :
-                new ObjectParameter("Descripcion", typeof(string));
-    
-            var valorUnitarioParameter = valorUnitario != null ?
-                new ObjectParameter("ValorUnitario", valorUnitario) :
-                new ObjectParameter("ValorUnitario", typeof(string));
-    
-            var añoParameter = año.HasValue ?
-                new ObjectParameter("Año", año) :
-                new ObjectParameter("Año", typeof(int));
-    
-            var mesParameter = mes.HasValue ?
-                new ObjectParameter("Mes", mes) :
-                new ObjectParameter("Mes", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_NominasInsert_Result>("SP_NominasInsert", versionParameter, serieParameter, folioParameter, fechaParameter, selloParameter, formaPagoParameter, noCertificadoParameter, certificadoParameter, subTotalParameter, descuentoParameter, monedaParameter, totalParameter, tipodeComprobanteParameter, metodoPagoParameter, lugarExpedicionParameter, emisor_RfcParameter, emisor_NombreParameter, emisor_RegimenFiscalParameter, receptor_RfcParameter, receptor_NombreParameter, receptor_UsoCFDIParameter, fechaFinalPagoParameter, fechaInicialPagoParameter, fechaPagoParameter, numDiasPagadosParameter, tipoNominaParameter, totalDeduccionesParameter, totalPercepcionesParameter, complemento_VersionParameter, registroPatronalParameter, antiguedadParameter, bancoParameter, claveEntFedParameter, cuentaBancariaParameter, curpParameter, departamentoParameter, fechaInicioRelLaboralParameter, numEmpleadoParameter, numSeguridadSocialParameter, periodicidadPagoParameter, puestoParameter, riesgoPuestoParameter, salarioBaseCotAporParameter, salarioDiarioIntegradoParameter, sindicalizadoParameter, tipoContratoParameter, tipoJornadaParameter, tipoRegimenParameter, totalExentoParameter, totalGravadoParameter, totalSueldosParameter, totalImpuestoRetenidosParameter, totalOtrasDeduccionesParameter, t_RfcProvCertifParameter, t_VersionParameter, uUIDParameter, t_FechaTimbradoParameter, t_SelloCFDParameter, noCertificadoSATParameter, fechaConvertParameter, estatusNominaParameter, opcionParameter, msg, capto, idNominaParameter, claveParameter, conceptoParameter, importeExentoParameter, importeGravadoParameter, tipoPercepcionParameter, importeParameter, tipoDeduccionParameter, claveProdServParameter, cantidadParameter, claveUnidadParameter, descripcionParameter, valorUnitarioParameter, añoParameter, mesParameter);
         }
     }
 }
