@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -67,6 +82,9 @@
     </Reference>
     <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="SplashScreen, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SplashScreen.Winforms.1.0.0\lib\SplashScreen.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -611,6 +629,12 @@
     <Compile Include="Forms\LoadFactForm.Designer.cs">
       <DependentUpon>LoadFactForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\OpcionVersionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OpcionVersionForm.Designer.cs">
+      <DependentUpon>OpcionVersionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\PlantillaPrepolizaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -666,6 +690,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoadFactForm.resx">
       <DependentUpon>LoadFactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OpcionVersionForm.resx">
+      <DependentUpon>OpcionVersionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlantillaPrepolizaForm.resx">
       <DependentUpon>PlantillaPrepolizaForm.cs</DependentUpon>
@@ -742,6 +769,10 @@
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
     <Content Include="polizaGastos.ico" />
+    <None Include="Resources\regresar.png" />
+    <None Include="Resources\cerrar_tres.fw.png" />
+    <None Include="Resources\version_dos.fw.png" />
+    <None Include="Resources\version_uno.fw.png" />
     <None Include="Resources\cerrar.png" />
     <None Include="Resources\iconToolTip.fw.png" />
     <None Include="Resources\catalogoDeCuentas.png" />
@@ -766,6 +797,18 @@
       <Project>{4e7c58c8-8cc7-4c61-9bae-7f5beba30268}</Project>
       <Name>EKPolizaGastos.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -105,8 +105,8 @@ namespace EKPolizaGastos.Common.Classes
             SqlConnection conn = new SqlConnection(cnx);
             DataTable Proveedores = new DataTable();
             //CHARGE DATA 
-            SqlCommand cmd = new SqlCommand("select distinct(RFCEmisor)," +
-                "NombreEmisor from " + Tabla + " where Ano='"+ Periodo + "' and Mes='"+ mes + "' and Empresa='" + RFCEmpresa + "' order by RFCEmisor", conn);
+            SqlCommand cmd = new SqlCommand("select distinct(RFCEmisor)" +
+                " from " + Tabla + " where Ano='"+ Periodo + "' and Mes='"+ mes + "' and Empresa='" + RFCEmpresa + "' order by RFCEmisor", conn);
             using (SqlDataAdapter a = new SqlDataAdapter(cmd))
             {
                 a.Fill(Proveedores);
@@ -122,12 +122,29 @@ namespace EKPolizaGastos.Common.Classes
         {
             string Tabla;
             Tabla = Ejercicio.Substring(0, 3) + "FACTRECIBIDAS";
-            
+
+            DataTable ResultadoDIOT = new DataTable("DIOT");
+            ResultadoDIOT.Columns.Add("RFC_Emisor");
+            ResultadoDIOT.Columns.Add("Proveedor_Emisor");
+            ResultadoDIOT.Columns.Add("IVA_SIN_DECIMALES");
+            ResultadoDIOT.Columns.Add("IVA_CON_DECIMALES");
+            ResultadoDIOT.Columns.Add("BASE");
+            ResultadoDIOT.Columns.Add("CONCEPTOS_NO_GRABAN_IVA");
+            ResultadoDIOT.Columns.Add("IdEmpresa");
+            ResultadoDIOT.Columns.Add("MES");
+            ResultadoDIOT.Columns.Add("PERIODO");
+
+
+
+
+         
+
 
             SqlConnection conn = new SqlConnection(cnx);
             //CREATE TABLE TO EXCEL FILE
             DataTable result = new DataTable();
-
+            DataTable result2 = new DataTable();
+            DataTable resultA = new DataTable();
             string RFC_Emisor;
             string Proveedor_Emisor;
 
@@ -135,21 +152,38 @@ namespace EKPolizaGastos.Common.Classes
             int BaseR;//redondeado
             decimal BaseD;//NO redondeado
             decimal iva_calculado; //NO redondeado
+            decimal RESULTADO; //NO redondeado
+            decimal SubtotalBase;
+            decimal subtotal;
+            decimal descuento;
+            decimal conceptoSinIva;
+            //EGRESOS
+            decimal EIva_trasladado; 
+            decimal Eiva_calculado; 
+            decimal EBaseD; 
+            decimal EBaseR; 
+            decimal Esubtotal;
+            decimal Edescuento;
+            decimal ESubtotalBase; 
+            decimal ERESULTADO;
+            decimal EconceptoSinIva;
 
-          
+
 
             Mes = Convert.ToString(SearchMonthD(Mes));
 
             DataTable Existe = new DataTable();
             //compruebo si ya existe ejercicio y de lo contrario solo lo llamo
-            SqlCommand cmdExiste = new SqlCommand("select * from diot where mes='" + Mes + "' and periodo='" + Periodo + "' and " +
-                                  "IdEmpresa='" + IdEmpresa + "' order by Proveedor asc", conn);
-            using (SqlDataAdapter a = new SqlDataAdapter(cmdExiste))
-            {
-                Existe.Clear();
-                a.Fill(Existe);
+            //SqlCommand cmdExiste = new SqlCommand("select * from diot where mes='" + Mes + "' and periodo='" + Periodo + "' and " +
+            //                      "IdEmpresa='" + IdEmpresa + "' order by Proveedor asc", conn);
+            //using (SqlDataAdapter a = new SqlDataAdapter(cmdExiste))
+            //{
+            //    Existe.Clear();
+            //    a.Fill(Existe);
 
-            }
+            //}
+       
+            
             //Si no existe el ejercicio se realiza, de lo contrario solo lo llamo con la consulta
             if (Existe.Rows.Count == 0)
             {
@@ -158,15 +192,28 @@ namespace EKPolizaGastos.Common.Classes
                 {
 
                     RFC_Emisor = item[0].ToString();
-                    Proveedor_Emisor = item[1].ToString();
 
-                 
+                    //Nombre Provedor
+                    SqlCommand cmdPn = new SqlCommand("select NombreEmisor " +
+                       " from " + Tabla + "" +
+                       " where  RFCEmisor= '" + RFC_Emisor + "' and Ano='" + Periodo + "' and " +
+                       " Mes='" + Mes + "'", conn);
+                    using (SqlDataAdapter a = new SqlDataAdapter(cmdPn))
+                    {
+                        resultA.Clear();
+                        a.Fill(resultA);
+                        Proveedor_Emisor = resultA.Rows[0][0].ToString().Trim();
+                    }
+
+                    //Comprobantes tipo I
                     SqlCommand cmd = new SqlCommand("select sum(Convert(decimal(18,2),IVA)) as IVA," +
                         " sum(Convert(decimal(18,2),IVA)/ "+ base_Iva +") as Base, " +//- CONVERT(decimal(18, 2), Descuento)
-                        " sum(Convert(decimal(18,2),RetenidoIVA)) as IVARetenido" +
+                        " sum(Convert(decimal(18,2),SubTotal)) as Subtotal," +
+                        " sum(Convert(decimal(18, 2), Descuento)) as Descuento, "+
+                        " sum(Convert(decimal(18, 2), Total)) as Total " +
                         " from " + Tabla + "" +
-                        " where RFCEmisor = '" + RFC_Emisor + "' and Ano='" + Periodo +"' and " +
-                        "Mes='" +  Mes + "'", conn);
+                        " where TipoComprobante='I' and RFCEmisor= '" + RFC_Emisor + "' and Ano='" + Periodo +"' and " +
+                        " Mes='" +  Mes + "'", conn);
                     using (SqlDataAdapter a = new SqlDataAdapter(cmd))
                     {
                         result.Clear();
@@ -174,17 +221,96 @@ namespace EKPolizaGastos.Common.Classes
 
                     }
 
-                    Iva_trasladado = decimal.Parse(result.Rows[0][0].ToString()); //NO redondeado
-
-                    BaseD = decimal.Parse(result.Rows[0][1].ToString()); //NO redondeado
-                    BaseR = (int)Math.Round(Convert.ToDouble(BaseD), 0, MidpointRounding.ToEven);
-
-                   iva_calculado = (int)Math.Round(Convert.ToDouble(Iva_trasladado), 0, MidpointRounding.ToEven); ; //redondeado
-
-                    if (iva_calculado > 0)
+                    if (result.Rows.Count > 0)
                     {
-                        Register(RFC_Emisor, Proveedor_Emisor, Iva_trasladado, BaseR, iva_calculado, cnx, IdEmpresa, Mes, Periodo);
+                        Iva_trasladado = decimal.Parse(result.Rows[0][0].ToString());
+                        iva_calculado = (int)Math.Round(Convert.ToDouble(Iva_trasladado), 0, MidpointRounding.ToEven); //IVA REDONDEADO
+
+                        BaseD = decimal.Parse(result.Rows[0][1].ToString()); //NO redondeado
+
+                        BaseR = (int)Math.Round(Convert.ToDouble(BaseD), 0, MidpointRounding.ToEven);
+
+                        subtotal = decimal.Parse(result.Rows[0][2].ToString());
+                        descuento = decimal.Parse(result.Rows[0][3].ToString());
+
+                        SubtotalBase = (int)Math.Round(Convert.ToDouble(subtotal), 0, MidpointRounding.ToEven);
+
+                        RESULTADO = (int)Math.Round(Convert.ToDouble(subtotal - descuento), 0, MidpointRounding.ToEven);
+
+                        conceptoSinIva = 0;
+
+                        if (BaseR < SubtotalBase)
+                        {
+                            conceptoSinIva = RESULTADO - BaseR;//conceptos sin iva
+                        }
+
+
+
+
+                        ////resto sus notas de credito
+                        //////AHORA LAS NOTAS DE CREDITO
+                        ///
+                        EIva_trasladado = 0;
+                        Eiva_calculado = 0;
+                        EBaseD = 0;
+                        EBaseR = 0;
+                        Esubtotal = 0;
+                        Edescuento = 0;
+                        ESubtotalBase = 0;
+                        ERESULTADO = 0;
+                        EconceptoSinIva = 0;
+                        SqlCommand cmd2 = new SqlCommand("select sum(Convert(decimal(18,2),IVA)) as IVA," +
+                            " sum(Convert(decimal(18,2),IVA)/ " + base_Iva + ") as Base, " +//- CONVERT(decimal(18, 2), Descuento)
+                            " sum(Convert(decimal(18,2),SubTotal)) as Subtotal," +
+                            " sum(Convert(decimal(18, 2), Descuento)) as Descuento, " +
+                            " sum(Convert(decimal(18, 2), Total)) as Total " +
+                            " from " + Tabla + "" +
+                            " where TipoComprobante='E' and RFCEmisor= '" + RFC_Emisor + "' and Ano='" + Periodo + "' and " +
+                            " Mes='" + Mes + "'", conn);
+                        using (SqlDataAdapter a = new SqlDataAdapter(cmd2))
+                        {
+                            result2.Clear();
+                            a.Fill(result2);
+                            if (result2.Rows[0][0].ToString()!=string.Empty)
+                            {
+                                EIva_trasladado = decimal.Parse(result2.Rows[0][0].ToString());
+                                Eiva_calculado = (int)Math.Round(Convert.ToDouble(EIva_trasladado), 0, MidpointRounding.ToEven); //IVA REDONDEADO
+
+                                EBaseD = decimal.Parse(result2.Rows[0][1].ToString()); //NO redondeado
+
+                                EBaseR = (int)Math.Round(Convert.ToDouble(EBaseD), 0, MidpointRounding.ToEven);
+
+                                Esubtotal = decimal.Parse(result2.Rows[0][2].ToString());
+                                Edescuento = decimal.Parse(result2.Rows[0][3].ToString());
+
+                                ESubtotalBase = (int)Math.Round(Convert.ToDouble(Esubtotal), 0, MidpointRounding.ToEven);
+
+                                ERESULTADO = (int)Math.Round(Convert.ToDouble(Esubtotal - Edescuento), 0, MidpointRounding.ToEven);
+
+                                if (EBaseR < ESubtotalBase)
+                                {
+                                    EconceptoSinIva = ERESULTADO - EBaseR;//conceptos sin iva
+                                }
+                            }
+                        }
+
+
+
+                        ResultadoDIOT.Rows.Add(RFC_Emisor, Proveedor_Emisor, iva_calculado-Eiva_calculado,
+                        Iva_trasladado-EIva_trasladado, BaseR-EBaseR, conceptoSinIva-EconceptoSinIva, IdEmpresa, Mes, Periodo);
                     }
+                   
+
+
+
+
+                 
+                   
+
+
+
+                    
+                    
                     RFC_Emisor = string.Empty;
                     Proveedor_Emisor = string.Empty;
 
@@ -192,41 +318,6 @@ namespace EKPolizaGastos.Common.Classes
                 }
 
             }
-
-
-
-            DataTable ResultadoDIOT = new DataTable("DIOT");
-
-            SqlCommand cmddiot = new SqlCommand("select * from diot where mes='" + Mes + "' and periodo='" + Periodo + "' and " +
-                                    "IdEmpresa='" + IdEmpresa + "' order by Proveedor asc", conn);
-            using (SqlDataAdapter a = new SqlDataAdapter(cmddiot))
-            {
-                ResultadoDIOT.Clear();
-                a.Fill(ResultadoDIOT);
-
-            }
-
-            decimal suma_A = 0;
-            decimal suma_B = 0;
-            decimal suma_C = 0;
-
-            foreach (DataRow dr in ResultadoDIOT.Rows)
-            {
-                suma_A += Convert.ToDecimal(dr[3].ToString());//iva_trasladado
-                suma_B += Convert.ToDecimal(dr[4].ToString());//base
-                suma_C += Convert.ToDecimal(dr[5].ToString());//Iva_trasladado_calculado
-
-            }
-            DataRow row = ResultadoDIOT.NewRow();
-            row[2] = "Total de DIOT:";
-            row[3] = suma_A;
-            row[4] = suma_B;
-            row[5] = suma_C;
-            row[6] = Mes;
-            row[7] = Periodo;
-            row[8] = IdEmpresa;
-
-            ResultadoDIOT.Rows.Add(row);
 
             return ResultadoDIOT;
 

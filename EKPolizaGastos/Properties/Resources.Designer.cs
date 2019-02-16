@@ -113,6 +113,16 @@ namespace EKPolizaGastos.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cerrar_tres_fw {
+            get {
+                object obj = ResourceManager.GetObject("cerrar_tres.fw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap diot {
             get {
                 object obj = ResourceManager.GetObject("diot", resourceCulture);
@@ -236,6 +246,36 @@ namespace EKPolizaGastos.Properties {
         internal static System.Drawing.Bitmap refresProveedor {
             get {
                 object obj = ResourceManager.GetObject("refresProveedor", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap regresar {
+            get {
+                object obj = ResourceManager.GetObject("regresar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap version_dos_fw {
+            get {
+                object obj = ResourceManager.GetObject("version_dos.fw", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap version_uno_fw {
+            get {
+                object obj = ResourceManager.GetObject("version_uno.fw", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

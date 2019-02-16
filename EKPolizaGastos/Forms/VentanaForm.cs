@@ -1,4 +1,5 @@
-﻿using DevComponents.DotNetBar;
+﻿using ClosedXML.Excel;
+using DevComponents.DotNetBar;
 using EKPolizaGastos.Common.Classes;
 using EKPolizaGastos.Context;
 using System;
@@ -18,13 +19,22 @@ namespace EKPolizaGastos.Forms
         #region Context
         private SEMP_SATContext db;
         private ReadSATFactura readSATFactura;
+        private FolderBrowserDialog folderBrowserDialog;
+        private ReadSatNominas readSatNominas;
+        private ReadSatFactura2 readSatFactura2;
+        private diotClass diot;
         #endregion
 
-        
+        private string ejercicio;
         public VentanaForm()
         {
+           
             db = new SEMP_SATContext();
+            folderBrowserDialog = new FolderBrowserDialog();
             readSATFactura = new ReadSATFactura();
+            readSatNominas = new ReadSatNominas();
+            readSatFactura2 = new ReadSatFactura2();
+            diot = new diotClass();
             InitializeComponent();
         }
         private void LoadF()
@@ -480,7 +490,7 @@ namespace EKPolizaGastos.Forms
         //MANDO EL EJERCICIO 
         private void btnComenzar_Click(object sender, EventArgs e)
         {
-            string ejercicio;
+          
             int idEmpresa =int.Parse(cmbEmpresa.SelectedValue.ToString());
             var empresa = db.Empresas.Where(p => p.IdEmpresa == idEmpresa).FirstOrDefault();
             int tipoFacturas = int.Parse(cmbTipoFactura.SelectedValue.ToString());
@@ -504,12 +514,12 @@ namespace EKPolizaGastos.Forms
                     polizaSatForm.path = empresa.PathNomina;
                     //JMR_EMI_ENE2018
                 }
-
+                this.Hide();
                 string cnx = readSATFactura.CheckDataConection();
                 polizaSatForm.tipoDeBase = cmbTipoFactura.Text;
                 polizaSatForm.cnx = cnx;
                 polizaSatForm.ShowDialog();
-                this.Close();
+                //this.Close();
                 return;
 
             }
@@ -527,7 +537,222 @@ namespace EKPolizaGastos.Forms
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            OpcionVersionForm opcionVersionForm = new OpcionVersionForm();
+            opcionVersionForm.p= 1;
+            opcionVersionForm.Show();
             this.Close();
+        }
+
+        private void btnDiot_Click(object sender, EventArgs e)
+        {
+           
+            int idEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
+            var empresa = db.Empresas.Where(p => p.IdEmpresa == idEmpresa).FirstOrDefault();
+            if (empresa != null && cmbMes.Text != "" && cmbAno.Text != "")
+            {
+                ejercicio = empresa.Letra.Trim() + "-" + cmbMes.Text.Substring(0, 3) + cmbAno.Text;
+
+
+               
+                    MessageBoxEx.EnableGlass = false;
+
+                    DialogResult result = MessageBoxEx.Show("¿Generar Diot del Ejercicio Seleccionado? (" + ejercicio + ")", "EKDIOT",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    switch (result)
+                    {
+                        case DialogResult.Yes:
+                            {
+
+                                BeginDiot();
+
+                                break;
+                            }
+                        case DialogResult.No:
+                            {
+
+                                break;
+                            }
+                    }
+            
+
+            }
+            else
+            {
+
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("NO has seleccionado bien el Ejercicio!",
+                    "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+
+
+
+
+
+
+
+        }
+
+        private void BeginDiot()
+        {
+            try
+            {
+                string value = ".16";
+                string cnx = readSATFactura.CheckDataConection();
+                int NoEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
+                if (InputBox("Generacion de DIOT", "Ingrese el valor del IVA:", ref value) == DialogResult.OK)
+                {
+                    if (decimal.Parse(value) > 0)
+                    {
+
+                        DataTable resultados = new DataTable();
+                       
+                        //ejercicio CIS-ENE2018 CIC ENE 2018
+                        int no = NoEmpresa;
+                        var rfc = db.Empresas.Where(p => p.IdEmpresa == no).First();
+                        resultados = readSatFactura2.ToListPRV(ejercicio, cnx, value, rfc.RFC, ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+
+                        DataTable result = new DataTable();
+                        result = readSatFactura2.DIOT(resultados, ejercicio, cnx, value, no.ToString(), ejercicio.Substring(4, 3), ejercicio.Substring(7, 4));
+
+                        Export(result);
+
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Valor no Valido para Generar DIOT" + ex.Message, "EKDIOT",
+                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+
+        public void Export(DataTable Result)
+        {
+            string ruta;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "Excel files (*.xlsx)|*.xlsx";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                ruta = saveFileDialog1.FileName;
+
+                if (string.IsNullOrEmpty(ruta))
+                {
+                    MessageBoxEx.EnableGlass = false;
+                    MessageBoxEx.Show("No hay directorio Seleccionado",
+                        "EKDIOT", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                }
+                else
+                {
+
+                    //Formato a las filas
+                    //Result.Columns[3].DataType = System.Type.GetType("System.Decimal");
+                    //Result.Columns[4].DataType = System.Type.GetType("System.Decimal");
+                    //Result.Columns[5].DataType = System.Type.GetType("System.Decimal");
+
+                    DataView dataview = new DataView(Result);
+
+                    //ALTERNAMENTE DISEÑAMOS EL BLOC DE NOTAS
+                    using (System.IO.StreamWriter escritor = new System.IO.StreamWriter(ruta + ".txt"))
+                    {
+                        int bases;
+                        int basesSinIva;
+                        string rfc;
+
+                      //  ResultadoDIOT.Rows.Add(RFC_Emisor, Proveedor_Emisor, iva_calculado,
+                      //Iva_trasladado , BaseR , conceptoSinIva, IdEmpresa, Mes, Periodo);
+                        for (int i = 0; i < Result.Rows.Count; i++)
+                        {
+                            rfc = Result.Rows[i][0].ToString();
+
+
+                            if (decimal.Parse(Result.Rows[i][4].ToString()) > 0)
+                            {
+                                bases = (int)Math.Round(Convert.ToDouble(Result.Rows[i][4].ToString()), 0, MidpointRounding.ToEven);
+                                basesSinIva = (int)Math.Round(Convert.ToDouble(Result.Rows[i][5].ToString()), 0, MidpointRounding.ToEven);
+                                escritor.WriteLine("04|85|" + rfc + "|||||" + bases + "||||||||||||||||");
+
+                                //escritor.WriteLine("04|85|" + rfc + "|||||" + bases + "|||||||||||||" + basesSinIva + "|||");
+                            }
+                        }
+
+
+                    }
+
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                       
+                        wb.Worksheets.Add(dataview.ToTable());
+                        wb.SaveAs(ruta);
+
+                    }
+
+                    MessageBoxEx.EnableGlass = false;
+                    MessageBoxEx.Show("DIOT GENERADA CON EXITO", "EKDIOT",
+                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                }
+            }
+
+
+
+        }
+
+
+
+
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new System.Drawing.Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new System.Drawing.Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
         }
     }
 }

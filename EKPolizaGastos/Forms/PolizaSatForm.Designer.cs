@@ -70,6 +70,7 @@
             this.superTooltip1 = new DevComponents.DotNetBar.SuperTooltip();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
+            this.btnAnterior = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.buttonX7 = new DevComponents.DotNetBar.ButtonX();
             this.buttonX6 = new DevComponents.DotNetBar.ButtonX();
@@ -115,7 +116,7 @@
             // 
             this.line1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.line1.Location = new System.Drawing.Point(32, 578);
+            this.line1.Location = new System.Drawing.Point(32, 582);
             this.line1.Name = "line1";
             this.line1.Size = new System.Drawing.Size(1007, 10);
             this.line1.TabIndex = 70;
@@ -174,7 +175,7 @@
             // 
             // 
             this.labelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX8.Location = new System.Drawing.Point(349, 611);
+            this.labelX8.Location = new System.Drawing.Point(32, 611);
             this.labelX8.Name = "labelX8";
             this.labelX8.Size = new System.Drawing.Size(199, 38);
             this.labelX8.TabIndex = 66;
@@ -190,7 +191,7 @@
             this.txtDepto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDepto.DisabledBackColor = System.Drawing.Color.Black;
             this.txtDepto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDepto.Location = new System.Drawing.Point(557, 620);
+            this.txtDepto.Location = new System.Drawing.Point(320, 622);
             this.txtDepto.Name = "txtDepto";
             this.txtDepto.PreventEnterBeep = true;
             this.txtDepto.Size = new System.Drawing.Size(100, 29);
@@ -205,7 +206,7 @@
             // 
             this.labelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX7.Location = new System.Drawing.Point(36, 590);
+            this.labelX7.Location = new System.Drawing.Point(32, 533);
             this.labelX7.Name = "labelX7";
             this.labelX7.Size = new System.Drawing.Size(260, 23);
             this.labelX7.TabIndex = 64;
@@ -218,9 +219,9 @@
             this.cmbLocalidades.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbLocalidades.FormattingEnabled = true;
             this.cmbLocalidades.ItemHeight = 20;
-            this.cmbLocalidades.Location = new System.Drawing.Point(35, 621);
+            this.cmbLocalidades.Location = new System.Drawing.Point(32, 560);
             this.cmbLocalidades.Name = "cmbLocalidades";
-            this.cmbLocalidades.Size = new System.Drawing.Size(299, 28);
+            this.cmbLocalidades.Size = new System.Drawing.Size(388, 28);
             this.cmbLocalidades.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.cmbLocalidades.TabIndex = 63;
             this.cmbLocalidades.SelectedIndexChanged += new System.EventHandler(this.cmbLocalidades_SelectedIndexChanged);
@@ -546,6 +547,21 @@
             this.labelX2.TabIndex = 79;
             this.labelX2.Text = "-";
             // 
+            // btnAnterior
+            // 
+            this.btnAnterior.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnAnterior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAnterior.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnAnterior.Image = global::EKPolizaGastos.Properties.Resources.regresar;
+            this.btnAnterior.ImageFixedSize = new System.Drawing.Size(36, 36);
+            this.btnAnterior.Location = new System.Drawing.Point(637, 593);
+            this.btnAnterior.Name = "btnAnterior";
+            this.btnAnterior.Size = new System.Drawing.Size(93, 53);
+            this.btnAnterior.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnAnterior.TabIndex = 81;
+            this.btnAnterior.Text = "Poliza\r\n Anterior";
+            this.btnAnterior.Click += new System.EventHandler(this.btnAnterior_Click);
+            // 
             // btnClose
             // 
             this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -553,9 +569,9 @@
             this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnClose.Image = global::EKPolizaGastos.Properties.Resources.cerrar;
             this.btnClose.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.btnClose.Location = new System.Drawing.Point(945, 593);
+            this.btnClose.Location = new System.Drawing.Point(945, 592);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(94, 54);
+            this.btnClose.Size = new System.Drawing.Size(94, 53);
             this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnClose.TabIndex = 80;
             this.btnClose.Text = "&Salir";
@@ -703,7 +719,7 @@
             this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX3.Image = global::EKPolizaGastos.Properties.Resources.refresProveedor;
             this.buttonX3.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonX3.Location = new System.Drawing.Point(667, 594);
+            this.buttonX3.Location = new System.Drawing.Point(518, 593);
             this.buttonX3.Name = "buttonX3";
             this.buttonX3.Size = new System.Drawing.Size(93, 53);
             this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -718,7 +734,7 @@
             this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX2.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
             this.buttonX2.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.buttonX2.Location = new System.Drawing.Point(769, 594);
+            this.buttonX2.Location = new System.Drawing.Point(769, 593);
             this.buttonX2.Name = "buttonX2";
             this.buttonX2.Size = new System.Drawing.Size(163, 53);
             this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -731,6 +747,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1071, 663);
+            this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.labelX2);
             this.Controls.Add(this.dataGridViewX1);
@@ -829,5 +846,6 @@
         private DevComponents.DotNetBar.Controls.DataGridViewX dataGridViewX1;
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.ButtonX btnClose;
+        private DevComponents.DotNetBar.ButtonX btnAnterior;
     }
 }

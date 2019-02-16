@@ -37,9 +37,10 @@
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
-            this.btnCargar = new DevComponents.DotNetBar.ButtonX();
-            this.btnComenzar = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
+            this.btnComenzar = new DevComponents.DotNetBar.ButtonX();
+            this.btnCargar = new DevComponents.DotNetBar.ButtonX();
+            this.btnDiot = new DevComponents.DotNetBar.ButtonX();
             this.SuspendLayout();
             // 
             // cmbTipoFactura
@@ -142,6 +143,33 @@
             this.labelX4.TabIndex = 8;
             this.labelX4.Text = "Seleccione Año";
             // 
+            // btnClose
+            // 
+            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnClose.Image = global::EKPolizaGastos.Properties.Resources.cerrar;
+            this.btnClose.ImageFixedSize = new System.Drawing.Size(20, 20);
+            this.btnClose.Location = new System.Drawing.Point(269, 12);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(47, 38);
+            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnClose.TabIndex = 9;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // btnComenzar
+            // 
+            this.btnComenzar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnComenzar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnComenzar.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
+            this.btnComenzar.ImageFixedSize = new System.Drawing.Size(48, 48);
+            this.btnComenzar.Location = new System.Drawing.Point(18, 351);
+            this.btnComenzar.Name = "btnComenzar";
+            this.btnComenzar.Size = new System.Drawing.Size(115, 44);
+            this.btnComenzar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnComenzar.TabIndex = 5;
+            this.btnComenzar.Text = "Polizas";
+            this.btnComenzar.Click += new System.EventHandler(this.btnComenzar_Click);
+            // 
             // btnCargar
             // 
             this.btnCargar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
@@ -156,38 +184,24 @@
             this.btnCargar.Text = "Cargar Ejercicios";
             this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
             // 
-            // btnComenzar
+            // btnDiot
             // 
-            this.btnComenzar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnComenzar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnComenzar.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
-            this.btnComenzar.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.btnComenzar.Location = new System.Drawing.Point(77, 337);
-            this.btnComenzar.Name = "btnComenzar";
-            this.btnComenzar.Size = new System.Drawing.Size(152, 60);
-            this.btnComenzar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnComenzar.TabIndex = 5;
-            this.btnComenzar.Text = "Empezar";
-            this.btnComenzar.Click += new System.EventHandler(this.btnComenzar_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnClose.Image = global::EKPolizaGastos.Properties.Resources.cerrar;
-            this.btnClose.ImageFixedSize = new System.Drawing.Size(20, 20);
-            this.btnClose.Location = new System.Drawing.Point(269, 12);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(47, 38);
-            this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnClose.TabIndex = 9;
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnDiot.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDiot.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDiot.Location = new System.Drawing.Point(173, 351);
+            this.btnDiot.Name = "btnDiot";
+            this.btnDiot.Size = new System.Drawing.Size(115, 44);
+            this.btnDiot.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDiot.TabIndex = 10;
+            this.btnDiot.Text = "buttonX1";
+            this.btnDiot.Click += new System.EventHandler(this.btnDiot_Click);
             // 
             // VentanaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(328, 429);
+            this.Controls.Add(this.btnDiot);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnComenzar);
             this.Controls.Add(this.btnCargar);
@@ -225,5 +239,6 @@
         private DevComponents.DotNetBar.ButtonX btnCargar;
         private DevComponents.DotNetBar.ButtonX btnComenzar;
         private DevComponents.DotNetBar.ButtonX btnClose;
+        private DevComponents.DotNetBar.ButtonX btnDiot;
     }
 }

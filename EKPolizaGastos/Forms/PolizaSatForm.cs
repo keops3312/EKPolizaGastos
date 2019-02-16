@@ -3061,11 +3061,55 @@ namespace EKPolizaGastos.Forms
         //Exit
         private void btnClose_Click(object sender, EventArgs e)
         {
+            VentanaForm ventanaForm = new VentanaForm();
+            ventanaForm.Show();
             this.Close();
         }
 
         private void buttonX5_Click(object sender, EventArgs e)
         {
+
+        }
+        //Regresar a poliza
+        private void btnAnterior_Click(object sender, EventArgs e)
+        {
+
+
+
+
+
+            if (indexGridPosition >= 1)//antes <=
+            {
+
+
+                indexGridPosition--;
+
+
+                poliza.Rows.Clear();
+                Lectura_de_factura();
+
+
+
+            }     
+            else 
+            {
+                MessageBoxEx.EnableGlass = false;
+                MessageBoxEx.Show("Has LLegado a la Primera Fila!!" +
+                                    "\n" + "Ya no Hay mas Filas Atras! :0",
+                                                       "EKPolizaGastos",
+                                                       MessageBoxButtons.OK,
+                                                       MessageBoxIcon.Exclamation);
+
+
+            }
+
+
+
+
+
+
+
+
 
         }
     }
