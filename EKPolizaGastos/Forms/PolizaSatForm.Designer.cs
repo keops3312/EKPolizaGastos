@@ -116,7 +116,7 @@
             // 
             this.line1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.line1.Location = new System.Drawing.Point(32, 582);
+            this.line1.Location = new System.Drawing.Point(32, 593);
             this.line1.Name = "line1";
             this.line1.Size = new System.Drawing.Size(1007, 10);
             this.line1.TabIndex = 70;
@@ -132,7 +132,7 @@
             this.txtHaber.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtHaber.DisabledBackColor = System.Drawing.Color.Black;
             this.txtHaber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtHaber.Location = new System.Drawing.Point(856, 543);
+            this.txtHaber.Location = new System.Drawing.Point(856, 558);
             this.txtHaber.Name = "txtHaber";
             this.txtHaber.PreventEnterBeep = true;
             this.txtHaber.Size = new System.Drawing.Size(183, 29);
@@ -148,7 +148,7 @@
             this.txtDebe.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.txtDebe.DisabledBackColor = System.Drawing.Color.Black;
             this.txtDebe.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDebe.Location = new System.Drawing.Point(609, 543);
+            this.txtDebe.Location = new System.Drawing.Point(609, 558);
             this.txtDebe.Name = "txtDebe";
             this.txtDebe.PreventEnterBeep = true;
             this.txtDebe.Size = new System.Drawing.Size(183, 29);
@@ -162,7 +162,7 @@
             // 
             this.labelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelX9.Location = new System.Drawing.Point(518, 549);
+            this.labelX9.Location = new System.Drawing.Point(518, 564);
             this.labelX9.Name = "labelX9";
             this.labelX9.Size = new System.Drawing.Size(72, 23);
             this.labelX9.TabIndex = 67;
@@ -253,7 +253,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.poliza.DefaultCellStyle = dataGridViewCellStyle2;
             this.poliza.EnableHeadersVisualStyles = false;
@@ -318,7 +318,7 @@
             this.txtConcepto.Multiline = true;
             this.txtConcepto.Name = "txtConcepto";
             this.txtConcepto.PreventEnterBeep = true;
-            this.txtConcepto.Size = new System.Drawing.Size(916, 38);
+            this.txtConcepto.Size = new System.Drawing.Size(913, 38);
             this.txtConcepto.TabIndex = 61;
             // 
             // labelX5
@@ -359,7 +359,7 @@
             this.txtFecha.Location = new System.Drawing.Point(859, 114);
             this.txtFecha.Name = "txtFecha";
             this.txtFecha.PreventEnterBeep = true;
-            this.txtFecha.Size = new System.Drawing.Size(183, 26);
+            this.txtFecha.Size = new System.Drawing.Size(180, 26);
             this.txtFecha.TabIndex = 58;
             // 
             // txtNumero
@@ -439,10 +439,10 @@
             // 
             // 
             this.lblEmpresa.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmpresa.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmpresa.Location = new System.Drawing.Point(32, 10);
             this.lblEmpresa.Name = "lblEmpresa";
-            this.lblEmpresa.Size = new System.Drawing.Size(417, 23);
+            this.lblEmpresa.Size = new System.Drawing.Size(517, 23);
             this.lblEmpresa.TabIndex = 51;
             this.lblEmpresa.Text = "Empresa";
             // 
@@ -452,8 +452,8 @@
             // 
             // 
             this.lblMes.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMes.Location = new System.Drawing.Point(480, 10);
+            this.lblMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMes.Location = new System.Drawing.Point(569, 10);
             this.lblMes.Name = "lblMes";
             this.lblMes.Size = new System.Drawing.Size(220, 23);
             this.lblMes.TabIndex = 50;
@@ -465,7 +465,7 @@
             // 
             // 
             this.lblAno.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.lblAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAno.Location = new System.Drawing.Point(822, 10);
             this.lblAno.Name = "lblAno";
             this.lblAno.Size = new System.Drawing.Size(220, 23);
@@ -514,7 +514,7 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewX1.EnableHeadersVisualStyles = false;
@@ -554,7 +554,7 @@
             this.btnAnterior.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnAnterior.Image = global::EKPolizaGastos.Properties.Resources.regresar;
             this.btnAnterior.ImageFixedSize = new System.Drawing.Size(36, 36);
-            this.btnAnterior.Location = new System.Drawing.Point(637, 593);
+            this.btnAnterior.Location = new System.Drawing.Point(637, 606);
             this.btnAnterior.Name = "btnAnterior";
             this.btnAnterior.Size = new System.Drawing.Size(93, 53);
             this.btnAnterior.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -569,7 +569,7 @@
             this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnClose.Image = global::EKPolizaGastos.Properties.Resources.cerrar;
             this.btnClose.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.btnClose.Location = new System.Drawing.Point(945, 592);
+            this.btnClose.Location = new System.Drawing.Point(945, 605);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(94, 53);
             this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -719,7 +719,7 @@
             this.buttonX3.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX3.Image = global::EKPolizaGastos.Properties.Resources.refresProveedor;
             this.buttonX3.ImageFixedSize = new System.Drawing.Size(24, 24);
-            this.buttonX3.Location = new System.Drawing.Point(518, 593);
+            this.buttonX3.Location = new System.Drawing.Point(518, 606);
             this.buttonX3.Name = "buttonX3";
             this.buttonX3.Size = new System.Drawing.Size(93, 53);
             this.buttonX3.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -734,7 +734,7 @@
             this.buttonX2.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.buttonX2.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
             this.buttonX2.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.buttonX2.Location = new System.Drawing.Point(769, 593);
+            this.buttonX2.Location = new System.Drawing.Point(769, 606);
             this.buttonX2.Name = "buttonX2";
             this.buttonX2.Size = new System.Drawing.Size(163, 53);
             this.buttonX2.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;

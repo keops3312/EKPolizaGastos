@@ -271,7 +271,7 @@ namespace EKPolizaGastos.Common.Classes
                         {
                             result2.Clear();
                             a.Fill(result2);
-                            if (result2.Rows[0][0].ToString()!=string.Empty)
+                            if (result2.Rows[0][0].ToString() != string.Empty)
                             {
                                 EIva_trasladado = decimal.Parse(result2.Rows[0][0].ToString());
                                 Eiva_calculado = (int)Math.Round(Convert.ToDouble(EIva_trasladado), 0, MidpointRounding.ToEven); //IVA REDONDEADO
@@ -298,19 +298,40 @@ namespace EKPolizaGastos.Common.Classes
 
                         ResultadoDIOT.Rows.Add(RFC_Emisor, Proveedor_Emisor, iva_calculado-Eiva_calculado,
                         Iva_trasladado-EIva_trasladado, BaseR-EBaseR, conceptoSinIva-EconceptoSinIva, IdEmpresa, Mes, Periodo);
+
+                        Iva_trasladado = 0;
+                        iva_calculado = 0; 
+
+                        BaseD = 0; 
+
+                        BaseR = 0; 
+
+                        subtotal = 0;
+                        descuento = 0;
+
+                        SubtotalBase = 0;
+
+                        RESULTADO = 0;
+
+                        conceptoSinIva = 0;
+
+                        
+                    
+                       
+
                     }
-                   
 
 
 
 
-                 
-                   
 
 
 
-                    
-                    
+
+
+
+
+
                     RFC_Emisor = string.Empty;
                     Proveedor_Emisor = string.Empty;
 
@@ -414,7 +435,7 @@ namespace EKPolizaGastos.Common.Classes
             SqlConnection conn = new SqlConnection(cnx);
             DataTable result = new DataTable();
             //CHARGE DATA 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM " + tablaName + " " +
+            SqlCommand cmd = new SqlCommand("SELECT * FROM " + tablaName.Trim() + " " +
                                "where realizada='2' and Ano='" + año + "' and Mes='" + mes + "' order by facturaId asc", conn);
             using (SqlDataAdapter a = new SqlDataAdapter(cmd))
             {

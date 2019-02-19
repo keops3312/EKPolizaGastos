@@ -107,7 +107,7 @@ namespace EKPolizaGastos.Forms
 
         private void cmbEmpresa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            loadAnosCargados();
         }
 
         private void loadAnosCargados()
@@ -231,9 +231,9 @@ namespace EKPolizaGastos.Forms
             }
             catch (Exception)
             {
-                MessageBoxEx.EnableGlass = false;
-                MessageBoxEx.Show("Esta Empresa No Contiene Ejercicios",
-                "EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBoxEx.EnableGlass = false;
+                //MessageBoxEx.Show("Esta Empresa No Contiene Ejercicios",
+                //"EKPolizaGastos", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
            
         }
@@ -475,12 +475,12 @@ namespace EKPolizaGastos.Forms
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            loadAnosCargados();
+           // loadAnosCargados();
         }
 
         private void cmbAno_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            loadMesesCargados();
         }
 
         private void labelX2_Click(object sender, EventArgs e)
@@ -677,14 +677,18 @@ namespace EKPolizaGastos.Forms
                             rfc = Result.Rows[i][0].ToString();
 
 
-                            if (decimal.Parse(Result.Rows[i][4].ToString()) > 0)
-                            {
-                                bases = (int)Math.Round(Convert.ToDouble(Result.Rows[i][4].ToString()), 0, MidpointRounding.ToEven);
-                                basesSinIva = (int)Math.Round(Convert.ToDouble(Result.Rows[i][5].ToString()), 0, MidpointRounding.ToEven);
-                                escritor.WriteLine("04|85|" + rfc + "|||||" + bases + "||||||||||||||||");
+                            //if (decimal.Parse(Result.Rows[i][4].ToString()) > 0)
+                            //{
+                             bases = (int)Math.Round(Convert.ToDouble(Result.Rows[i][4].ToString()), 0, MidpointRounding.ToEven);
+                            basesSinIva = (int)Math.Round(Convert.ToDouble(Result.Rows[i][5].ToString()), 0, MidpointRounding.ToEven);
+                                escritor.WriteLine("04|85|" + rfc + "|||||" + bases + "|||||||||||||"+ basesSinIva +"|||");
+                          //}
+                          
+                          //checar con ingeniero las notas de credito con devoluciones y compensaciones esto deberia
+                          //ir en el campo 23, es decir el ultimo y la base como cero
 
-                                //escritor.WriteLine("04|85|" + rfc + "|||||" + bases + "|||||||||||||" + basesSinIva + "|||");
-                            }
+
+                                
                         }
 
 
@@ -753,6 +757,12 @@ namespace EKPolizaGastos.Forms
             DialogResult dialogResult = form.ShowDialog();
             value = textBox.Text;
             return dialogResult;
+        }
+
+        private void btnImportExcel_Click(object sender, EventArgs e)
+        {
+            ExcelForm excel = new ExcelForm();
+            excel.ShowDialog();
         }
     }
 }

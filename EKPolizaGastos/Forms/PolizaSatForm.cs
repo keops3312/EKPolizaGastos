@@ -94,9 +94,6 @@ namespace EKPolizaGastos.Forms
         private string Cuenta_ieps_trasladado;
         #endregion
 
-
-
-
         #region Methods (metodos)
 
         public PolizaSatForm()
@@ -290,6 +287,11 @@ namespace EKPolizaGastos.Forms
          "<strong>Salir de Generar Poliza!</strong>", ""
     , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
          DevComponents.DotNetBar.eTooltipColor.Gray));
+
+            superTooltip1.SetSuperTooltip(btnAnterior, new DevComponents.DotNetBar.SuperTooltipInfo("EKPolizaGastos",
+        "<strong>Leer Poliza Anterior!</strong>", ""
+   , null, ((System.Drawing.Image)(EKPolizaGastos.Properties.Resources.iconToolTip_fw)),
+        DevComponents.DotNetBar.eTooltipColor.Magenta));
             #endregion
 
             txtTipo.Text = "Eg";
@@ -1608,14 +1610,7 @@ namespace EKPolizaGastos.Forms
 
             #endregion
         }
-     
-        #endregion
 
-
-        private void PolizaSatForm_Load(object sender, EventArgs e)
-        {
-            LoadF();
-        }
 
 
         //AGREGAR NUEVA FILA
@@ -1644,6 +1639,16 @@ namespace EKPolizaGastos.Forms
 
 
         }
+        #endregion
+
+        #region Events (Eventos)
+
+        private void PolizaSatForm_Load(object sender, EventArgs e)
+        {
+            LoadF();
+        }
+
+
 
 
         //CARGO
@@ -1657,7 +1662,7 @@ namespace EKPolizaGastos.Forms
             agregarFila(2);
         }
 
-     
+
         //ACTUALIZAR CON CUENTA ABONO 1
         private void btnAbono_Click(object sender, EventArgs e)
         {
@@ -1910,7 +1915,7 @@ namespace EKPolizaGastos.Forms
                 //Crear carpeta con nombre dia CIS-NOV-2018_10dic2018
                 string fecha_carpeta;
                 string carpeta_ejercicio;
-                string directorio_a_localizar="";
+                string directorio_a_localizar = "";
                 string numeroPolizaConvertido = "";
                 int consecutivo;
                 fecha_carpeta = Convert.ToDateTime(txtFecha.Text).ToString("ddMMMyyyy");
@@ -1927,16 +1932,16 @@ namespace EKPolizaGastos.Forms
                 {
                     carpeta_ejercicio = ejercicio + "_" + fecha_carpeta;
                     //JMR_EMI_ENE2018
-                    directorio_a_localizar = path + "/" + 
-                        ejercicio.Substring(0, 3) + "_EMI_" + ejercicio.Substring(4, 7) + 
+                    directorio_a_localizar = path + "/" +
+                        ejercicio.Substring(0, 3) + "_EMI_" + ejercicio.Substring(4, 7) +
                         "/Polizas";//+ carpeta_ejercicio;
-                   
+
 
 
                 }
 
 
-              
+
 
 
                 if (!Directory.Exists(directorio_a_localizar))
@@ -1983,7 +1988,7 @@ namespace EKPolizaGastos.Forms
                 //Creo el Bloc de Notas primero para poder editar
                 string cuentaWrite;
                 string tituloWrite;
-                string importeWrite="0.00";
+                string importeWrite = "0.00";
 
                 if (File.Exists(directorio_a_localizar + "/" + nuevo + ".pol"))
                 {
@@ -2045,7 +2050,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                   
+
                                     escritor.WriteLine(importeWrite);
                                 }
 
@@ -2057,7 +2062,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                    
+
                                     escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
@@ -2073,10 +2078,10 @@ namespace EKPolizaGastos.Forms
                             }
 
 
-                          
 
 
-                           
+
+
                             Titulo_principal = txtConcepto.Text;
                             Cuenta_Abono_1 = item.Cells[0].Value.ToString();
                         }
@@ -2100,7 +2105,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                   
+
                                     escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
@@ -2131,7 +2136,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Haber
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                    
+
                                     escritor.WriteLine(importeWrite);
                                 }
 
@@ -2142,7 +2147,7 @@ namespace EKPolizaGastos.Forms
 
 
 
-                           
+
                             Cuenta_cargo_Iva = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "IVA RETENIDO")
@@ -2171,7 +2176,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                   
+
                                     escritor.WriteLine(importeWrite);
                                 }
 
@@ -2184,7 +2189,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                   
+
                                     escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
@@ -2198,11 +2203,11 @@ namespace EKPolizaGastos.Forms
 
                             }
 
-                        
 
 
 
-                           
+
+
                             iva_Retenido = item.Cells[0].Value.ToString();
                             Cuenta_iva_retenido = item.Cells[0].Value.ToString();
                         }
@@ -2231,7 +2236,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                    
+
                                     escritor.WriteLine(importeWrite);
                                 }
 
@@ -2244,7 +2249,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                    
+
                                     escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
@@ -2260,13 +2265,13 @@ namespace EKPolizaGastos.Forms
                             }
 
 
-                         
 
 
 
 
 
-                          
+
+
                             Cuenta_isr_retenido = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "ISR TRASLADADO")
@@ -2322,9 +2327,9 @@ namespace EKPolizaGastos.Forms
 
 
 
-                          
 
-                           
+
+
                             Cuenta_isr_trasladado = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "IEPS RETENIDO")
@@ -2344,7 +2349,7 @@ namespace EKPolizaGastos.Forms
                                     importeWrite = item.Cells[2].Value.ToString() + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
-                                   escritor.WriteLine(importeWrite);
+                                    escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
@@ -2381,7 +2386,7 @@ namespace EKPolizaGastos.Forms
 
 
 
-                           
+
                             Cuenta_ieps_retenido = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "IEPS TRASLADADO")
@@ -2433,9 +2438,9 @@ namespace EKPolizaGastos.Forms
                                 }
 
                             }
-                          
 
-                           
+
+
                             Cuenta_ieps_trasladado = item.Cells[0].Value.ToString();
                         }
                         if (item.Cells[4].Value.ToString() == "CONCEPTO")
@@ -2492,12 +2497,12 @@ namespace EKPolizaGastos.Forms
 
                             }
 
-                         
 
 
 
 
-                                cuentaBase = item.Cells[0].Value.ToString();
+
+                            cuentaBase = item.Cells[0].Value.ToString();
 
                             if (indice == 1)
                             {
@@ -3090,8 +3095,8 @@ namespace EKPolizaGastos.Forms
 
 
 
-            }     
-            else 
+            }
+            else
             {
                 MessageBoxEx.EnableGlass = false;
                 MessageBoxEx.Show("Has LLegado a la Primera Fila!!" +
@@ -3112,5 +3117,6 @@ namespace EKPolizaGastos.Forms
 
 
         }
+        #endregion
     }
 }

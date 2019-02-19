@@ -629,6 +629,12 @@
     <Compile Include="Forms\LoadFactForm.Designer.cs">
       <DependentUpon>LoadFactForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\NominaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NominaForm.Designer.cs">
+      <DependentUpon>NominaForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OpcionVersionForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -690,6 +696,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoadFactForm.resx">
       <DependentUpon>LoadFactForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NominaForm.resx">
+      <DependentUpon>NominaForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OpcionVersionForm.resx">
       <DependentUpon>OpcionVersionForm.cs</DependentUpon>
@@ -769,6 +778,7 @@
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
     <Content Include="polizaGastos.ico" />
+    <None Include="Resources\excel.png" />
     <None Include="Resources\regresar.png" />
     <None Include="Resources\cerrar_tres.fw.png" />
     <None Include="Resources\version_dos.fw.png" />

@@ -37,10 +37,11 @@
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
             this.labelX3 = new DevComponents.DotNetBar.LabelX();
             this.labelX4 = new DevComponents.DotNetBar.LabelX();
+            this.btnImportExcel = new DevComponents.DotNetBar.ButtonX();
+            this.btnDiot = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.btnComenzar = new DevComponents.DotNetBar.ButtonX();
             this.btnCargar = new DevComponents.DotNetBar.ButtonX();
-            this.btnDiot = new DevComponents.DotNetBar.ButtonX();
             this.SuspendLayout();
             // 
             // cmbTipoFactura
@@ -49,7 +50,7 @@
             this.cmbTipoFactura.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbTipoFactura.FormattingEnabled = true;
             this.cmbTipoFactura.ItemHeight = 14;
-            this.cmbTipoFactura.Location = new System.Drawing.Point(89, 51);
+            this.cmbTipoFactura.Location = new System.Drawing.Point(138, 51);
             this.cmbTipoFactura.Name = "cmbTipoFactura";
             this.cmbTipoFactura.Size = new System.Drawing.Size(137, 20);
             this.cmbTipoFactura.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -61,7 +62,7 @@
             this.cmbEmpresa.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbEmpresa.FormattingEnabled = true;
             this.cmbEmpresa.ItemHeight = 14;
-            this.cmbEmpresa.Location = new System.Drawing.Point(18, 129);
+            this.cmbEmpresa.Location = new System.Drawing.Point(65, 129);
             this.cmbEmpresa.Name = "cmbEmpresa";
             this.cmbEmpresa.Size = new System.Drawing.Size(282, 20);
             this.cmbEmpresa.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -75,7 +76,7 @@
             this.cmbMes.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbMes.FormattingEnabled = true;
             this.cmbMes.ItemHeight = 14;
-            this.cmbMes.Location = new System.Drawing.Point(173, 298);
+            this.cmbMes.Location = new System.Drawing.Point(143, 274);
             this.cmbMes.Name = "cmbMes";
             this.cmbMes.Size = new System.Drawing.Size(127, 20);
             this.cmbMes.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -87,7 +88,7 @@
             this.cmbAno.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbAno.FormattingEnabled = true;
             this.cmbAno.ItemHeight = 14;
-            this.cmbAno.Location = new System.Drawing.Point(18, 298);
+            this.cmbAno.Location = new System.Drawing.Point(149, 197);
             this.cmbAno.Name = "cmbAno";
             this.cmbAno.Size = new System.Drawing.Size(115, 20);
             this.cmbAno.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -100,7 +101,7 @@
             // 
             // 
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX1.Location = new System.Drawing.Point(88, 22);
+            this.labelX1.Location = new System.Drawing.Point(123, 24);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(167, 23);
             this.labelX1.TabIndex = 5;
@@ -112,7 +113,7 @@
             // 
             // 
             this.labelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX2.Location = new System.Drawing.Point(98, 100);
+            this.labelX2.Location = new System.Drawing.Point(138, 100);
             this.labelX2.Name = "labelX2";
             this.labelX2.Size = new System.Drawing.Size(136, 23);
             this.labelX2.TabIndex = 6;
@@ -125,7 +126,7 @@
             // 
             // 
             this.labelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX3.Location = new System.Drawing.Point(193, 269);
+            this.labelX3.Location = new System.Drawing.Point(162, 245);
             this.labelX3.Name = "labelX3";
             this.labelX3.Size = new System.Drawing.Size(89, 23);
             this.labelX3.TabIndex = 7;
@@ -137,11 +138,39 @@
             // 
             // 
             this.labelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.labelX4.Location = new System.Drawing.Point(36, 269);
+            this.labelX4.Location = new System.Drawing.Point(164, 168);
             this.labelX4.Name = "labelX4";
             this.labelX4.Size = new System.Drawing.Size(85, 23);
             this.labelX4.TabIndex = 8;
             this.labelX4.Text = "Seleccione Año";
+            // 
+            // btnImportExcel
+            // 
+            this.btnImportExcel.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnImportExcel.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnImportExcel.Image = global::EKPolizaGastos.Properties.Resources.excel;
+            this.btnImportExcel.ImageFixedSize = new System.Drawing.Size(36, 36);
+            this.btnImportExcel.Location = new System.Drawing.Point(18, 348);
+            this.btnImportExcel.Name = "btnImportExcel";
+            this.btnImportExcel.Size = new System.Drawing.Size(115, 44);
+            this.btnImportExcel.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnImportExcel.TabIndex = 11;
+            this.btnImportExcel.Text = "Importar Ejercicio";
+            this.btnImportExcel.Click += new System.EventHandler(this.btnImportExcel_Click);
+            // 
+            // btnDiot
+            // 
+            this.btnDiot.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnDiot.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnDiot.Image = global::EKPolizaGastos.Properties.Resources.New_Database;
+            this.btnDiot.ImageFixedSize = new System.Drawing.Size(36, 36);
+            this.btnDiot.Location = new System.Drawing.Point(272, 348);
+            this.btnDiot.Name = "btnDiot";
+            this.btnDiot.Size = new System.Drawing.Size(115, 44);
+            this.btnDiot.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnDiot.TabIndex = 10;
+            this.btnDiot.Text = "DIOT";
+            this.btnDiot.Click += new System.EventHandler(this.btnDiot_Click);
             // 
             // btnClose
             // 
@@ -149,7 +178,7 @@
             this.btnClose.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnClose.Image = global::EKPolizaGastos.Properties.Resources.cerrar;
             this.btnClose.ImageFixedSize = new System.Drawing.Size(20, 20);
-            this.btnClose.Location = new System.Drawing.Point(269, 12);
+            this.btnClose.Location = new System.Drawing.Point(340, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(47, 38);
             this.btnClose.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -162,7 +191,7 @@
             this.btnComenzar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnComenzar.Image = global::EKPolizaGastos.Properties.Resources.Poliza_de__Servicio;
             this.btnComenzar.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.btnComenzar.Location = new System.Drawing.Point(18, 351);
+            this.btnComenzar.Location = new System.Drawing.Point(147, 348);
             this.btnComenzar.Name = "btnComenzar";
             this.btnComenzar.Size = new System.Drawing.Size(115, 44);
             this.btnComenzar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -176,31 +205,21 @@
             this.btnCargar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
             this.btnCargar.Image = global::EKPolizaGastos.Properties.Resources._256px_Database_svg;
             this.btnCargar.ImageFixedSize = new System.Drawing.Size(48, 48);
-            this.btnCargar.Location = new System.Drawing.Point(77, 174);
+            this.btnCargar.Location = new System.Drawing.Point(36, 51);
             this.btnCargar.Name = "btnCargar";
-            this.btnCargar.Size = new System.Drawing.Size(152, 60);
+            this.btnCargar.Size = new System.Drawing.Size(27, 19);
             this.btnCargar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.btnCargar.TabIndex = 2;
             this.btnCargar.Text = "Cargar Ejercicios";
+            this.btnCargar.Visible = false;
             this.btnCargar.Click += new System.EventHandler(this.btnCargar_Click);
-            // 
-            // btnDiot
-            // 
-            this.btnDiot.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
-            this.btnDiot.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnDiot.Location = new System.Drawing.Point(173, 351);
-            this.btnDiot.Name = "btnDiot";
-            this.btnDiot.Size = new System.Drawing.Size(115, 44);
-            this.btnDiot.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.btnDiot.TabIndex = 10;
-            this.btnDiot.Text = "buttonX1";
-            this.btnDiot.Click += new System.EventHandler(this.btnDiot_Click);
             // 
             // VentanaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(328, 429);
+            this.ClientSize = new System.Drawing.Size(399, 423);
+            this.Controls.Add(this.btnImportExcel);
             this.Controls.Add(this.btnDiot);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnComenzar);
@@ -218,7 +237,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(399, 423);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(399, 423);
             this.Name = "VentanaForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Seleccione de Tipo de Polizas";
@@ -240,5 +261,6 @@
         private DevComponents.DotNetBar.ButtonX btnComenzar;
         private DevComponents.DotNetBar.ButtonX btnClose;
         private DevComponents.DotNetBar.ButtonX btnDiot;
+        private DevComponents.DotNetBar.ButtonX btnImportExcel;
     }
 }

@@ -183,11 +183,13 @@
             this.gridMuestra.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gridMuestra.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(198)))), ((int)(((byte)(213)))));
             this.gridMuestra.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridMuestra.Location = new System.Drawing.Point(242, 64);
+            this.gridMuestra.GridColor = System.Drawing.SystemColors.AppWorkspace;
+            this.gridMuestra.Location = new System.Drawing.Point(242, 55);
             this.gridMuestra.Name = "gridMuestra";
             this.gridMuestra.ReadOnly = true;
-            this.gridMuestra.Size = new System.Drawing.Size(753, 379);
+            this.gridMuestra.Size = new System.Drawing.Size(753, 388);
             this.gridMuestra.TabIndex = 14;
             // 
             // labelX3
