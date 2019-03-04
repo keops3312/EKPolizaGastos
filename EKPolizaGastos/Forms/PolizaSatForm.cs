@@ -1052,6 +1052,31 @@ namespace EKPolizaGastos.Forms
             }
             else
             {
+                //Titulo_principal = proveedor.Titulo_principal;//el concepto del encabezado
+                //Titulo_secundario = proveedor.Titulo_secundario;//el concepto del total
+                //Titulo_tercero = proveedor.Titulo_tercero; //el concepto del iva
+                //tomamos la primera creacion de proveedores
+
+                Titulo_principal = Proveedor + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+
+                Titulo_secundario = Proveedor;
+
+                Titulo_tercero = "IVA-" + Proveedor + "-" + Folio; //proveedor a 25 caracteres + RFc
+
+                if (Proveedor.Length > 40)
+                {
+                    Titulo_principal = Proveedor.Substring(0, 40) + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+                }
+
+                if (Proveedor.Length > 25)
+                {
+                    Titulo_secundario = Proveedor.Substring(0, 25); //proveedor a 25 caracteres + RFc
+                }
+
+                if (Proveedor.Length > 20)
+                {
+                    Titulo_tercero = "IVA-" + Proveedor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                }
 
                 //Titulo_principal = proveedor.Titulo_principal + " " + proveedor.RFC;
 
@@ -1069,9 +1094,7 @@ namespace EKPolizaGastos.Forms
 
 
 
-                Titulo_principal = proveedor.Titulo_principal;//el concepto del encabezado
-                Titulo_secundario = proveedor.Titulo_secundario;//el concepto del total
-                Titulo_tercero = proveedor.Titulo_tercero; //el concepto del iva
+               
 
                 //NUEVAS CUENTAS
                 Cuenta_ieps_trasladado = proveedor.Ieps_Trasladado;
