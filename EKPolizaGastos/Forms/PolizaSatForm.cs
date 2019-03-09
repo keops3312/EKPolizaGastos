@@ -920,7 +920,7 @@ namespace EKPolizaGastos.Forms
 
             dataGridViewX1.Rows[indexGridPosition].Selected = true;
             dataGridViewX1.CurrentCell = dataGridViewX1.Rows[indexGridPosition].Cells[0];
-
+           
 
             Proveedor = dataGridViewX1.Rows[indexGridPosition].Cells[21].Value.ToString();//RFC
             Proveedor_Completo = dataGridViewX1.Rows[indexGridPosition].Cells[21].Value.ToString();//NOMBRE PROVEEDOR
@@ -928,7 +928,8 @@ namespace EKPolizaGastos.Forms
             IdF = dataGridViewX1.Rows[indexGridPosition].Cells[0].Value.ToString();
             UUID = dataGridViewX1.Rows[indexGridPosition].Cells[17].Value.ToString();//UUID
             Folio = dataGridViewX1.Rows[indexGridPosition].Cells[16].Value.ToString();//FOLIOF
-            txtNumero.Text = dataGridViewX1.Rows[indexGridPosition].Cells[0].Value.ToString();//NUMERO ID FACTURA
+
+            txtNumero.Text = dataGridViewX1.Rows[indexGridPosition].Cells[67].Value.ToString();//NUMERO ID FACTURA antes 0
 
             tipoDeComprobante = string.Empty;
 
@@ -1269,13 +1270,13 @@ namespace EKPolizaGastos.Forms
                 {
                     //El total de la poliza
                     total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
-                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", total, "TOTAL");
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", decimal.Parse(total).ToString("N2"), "TOTAL");
                 }
                 else if (tipoDeComprobante.Trim() == "E")
                 {
                     //El total de la poliza
                     total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
-                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, total, "0.00", "TOTAL");
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, decimal.Parse(total).ToString("N2"), "0.00", "TOTAL");
                 }
                
                 //El Subtotal de la Poliza Subtotal(subtotal - descuento)
@@ -1286,11 +1287,11 @@ namespace EKPolizaGastos.Forms
 
                 if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, subtotal, "0.00", "CONCEPTO");
+                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, decimal.Parse(subtotal).ToString("N2"), "0.00", "CONCEPTO");
                 }
                 else if (tipoDeComprobante.Trim() == "E")
                 {
-                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, "0.00", subtotal, "CONCEPTO");
+                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, "0.00", decimal.Parse(subtotal).ToString("N2"), "CONCEPTO");
                 }
 
                 //ISR RETENIDO
@@ -1299,14 +1300,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!isr_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", "0.00", isr_retenido, "ISR RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", "0.00", decimal.Parse(isr_retenido).ToString("N2"), "ISR RETENIDO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "E")
                 {
                     if (!isr_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", isr_retenido, "0.00", "ISR RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", decimal.Parse(isr_retenido).ToString("N2"), "0.00", "ISR RETENIDO");
                     }
 
                 }
@@ -1317,14 +1318,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!iva_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", "0.00", decimal.Parse(iva_retenido).ToString("N2"), "IVA RETENIDO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "E")
                 {
                     if (!iva_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", decimal.Parse(iva_retenido).ToString("N2"), "0.00", "IVA RETENIDO");
                     }
                 }
 
@@ -1333,7 +1334,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ieps.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, ieps, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, decimal.Parse(ieps).ToString("N2"), "0.00", "IEPS TRASLADADO");
                     }
 
                 }
@@ -1341,7 +1342,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ieps.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, "0.00", ieps, "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, "0.00", decimal.Parse(ieps).ToString("N2"), "IEPS TRASLADADO");
                     }
                 }
 
@@ -1351,7 +1352,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ish.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", ieps, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", decimal.Parse(ish).ToString("N2"), "0.00", "IEPS TRASLADADO");
                     }
 
                 }
@@ -1359,7 +1360,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ish.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", "0.00", ieps, "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", "0.00", decimal.Parse(ish).ToString("N2"), "IEPS TRASLADADO");
                     }
                 }
 
@@ -1369,14 +1370,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!totalLocalTrasladado.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", ieps, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", decimal.Parse(totalLocalTrasladado).ToString("N2"), "0.00", "IEPS TRASLADADO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "E")
                 {
                     if (!totalLocalTrasladado.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", "0.00", ieps, "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", "0.00", decimal.Parse(totalLocalTrasladado).ToString("N2"), "IEPS TRASLADADO");
                     }
                 }
 
@@ -1386,14 +1387,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!totalLocalRetenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", "0.00", decimal.Parse(totalLocalRetenido).ToString("N2"), "IVA RETENIDO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "E")
                 {
                     if (!totalLocalRetenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", decimal.Parse(totalLocalRetenido).ToString("N2"), "0.00", "IVA RETENIDO");
                     }
 
                 }
@@ -1404,7 +1405,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!iva.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, iva, "0.00", "IVA TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, decimal.Parse(iva).ToString("N2"), "0.00", "IVA TRASLADADO");
                     }
 
 
@@ -1413,7 +1414,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!iva.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, "0.00", iva, "IVA TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, "0.00", decimal.Parse(iva).ToString("N2"), "IVA TRASLADADO");
                     }
 
                 }
@@ -1425,13 +1426,13 @@ namespace EKPolizaGastos.Forms
                 {
                     //El total de la poliza
                     total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
-                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", total, "TOTAL");
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, "0.00", decimal.Parse(total).ToString("N2"), "TOTAL");
                 }
                 else if (tipoDeComprobante.Trim() == "I")
                 {
                     //El total de la poliza
                     total = dataGridViewX1.Rows[indexGridPosition].Cells[36].Value.ToString();
-                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, total, "0.00", "TOTAL");
+                    poliza.Rows.Insert(0, Cuenta_Abono_1, Titulo_secundario, decimal.Parse(total).ToString("N2"), "0.00", "TOTAL");
                 }
               
 
@@ -1444,11 +1445,11 @@ namespace EKPolizaGastos.Forms
 
                 if (tipoDeComprobante.Trim() == "E")
                 {
-                    poliza.Rows.Insert(1, Cuenta_cargo_1,Titulo_secundario, subtotal, "0.00", "CONCEPTO");
+                    poliza.Rows.Insert(1, Cuenta_cargo_1,Titulo_secundario, decimal.Parse(subtotal).ToString("N2"), "0.00", "CONCEPTO");
                 }
                 else if (tipoDeComprobante.Trim() == "I")
                 {
-                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, "0.00", subtotal, "CONCEPTO");
+                    poliza.Rows.Insert(1, Cuenta_cargo_1, Titulo_secundario, "0.00", decimal.Parse(subtotal).ToString("N2"), "CONCEPTO");
                 }
 
                 //ISR RETENIDO
@@ -1457,14 +1458,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!isr_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", "0.00", isr_retenido, "ISR RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", "0.00", decimal.Parse(isr_retenido).ToString("N2"), "ISR RETENIDO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "I")
                 {
                     if (!isr_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", isr_retenido, "0.00", "ISR RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_isr_retenido, "ISR-RETENIDO", decimal.Parse(isr_retenido).ToString("N2"), "0.00", "ISR RETENIDO");
                     }
 
                 }
@@ -1475,14 +1476,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!iva_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", "0.00", decimal.Parse(iva_retenido).ToString("N2"), "IVA RETENIDO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "I")
                 {
                     if (!iva_retenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "IVA-RETENIDO", decimal.Parse(iva_retenido).ToString("N2"), "0.00", "IVA RETENIDO");
                     }
                 }
 
@@ -1491,7 +1492,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ieps.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, ieps, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, decimal.Parse(ieps).ToString("N2"), "0.00", "IEPS TRASLADADO");
                     }
 
                 }
@@ -1499,7 +1500,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ieps.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, "0.00", ieps, "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, leyenda_IEPS, "0.00", decimal.Parse(ieps).ToString("N2"), "IEPS TRASLADADO");
                     }
                 }
 
@@ -1509,7 +1510,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ish.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", ieps, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", decimal.Parse(ish).ToString("N2"), "0.00", "IEPS TRASLADADO");
                     }
 
                 }
@@ -1517,7 +1518,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!ish.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", "0.00", ieps, "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "ISH", "0.00", decimal.Parse(ish).ToString("N2"), "IEPS TRASLADADO");
                     }
                 }
 
@@ -1527,14 +1528,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!totalLocalTrasladado.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", ieps, "0.00", "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", decimal.Parse(totalLocalTrasladado).ToString("N2"), "0.00", "IEPS TRASLADADO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "I")
                 {
                     if (!totalLocalTrasladado.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", "0.00", ieps, "IEPS TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_ieps_trasladado, "TLOCAL-TRASLADADO", "0.00", decimal.Parse(totalLocalTrasladado).ToString("N2"), "IEPS TRASLADADO");
                     }
                 }
 
@@ -1544,14 +1545,14 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!totalLocalRetenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", "0.00", iva_retenido, "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", "0.00", decimal.Parse(totalLocalRetenido).ToString("N2"), "IVA RETENIDO");
                     }
                 }
                 else if (tipoDeComprobante.Trim() == "I")
                 {
                     if (!totalLocalRetenido.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", iva_retenido, "0.00", "IVA RETENIDO");
+                        poliza.Rows.Insert(2, Cuenta_iva_retenido, "TLOCAL-RETENIDO", decimal.Parse(totalLocalRetenido).ToString("N2"), "0.00", "IVA RETENIDO");
                     }
 
                 }
@@ -1562,7 +1563,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!iva.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, iva, "0.00", "IVA TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, decimal.Parse(iva).ToString("N2"), "0.00", "IVA TRASLADADO");
                     }
 
 
@@ -1571,7 +1572,7 @@ namespace EKPolizaGastos.Forms
                 {
                     if (!iva.Equals("0"))
                     {
-                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, "0.00", iva, "IVA TRASLADADO");
+                        poliza.Rows.Insert(2, Cuenta_cargo_Iva, Titulo_tercero, "0.00", decimal.Parse(iva).ToString("N2"), "IVA TRASLADADO");
                     }
 
                 }
@@ -1616,14 +1617,14 @@ namespace EKPolizaGastos.Forms
             {
                 diferencia = decimal.Parse(txtDebe.Text) - decimal.Parse(txtHaber.Text);
 
-                poliza.Rows.Insert(1, Cuenta_ieps_trasladado, "OTROS", "0.00", diferencia, "IEPS TRASLADADO");
+                poliza.Rows.Insert(1, Cuenta_ieps_trasladado, "OTROS", "0.00", diferencia.ToString("N2"), "IEPS TRASLADADO");
                 RECALCULAR();
             }
             else if (decimal.Parse(txtDebe.Text) < decimal.Parse(txtHaber.Text))
             {
                 diferencia = decimal.Parse(txtHaber.Text) - decimal.Parse(txtDebe.Text);
 
-                poliza.Rows.Insert(1, Cuenta_ieps_trasladado, "OTROS", diferencia, "0.00", "IEPS TRASLADADO");
+                poliza.Rows.Insert(1, Cuenta_ieps_trasladado, "OTROS", diferencia.ToString("N2"), "0.00", "IEPS TRASLADADO");
                 RECALCULAR();
 
             }
@@ -2062,7 +2063,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";//haber
+                                    importeWrite =string.Format("{0:0.00}",decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";//haber
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2070,7 +2071,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";//Debe
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2082,7 +2083,7 @@ namespace EKPolizaGastos.Forms
                             {
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2090,7 +2091,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2125,7 +2126,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Debe
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";//Debe
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2133,7 +2134,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";//Haber
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";//Haber
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2148,7 +2149,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";//Debe
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";//Debe
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2156,7 +2157,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";//Haber
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";//Haber
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2188,7 +2189,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2196,7 +2197,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2209,7 +2210,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2217,7 +2218,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2248,7 +2249,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2256,7 +2257,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2269,7 +2270,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
 
@@ -2277,7 +2278,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2311,7 +2312,7 @@ namespace EKPolizaGastos.Forms
                             {
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2319,7 +2320,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine(importeWrite);
@@ -2332,14 +2333,14 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2369,14 +2370,14 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2390,7 +2391,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2398,7 +2399,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine(importeWrite);
@@ -2425,14 +2426,14 @@ namespace EKPolizaGastos.Forms
                             {
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine(importeWrite);
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2446,7 +2447,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2454,7 +2455,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine(importeWrite);
@@ -2480,7 +2481,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
 
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
@@ -2490,7 +2491,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
 
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
@@ -2504,7 +2505,7 @@ namespace EKPolizaGastos.Forms
 
                                 if (tipoDeComprobante.Trim() == "I")
                                 {
-                                    importeWrite = item.Cells[3].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[3].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine("");
@@ -2512,7 +2513,7 @@ namespace EKPolizaGastos.Forms
                                 }
                                 else if (tipoDeComprobante.Trim() == "E")
                                 {
-                                    importeWrite = item.Cells[2].Value.ToString() + ",1.00";
+                                    importeWrite = string.Format("{0:0.00}", decimal.Parse(item.Cells[2].Value.ToString())) + ",1.00";
                                     escritor.WriteLine(cuentaWrite);
                                     escritor.WriteLine(tituloWrite);
                                     escritor.WriteLine(importeWrite);
@@ -2675,6 +2676,9 @@ namespace EKPolizaGastos.Forms
                                                        "EKPolizaGastos",
                                                        MessageBoxButtons.OK,
                                                        MessageBoxIcon.Exclamation);
+
+                VentanaForm ventanaForm = new VentanaForm();
+                ventanaForm.Show();
                 this.Close();
 
             }

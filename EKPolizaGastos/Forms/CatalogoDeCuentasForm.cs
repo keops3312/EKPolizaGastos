@@ -54,7 +54,7 @@ namespace EKPolizaGastos.Forms
         private void textBoxX1_TextChanged(object sender, EventArgs e)
         {
             
-            tabla.DefaultView.RowFilter = $"Descripcion LIKE '{textBoxX1.Text}%'";
+            tabla.DefaultView.RowFilter = $"Descripcion LIKE '{textBoxX1.Text}%' or Cuenta LIKE '{textBoxX1.Text}%'";
         }
     }
 }

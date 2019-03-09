@@ -36,5 +36,7 @@ namespace EKPolizaGastos.Context
         public string Ieps_Retenido { get; set; }
         public string Ieps_Trasladado { get; set; }
         public string Isr_Trasladado { get; set; }
+        public string tipoDeTercero { get; set; }
+        public string tipoDeOperacion { get; set; }
     }
 }

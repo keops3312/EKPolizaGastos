@@ -2,6 +2,8 @@
 using DevComponents.DotNetBar;
 using EKPolizaGastos.Common.Classes;
 using EKPolizaGastos.Context;
+using EKPolizaGastos.Data;
+using EKPolizaGastos.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -634,81 +636,129 @@ namespace EKPolizaGastos.Forms
 
         public void Export(DataTable Result)
         {
-            string ruta;
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "Excel files (*.xlsx)|*.xlsx";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-
-                ruta = saveFileDialog1.FileName;
-
-                if (string.IsNullOrEmpty(ruta))
-                {
-                    MessageBoxEx.EnableGlass = false;
-                    MessageBoxEx.Show("No hay directorio Seleccionado",
-                        "EKDIOT", MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }
-                else
-                {
-
-                    //Formato a las filas
-                    //Result.Columns[3].DataType = System.Type.GetType("System.Decimal");
-                    //Result.Columns[4].DataType = System.Type.GetType("System.Decimal");
-                    //Result.Columns[5].DataType = System.Type.GetType("System.Decimal");
-
-                    DataView dataview = new DataView(Result);
-
-                    //ALTERNAMENTE DISEÑAMOS EL BLOC DE NOTAS
-                    using (System.IO.StreamWriter escritor = new System.IO.StreamWriter(ruta + ".txt"))
-                    {
-                        int bases;
-                        int basesSinIva;
-                        string rfc;
-
-                      //  ResultadoDIOT.Rows.Add(RFC_Emisor, Proveedor_Emisor, iva_calculado,
-                      //Iva_trasladado , BaseR , conceptoSinIva, IdEmpresa, Mes, Periodo);
-                        for (int i = 0; i < Result.Rows.Count; i++)
-                        {
-                            rfc = Result.Rows[i][0].ToString();
+            int idEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
+            var empresa = db.Empresas.Where(p => p.IdEmpresa == idEmpresa).FirstOrDefault();
+           
+          
+            Result.TableName="DIOT";
+            DiotForm diotForm = new DiotForm();
+            diotForm.Resultado = Result;
+            diotForm.empresa = empresa.Empresa;
+            diotForm.mes = cmbMes.Text;
+            diotForm.ano = cmbAno.Text;
+            diotForm.rfc = empresa.RFC;
+            diotForm.ShowDialog();
 
 
-                            //if (decimal.Parse(Result.Rows[i][4].ToString()) > 0)
-                            //{
-                             bases = (int)Math.Round(Convert.ToDouble(Result.Rows[i][4].ToString()), 0, MidpointRounding.ToEven);
-                            basesSinIva = (int)Math.Round(Convert.ToDouble(Result.Rows[i][5].ToString()), 0, MidpointRounding.ToEven);
-                                escritor.WriteLine("04|85|" + rfc + "|||||" + bases + "|||||||||||||"+ basesSinIva +"|||");
-                          //}
-                          
-                          //checar con ingeniero las notas de credito con devoluciones y compensaciones esto deberia
-                          //ir en el campo 23, es decir el ultimo y la base como cero
+            //string ruta;
+            //SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            //saveFileDialog1.Filter = "Excel files (*.xlsx)|*.xlsx";
+            //saveFileDialog1.FilterIndex = 2;
+            //saveFileDialog1.RestoreDirectory = true;
+
+            //if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+
+            //    ruta = saveFileDialog1.FileName;
+
+            //    if (string.IsNullOrEmpty(ruta))
+            //    {
+            //        MessageBoxEx.EnableGlass = false;
+            //        MessageBoxEx.Show("No hay directorio Seleccionado",
+            //            "EKDIOT", MessageBoxButtons.OK,
+            //            MessageBoxIcon.Information);
+            //    }
+            //    else
+            //    {
+
+            //        DiotForm diotForm = new DiotForm();
+            //        diotForm.Resultado = Result;
+
+
+
+            //        //LocalidadModel localidadModel = new LocalidadModel();
+            //        //localidadModel.localidadResult(loc);
+            //        //ob.SetParameterValue("tipos", leyendaTipos);
+            //        //ob.SetParameterValue("estatus", leyendaEstatus);
+            //        //ob.SetParameterValue("rangos", leyendaRango);
+            //        //ob.SetParameterValue("modoOrden", mode);
+
+            //        //ob.SetParameterValue("sucursal", localidadModel.sucursal);
+            //        //ob.SetParameterValue("marca", localidadModel.marca);
+            //        //ob.SetParameterValue("empresa", localidadModel.empresa);
+            //        //ob.SetParameterValue("localidad", localidadModel.localidad);
+            //        //ob.SetParameterValue("encargado", localidadModel.encargado);
+            //        //ob.SetParameterValue("logo", localidadModel.logotipo);
+
+
+
+            //        //crystalReportViewer1.ReportSource = ob;
+            //        //crystalReportViewer1.Refresh();
+            //        //Formato a las filas
+            //        //Result.Columns[3].DataType = System.Type.GetType("System.Decimal");
+            //        //Result.Columns[4].DataType = System.Type.GetType("System.Decimal");
+            //        //Result.Columns[5].DataType = System.Type.GetType("System.Decimal");
+
+            //        //DataView dataview = new DataView(Result);
+
+
+
+            //        ////ALTERNAMENTE DISEÑAMOS EL BLOC DE NOTAS
+            //        //using (System.IO.StreamWriter escritor = new System.IO.StreamWriter(ruta + ".txt"))
+            //        //{
+            //        //    int Base;
+            //        //    int NoGrabanIVA;
+            //        //    int IvaRetenido;
+            //        //    int IvaEgreso;
+
+            //        //    string tipo;
+            //        //    string rfc;
+
+            //        //  //  ResultadoDIOT.Rows.Add(RFC_Emisor, Proveedor_Emisor, iva_calculado,
+            //        //  //Iva_trasladado , BaseR , conceptoSinIva, IdEmpresa, Mes, Periodo);
+            //        //    for (int i = 0; i < Result.Rows.Count; i++)
+            //        //    {
+            //        //        rfc = Result.Rows[i][0].ToString();
+            //        //        tipo= Result.Rows[i][14].ToString();
+
+                           
+            //        //        Base = (int)Math.Round(Convert.ToDouble(Result.Rows[i][4].ToString()), 0, MidpointRounding.ToEven);
+            //        //        IvaRetenido = (int)Math.Round(Convert.ToDouble(Result.Rows[i][5].ToString()), 0, MidpointRounding.ToEven);
+            //        //        NoGrabanIVA = (int)Math.Round(Convert.ToDouble(Result.Rows[i][7].ToString()), 0, MidpointRounding.ToEven);
+            //        //        IvaEgreso =(int)Math.Round(Convert.ToDouble(Result.Rows[i][8].ToString()), 0, MidpointRounding.ToEven);
+
+            //        //        string batch;
+            //        //        batch = "04|85|" + rfc + "|||||" + Base + "||||||||||||" + NoGrabanIVA + "||" + IvaRetenido + "|"+IvaEgreso+"|";
+
+            //        //        escritor.WriteLine(batch);
+                         
+            //        //      //checar con ingeniero las notas de credito con devoluciones y compensaciones esto deberia
+            //        //      //ir en el campo 23, es decir el ultimo y la base como cero
 
 
                                 
-                        }
+            //        //    }
 
 
-                    }
+            //        //}
 
-                    using (XLWorkbook wb = new XLWorkbook())
-                    {
+            //        //using (XLWorkbook wb = new XLWorkbook())
+            //        //{
                        
-                        wb.Worksheets.Add(dataview.ToTable());
-                        wb.SaveAs(ruta);
+            //        //    wb.Worksheets.Add(dataview.ToTable());
+            //        //    wb.SaveAs(ruta);
 
-                    }
+            //        //}
 
-                    MessageBoxEx.EnableGlass = false;
-                    MessageBoxEx.Show("DIOT GENERADA CON EXITO", "EKDIOT",
-                     MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        //MessageBoxEx.EnableGlass = false;
+            //        //MessageBoxEx.Show("DIOT GENERADA CON EXITO", "EKDIOT",
+            //        //MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
-                }
-            }
+            //    }
+            //}
 
 
 

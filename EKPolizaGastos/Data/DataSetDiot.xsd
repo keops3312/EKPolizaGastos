@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSetDiot" targetNamespace="http://tempuri.org/DataSetDiot.xsd" xmlns:mstns="http://tempuri.org/DataSetDiot.xsd" xmlns="http://tempuri.org/DataSetDiot.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSetDiot" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSetDiot" msprop:Generator_UserDSName="DataSetDiot">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="DIOT" msdata:CaseSensitive="False" msprop:Generator_TableClassName="DIOTDataTable" msprop:Generator_TableVarName="tableDIOT" msprop:Generator_RowChangedName="DIOTRowChanged" msprop:Generator_TablePropName="DIOT" msprop:Generator_RowDeletingName="DIOTRowDeleting" msprop:Generator_RowChangingName="DIOTRowChanging" msprop:Generator_RowEvHandlerName="DIOTRowChangeEventHandler" msprop:Generator_RowDeletedName="DIOTRowDeleted" msprop:Generator_RowClassName="DIOTRow" msprop:Generator_UserTableName="DIOT" msprop:Generator_RowEvArgName="DIOTRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RFC_Emisor" msprop:Generator_ColumnVarNameInTable="columnRFC_Emisor" msprop:Generator_ColumnPropNameInRow="RFC_Emisor" msprop:Generator_ColumnPropNameInTable="RFC_EmisorColumn" msprop:Generator_UserColumnName="RFC_Emisor" type="xs:string" minOccurs="0" />
+              <xs:element name="Proveedor_Emisor" msprop:Generator_ColumnVarNameInTable="columnProveedor_Emisor" msprop:Generator_ColumnPropNameInRow="Proveedor_Emisor" msprop:Generator_ColumnPropNameInTable="Proveedor_EmisorColumn" msprop:Generator_UserColumnName="Proveedor_Emisor" type="xs:string" minOccurs="0" />
+              <xs:element name="IVA_SIN_DECIMALES" msprop:Generator_ColumnVarNameInTable="columnIVA_SIN_DECIMALES" msprop:Generator_ColumnPropNameInRow="IVA_SIN_DECIMALES" msprop:Generator_ColumnPropNameInTable="IVA_SIN_DECIMALESColumn" msprop:Generator_UserColumnName="IVA_SIN_DECIMALES" type="xs:string" minOccurs="0" />
+              <xs:element name="IVA_CON_DECIMALES" msprop:Generator_ColumnVarNameInTable="columnIVA_CON_DECIMALES" msprop:Generator_ColumnPropNameInRow="IVA_CON_DECIMALES" msprop:Generator_ColumnPropNameInTable="IVA_CON_DECIMALESColumn" msprop:Generator_UserColumnName="IVA_CON_DECIMALES" type="xs:string" minOccurs="0" />
+              <xs:element name="BASE" msprop:Generator_ColumnVarNameInTable="columnBASE" msprop:Generator_ColumnPropNameInRow="BASE" msprop:Generator_ColumnPropNameInTable="BASEColumn" msprop:Generator_UserColumnName="BASE" type="xs:string" minOccurs="0" />
+              <xs:element name="IVA_RETENIDO" msprop:Generator_ColumnVarNameInTable="columnIVA_RETENIDO" msprop:Generator_ColumnPropNameInRow="IVA_RETENIDO" msprop:Generator_ColumnPropNameInTable="IVA_RETENIDOColumn" msprop:Generator_UserColumnName="IVA_RETENIDO" type="xs:string" minOccurs="0" />
+              <xs:element name="ISR_RETENIDO" msprop:Generator_ColumnVarNameInTable="columnISR_RETENIDO" msprop:Generator_ColumnPropNameInRow="ISR_RETENIDO" msprop:Generator_ColumnPropNameInTable="ISR_RETENIDOColumn" msprop:Generator_UserColumnName="ISR_RETENIDO" type="xs:string" minOccurs="0" />
+              <xs:element name="CONCEPTOS_NO_GRABAN_IVA" msprop:Generator_ColumnVarNameInTable="columnCONCEPTOS_NO_GRABAN_IVA" msprop:Generator_ColumnPropNameInRow="CONCEPTOS_NO_GRABAN_IVA" msprop:Generator_ColumnPropNameInTable="CONCEPTOS_NO_GRABAN_IVAColumn" msprop:Generator_UserColumnName="CONCEPTOS_NO_GRABAN_IVA" type="xs:string" minOccurs="0" />
+              <xs:element name="EGRESO_IVA_SIN_DECIMALES" msprop:Generator_ColumnVarNameInTable="columnEGRESO_IVA_SIN_DECIMALES" msprop:Generator_ColumnPropNameInRow="EGRESO_IVA_SIN_DECIMALES" msprop:Generator_ColumnPropNameInTable="EGRESO_IVA_SIN_DECIMALESColumn" msprop:Generator_UserColumnName="EGRESO_IVA_SIN_DECIMALES" type="xs:string" minOccurs="0" />
+              <xs:element name="EGRESO_IVA_CON_DECIMALES" msprop:Generator_ColumnVarNameInTable="columnEGRESO_IVA_CON_DECIMALES" msprop:Generator_ColumnPropNameInRow="EGRESO_IVA_CON_DECIMALES" msprop:Generator_ColumnPropNameInTable="EGRESO_IVA_CON_DECIMALESColumn" msprop:Generator_UserColumnName="EGRESO_IVA_CON_DECIMALES" type="xs:string" minOccurs="0" />
+              <xs:element name="EGRESO_BASE" msprop:Generator_ColumnVarNameInTable="columnEGRESO_BASE" msprop:Generator_ColumnPropNameInRow="EGRESO_BASE" msprop:Generator_ColumnPropNameInTable="EGRESO_BASEColumn" msprop:Generator_UserColumnName="EGRESO_BASE" type="xs:string" minOccurs="0" />
+              <xs:element name="EGRESO_IVA_RETENIDO" msprop:Generator_ColumnVarNameInTable="columnEGRESO_IVA_RETENIDO" msprop:Generator_ColumnPropNameInRow="EGRESO_IVA_RETENIDO" msprop:Generator_ColumnPropNameInTable="EGRESO_IVA_RETENIDOColumn" msprop:Generator_UserColumnName="EGRESO_IVA_RETENIDO" type="xs:string" minOccurs="0" />
+              <xs:element name="EGRESO_ISR_RETENIDO" msprop:Generator_ColumnVarNameInTable="columnEGRESO_ISR_RETENIDO" msprop:Generator_ColumnPropNameInRow="EGRESO_ISR_RETENIDO" msprop:Generator_ColumnPropNameInTable="EGRESO_ISR_RETENIDOColumn" msprop:Generator_UserColumnName="EGRESO_ISR_RETENIDO" type="xs:string" minOccurs="0" />
+              <xs:element name="EGRESO_CONCEPTOS_NO_GRABAN_IVA" msprop:Generator_ColumnVarNameInTable="columnEGRESO_CONCEPTOS_NO_GRABAN_IVA" msprop:Generator_ColumnPropNameInRow="EGRESO_CONCEPTOS_NO_GRABAN_IVA" msprop:Generator_ColumnPropNameInTable="EGRESO_CONCEPTOS_NO_GRABAN_IVAColumn" msprop:Generator_UserColumnName="EGRESO_CONCEPTOS_NO_GRABAN_IVA" type="xs:string" minOccurs="0" />
+              <xs:element name="IdEmpresa" msprop:Generator_ColumnVarNameInTable="columnIdEmpresa" msprop:Generator_ColumnPropNameInRow="IdEmpresa" msprop:Generator_ColumnPropNameInTable="IdEmpresaColumn" msprop:Generator_UserColumnName="IdEmpresa" type="xs:string" minOccurs="0" />
+              <xs:element name="MES" msprop:Generator_ColumnVarNameInTable="columnMES" msprop:Generator_ColumnPropNameInRow="MES" msprop:Generator_ColumnPropNameInTable="MESColumn" msprop:Generator_UserColumnName="MES" type="xs:string" minOccurs="0" />
+              <xs:element name="PERIODO" msprop:Generator_ColumnVarNameInTable="columnPERIODO" msprop:Generator_ColumnPropNameInRow="PERIODO" msprop:Generator_ColumnPropNameInTable="PERIODOColumn" msprop:Generator_UserColumnName="PERIODO" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

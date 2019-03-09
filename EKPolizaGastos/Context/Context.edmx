@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SEMP_SATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SEMP_SATModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SEMP_SAT.dbo.CIS-ABR2018' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CIS-ABR2018">
@@ -5345,6 +5345,8 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="Ieps_Retenido" Type="nvarchar" MaxLength="255" />
           <Property Name="Ieps_Trasladado" Type="nvarchar" MaxLength="255" />
           <Property Name="Isr_Trasladado" Type="nvarchar" MaxLength="255" />
+          <Property Name="tipoDeTercero" Type="nchar" MaxLength="10" />
+          <Property Name="tipoDeOperacion" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -9363,8 +9365,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
             <End Role="Localidades" EntitySet="Localidades" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SEMP_SATModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -10404,6 +10405,8 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="Ieps_Retenido" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Ieps_Trasladado" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Isr_Trasladado" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tipoDeTercero" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="tipoDeOperacion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -15794,6 +15797,8 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <EntitySetMapping Name="Proveedores">
             <EntityTypeMapping TypeName="SEMP_SATModel.Proveedores">
               <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="tipoDeOperacion" ColumnName="tipoDeOperacion" />
+                <ScalarProperty Name="tipoDeTercero" ColumnName="tipoDeTercero" />
                 <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
                 <ScalarProperty Name="Proveedor" ColumnName="Proveedor" />
                 <ScalarProperty Name="RFC" ColumnName="RFC" />
