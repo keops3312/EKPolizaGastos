@@ -92,6 +92,8 @@ namespace EKPolizaGastos.Forms
         private string Cuenta_isr_trasladado;
         private string Cuenta_ieps_retenido;
         private string Cuenta_ieps_trasladado;
+
+        public int xClick = 0, yClick = 0;
         #endregion
 
         #region Methods (metodos)
@@ -3144,6 +3146,52 @@ namespace EKPolizaGastos.Forms
 
 
         }
+
+        //Botones para minimizar, maximizar, arrastar
+
+        private void btnMinimizar_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void PolizaSatForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+            { xClick = e.X; yClick = e.Y; }
+            else
+            { this.Left = this.Left + (e.X - xClick); this.Top = this.Top + (e.Y - yClick); }
+        }
+
+        private void PolizaSatForm_DoubleClick(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+
+            }
+        }
+
+        private void btnMaximizar_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                this.WindowState = FormWindowState.Maximized;
+
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Normal;
+
+            }
+
+        }
         #endregion
+
+
     }
 }

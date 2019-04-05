@@ -70,6 +70,8 @@
             this.superTooltip1 = new DevComponents.DotNetBar.SuperTooltip();
             this.dataGridViewX1 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.labelX2 = new DevComponents.DotNetBar.LabelX();
+            this.btnMaximizar = new DevComponents.DotNetBar.ButtonX();
+            this.btnMinimizar = new DevComponents.DotNetBar.ButtonX();
             this.btnAnterior = new DevComponents.DotNetBar.ButtonX();
             this.btnClose = new DevComponents.DotNetBar.ButtonX();
             this.buttonX7 = new DevComponents.DotNetBar.ButtonX();
@@ -253,7 +255,7 @@
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.poliza.DefaultCellStyle = dataGridViewCellStyle2;
             this.poliza.EnableHeadersVisualStyles = false;
@@ -468,7 +470,7 @@
             this.lblAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAno.Location = new System.Drawing.Point(822, 10);
             this.lblAno.Name = "lblAno";
-            this.lblAno.Size = new System.Drawing.Size(220, 23);
+            this.lblAno.Size = new System.Drawing.Size(134, 23);
             this.lblAno.TabIndex = 49;
             this.lblAno.Text = "Año";
             // 
@@ -514,12 +516,12 @@
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewX1.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewX1.EnableHeadersVisualStyles = false;
             this.dataGridViewX1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(142)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.dataGridViewX1.Location = new System.Drawing.Point(936, 12);
+            this.dataGridViewX1.Location = new System.Drawing.Point(14, 38);
             this.dataGridViewX1.Name = "dataGridViewX1";
             this.dataGridViewX1.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -546,6 +548,34 @@
             this.labelX2.Size = new System.Drawing.Size(189, 26);
             this.labelX2.TabIndex = 79;
             this.labelX2.Text = "-";
+            // 
+            // btnMaximizar
+            // 
+            this.btnMaximizar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnMaximizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaximizar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnMaximizar.Image = global::EKPolizaGastos.Properties.Resources.maximizar;
+            this.btnMaximizar.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.btnMaximizar.Location = new System.Drawing.Point(1028, 9);
+            this.btnMaximizar.Name = "btnMaximizar";
+            this.btnMaximizar.Size = new System.Drawing.Size(35, 30);
+            this.btnMaximizar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnMaximizar.TabIndex = 83;
+            this.btnMaximizar.Click += new System.EventHandler(this.btnMaximizar_Click);
+            // 
+            // btnMinimizar
+            // 
+            this.btnMinimizar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
+            this.btnMinimizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinimizar.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
+            this.btnMinimizar.Image = global::EKPolizaGastos.Properties.Resources.minimizar;
+            this.btnMinimizar.ImageFixedSize = new System.Drawing.Size(24, 24);
+            this.btnMinimizar.Location = new System.Drawing.Point(987, 9);
+            this.btnMinimizar.Name = "btnMinimizar";
+            this.btnMinimizar.Size = new System.Drawing.Size(35, 30);
+            this.btnMinimizar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.btnMinimizar.TabIndex = 82;
+            this.btnMinimizar.Click += new System.EventHandler(this.btnMinimizar_Click);
             // 
             // btnAnterior
             // 
@@ -747,6 +777,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1071, 663);
+            this.Controls.Add(this.btnMaximizar);
+            this.Controls.Add(this.btnMinimizar);
             this.Controls.Add(this.btnAnterior);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.labelX2);
@@ -783,10 +815,13 @@
             this.Controls.Add(this.lblCantidad);
             this.DoubleBuffered = true;
             this.EnableGlass = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PolizaSatForm";
             this.Text = "Nueva Plantilla de Poliza";
             this.Load += new System.EventHandler(this.PolizaSatForm_Load);
+            this.DoubleClick += new System.EventHandler(this.PolizaSatForm_DoubleClick);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PolizaSatForm_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.poliza)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewX1)).EndInit();
             this.ResumeLayout(false);
@@ -847,5 +882,7 @@
         private DevComponents.DotNetBar.LabelX labelX2;
         private DevComponents.DotNetBar.ButtonX btnClose;
         private DevComponents.DotNetBar.ButtonX btnAnterior;
+        private DevComponents.DotNetBar.ButtonX btnMinimizar;
+        private DevComponents.DotNetBar.ButtonX btnMaximizar;
     }
 }

@@ -27,6 +27,8 @@ namespace EKPolizaGastos.Forms
         private diotClass diot;
         #endregion
 
+        private DataTable meses;
+
         private string ejercicio;
         public VentanaForm()
         {
@@ -41,6 +43,7 @@ namespace EKPolizaGastos.Forms
         }
         private void LoadF()
         {
+           
 
             DataRow myNewRow;
             DataTable dataTable = new DataTable("TiposFacturas");
@@ -63,10 +66,10 @@ namespace EKPolizaGastos.Forms
             myNewRow["Tipo"] = "Emitidas";
             dataTable.Rows.Add(myNewRow);
 
-            myNewRow = dataTable.NewRow();
-            myNewRow["IdTipo"] = 3;
-            myNewRow["Tipo"] = "Nomina";
-            dataTable.Rows.Add(myNewRow);
+            //myNewRow = dataTable.NewRow();
+            //myNewRow["IdTipo"] = 3;
+            //myNewRow["Tipo"] = "Nomina";
+            //dataTable.Rows.Add(myNewRow);
 
 
 
@@ -245,6 +248,11 @@ namespace EKPolizaGastos.Forms
 
             try
             {
+                meses = new DataTable();
+                //meses.Columns.Clear();
+                meses.Columns.Add("id",typeof(int));
+                meses.Columns.Add("mes",typeof(string));
+
                 int NoEmpresa = int.Parse(cmbEmpresa.SelectedValue.ToString());
                 int tipoFacturas = int.Parse(cmbTipoFactura.SelectedValue.ToString());
 
@@ -255,6 +263,12 @@ namespace EKPolizaGastos.Forms
                 {
 
                     cmbMes.Items.Clear();
+                }
+
+                if (meses.Rows.Count > 0)
+                {
+
+                    meses.Clear();
                 }
 
                 if (tipoFacturas == 1)
@@ -270,7 +284,7 @@ namespace EKPolizaGastos.Forms
                             mesConvertido(item.Value);
                         }
 
-
+                        
 
                     }
 
@@ -284,7 +298,7 @@ namespace EKPolizaGastos.Forms
                         {
                             mesConvertido(item.Value);
                         }
-
+                       
                     }
 
                     if (empresa.Letra.Trim() == "CMG")
@@ -406,9 +420,18 @@ namespace EKPolizaGastos.Forms
 
                 }
 
-                //NOMINA
+            
+                //order
+                DataView view = new DataView(meses);
+                /* Lo ordenamos por el campo Nombre.*/
+                view.Sort = "id asc";
+                /* Mostramos los datos en un control DataGridView*/
+                foreach (DataRowView row in view)
+                {
+                    cmbMes.Items.Add(row[1].ToString());
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBoxEx.EnableGlass = false;
                 MessageBoxEx.Show("Esta Empresa No Contiene Ejercicios",
@@ -419,54 +442,70 @@ namespace EKPolizaGastos.Forms
 
         private void mesConvertido(int Value)
         {
+           
             if (Value == 1)
             {
-                cmbMes.Items.Add("ENERO");
+                meses.Rows.Add(1, "ENERO");
+                //cmbMes.Items.Add(new {Text= , Value=1 });
+                
             }
             if (Value == 2)
             {
-                cmbMes.Items.Add("FEBRERO");
+                meses.Rows.Add(2, "FEBRERO");
+                //cmbMes.Items.Add(new { Text="FEBRERO" , value=2});
             }
             if (Value == 3)
             {
-                cmbMes.Items.Add("MARZO");
+                meses.Rows.Add(3, "MARZO");
+                //cmbMes.Items.Add(new { Text = "MARZO", value = 3 });
             }
             if (Value == 4)
             {
-                cmbMes.Items.Add("ABRIL");
+                meses.Rows.Add(4, "ABRIL");
+                //cmbMes.Items.Add(new { Text = "ABRIL", value = 4 });
             }
             if (Value == 5)
             {
-                cmbMes.Items.Add("MAYO");
+                meses.Rows.Add(5, "MAYO");
+                //cmbMes.Items.Add(new { Text = "MAYO", value = 5});
             }
             if (Value == 6)
             {
-                cmbMes.Items.Add("JUNIO");
+                meses.Rows.Add(6, "JUNIO");
+                // cmbMes.Items.Add(new { Text = "JUNIO", value = 6 });
             }
             if (Value == 7)
             {
-                cmbMes.Items.Add("JULIO");
+                meses.Rows.Add(7, "JULIO");
+                //cmbMes.Items.Add(new { Text = "JULIO", value = 7 });
             }
             if (Value == 8)
             {
-                cmbMes.Items.Add("AGOSTO");
+                meses.Rows.Add(8, "AGOSTO");
+                //cmbMes.Items.Add(new { Text = "AGOSTO", value = 8 });
             }
             if (Value == 9)
             {
-                cmbMes.Items.Add("SEPTIEMBRE");
+                meses.Rows.Add(9, "SEPTIEMBRE");
+                // cmbMes.Items.Add(new { Text = "SEPTIEMBRE", value = 9 });
             }
             if (Value == 10)
             {
-                cmbMes.Items.Add("OCTUBRE");
+                meses.Rows.Add(10, "OCTUBRE");
+                //cmbMes.Items.Add(new { Text = "OCTUBRE", value = 10 });
             }
             if (Value == 11)
             {
-                cmbMes.Items.Add("NOVIEMBRE");
+                meses.Rows.Add(11, "NOVIEMBRE");
+                //cmbMes.Items.Add(new { Text = "NOVIEMBRE", value = 11 });
             }
             if (Value == 12)
             {
-                cmbMes.Items.Add("DICIEMBRE");
+                meses.Rows.Add(12, "DICIEMBRE");
+                //cmbMes.Items.Add(new { Text = "DICIEMBRE", value = 12 });
             }
+           
+            
         }
 
 
@@ -644,6 +683,19 @@ namespace EKPolizaGastos.Forms
             Result.TableName="DIOT";
             DiotForm diotForm = new DiotForm();
             diotForm.Resultado = Result;
+
+            if (int.Parse(cmbTipoFactura.SelectedValue.ToString()) == 1)
+            {
+                diotForm.ruta = empresa.Path;
+            }
+            else
+            {
+                diotForm.ruta = empresa.PathNomina;
+            }
+            diotForm.letra = empresa.Letra.Trim();
+
+
+
             diotForm.empresa = empresa.Empresa;
             diotForm.mes = cmbMes.Text;
             diotForm.ano = cmbAno.Text;

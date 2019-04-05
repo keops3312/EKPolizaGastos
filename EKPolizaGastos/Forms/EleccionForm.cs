@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace EKPolizaGastos.Forms
         public string empresa;
         public string ano;
         public string rfc;
+        public string carpeta;
 
         #region Context
         private SEMP_SATContext db;
@@ -102,107 +104,118 @@ namespace EKPolizaGastos.Forms
         private void buttonX1_Click(object sender, EventArgs e)
         {
 
-            string ruta;
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-           // saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            //ALTERNAMENTE DISEÑAMOS EL BLOC DE NOTAS
+            using (System.IO.StreamWriter escritor = new System.IO.StreamWriter(carpeta))
             {
+                int Base;
+                int NoGrabanIVA;
+                int IvaRetenido;
+                int IvaEgreso;
 
-                ruta = saveFileDialog1.FileName;
+                string tipoTercero;
+                string tipoOperacion;
+                string rfc;
 
-                if (string.IsNullOrEmpty(ruta))
+                foreach (DataGridViewRow item in dataGridViewX1.Rows)
                 {
-                    MessageBoxEx.EnableGlass = false;
-                    MessageBoxEx.Show("No hay directorio Seleccionado",
-                        "EKDIOT", MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                }
-                else
-                {
-
-                    //ALTERNAMENTE DISEÑAMOS EL BLOC DE NOTAS
-                    using (System.IO.StreamWriter escritor = new System.IO.StreamWriter(ruta + ".txt"))
+                    rfc = item.Cells[2].Value.ToString();
+                    tipoTercero = item.Cells[0].Value.ToString();
+                    tipoOperacion = item.Cells[1].Value.ToString();
+                    if (string.IsNullOrEmpty(tipoTercero) || string.IsNullOrWhiteSpace(tipoTercero))
                     {
-                        int Base;
-                        int NoGrabanIVA;
-                        int IvaRetenido;
-                        int IvaEgreso;
+                        tipoTercero = "04";
+                        tipoOperacion = "85";
+                    }
+                    Base = (int)Math.Round(Convert.ToDouble(item.Cells[4].Value.ToString()), 0, MidpointRounding.ToEven);
+                    IvaRetenido = (int)Math.Round(Convert.ToDouble(item.Cells[6].Value.ToString()), 0, MidpointRounding.ToEven);
+                    NoGrabanIVA = (int)Math.Round(Convert.ToDouble(item.Cells[5].Value.ToString()), 0, MidpointRounding.ToEven);
+                    IvaEgreso = (int)Math.Round(Convert.ToDouble(item.Cells[7].Value.ToString()), 0, MidpointRounding.ToEven);
 
-                        string tipoTercero;
-                        string tipoOperacion;
-                        string rfc;
+                    string batch;
+                    batch = "" + tipoTercero.Trim() + "|" + tipoOperacion.Trim() + "|" + rfc + "|||||" + Base + "||||||||||||" + NoGrabanIVA + "||" + IvaRetenido + "|" + IvaEgreso + "|";
 
-                        foreach (DataGridViewRow item in dataGridViewX1.Rows)
+                    escritor.WriteLine(batch);
+
+                    int IdEmpresa = int.Parse(Resultado.Rows[0][14].ToString());
+                    var listaProveedores = db.Proveedores.Where(C => C.RFC == rfc.Trim() && C.IdEmpresa == IdEmpresa).FirstOrDefault();
+                    if (listaProveedores != null)
+                    {
+                        if (chkTipoOperacion.Checked == true)
                         {
-                            rfc = item.Cells[2].Value.ToString();
-                            tipoTercero=item.Cells[0].Value.ToString();
-                            tipoOperacion= item.Cells[1].Value.ToString();
-                            if (string.IsNullOrEmpty(tipoTercero) || string.IsNullOrWhiteSpace(tipoTercero))
-                            {
-                                tipoTercero = "04";
-                                tipoOperacion = "85";
-                            }
-                            Base = (int)Math.Round(Convert.ToDouble(item.Cells[4].Value.ToString()), 0, MidpointRounding.ToEven);
-                            IvaRetenido = (int)Math.Round(Convert.ToDouble(item.Cells[6].Value.ToString()), 0, MidpointRounding.ToEven);
-                            NoGrabanIVA = (int)Math.Round(Convert.ToDouble(item.Cells[5].Value.ToString()), 0, MidpointRounding.ToEven);
-                            IvaEgreso = (int)Math.Round(Convert.ToDouble(item.Cells[7].Value.ToString()), 0, MidpointRounding.ToEven);
 
-                            string batch;
-                            batch = "" + tipoTercero.Trim() + "|" + tipoOperacion.Trim() + "|" + rfc + "|||||" + Base + "||||||||||||" + NoGrabanIVA + "||" + IvaRetenido + "|" + IvaEgreso + "|";
-
-                            escritor.WriteLine(batch);
-
-                            int IdEmpresa = int.Parse(Resultado.Rows[0][14].ToString());
-                            var listaProveedores = db.Proveedores.Where(C => C.RFC == rfc.Trim() && C.IdEmpresa == IdEmpresa).FirstOrDefault();
-                            if (listaProveedores != null)
-                            {
-                                if (chkTipoOperacion.Checked == true)
-                                {
-
-                                    //Proveedores proveedoresM = new Proveedores();
-                                    listaProveedores.tipoDeOperacion = tipoOperacion;
-                                    //MODIFICAR SOLO UNA ENTIDAD CON  ENTY FRAMEWORK
-                                    db.Proveedores.Attach(listaProveedores);
-                                    db.Entry(listaProveedores).State =
-                                    EntityState.Modified;
-                                    db.SaveChanges();
+                            //Proveedores proveedoresM = new Proveedores();
+                            listaProveedores.tipoDeOperacion = tipoOperacion;
+                            //MODIFICAR SOLO UNA ENTIDAD CON  ENTY FRAMEWORK
+                            db.Proveedores.Attach(listaProveedores);
+                            db.Entry(listaProveedores).State =
+                            EntityState.Modified;
+                            db.SaveChanges();
 
 
 
-                                }
-                                if (chkTipoTercero.Checked == true)
-                                {
-
-                                    //Proveedores proveedoresM = new Proveedores();
-                                    listaProveedores.tipoDeTercero = tipoTercero;
-                                    //MODIFICAR SOLO UNA ENTIDAD CON  ENTY FRAMEWORK
-                                    db.Proveedores.Attach(listaProveedores);
-                                    db.Entry(listaProveedores).State =
-                                    EntityState.Modified;
-                                    db.SaveChanges();
-                                }
-                            }
-
-
-                           
                         }
+                        if (chkTipoTercero.Checked == true)
+                        {
 
-
-
+                            //Proveedores proveedoresM = new Proveedores();
+                            listaProveedores.tipoDeTercero = tipoTercero;
+                            //MODIFICAR SOLO UNA ENTIDAD CON  ENTY FRAMEWORK
+                            db.Proveedores.Attach(listaProveedores);
+                            db.Entry(listaProveedores).State =
+                            EntityState.Modified;
+                            db.SaveChanges();
+                        }
                     }
 
 
-                    MessageBoxEx.EnableGlass = false;
-                    MessageBoxEx.Show("DIOT GENERADA CON EXITO", "EKDIOT",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-
 
                 }
+
+
+
             }
+
+
+            MessageBoxEx.EnableGlass = false;
+            MessageBoxEx.Show("DIOT GENERADA CON EXITO\n"+
+                carpeta, "EKDIOT",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+
+            //string ruta;
+            //SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            //saveFileDialog1.Filter = "Text files (*.txt)|*.txt";
+            //saveFileDialog1.FilterIndex = 2;
+            
+
+            //string initPath = "T:/CFDIS/CIS/CIS-ENE2018"; //carpeta;
+            
+            //saveFileDialog1.InitialDirectory = initPath;
+
+            //saveFileDialog1.RestoreDirectory = true;
+
+            //if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+
+            //    ruta = saveFileDialog1.FileName;
+
+            //    if (string.IsNullOrEmpty(ruta))
+            //    {
+            //        MessageBoxEx.EnableGlass = false;
+            //        MessageBoxEx.Show("No hay directorio Seleccionado",
+            //            "EKDIOT", MessageBoxButtons.OK,
+            //            MessageBoxIcon.Information);
+            //    }
+            //    else
+            //    {
+
+                  
+
+            //    }
+            //}
 
 
           

@@ -29,7 +29,7 @@ namespace EKPolizaGastos.Forms
             SplashScreen.SplashForm frm = new SplashScreen.SplashForm();
             frm.AppName = "Polizas y DIOT XML";
             frm.Icon = Properties.Resources.empresa;
-            frm.ShowIcon = true;
+             frm.ShowIcon = true;
             frm.ShowInTaskbar = true;
             Application.Run(frm);
         }

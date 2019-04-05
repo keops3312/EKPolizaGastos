@@ -821,6 +821,8 @@
     <Content Include="Images\My_Documents_Folder.png" />
     <Content Include="Images\New-Database.png" />
     <Content Include="polizaGastos.ico" />
+    <None Include="Resources\maximizar.png" />
+    <None Include="Resources\minimizar.png" />
     <None Include="Resources\sat.png" />
     <None Include="Resources\tipoOperacion.png" />
     <None Include="Resources\tipoTercero.png" />
