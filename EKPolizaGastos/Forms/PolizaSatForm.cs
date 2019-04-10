@@ -55,6 +55,13 @@ namespace EKPolizaGastos.Forms
         string IdF;
         int IdEmpresaEjercicio;
         string Proveedor_concepto;
+
+
+        //DATOS DEL EMISOR CUNADO SON EMITIDAS
+        string emisor;
+        string rfcEmisor;
+
+        //
         int IdEmpresa;
 
         string Cuenta_cargo_1;
@@ -296,7 +303,21 @@ namespace EKPolizaGastos.Forms
         DevComponents.DotNetBar.eTooltipColor.Magenta));
             #endregion
 
-            txtTipo.Text = "Eg";
+            if (tipoDeBase.Equals("Recibidas"))
+            {
+                
+                txtTipo.Text = "Eg";
+
+            }
+            else if (tipoDeBase.Equals("Emitidas"))
+            {
+                
+                txtTipo.Text = "Ig";
+
+            }
+
+
+          //  txtTipo.Text = "Eg";
             txtFecha.Text = "";
 
 
@@ -931,6 +952,16 @@ namespace EKPolizaGastos.Forms
             UUID = dataGridViewX1.Rows[indexGridPosition].Cells[17].Value.ToString();//UUID
             Folio = dataGridViewX1.Rows[indexGridPosition].Cells[16].Value.ToString();//FOLIOF
 
+
+            //DATOS DEL EMISOR CUANDO SON FACTURAS DE TIPO EMITIDAS 
+            emisor = dataGridViewX1.Rows[indexGridPosition].Cells[25].Value.ToString();//EMISOR
+            rfcEmisor = dataGridViewX1.Rows[indexGridPosition].Cells[24].Value.ToString();//RFC
+
+
+
+
+            //
+
             txtNumero.Text = dataGridViewX1.Rows[indexGridPosition].Cells[67].Value.ToString();//NUMERO ID FACTURA antes 0
 
             tipoDeComprobante = string.Empty;
@@ -1022,162 +1053,332 @@ namespace EKPolizaGastos.Forms
 
 
 
-            var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor.Trim() && p.IdEmpresa == IdEmpresaEjercicio).FirstOrDefault();
+          
 
             if (Folio.Length > 5)
             {
                 Folio = Folio.Substring(0, 5);
             }
 
-            if (proveedor == null)
+
+            if (tipoDeBase.Equals("Recibidas"))
             {
-                //tomamos la primera creacion de proveedores
+                var proveedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor.Trim() && p.IdEmpresa == IdEmpresaEjercicio).FirstOrDefault();
 
-                Titulo_principal = Proveedor + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
-
-                Titulo_secundario = Proveedor;
-
-                if (Proveedor.Length > 40)
+                if (proveedor == null)
                 {
-                    Titulo_principal = Proveedor.Substring(0, 40) + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+                    //tomamos la primera creacion de proveedores
+
+                    Titulo_principal = Proveedor + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+
+                    Titulo_secundario = Proveedor;
+
+                    Titulo_tercero = "IVA-" + Proveedor + "-" + Folio; //prueba
+
+                    if (Proveedor.Length > 40)
+                    {
+                        Titulo_principal = Proveedor.Substring(0, 40) + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+                    }
+
+                    if (Proveedor.Length > 25)
+                    {
+                        Titulo_secundario = Proveedor.Substring(0, 25); //proveedor a 25 caracteres + RFc
+                    }
+
+                    if (Proveedor.Length > 20)
+                    {
+                        Titulo_tercero = "IVA-" + Proveedor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                    }
+
                 }
-
-                if (Proveedor.Length > 25)
+                else
                 {
-                    Titulo_secundario = Proveedor.Substring(0, 25); //proveedor a 25 caracteres + RFc
-                }
+                    //Titulo_principal = proveedor.Titulo_principal;//el concepto del encabezado
+                    //Titulo_secundario = proveedor.Titulo_secundario;//el concepto del total
+                    //Titulo_tercero = proveedor.Titulo_tercero; //el concepto del iva
+                    //tomamos la primera creacion de proveedores
 
-                if (Proveedor.Length > 20)
-                {
-                    Titulo_tercero = "IVA-" + Proveedor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                    Titulo_principal = Proveedor + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+
+                    Titulo_secundario = Proveedor;
+
+                    Titulo_tercero = "IVA-" + Proveedor + "-" + Folio; //proveedor a 25 caracteres + RFc
+
+                    if (Proveedor.Length > 40)
+                    {
+                        Titulo_principal = Proveedor.Substring(0, 40) + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
+                    }
+
+                    if (Proveedor.Length > 25)
+                    {
+                        Titulo_secundario = Proveedor.Substring(0, 25); //proveedor a 25 caracteres + RFc
+                    }
+
+                    if (Proveedor.Length > 20)
+                    {
+                        Titulo_tercero = "IVA-" + Proveedor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                    }
+
+                    //Titulo_principal = proveedor.Titulo_principal + " " + proveedor.RFC;
+
+                    Cuenta_cargo_1 = proveedor.Cuenta_cargo_1;
+                    Cuenta_cargo_2 = proveedor.Cuenta_cargo_2;
+                    Cuenta_cargo_3 = proveedor.Cuenta_cargo_3;
+                    Cuenta_cargo_Iva = proveedor.Cuenta_Cargo_Iva;
+                    Cuenta_iva_retenido = proveedor.Iva_Retenido;
+                    Cuenta_Abono_1 = proveedor.Cuenta_Abono_1;
+                    Cuenta_Abono_2 = proveedor.Cuenta_Abono_2;
+                    Cuenta_Abono_3 = proveedor.Cuenta_Abono_3;
+
+                    Cuenta_isr_retenido = proveedor.Isr_Retenido;//cuenta isr retenido
+                    Cuenta_isr_trasladado = proveedor.Isr_Trasladado;
+
+
+
+
+
+                    //NUEVAS CUENTAS
+                    Cuenta_ieps_trasladado = proveedor.Ieps_Trasladado;
+                    Cuenta_ieps_retenido = proveedor.Ieps_Retenido;
+
+
+
+                    Departamento = txtDepto.Text;
+
+
+
+                    if (Cuenta_cargo_1.Length <= 1)
+                    {
+                        Cuenta_cargo_1 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_2.Length <= 1)
+                    {
+
+                        Cuenta_cargo_2 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_3.Length <= 1)
+                    {
+
+                        Cuenta_cargo_3 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_Iva.Length <= 1)
+                    {
+
+                        Cuenta_cargo_Iva = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_1.Length <= 1)
+                    {
+
+                        Cuenta_Abono_1 = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_2.Length <= 1)
+                    {
+
+                        Cuenta_Abono_2 = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_3.Length <= 1)
+                    {
+
+                        Cuenta_Abono_3 = "0000-000-000";
+
+                    }
+                    if (Cuenta_isr_retenido == "" || string.IsNullOrEmpty(Cuenta_isr_retenido))
+                    {
+
+                        Cuenta_isr_retenido = "0000-000-000";
+
+                    }
+                    if (Cuenta_ieps_trasladado == "" || string.IsNullOrEmpty(Cuenta_ieps_trasladado))
+                    {
+                        Cuenta_ieps_trasladado = "0000-000-000";
+                    }
+                    if (Cuenta_isr_trasladado == "" || string.IsNullOrEmpty(Cuenta_isr_trasladado))
+                    {
+                        Cuenta_isr_trasladado = "0000-000-000";
+                    }
+                    if (Cuenta_iva_retenido == "" || string.IsNullOrEmpty(Cuenta_iva_retenido))
+                    {
+                        Cuenta_iva_retenido = "0000-000-000";
+                    }
+                    if (Cuenta_ieps_retenido == "" || string.IsNullOrEmpty(Cuenta_ieps_retenido))
+                    {
+                        Cuenta_ieps_retenido = "0000-000-000";
+                    }
+
+
+
+
+
                 }
 
             }
-            else
+            else if (tipoDeBase.Equals("Emitidas"))
             {
-                //Titulo_principal = proveedor.Titulo_principal;//el concepto del encabezado
-                //Titulo_secundario = proveedor.Titulo_secundario;//el concepto del total
-                //Titulo_tercero = proveedor.Titulo_tercero; //el concepto del iva
-                //tomamos la primera creacion de proveedores
+                var proveedor = db.Proveedores.Where(p => p.RFC == rfcEmisor.Trim() && p.IdEmpresa == IdEmpresaEjercicio).FirstOrDefault();
 
-                Titulo_principal = Proveedor + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
-
-                Titulo_secundario = Proveedor;
-
-                Titulo_tercero = "IVA-" + Proveedor + "-" + Folio; //proveedor a 25 caracteres + RFc
-
-                if (Proveedor.Length > 40)
+                if (proveedor == null)
                 {
-                    Titulo_principal = Proveedor.Substring(0, 40) + " " + RFC_proveedor; //proveedor a 40 caracteres + RFc
-                }
+                    //tomamos la primera creacion de proveedores
 
-                if (Proveedor.Length > 25)
-                {
-                    Titulo_secundario = Proveedor.Substring(0, 25); //proveedor a 25 caracteres + RFc
-                }
+                    Titulo_principal = emisor + " " + rfcEmisor; //proveedor a 40 caracteres + RFc
 
-                if (Proveedor.Length > 20)
-                {
-                    Titulo_tercero = "IVA-" + Proveedor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
-                }
+                    Titulo_secundario = emisor;
 
-                //Titulo_principal = proveedor.Titulo_principal + " " + proveedor.RFC;
+                    Titulo_tercero = "IVA-" + emisor + "-" + Folio; //proveedor a 25 caracteres + RFc
 
-                Cuenta_cargo_1 = proveedor.Cuenta_cargo_1;
-                Cuenta_cargo_2 = proveedor.Cuenta_cargo_2;
-                Cuenta_cargo_3 = proveedor.Cuenta_cargo_3;
-                Cuenta_cargo_Iva = proveedor.Cuenta_Cargo_Iva;
-                Cuenta_iva_retenido = proveedor.Iva_Retenido;
-                Cuenta_Abono_1 = proveedor.Cuenta_Abono_1;
-                Cuenta_Abono_2 = proveedor.Cuenta_Abono_2;
-                Cuenta_Abono_3 = proveedor.Cuenta_Abono_3;
+                    if (emisor.Length > 40)
+                    {
+                        Titulo_principal = emisor.Substring(0, 40) + " " + rfcEmisor; //proveedor a 40 caracteres + RFc
+                    }
 
-                Cuenta_isr_retenido = proveedor.Isr_Retenido;//cuenta isr retenido
-                Cuenta_isr_trasladado = proveedor.Isr_Trasladado;
+                    if (emisor.Length > 25)
+                    {
+                        Titulo_secundario = emisor.Substring(0, 25); //proveedor a 25 caracteres + RFc
+                    }
 
-
-
-               
-
-                //NUEVAS CUENTAS
-                Cuenta_ieps_trasladado = proveedor.Ieps_Trasladado;
-                Cuenta_ieps_retenido = proveedor.Ieps_Retenido;
-
-
-
-                Departamento = txtDepto.Text;
-
-
-
-                if (Cuenta_cargo_1.Length <= 1)
-                {
-                    Cuenta_cargo_1 = "0000-000-000";
+                    if (emisor.Length > 20)
+                    {
+                        Titulo_tercero = "IVA-" + emisor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                    }
 
                 }
-                if (Cuenta_cargo_2.Length <= 1)
+                else
                 {
+                    //Titulo_principal = proveedor.Titulo_principal;//el concepto del encabezado
+                    //Titulo_secundario = proveedor.Titulo_secundario;//el concepto del total
+                    //Titulo_tercero = proveedor.Titulo_tercero; //el concepto del iva
+                    //tomamos la primera creacion de proveedores
 
-                    Cuenta_cargo_2 = "0000-000-000";
+                    Titulo_principal = emisor + " " + rfcEmisor; //proveedor a 40 caracteres + RFc
+
+                    Titulo_secundario = emisor;
+
+                    Titulo_tercero = "IVA-" + emisor + "-" + Folio; //proveedor a 25 caracteres + RFc
+
+                    if (emisor.Length > 40)
+                    {
+                        Titulo_principal = emisor.Substring(0, 40) + " " +rfcEmisor; //proveedor a 40 caracteres + RFc
+                    }
+
+                    if (emisor.Length > 25)
+                    {
+                        Titulo_secundario = emisor.Substring(0, 25); //proveedor a 25 caracteres + RFc
+                    }
+
+                    if (emisor.Length > 20)
+                    {
+                        Titulo_tercero = "IVA-" + emisor.Substring(0, 20) + "-" + Folio; //proveedor a 25 caracteres + RFc
+                    }
+
+                    //Titulo_principal = proveedor.Titulo_principal + " " + proveedor.RFC;
+
+                    Cuenta_cargo_1 = proveedor.Cuenta_cargo_1;
+                    Cuenta_cargo_2 = proveedor.Cuenta_cargo_2;
+                    Cuenta_cargo_3 = proveedor.Cuenta_cargo_3;
+                    Cuenta_cargo_Iva = proveedor.Cuenta_Cargo_Iva;
+                    Cuenta_iva_retenido = proveedor.Iva_Retenido;
+                    Cuenta_Abono_1 = proveedor.Cuenta_Abono_1;
+                    Cuenta_Abono_2 = proveedor.Cuenta_Abono_2;
+                    Cuenta_Abono_3 = proveedor.Cuenta_Abono_3;
+
+                    Cuenta_isr_retenido = proveedor.Isr_Retenido;//cuenta isr retenido
+                    Cuenta_isr_trasladado = proveedor.Isr_Trasladado;
+
+
+
+
+
+                    //NUEVAS CUENTAS
+                    Cuenta_ieps_trasladado = proveedor.Ieps_Trasladado;
+                    Cuenta_ieps_retenido = proveedor.Ieps_Retenido;
+
+
+
+                    Departamento = txtDepto.Text;
+
+
+
+                    if (Cuenta_cargo_1.Length <= 1)
+                    {
+                        Cuenta_cargo_1 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_2.Length <= 1)
+                    {
+
+                        Cuenta_cargo_2 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_3.Length <= 1)
+                    {
+
+                        Cuenta_cargo_3 = "0000-000-000";
+
+                    }
+                    if (Cuenta_cargo_Iva.Length <= 1)
+                    {
+
+                        Cuenta_cargo_Iva = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_1.Length <= 1)
+                    {
+
+                        Cuenta_Abono_1 = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_2.Length <= 1)
+                    {
+
+                        Cuenta_Abono_2 = "0000-000-000";
+
+                    }
+                    if (Cuenta_Abono_3.Length <= 1)
+                    {
+
+                        Cuenta_Abono_3 = "0000-000-000";
+
+                    }
+                    if (Cuenta_isr_retenido == "" || string.IsNullOrEmpty(Cuenta_isr_retenido))
+                    {
+
+                        Cuenta_isr_retenido = "0000-000-000";
+
+                    }
+                    if (Cuenta_ieps_trasladado == "" || string.IsNullOrEmpty(Cuenta_ieps_trasladado))
+                    {
+                        Cuenta_ieps_trasladado = "0000-000-000";
+                    }
+                    if (Cuenta_isr_trasladado == "" || string.IsNullOrEmpty(Cuenta_isr_trasladado))
+                    {
+                        Cuenta_isr_trasladado = "0000-000-000";
+                    }
+                    if (Cuenta_iva_retenido == "" || string.IsNullOrEmpty(Cuenta_iva_retenido))
+                    {
+                        Cuenta_iva_retenido = "0000-000-000";
+                    }
+                    if (Cuenta_ieps_retenido == "" || string.IsNullOrEmpty(Cuenta_ieps_retenido))
+                    {
+                        Cuenta_ieps_retenido = "0000-000-000";
+                    }
+
+
+
+
 
                 }
-                if (Cuenta_cargo_3.Length <= 1)
-                {
-
-                    Cuenta_cargo_3 = "0000-000-000";
-
-                }
-                if (Cuenta_cargo_Iva.Length <= 1)
-                {
-
-                    Cuenta_cargo_Iva = "0000-000-000";
-
-                }
-                if (Cuenta_Abono_1.Length <= 1)
-                {
-
-                    Cuenta_Abono_1 = "0000-000-000";
-
-                }
-                if (Cuenta_Abono_2.Length <= 1)
-                {
-
-                    Cuenta_Abono_2 = "0000-000-000";
-
-                }
-                if (Cuenta_Abono_3.Length <= 1)
-                {
-
-                    Cuenta_Abono_3 = "0000-000-000";
-
-                }
-                if (Cuenta_isr_retenido == "" || string.IsNullOrEmpty(Cuenta_isr_retenido))
-                {
-
-                    Cuenta_isr_retenido = "0000-000-000";
-
-                }
-                if (Cuenta_ieps_trasladado == "" || string.IsNullOrEmpty(Cuenta_ieps_trasladado))
-                {
-                    Cuenta_ieps_trasladado = "0000-000-000";
-                }
-                if (Cuenta_isr_trasladado == "" || string.IsNullOrEmpty(Cuenta_isr_trasladado))
-                {
-                    Cuenta_isr_trasladado = "0000-000-000";
-                }
-                if (Cuenta_iva_retenido == "" || string.IsNullOrEmpty(Cuenta_iva_retenido))
-                {
-                    Cuenta_iva_retenido = "0000-000-000";
-                }
-                if (Cuenta_ieps_retenido == "" || string.IsNullOrEmpty(Cuenta_ieps_retenido))
-                {
-                    Cuenta_ieps_retenido = "0000-000-000";
-                }
-
-
-
-
 
             }
+
+
+
+        
             //
 
             //boton de cuentas abono
@@ -1265,6 +1466,26 @@ namespace EKPolizaGastos.Forms
             string leyenda_IVA = "IVA-" + Proveedor + "-" + Folio; ;//.Substring(0, 20)
             string leyenda_IEPS = "IEPS-" + Proveedor + "-" + Folio;
             string leyenda_ISR = "ISR-" + Proveedor + "-" + Folio;
+
+            if (tipoDeBase.Equals("Recibidas"))
+            {
+
+                leyenda_IVA = "IVA-" + Proveedor + "-" + Folio; ;//.Substring(0, 20)
+                leyenda_IEPS = "IEPS-" + Proveedor + "-" + Folio;
+                 leyenda_ISR = "ISR-" + Proveedor + "-" + Folio;
+
+            }
+            else if (tipoDeBase.Equals("Emitidas"))
+            {
+                leyenda_IVA = "IVA-" + emisor + "-" + Folio; ;//.Substring(0, 20)
+                leyenda_IEPS = "IEPS-" + emisor + "-" + Folio;
+                leyenda_ISR = "ISR-" + emisor + "-" + Folio;
+
+
+            }
+
+
+           
 
             if (tipoDeBase.Equals("Recibidas"))
             {
@@ -2575,7 +2796,20 @@ namespace EKPolizaGastos.Forms
                 ////Ahora guardo los datos del proveedor
                 ///
                 //1 comprubeo si existe empresa con este departamento
-                var ExisteProovedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor
+                string provedorActualizar = "";
+              
+                    if (tipoDeBase.Equals("Recibidas"))
+                    {
+
+                        provedorActualizar = RFC_proveedor;
+                    }
+                    else if (tipoDeBase.Equals("Emitidas"))
+                    {
+
+                        provedorActualizar = rfcEmisor;
+
+                    }
+                var ExisteProovedor = db.Proveedores.Where(p => p.RFC ==provedorActualizar
                 && p.IdEmpresa == IdEmpresa).FirstOrDefault();
                 string numeroProvedorConvertido = "0";
                 if (ExisteProovedor != null)
@@ -2699,14 +2933,30 @@ namespace EKPolizaGastos.Forms
         //ACTUALIZAR DATOS DE PROVEEDOR
         private void buttonX3_Click(object sender, EventArgs e)
         {
+            string provedorActualizar="";
             if (txtDepto.Text != "")
             {
+
+                if (tipoDeBase.Equals("Recibidas"))
+                {
+
+                    provedorActualizar = RFC_proveedor;
+                }
+                else if (tipoDeBase.Equals("Emitidas"))
+                {
+
+                    provedorActualizar = rfcEmisor;
+
+                }
+
+
+
 
                 int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
                 var empresas = db.Empresas.Where(p => p.IdEmpresa == empresa).FirstOrDefault();
 
 
-                var ExisteProovedor = db.Proveedores.Where(p => p.RFC == RFC_proveedor
+                var ExisteProovedor = db.Proveedores.Where(p => p.RFC == provedorActualizar
                 && p.IdEmpresa == empresas.IdEmpresa).FirstOrDefault();
 
                 string numeroProvedorConvertido = "0";
@@ -2963,7 +3213,7 @@ namespace EKPolizaGastos.Forms
 
 
 
-                        var listaProveedores = db.Proveedores.Where(C => C.RFC == RFC_proveedor && C.IdEmpresa == empresa).ToList();
+                        var listaProveedores = db.Proveedores.Where(C => C.RFC == provedorActualizar && C.IdEmpresa == empresa).ToList();
                         Proveedores proveedoresM = new Proveedores();
                         foreach (var item in listaProveedores)
                         {
