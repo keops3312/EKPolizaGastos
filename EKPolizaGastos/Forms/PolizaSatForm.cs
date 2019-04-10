@@ -1955,9 +1955,26 @@ namespace EKPolizaGastos.Forms
         {
             int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
 
+            string provedorActualizar = "";
+           
+
+                if (tipoDeBase.Equals("Recibidas"))
+                {
+
+                    provedorActualizar = RFC_proveedor;
+                   
+                }
+                else if (tipoDeBase.Equals("Emitidas"))
+                {
+
+                    provedorActualizar = rfcEmisor;
+
+                }
+
+
 
             CuentasForm cuentas = new CuentasForm();
-            cuentas.RfcDeProveedor = RFC_proveedor;
+            cuentas.RfcDeProveedor = provedorActualizar;
             cuentas.idEmpresa = Convert.ToString(empresa).ToString();
             cuentas.CuentaCapturada = poliza.Rows[0].Cells[0].Value.ToString();
             PolizaSatForm actual = new PolizaSatForm();
@@ -2018,9 +2035,23 @@ namespace EKPolizaGastos.Forms
         {
             int empresa = int.Parse(cmbLocalidades.SelectedValue.ToString());
 
+            string provedorActualizar = "";
+
+
+            if (tipoDeBase.Equals("Recibidas"))
+            {
+
+                provedorActualizar = RFC_proveedor;
+            }
+            else if (tipoDeBase.Equals("Emitidas"))
+            {
+
+                provedorActualizar = rfcEmisor;
+
+            }
 
             CargosForm cuentas = new CargosForm();
-            cuentas.RfcDeProveedor = RFC_proveedor;
+            cuentas.RfcDeProveedor = provedorActualizar;
             cuentas.idEmpresa = Convert.ToString(empresa).ToString();
             //CargosForm.CuentaCapturada = poliza.Rows[0].Cells[0].Value.ToString();
             PolizaSatForm actual = new PolizaSatForm();
@@ -2797,18 +2828,25 @@ namespace EKPolizaGastos.Forms
                 ///
                 //1 comprubeo si existe empresa con este departamento
                 string provedorActualizar = "";
+                string provedorACtualizarDato = "";
               
                     if (tipoDeBase.Equals("Recibidas"))
                     {
 
                         provedorActualizar = RFC_proveedor;
+                        provedorACtualizarDato = Proveedor_Completo;
                     }
                     else if (tipoDeBase.Equals("Emitidas"))
                     {
 
                         provedorActualizar = rfcEmisor;
+                        provedorACtualizarDato = emisor;
 
                     }
+
+
+                IdEmpresas = int.Parse(cmbLocalidades.SelectedValue.ToString());
+
                 var ExisteProovedor = db.Proveedores.Where(p => p.RFC ==provedorActualizar
                 && p.IdEmpresa == IdEmpresa).FirstOrDefault();
                 string numeroProvedorConvertido = "0";
@@ -2837,8 +2875,8 @@ namespace EKPolizaGastos.Forms
                 //Agrego Proveedor
                 Proveedores proveedor = new Proveedores
                 {
-                    Proveedor = Proveedor_Completo,
-                    RFC = RFC_proveedor,
+                    Proveedor = provedorACtualizarDato,
+                    RFC = provedorActualizar,
                     NoProveedor = numeroProvedorConvertido,
                     IdEmpresa = IdEmpresa,
                     IdLocalidad = 1,//IdLocalidad,
@@ -2934,18 +2972,23 @@ namespace EKPolizaGastos.Forms
         private void buttonX3_Click(object sender, EventArgs e)
         {
             string provedorActualizar="";
+            string provedorACtualizarDato = "";
             if (txtDepto.Text != "")
             {
+
+                
 
                 if (tipoDeBase.Equals("Recibidas"))
                 {
 
                     provedorActualizar = RFC_proveedor;
+                    provedorACtualizarDato = Proveedor_Completo;
                 }
                 else if (tipoDeBase.Equals("Emitidas"))
                 {
 
                     provedorActualizar = rfcEmisor;
+                    provedorACtualizarDato = emisor;
 
                 }
 
@@ -3219,8 +3262,9 @@ namespace EKPolizaGastos.Forms
                         {
                             //proveedoresM = ExisteProovedor;
 
-                            item.Proveedor = Proveedor_Completo;
-                            item.RFC = RFC_proveedor;
+                            item.Proveedor = provedorACtualizarDato;
+                            item.RFC = provedorActualizar;
+
                             item.NoProveedor = item.IdProveedor.ToString();
                             item.IdEmpresa = empresas.IdEmpresa;
                             item.Departamento = txtDepto.Text;

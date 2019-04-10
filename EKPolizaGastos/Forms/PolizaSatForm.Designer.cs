@@ -534,6 +534,7 @@
             this.dataGridViewX1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewX1.Size = new System.Drawing.Size(10, 10);
             this.dataGridViewX1.TabIndex = 78;
+            this.dataGridViewX1.Visible = false;
             // 
             // labelX2
             // 
