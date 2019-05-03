@@ -133,7 +133,13 @@ namespace EKPolizaGastos.Forms
                     IvaEgreso = (int)Math.Round(Convert.ToDouble(item.Cells[7].Value.ToString()), 0, MidpointRounding.ToEven);
 
                     string batch;
-                    batch = "" + tipoTercero.Trim() + "|" + tipoOperacion.Trim() + "|" + rfc + "|||||" + Base + "||||||||||||" + NoGrabanIVA + "||" + IvaRetenido + "|" + IvaEgreso + "|";
+                    //batch = "" + tipoTercero.Trim() + "|" + tipoOperacion.Trim() + "|" + rfc + "|||||" + Base + "||||||||||||" + NoGrabanIVA + "||" + IvaRetenido + "|" + IvaEgreso + "|";
+
+                    batch = "" + tipoTercero.Trim() + "|" + tipoOperacion.Trim() + "|" + rfc + "|||||" + Base + "|||||||||||||" + NoGrabanIVA + "||" + IvaRetenido + "|" + IvaEgreso + "|";
+                    /*
+                  
+                    */
+
 
                     escritor.WriteLine(batch);
 

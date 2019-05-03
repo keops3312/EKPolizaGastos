@@ -247,7 +247,8 @@ namespace EKPolizaGastos.Common.Classes
                     RFC_Emisor.Equals("REME5202139N1") || 
                     RFC_Emisor.Equals("SIAM480401GF4") || 
                     RFC_Emisor.Equals("COTI4112249D3") || 
-                    RFC_Emisor.Equals("GABL540419HA8") 
+                    RFC_Emisor.Equals("GABL540419HA8") ||
+                    RFC_Emisor.Equals("GAAJ6612125V6")
                    )
                 {
                     //INGRESOS 
@@ -434,6 +435,10 @@ namespace EKPolizaGastos.Common.Classes
                         || EBaseR > 0 || Eiva_calculado > 0 || EIva_trasladado > 0 || EretenidoIva > 0 || Etotal > 0)
                     {
 
+                        if(total < 0 && RFC_Emisor.Equals("BBA830831LJ2"))/*ESTA ACTUALIZACION LO QUE HACE (EJEMPLO BANCOMER COMISIONES) NO SE INCLUYEN DENTRO DEL IVA SOLO APLICA HOY PARA BANCOMER*/
+                        {
+                            total = 0; //*-1 PARA CONVERTIR NEGATIVO A POSITIVO
+                        }
 
                         ResultadoDIOT.Rows.Add(RFC_Emisor,
                             Proveedor_Emisor,

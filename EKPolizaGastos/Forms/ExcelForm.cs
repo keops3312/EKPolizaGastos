@@ -94,9 +94,17 @@ namespace EKPolizaGastos.Forms
                 foreach (DataGridViewRow row in gridMuestra.Rows)
                 {
 
-                    periodo = int.Parse(row.Cells[10].Value.ToString());
-                    mes = int.Parse(row.Cells[11].Value.ToString());
-                    dia = int.Parse(row.Cells[12].Value.ToString());
+                    DateTime FechaRaiz = DateTime.Parse(row.Cells[04].ToString());
+
+                    periodo = FechaRaiz.Year;
+                    mes = FechaRaiz.Month;
+                    dia = FechaRaiz.Day;
+
+
+
+                    //periodo = int.Parse(row.Cells[10].Value.ToString());//ANO
+                    //mes = int.Parse(row.Cells[11].Value.ToString());//MES
+                    //dia = int.Parse(row.Cells[12].Value.ToString());//DIA
 
 
                     letra = cmbEmpresa.SelectedValue.ToString();
@@ -114,70 +122,70 @@ namespace EKPolizaGastos.Forms
                    new CISFACTRECIBIDAS
                    {
 
-                       Verificado = row.Cells[0].Value.ToString(),
-                       EstadoSat = row.Cells[1].Value.ToString(),
-                       EstadoValidacion = row.Cells[2].Value.ToString(),
-                       NoCertificadoEmisor = row.Cells[3].Value.ToString(),
-                       NoCertificadoSAT = row.Cells[4].Value.ToString(),
-                       Version = row.Cells[5].Value.ToString(),
-                       TipoComprobante = row.Cells[6].Value.ToString(),
-                       Tipo = row.Cells[7].Value.ToString(),
-                       FechaEmision = DateTime.Parse(row.Cells[8].Value.ToString()),
-                       FechaTimbrado = row.Cells[9].Value.ToString(),
-                       Ano = int.Parse(row.Cells[10].Value.ToString()),
-                       Mes = int.Parse(row.Cells[11].Value.ToString()),
-                       Dia = int.Parse(row.Cells[12].Value.ToString()),
-                       EstadoPago = row.Cells[13].Value.ToString(),
-                       Serie = row.Cells[15].Value.ToString(),
-                       Folio = row.Cells[16].Value.ToString(),
-                       UUID = row.Cells[17].Value.ToString(),
-                       TipoRelacion = row.Cells[18].Value.ToString(),
-                       UUIDRelacion = row.Cells[19].Value.ToString(),
-                       RFCEmisor = row.Cells[20].Value.ToString(),
-                       NombreEmisor = row.Cells[21].Value.ToString(),
-                       RegimenFiscal = row.Cells[22].Value.ToString(),
-                       LugarDeExpedicion = row.Cells[23].Value.ToString(),
-                       RFCReceptor = row.Cells[24].Value.ToString(),
-                       NombreReceptor = row.Cells[25].Value.ToString(),
-                       ResidenciaFiscal = row.Cells[26].Value.ToString(),
-                       NumRegIdTrib = row.Cells[27].Value.ToString(),
-                       UsoCFDI = row.Cells[28].Value.ToString(),
-                       SubTotal = row.Cells[29].Value.ToString(),
-                       Descuento = row.Cells[30].Value.ToString(),
-                       TotaLIEPS = row.Cells[31].Value.ToString(),
-                       IVA = row.Cells[32].Value.ToString(),
-                       RetenidoIVA = row.Cells[33].Value.ToString(),
-                       RetenidoISR = row.Cells[34].Value.ToString(),
-                       ISH = row.Cells[35].Value.ToString(),
-                       Total = row.Cells[36].Value.ToString(),
-                       TotalOriginal = row.Cells[37].Value.ToString(),
-                       TotalTrasladados = row.Cells[38].Value.ToString(),
-                       TotalRetenidos = row.Cells[39].Value.ToString(),
-                       TotalLocalTrasladado = row.Cells[40].Value.ToString(),
-                       TotalLocalRetenido = row.Cells[41].Value.ToString(),
-                       Complemento = row.Cells[42].Value.ToString(),
-                       Moneda = row.Cells[43].Value.ToString(),
-                       TipoDeCambio = row.Cells[44].Value.ToString(),
-                       FormaDePago = row.Cells[45].Value.ToString(),
-                       MetodoDePago = row.Cells[46].Value.ToString(),
-                       NumCtaPago = row.Cells[47].Value.ToString(),
-                       CondicionDePago = row.Cells[48].Value.ToString(),
-                       Conceptos = row.Cells[49].Value.ToString(),
-                       Combustible = row.Cells[50].Value.ToString(),
-                       IEPS3 = row.Cells[51].Value.ToString(),
-                       IEPS6 = row.Cells[52].Value.ToString(),
-                       IEPS7 = row.Cells[53].Value.ToString(),
-                       IEPS8 = row.Cells[54].Value.ToString(),
-                       IEPS9 = row.Cells[55].Value.ToString(),
-                       IEPS265 = row.Cells[56].Value.ToString(),
-                       IEPS30 = row.Cells[57].Value.ToString(),
-                       IEPS53 = row.Cells[58].Value.ToString(),
-                       IEPS160 = row.Cells[59].Value.ToString(),
-                       AchivoXML = row.Cells[60].Value.ToString(),
-                       DireccionEmisor = row.Cells[61].Value.ToString(),
-                       LocalidadEmisor = row.Cells[62].Value.ToString(),
-                       DireccionReceptor = row.Cells[63].Value.ToString(),
-                       LocalidadReceptor = row.Cells[64].Value.ToString(),
+                       Verificado = row.Cells[0].Value.ToString(),//
+                       EstadoSat = row.Cells[1].Value.ToString(),//
+                       EstadoValidacion = ".",//row.Cells[2].Value.ToString(),
+                       NoCertificadoEmisor =".",// row.Cells[3].Value.ToString(),
+                       NoCertificadoSAT = ".",//row.Cells[4].Value.ToString(),
+                       Version = row.Cells[2].Value.ToString(),
+                       TipoComprobante = ".",
+                       Tipo = row.Cells[3].Value.ToString(),
+                       FechaEmision = DateTime.Parse(row.Cells[4].Value.ToString()),
+                       FechaTimbrado = row.Cells[5].Value.ToString(),
+                       Ano = periodo,
+                       Mes = mes,
+                       Dia = dia,                 
+                       EstadoPago =".",// row.Cells[13].Value.ToString(),
+                       Serie = row.Cells[8].Value.ToString(),
+                       Folio = row.Cells[9].Value.ToString(),
+                       UUID = row.Cells[10].Value.ToString(),
+                       TipoRelacion = ".",//row.Cells[18].Value.ToString(),
+                       UUIDRelacion = row.Cells[11].Value.ToString(),
+                       RFCEmisor = row.Cells[12].Value.ToString(),
+                       NombreEmisor = row.Cells[13].Value.ToString(),
+                       RegimenFiscal = ".",//row.Cells[22].Value.ToString(),
+                       LugarDeExpedicion = row.Cells[14].Value.ToString(),
+                       RFCReceptor = row.Cells[15].Value.ToString(),
+                       NombreReceptor = row.Cells[16].Value.ToString(),
+                       ResidenciaFiscal = row.Cells[17].Value.ToString(),
+                       NumRegIdTrib = row.Cells[18].Value.ToString(),
+                       UsoCFDI = row.Cells[19].Value.ToString(),
+                       SubTotal = row.Cells[20].Value.ToString(),
+                       Descuento = row.Cells[21].Value.ToString(),
+                       TotaLIEPS = row.Cells[22].Value.ToString(),
+                       IVA = row.Cells[23].Value.ToString(),
+                       RetenidoIVA = row.Cells[24].Value.ToString(),
+                       RetenidoISR = row.Cells[25].Value.ToString(),
+                       ISH = row.Cells[26].Value.ToString(),
+                       Total = row.Cells[27].Value.ToString(),
+                       TotalOriginal = row.Cells[28].Value.ToString(),
+                       TotalTrasladados = row.Cells[29].Value.ToString(),
+                       TotalRetenidos = row.Cells[30].Value.ToString(),
+                       TotalLocalTrasladado = row.Cells[31].Value.ToString(),
+                       TotalLocalRetenido = row.Cells[32].Value.ToString(),
+                       Complemento = row.Cells[33].Value.ToString(),
+                       Moneda = row.Cells[34].Value.ToString(),
+                       TipoDeCambio = row.Cells[35].Value.ToString(),
+                       FormaDePago = row.Cells[36].Value.ToString(),
+                       MetodoDePago = row.Cells[37].Value.ToString(),
+                       NumCtaPago = row.Cells[38].Value.ToString(),
+                       CondicionDePago = row.Cells[39].Value.ToString(),
+                       Conceptos = row.Cells[40].Value.ToString(),
+                       Combustible = row.Cells[41].Value.ToString(),
+                       IEPS3 = row.Cells[42].Value.ToString(),
+                       IEPS6 = row.Cells[43].Value.ToString(),
+                       IEPS7 = row.Cells[44].Value.ToString(),
+                       IEPS8 = row.Cells[45].Value.ToString(),
+                       IEPS9 = row.Cells[46].Value.ToString(),
+                       IEPS265 = row.Cells[47].Value.ToString(),
+                       IEPS30 = row.Cells[48].Value.ToString(),
+                       IEPS53 = row.Cells[49].Value.ToString(),
+                       IEPS160 = row.Cells[50].Value.ToString(),
+                       AchivoXML = row.Cells[51].Value.ToString(),
+                       DireccionEmisor = row.Cells[52].Value.ToString(),
+                       LocalidadEmisor = row.Cells[53].Value.ToString(),
+                       DireccionReceptor = row.Cells[54].Value.ToString(),
+                       LocalidadReceptor = row.Cells[55].Value.ToString(),
                        Empresa = empresa.RFC,
                        realizada = 2,
 
@@ -188,8 +196,16 @@ namespace EKPolizaGastos.Forms
 
                    };
 
-                     
 
+                        if (cISFACTRECIBIDAS.Tipo == "Factura")
+                        {
+                            cISFACTRECIBIDAS.TipoComprobante = "I";
+                        }
+
+                        if (cISFACTRECIBIDAS.Tipo == "NotaCredito")
+                        {
+                            cISFACTRECIBIDAS.TipoComprobante = "E";
+                        }
 
 
                         db.CISFACTRECIBIDAS.Add(cISFACTRECIBIDAS);
@@ -271,11 +287,90 @@ namespace EKPolizaGastos.Forms
                           realizada = 2,
 
 
+                          #region TRASH_ANTERIOR
+                          //Verificado = row.Cells[0].Value.ToString(),
+                          //EstadoSat = row.Cells[1].Value.ToString(),
+                          //EstadoValidacion = row.Cells[2].Value.ToString(),
+                          //NoCertificadoEmisor = row.Cells[3].Value.ToString(),
+                          //NoCertificadoSAT = row.Cells[4].Value.ToString(),
+                          //Version = row.Cells[5].Value.ToString(),
+                          //TipoComprobante = row.Cells[6].Value.ToString(),
+                          //Tipo = row.Cells[7].Value.ToString(),
+                          //FechaEmision = DateTime.Parse(row.Cells[8].Value.ToString()),
+                          //FechaTimbrado = row.Cells[9].Value.ToString(),
+                          //Ano = int.Parse(row.Cells[10].Value.ToString()),
+                          //Mes = int.Parse(row.Cells[11].Value.ToString()),
+                          //Dia = int.Parse(row.Cells[12].Value.ToString()),
+                          //EstadoPago = row.Cells[13].Value.ToString(),
+                          //Serie = row.Cells[15].Value.ToString(),
+                          //Folio = row.Cells[16].Value.ToString(),
+                          //UUID = row.Cells[17].Value.ToString(),
+                          //TipoRelacion = row.Cells[18].Value.ToString(),
+                          //UUIDRelacion = row.Cells[19].Value.ToString(),
+                          //RFCEmisor = row.Cells[20].Value.ToString(),
+                          //NombreEmisor = row.Cells[21].Value.ToString(),
+                          //RegimenFiscal = row.Cells[22].Value.ToString(),
+                          //LugarDeExpedicion = row.Cells[23].Value.ToString(),
+                          //RFCReceptor = row.Cells[24].Value.ToString(),
+                          //NombreReceptor = row.Cells[25].Value.ToString(),
+                          //ResidenciaFiscal = row.Cells[26].Value.ToString(),
+                          //NumRegIdTrib = row.Cells[27].Value.ToString(),
+                          //UsoCFDI = row.Cells[28].Value.ToString(),
+                          //SubTotal = row.Cells[29].Value.ToString(),
+                          //Descuento = row.Cells[30].Value.ToString(),
+                          //TotaLIEPS = row.Cells[31].Value.ToString(),
+                          //IVA = row.Cells[32].Value.ToString(),
+                          //RetenidoIVA = row.Cells[33].Value.ToString(),
+                          //RetenidoISR = row.Cells[34].Value.ToString(),
+                          //ISH = row.Cells[35].Value.ToString(),
+                          //Total = row.Cells[36].Value.ToString(),
+                          //TotalOriginal = row.Cells[37].Value.ToString(),
+                          //TotalTrasladados = row.Cells[38].Value.ToString(),
+                          //TotalRetenidos = row.Cells[39].Value.ToString(),
+                          //TotalLocalTrasladado = row.Cells[40].Value.ToString(),
+                          //TotalLocalRetenido = row.Cells[41].Value.ToString(),
+                          //Complemento = row.Cells[42].Value.ToString(),
+                          //Moneda = row.Cells[43].Value.ToString(),
+                          //TipoDeCambio = row.Cells[44].Value.ToString(),
+                          //FormaDePago = row.Cells[45].Value.ToString(),
+                          //MetodoDePago = row.Cells[46].Value.ToString(),
+                          //NumCtaPago = row.Cells[47].Value.ToString(),
+                          //CondicionDePago = row.Cells[48].Value.ToString(),
+                          //Conceptos = row.Cells[49].Value.ToString(),
+                          //Combustible = row.Cells[50].Value.ToString(),
+                          //IEPS3 = row.Cells[51].Value.ToString(),
+                          //IEPS6 = row.Cells[52].Value.ToString(),
+                          //IEPS7 = row.Cells[53].Value.ToString(),
+                          //IEPS8 = row.Cells[54].Value.ToString(),
+                          //IEPS9 = row.Cells[55].Value.ToString(),
+                          //IEPS265 = row.Cells[56].Value.ToString(),
+                          //IEPS30 = row.Cells[57].Value.ToString(),
+                          //IEPS53 = row.Cells[58].Value.ToString(),
+                          //IEPS160 = row.Cells[59].Value.ToString(),
+                          //AchivoXML = row.Cells[60].Value.ToString(),
+                          //DireccionEmisor = row.Cells[61].Value.ToString(),
+                          //LocalidadEmisor = row.Cells[62].Value.ToString(),
+                          //DireccionReceptor = row.Cells[63].Value.ToString(),
+                          //LocalidadReceptor = row.Cells[64].Value.ToString(),
+                          //Empresa = empresa.RFC,
+                          //realizada = 2, 
+                          #endregion
+
+
 
 
 
                       };
 
+                        if (cISFACTSEMITIDAS.Tipo == "Factura")
+                        {
+                            cISFACTSEMITIDAS.TipoComprobante = "I";
+                        }
+
+                        if (cISFACTSEMITIDAS.Tipo == "NotaCredito")
+                        {
+                            cISFACTSEMITIDAS.TipoComprobante = "E";
+                        }
 
                         db.CISFACTSEMITIDAS.Add(cISFACTSEMITIDAS);
                         db.SaveChanges();
@@ -340,9 +435,16 @@ namespace EKPolizaGastos.Forms
                 //Ingreso a base de datos
                 foreach (DataGridViewRow row in gridMuestra.Rows)
                 {
-                    periodo = int.Parse(row.Cells[10].Value.ToString());
-                    mes = int.Parse(row.Cells[11].Value.ToString());
-                    dia = int.Parse(row.Cells[12].Value.ToString());
+
+                    DateTime FechaRaiz = DateTime.Parse(row.Cells[04].ToString());
+
+                    periodo = FechaRaiz.Year;
+                    mes = FechaRaiz.Month;
+                    dia = FechaRaiz.Day;
+
+                    //periodo = int.Parse(row.Cells[10].Value.ToString());
+                    //mes = int.Parse(row.Cells[11].Value.ToString());
+                    //dia = int.Parse(row.Cells[12].Value.ToString());
 
                     letra = cmbEmpresa.SelectedValue.ToString();
 
@@ -1399,9 +1501,15 @@ namespace EKPolizaGastos.Forms
                 int mes;
                 int dia;
 
-                periodo = int.Parse(gridMuestra.Rows[0].Cells[10].Value.ToString());
-                mes = int.Parse(gridMuestra.Rows[0].Cells[11].Value.ToString());
-                dia = int.Parse(gridMuestra.Rows[0].Cells[12].Value.ToString());
+                DateTime FechaRaiz = DateTime.Parse(gridMuestra.Rows[0].Cells[04].Value.ToString());
+
+                periodo = FechaRaiz.Year;
+                mes = FechaRaiz.Month;
+                dia = FechaRaiz.Day;
+
+                //periodo = int.Parse(gridMuestra.Rows[0].Cells[10].Value.ToString());
+                //mes = int.Parse(gridMuestra.Rows[0].Cells[11].Value.ToString());
+                //dia = int.Parse(gridMuestra.Rows[0].Cells[12].Value.ToString());
 
 
                 if (swtBtn.Value == true)
