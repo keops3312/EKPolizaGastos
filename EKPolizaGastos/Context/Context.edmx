@@ -9421,7 +9421,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -9493,7 +9493,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -9565,7 +9565,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -9637,7 +9637,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -9788,7 +9788,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -9860,7 +9860,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -9940,7 +9940,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="MetodoPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LugarExpedicion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="schemaLocation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionesDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionesDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="SubTotal" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Descuento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Moneda" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -10045,7 +10045,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -10117,7 +10117,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -10200,7 +10200,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -10272,7 +10272,7 @@ warning 6002: The table/view 'SEMP_SAT.dbo.MRO-SEP2018Conceptos' does not have a
           <Property Name="FormaDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="MetodoDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="NumCtaPago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CondicionDePago" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CondicionDePago" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Conceptos" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Combustible" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IEPS3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
